@@ -7,7 +7,7 @@ import { IAppState } from '../../store/reducers'
   
 interface Props {
   locale: string;
-  themeType: "light" | "dark";
+  themeType: "light" | "dark" | "auto";
   children?: object;
 }
 
@@ -30,7 +30,7 @@ const Theme = (props: Props) => {
   const { locale,themeType, children } = props;
   const messages = getMessages(locale);
   const theme = createMuiTheme({palette: {
-    type: themeType,
+    type: themeType === 'auto' ? undefined : themeType,
   },}, messages);
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;

@@ -4,7 +4,7 @@ import { SET_LOCALE, CHANGE_THEME, SET_SESSION_ID, SET_ALL_TORRENTS } from '../c
 
 export interface IAppState {
   locale: string;
-  theme: "light" | "dark";
+  theme: "light" | "dark" | "auto";
   sessionId: string | undefined;
   allTorrents: Array<object>;
 }

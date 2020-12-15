@@ -20,11 +20,11 @@ import {
 import LanguageIcon from '@material-ui/icons/Translate';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SearchIcon from '@material-ui/icons/Search';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
+
+import ThemeToggle from '../ThemeToggle'
 
 import { toggleTheme, setLocale } from '../../store/actions';
 import { IAppState } from '../../store/reducers';
@@ -105,10 +105,6 @@ export default function SearchAppBar() {
 
   const appBarColor = themeType === 'dark' ? 'transparent' : undefined;
 
-  const handleChangeTheme = () => {
-    dispatch(toggleTheme());
-  };
-
   const handleLanguageIconClick = (event: any) => {
     setLanguageMenu(event.currentTarget);
   };
@@ -153,20 +149,7 @@ export default function SearchAppBar() {
               <ExpandMoreIcon fontSize="small" />
             </Button>
           </Tooltip>
-          <Tooltip title={intl.formatMessage({ id: 'toggleTheme' })} enterDelay={300}>
-            <IconButton
-              color="inherit"
-              onClick={handleChangeTheme}
-              data-ga-event-category="header"
-              data-ga-event-action="dark"
-            >
-              {theme.palette.type === 'light' ? (
-                <Brightness4Icon />
-              ) : (
-                <Brightness7Icon />
-              )}
-            </IconButton>
-          </Tooltip>
+          <ThemeToggle />
           <Tooltip title="Github" enterDelay={300}>
             <IconButton
               component="a"
