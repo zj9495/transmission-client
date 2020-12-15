@@ -126,7 +126,7 @@ export default function SearchAppBar() {
       <AppBar position="static" color={appBarColor}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Transmission Web UI
+            Transmission
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
