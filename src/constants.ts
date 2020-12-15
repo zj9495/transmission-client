@@ -15,4 +15,4 @@ export const LANGUAGES = [
   },
 ];
 
-export default { APP_ROUTES, LANGUAGES };
+export const GITHUB_REPO = 'https://github.com/zj9495/transmission-client'

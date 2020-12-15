@@ -28,7 +28,7 @@ import { useIntl } from 'react-intl';
 
 import { toggleTheme, setLocale } from '../../store/actions';
 import { IAppState } from '../../store/reducers';
-import { LANGUAGES } from '../../constants';
+import { LANGUAGES, GITHUB_REPO } from '../../constants';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -171,7 +171,7 @@ export default function SearchAppBar() {
             <IconButton
               component="a"
               color="inherit"
-              href="https://github.com/zj9495/transmission-webui"
+              href={GITHUB_REPO}
               target="_blank"
               data-ga-event-category="header"
               data-ga-event-action="github"
