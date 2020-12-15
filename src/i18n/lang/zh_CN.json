@@ -1,0 +1,10 @@
+{
+  "userName": "用户名",
+  "password": "密码",
+  "rememberMe": "记住我",
+  "signIn": "登录",
+  "SIGNIN": "登录",
+  "search": "搜索",
+  "changeLanguage": "更改语言",
+  "toggleTheme": "在light（亮色）和dark（暗色）主题中切换"
+}

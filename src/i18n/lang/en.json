@@ -1,0 +1,10 @@
+{
+  "userName": "User Name",
+  "password": "Password",
+  "rememberMe": "Remember me",
+  "signIn": "Sign In",
+  "SIGNIN": "SIGN IN",
+  "search": "Search...",
+  "changeLanguage": "Change Language",
+  "toggleTheme": "Toogle light/dark theme"
+}

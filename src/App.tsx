@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Provider } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { APP_ROUTES } from './constants';
+import Intl from './containers/Intl';
+import Theme from './containers/Theme';
+import SignIn from './containers/SignIn';
+import List from './components/List';
+import Header from './components/Header';
+import store from './store';
+
+const App = () => (
+  <Provider store={store}>
+    <Intl>
+      <Theme>
+        <Router>
+          <CssBaseline />
+          <Header />
+          <Switch>
+            <Route path={APP_ROUTES.signIn} component={SignIn} />
+            <Route path={APP_ROUTES.list} component={List} />
+            <Redirect from={APP_ROUTES.base} to={APP_ROUTES.list} />
+          </Switch>
+        </Router>
+      </Theme>
+    </Intl>
+  </Provider>
+);
 
 export default App;
