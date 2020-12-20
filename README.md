@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+
+![Deploy To Github Pages](https://github.com/zj9495/transmission-client/workflows/Deploy%20To%20Github%20Pages/badge.svg?branch=master)
 
 ## Available Scripts
 
