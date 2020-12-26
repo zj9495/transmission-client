@@ -1,19 +1,29 @@
-import produce from 'immer';
+import produce from "immer";
 
-import { SET_LOCALE, CHANGE_THEME, SET_SESSION_ID, SET_ALL_TORRENTS } from '../constants';
-
-export interface IAppState {
-  locale: string;
-  theme: "light" | "dark" | "auto";
-  sessionId: string | undefined;
-  allTorrents: Array<object>;
-}
+import {
+  SET_LOCALE,
+  CHANGE_THEME,
+  SET_SESSION_ID,
+  SET_ALL_TORRENTS,
+  SET_SESSION,
+} from "../constants";
+import { IAppState } from "../../types";
 
 const initialState: IAppState = {
-  locale: 'zh-CN',
-  theme: 'light',
+  locale: "zh-CN",
+  theme: "light",
   sessionId: undefined,
   allTorrents: [],
+  session: {
+    units: {
+      memoryBytes: 1024,
+      memoryUnits: [],
+      sizeBytes: 1000,
+      sizeUnits: [],
+      speedBytes: 1000,
+      speedUnits: []
+    }
+  },
 };
 
 export interface Action {
@@ -21,6 +31,7 @@ export interface Action {
   payload: any;
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action: Action) =>
   produce(state, (draft) => {
     switch (action.type) {
@@ -30,12 +41,15 @@ export default (state = initialState, action: Action) =>
       case CHANGE_THEME:
         draft.theme = action.payload;
         break;
-        case SET_SESSION_ID:
-          draft.sessionId = action.payload;
-          break;
-          case SET_ALL_TORRENTS:
-            draft.allTorrents = action.payload;
-            break;
+      case SET_SESSION_ID:
+        draft.sessionId = action.payload;
+        break;
+      case SET_ALL_TORRENTS:
+        draft.allTorrents = action.payload;
+        break;
+      case SET_SESSION:
+        draft.session = action.payload;
+        break;
       default:
         return state;
     }
