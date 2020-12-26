@@ -27,7 +27,7 @@ import { useIntl } from 'react-intl';
 import ThemeToggle from '../ThemeToggle'
 
 import { toggleTheme, setLocale } from '../../store/actions';
-import { IAppState } from '../../store/reducers';
+import { IAppState } from '../../types';
 import { LANGUAGES, GITHUB_REPO } from '../../constants';
 
 const useStyles = makeStyles((theme: Theme) =>

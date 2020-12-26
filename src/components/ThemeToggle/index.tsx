@@ -9,7 +9,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import BrightnessAutoIcon from '@material-ui/icons/Brightness7';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IAppState } from '../../store/reducers';
+import { IAppState } from '../../types';
 import { toggleTheme } from '../../store/actions';
 
 const ThemeToggle = () => {

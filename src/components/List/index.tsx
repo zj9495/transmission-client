@@ -21,9 +21,13 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { getSizeBytesSelector, getSizeUnitsSelector, getSpeedBytesSelector, getSpeedUnitsSelector } from '../../store/selector'
 
-import { getSessionIdAction, getAllTorrentsAction } from "../../store/actions";
-import { IAppState } from "../../store/reducers";
+
+import Progress from "../Progress"
+
+import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
+import { IAppState, ISession } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,8 +42,15 @@ const Torrents: React.FC = () => {
   const dispatch = useDispatch();
   const torrents = useSelector((state: IAppState) => state.allTorrents);
 
+  const progressConfig = {
+    sizeBytes: useSelector(getSizeBytesSelector),
+    sizeUnits: useSelector(getSizeUnitsSelector),
+    speedBytes: useSelector(getSpeedBytesSelector),
+    speedUnits: useSelector(getSpeedUnitsSelector),
+  }
+
   useEffect(() => {
-    dispatch(getSessionIdAction());
+    dispatch(getSessionAction());
   }, []);
 
   const classes = useStyles();
@@ -56,16 +67,6 @@ const Torrents: React.FC = () => {
     dispatch(getAllTorrentsAction());
   };
 
-  const formatPercent = (totalSize: number, downloadSize: number): number => {
-    let percent = downloadSize / totalSize * 100
-    if (percent > 100) {
-      percent = 100
-    } else if (percent < 0) {
-      percent =0
-    }
-    return percent
-  }
-
   return (
     <div className={classes.root}>
       <IconButton
@@ -77,7 +78,7 @@ const Torrents: React.FC = () => {
         <GitHubIcon />
       </IconButton>
       <List component="nav" aria-label="main mailbox folders">
-        {torrents.map((torrent: any, index) => {
+        {torrents.map((torrent, index) => {
           return (
             <ListItem
               button
@@ -89,7 +90,7 @@ const Torrents: React.FC = () => {
                 <InboxIcon />
               </ListItemIcon> */}
               <ListItemText primary={torrent.name} secondary={
-                <LinearProgress variant="determinate" value={formatPercent(torrent.totalSize, torrent.downloadedEver)}/>
+                <Progress torrent={torrent} config={progressConfig}/>
               } />
             </ListItem>
           );
