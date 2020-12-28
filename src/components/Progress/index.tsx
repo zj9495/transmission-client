@@ -3,11 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { useSelector } from 'react-redux'
 
 import { ITorrent, IUnits } from '../../types'
-import { getSizeBytesSelector, getSizeUnitsSelector } from '../../store/selector'
 import {formatBytes} from '../../utils/units'
+import {formatLeftTime} from '../../utils/times'
 
 const getPercent = (totalSize: number, downloadSize: number): number => {
   let percent = downloadSize / totalSize * 100
@@ -32,11 +31,10 @@ interface Props {
 
 export default function Progress(props: Props) {
   const classes = useStyles();
-  const { totalSize, downloadedEver } = props.torrent;
+  const { totalSize, downloadedEver, leftUntilDone } = props.torrent;
   const { sizeBytes, sizeUnits } = props.config
   const torrentSize = formatBytes(totalSize, sizeBytes, sizeUnits)
-  console.log('totalSize, sizeBytes, sizeUnits: ', totalSize, sizeBytes, sizeUnits);
-  console.log('torrentSize: ', torrentSize);
+  const leftTime = formatLeftTime(leftUntilDone)
 
   const percent = getPercent(totalSize, downloadedEver)
 
@@ -47,7 +45,7 @@ export default function Progress(props: Props) {
       </Box>
       <Box minWidth={35}>
         <Typography variant="body2" color="textSecondary">
-          {`${percent}% ${torrentSize}`}
+          {`${percent}% ${torrentSize} ~${leftTime}`}
         </Typography>
       </Box>
     </div>

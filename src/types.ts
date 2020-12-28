@@ -2,6 +2,7 @@ export interface ITorrent {
   name: string;
   totalSize: number;
   downloadedEver: number;
+  leftUntilDone: number;
 }
 
 export type ITorrents = ITorrent[]
