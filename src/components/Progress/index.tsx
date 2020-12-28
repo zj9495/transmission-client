@@ -31,17 +31,17 @@ interface Props {
 
 export default function Progress(props: Props) {
   const classes = useStyles();
-  const { totalSize, downloadedEver, leftUntilDone } = props.torrent;
+  const { totalSize, leftUntilDone, percentDone } = props.torrent;
   const { sizeBytes, sizeUnits } = props.config
   const torrentSize = formatBytes(totalSize, sizeBytes, sizeUnits)
   const leftTime = formatLeftTime(leftUntilDone)
 
-  const percent = getPercent(totalSize, downloadedEver)
+  const percent = (percentDone * 100).toFixed(2)
 
   return (
     <div className={classes.root}>
       <Box width="100%" mr={1}>
-        <LinearProgress variant="determinate" value={percent} />
+        <LinearProgress variant="determinate" value={Number(percent)} />
       </Box>
       <Box minWidth={35}>
         <Typography variant="body2" color="textSecondary">
