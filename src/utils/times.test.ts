@@ -17,6 +17,7 @@ describe.each`
   ${439418880}  | ${"122:03:38"}
   ${350371840}  | ${"97:19:31"}
   ${628029680}  | ${"174:27:09"}
+  ${Infinity}   | ${"--:--:--"}
 `("test formatLeftTime($ms)", ({ ms, expected }) => {
   test(`returns ${expected}`, () => {
     expect(formatLeftTime(ms)).toBe(expected);
