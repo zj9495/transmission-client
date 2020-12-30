@@ -7,8 +7,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { ITorrent, IUnits } from '../../types'
-import {formatBytes} from '../../utils/units'
-import {formatLeftTime} from '../../utils/times'
+import { formatSize, formatSpeed } from '../../utils/units'
+import { formatLeftTime } from '../../utils/times'
 
 
 const useStyles = makeStyles({
@@ -25,14 +25,12 @@ interface Props {
 export default function Progress(props: Props) {
   const classes = useStyles();
   const { totalSize, leftUntilDone, percentDone, rateUpload, rateDownload, uploadedEver } = props.torrent;
-  const { sizeBytes, sizeUnits } = props.config
-  const { speedBytes, speedUnits } = props.config
-  const torrentSize = formatBytes(totalSize, sizeBytes, sizeUnits)
+  const torrentSize = formatSize(totalSize)
   const leftTime = formatLeftTime(leftUntilDone / rateDownload * 1000)
-  const uploadSpeed = formatBytes(rateUpload, speedBytes, speedUnits)
-  const downloadSpeed = formatBytes(rateDownload, speedBytes, speedUnits)
-  const uploadSize = formatBytes(uploadedEver, sizeBytes, sizeUnits)
-  const downloadSize = formatBytes(totalSize - leftUntilDone, sizeBytes, sizeUnits)
+  const uploadSpeed = formatSpeed(rateUpload)
+  const downloadSpeed = formatSpeed(rateDownload)
+  const uploadSize = formatSize(uploadedEver)
+  const downloadSize = formatSize(totalSize - leftUntilDone)
 
   const percent = (percentDone * 100).toFixed(2)
 

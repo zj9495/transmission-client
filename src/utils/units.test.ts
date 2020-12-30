@@ -1,4 +1,5 @@
-import { formatBytes } from "./units";
+import { formatBytes, formatSize, formatSpeed } from "./units";
+import store from '../store'
 
 describe.each`
   number                                   | bytes   | units                       | digits       | expected
@@ -63,3 +64,30 @@ describe.each`
     });
   }
 );
+
+test('formatSize', () => {
+  store.getState = jest.fn().mockReturnValue({
+    session: {
+      units: {
+        sizeBytes: 1000,
+        sizeUnits: ["kB", "MB", "GB", "TB"],
+      }
+    },
+  })
+
+  expect(formatSize(1000)).toBe('1kB')
+})
+
+
+test('formatSpeed', () => {
+  store.getState = jest.fn().mockReturnValue({
+    session: {
+      units: {
+        speedBytes: 1000,
+        speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
+      }
+    },
+  })
+
+  expect(formatSpeed(1000)).toBe('1kB/s')
+})
