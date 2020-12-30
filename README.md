@@ -3,6 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
 
 ![Deploy To Github Pages](https://github.com/zj9495/transmission-client/workflows/Deploy%20To%20Github%20Pages/badge.svg?branch=master)
+![Lint & Unit Test](https://github.com/zj9495/transmission-client/workflows/Lint%20&%20Unit%20Test/badge.svg)
 
 ## Available Scripts
 
