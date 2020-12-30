@@ -1,4 +1,7 @@
-export const formatLeftTime = (ms:number):string => {
+export const formatLeftTime = (ms: number): string => {
+  if (ms === Infinity) {
+    return '--:--:--'
+  }
   const s = Math.floor(ms / 1000)
   let seconds: number | string = Math.floor(s % 60)
   let minutes: number | string  = Math.floor(s / 60 % 60)
