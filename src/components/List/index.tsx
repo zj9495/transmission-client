@@ -21,10 +21,11 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+
 import { getSizeBytesSelector, getSizeUnitsSelector, getSpeedBytesSelector, getSpeedUnitsSelector } from '../../store/selector'
 
-
 import Progress from "../Progress"
+import ActionBar from "../ActionBar"
 
 import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
 import { IAppState, ISession } from "../../types";
@@ -51,6 +52,9 @@ const Torrents: React.FC = () => {
 
   useEffect(() => {
     dispatch(getSessionAction());
+    setInterval(() => {
+      dispatch(getAllTorrentsAction());
+    }, 5000)
   }, []);
 
   const classes = useStyles();
@@ -63,20 +67,21 @@ const Torrents: React.FC = () => {
     setSelectedIndex(index);
   };
 
-  const handleClick = () => {
-    dispatch(getAllTorrentsAction());
-  };
+  // const handleClick = () => {
+  //   dispatch(getAllTorrentsAction());
+  // };
 
   return (
     <div className={classes.root}>
-      <IconButton
+      {/* <IconButton
         color="inherit"
         data-ga-event-category="header"
         data-ga-event-action="github"
         onClick={handleClick}
       >
         <GitHubIcon />
-      </IconButton>
+      </IconButton> */}
+      <ActionBar />
       <List component="nav" aria-label="main mailbox folders">
         {torrents.map((torrent, index) => {
           return (
@@ -86,9 +91,12 @@ const Torrents: React.FC = () => {
               onClick={(event) => handleListItemClick(event, index)}
               key={index}
             >
-              {/* <ListItemIcon>
+              <ListItemIcon>
                 <InboxIcon />
-              </ListItemIcon> */}
+              </ListItemIcon>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
               <ListItemText primary={torrent.name} secondary={
                 <Progress torrent={torrent} config={progressConfig}/>
               } />

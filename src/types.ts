@@ -7,6 +7,8 @@ export interface ITorrent {
   rateUpload: number;
   rateDownload: number;
   uploadedEver: number;
+  status: number;
+  uploadRatio: number;
 }
 
 export type ITorrents = ITorrent[]
@@ -30,4 +32,8 @@ export interface IAppState {
   sessionId: string | undefined;
   allTorrents: ITorrents;
   session: ISession;
+}
+
+export interface IStatusColor {
+  [propName: number]: 'primary'|'disabled';
 }

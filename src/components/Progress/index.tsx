@@ -9,6 +9,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { ITorrent, IUnits } from '../../types'
 import { formatSize, formatSpeed } from '../../utils/units'
 import { formatLeftTime } from '../../utils/times'
+import { STATUS_COLORS } from '../../constants'
 
 
 const useStyles = makeStyles({
@@ -24,22 +25,26 @@ interface Props {
 
 export default function Progress(props: Props) {
   const classes = useStyles();
-  const { totalSize, leftUntilDone, percentDone, rateUpload, rateDownload, uploadedEver } = props.torrent;
+
+  const { totalSize, leftUntilDone, percentDone, rateUpload, rateDownload, uploadedEver, status, uploadRatio } = props.torrent;
+  console.log('status: ', status);
   const torrentSize = formatSize(totalSize)
-  const leftTime = formatLeftTime(leftUntilDone / rateDownload * 1000)
+  const leftTime = leftUntilDone ? formatLeftTime(leftUntilDone / rateDownload * 1000) : ''
   const uploadSpeed = formatSpeed(rateUpload)
   const downloadSpeed = formatSpeed(rateDownload)
   const uploadSize = formatSize(uploadedEver)
   const downloadSize = formatSize(totalSize - leftUntilDone)
 
+
   const percent = (percentDone * 100).toFixed(2)
+  const color = STATUS_COLORS[status];
 
   return (
     <div className={classes.root}>
       <Box>
         <Typography variant="body2" color="textSecondary">
           <KeyboardArrowDownIcon fontSize="inherit" />{downloadSpeed} {downloadSize}
-          <KeyboardArrowUpIcon fontSize="inherit" />{uploadSpeed} {uploadSize}
+          <KeyboardArrowUpIcon fontSize="inherit" />{uploadSpeed} {uploadSize} {uploadRatio < 0 ? '-' : uploadRatio}
         </Typography>
       </Box>
       <Box width="100%" mr={1}>

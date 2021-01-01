@@ -1,3 +1,5 @@
+import {IStatusColor} from './types'
+
 export const APP_ROUTES = {
   base: '/',
   signIn: '/sign-in',
@@ -16,3 +18,8 @@ export const LANGUAGES = [
 ];
 
 export const GITHUB_REPO = 'https://github.com/zj9495/transmission-client'
+
+export const STATUS_COLORS:IStatusColor = {
+  3: 'disabled',
+  4: 'primary'
+}
