@@ -32,6 +32,7 @@ export interface IAppState {
   sessionId: string | undefined;
   allTorrents: ITorrents;
   session: ISession;
+  menuOpen: boolean;
 }
 
 export interface IStatusColor {

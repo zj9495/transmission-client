@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import clsx from 'clsx';
 import {
   IconButton,
   Paper,
@@ -13,6 +14,7 @@ import {
   ListItemText,
   LinearProgress,
   Divider,
+  Box
 } from "@material-ui/core";
 import { LinearProgressProps } from "@material-ui/core/LinearProgress";
 import GitHubIcon from "@material-ui/icons/GitHub";
@@ -26,8 +28,10 @@ import { getSizeBytesSelector, getSizeUnitsSelector, getSpeedBytesSelector, getS
 
 import Progress from "../Progress"
 import ActionBar from "../ActionBar"
+import MenuBar from "../MenuBar"
 
 import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
+import { getMenuOpen } from '../../store/selector'
 import { IAppState, ISession } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,6 +40,12 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       backgroundColor: theme.palette.background.paper,
     },
+    container: {
+      marginLeft: 56
+    },
+    menuOpen: {
+      marginLeft: 240
+    }
   })
 );
 
@@ -59,6 +69,7 @@ const Torrents: React.FC = () => {
 
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
+  const menuOpen = useSelector(getMenuOpen);
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -73,37 +84,34 @@ const Torrents: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      {/* <IconButton
-        color="inherit"
-        data-ga-event-category="header"
-        data-ga-event-action="github"
-        onClick={handleClick}
-      >
-        <GitHubIcon />
-      </IconButton> */}
-      <ActionBar />
-      <List component="nav" aria-label="main mailbox folders">
-        {torrents.map((torrent, index) => {
-          return (
-            <ListItem
-              button
-              selected={selectedIndex === index}
-              onClick={(event) => handleListItemClick(event, index)}
-              key={index}
-            >
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary={torrent.name} secondary={
-                <Progress torrent={torrent} config={progressConfig}/>
-              } />
-            </ListItem>
-          );
-        })}
-      </List>
+      <MenuBar />
+      <Box className={clsx(classes.container, {
+        [classes.menuOpen]: menuOpen,
+      })}>
+        <ActionBar />
+        <List component="nav" aria-label="main mailbox folders">
+          {torrents.map((torrent, index) => {
+            return (
+              <ListItem
+                button
+                selected={selectedIndex === index}
+                onClick={(event) => handleListItemClick(event, index)}
+                key={index}
+              >
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary={torrent.name} secondary={
+                  <Progress torrent={torrent} config={progressConfig}/>
+                } />
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
     </div>
   );
 };

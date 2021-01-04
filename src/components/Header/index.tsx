@@ -21,12 +21,13 @@ import LanguageIcon from '@material-ui/icons/Translate';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SearchIcon from '@material-ui/icons/Search';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import MenuIcon from '@material-ui/icons/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import ThemeToggle from '../ThemeToggle'
 
-import { toggleTheme, setLocale } from '../../store/actions';
+import { toggleMenuOpen, setLocale } from '../../store/actions';
 import { IAppState } from '../../types';
 import { LANGUAGES, GITHUB_REPO } from '../../constants';
 
@@ -34,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
@@ -117,10 +121,17 @@ export default function SearchAppBar() {
     handleLanguageMenuClose();
   };
 
+  const handleMenuClick = () => {
+    dispatch(toggleMenuOpen())
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color={appBarColor}>
         <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleMenuClick}>
+            <MenuIcon />
+          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Transmission
           </Typography>

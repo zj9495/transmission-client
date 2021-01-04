@@ -6,6 +6,7 @@ import {
   SET_SESSION_ID,
   SET_ALL_TORRENTS,
   SET_SESSION,
+  TOGGLE_MENUOPEN,
 } from "../constants";
 import { IAppState } from "../../types";
 
@@ -24,6 +25,7 @@ const initialState: IAppState = {
       speedUnits: []
     }
   },
+  menuOpen: true
 };
 
 export interface Action {
@@ -49,6 +51,9 @@ export default (state = initialState, action: Action) =>
         break;
       case SET_SESSION:
         draft.session = action.payload;
+        break;
+      case TOGGLE_MENUOPEN:
+        draft.menuOpen = action.payload;
         break;
       default:
         return state;

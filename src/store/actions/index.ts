@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-import { SET_LOCALE, CHANGE_THEME, SET_ALL_TORRENTS, SET_SESSION } from '../constants';
+import { SET_LOCALE, CHANGE_THEME, SET_ALL_TORRENTS, SET_SESSION, TOGGLE_MENUOPEN } from '../constants';
 import { IAppState } from '../../types';
 import { getSession, getAllTorrents } from '../../api';
 import { objectToCamelCase } from '../../utils/object'
@@ -50,4 +50,16 @@ export const getAllTorrentsAction = () => (
       payload: res.data.arguments.torrents,
     })
   })
+}
+
+export const toggleMenuOpen = () => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>,
+  getState: () => IAppState
+) => {
+  const state = getState();
+  const payload = !state.menuOpen;
+  dispatch({
+    type: TOGGLE_MENUOPEN,
+    payload,
+  });
 }
