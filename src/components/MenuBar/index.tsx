@@ -22,7 +22,9 @@ import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import SwapVertOutlinedIcon from '@material-ui/icons/SwapVertOutlined';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import WarningIcon from '@material-ui/icons/Warning';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
 
 import { useSelector } from 'react-redux';
 
@@ -148,17 +150,27 @@ export default function MenuBar() {
       </ListItem>
       <ListItem button>
         <ListItemIcon><CloudUploadIcon /></ListItemIcon>
-        <ListItemText primary="Upload" />
+        <ListItemText primary="Seeding" />
         <span className={'MuiLabel-amount'}>1,183</span>
       </ListItem>
       <ListItem button>
-        <ListItemIcon><ErrorOutlineIcon /></ListItemIcon>
-        <ListItemText primary="Error" />
+        <ListItemIcon><FindInPageIcon /></ListItemIcon>
+        <ListItemText primary="Checking" />
+        <span className={'MuiLabel-amount'}>1,183</span>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon><HourglassEmptyIcon /></ListItemIcon>
+        <ListItemText primary="Waiting" />
         <span className={'MuiLabel-amount'}>1,183</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><WarningIcon /></ListItemIcon>
         <ListItemText primary="Warning" />
+        <span className={'MuiLabel-amount'}>1,183</span>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon><ErrorOutlineIcon /></ListItemIcon>
+        <ListItemText primary="Error" />
         <span className={'MuiLabel-amount'}>1,183</span>
       </ListItem>
     </List>
