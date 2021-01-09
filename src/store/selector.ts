@@ -6,3 +6,5 @@ export const getSizeBytesSelector = (state: IAppState) => state.session.units.si
 export const getSizeUnitsSelector = (state: IAppState) => state.session.units.sizeUnits
 
 export const getMenuOpen = (state: IAppState) => state.menuOpen
+
+export const getAllTorrents = (state: IAppState) => state.allTorrents

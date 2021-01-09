@@ -23,3 +23,13 @@ export const STATUS_COLORS:IStatusColor = {
   3: 'disabled',
   4: 'primary'
 }
+
+export const STATUS_TYPES = {
+  stopped: 0,
+  checkwait: 1,
+  check: 2,
+  downloadwait: 3,
+  download: 4,
+  seedwait: 5,
+  seed: 6,
+}

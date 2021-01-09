@@ -28,7 +28,8 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 
 import { useSelector } from 'react-redux';
 
-import { getMenuOpen } from '../../store/selector'
+import { getMenuOpen, getAllTorrents } from '../../store/selector'
+import { STATUS_TYPES } from '../../constants'
 
 const drawerWidth = 240;
 const closedDrawerWidth = 56
@@ -106,7 +107,21 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MenuBar() {
   const classes = useStyles();
   const menuOpen = useSelector(getMenuOpen);
+  const torrents = useSelector(getAllTorrents);
   const [menuTemporaryOpen, setMenuTemporaryOpen] = React.useState(false)
+  const torrentNums = {
+    all: torrents.length,
+    stopped: torrents.filter(item=>item.status === STATUS_TYPES.stopped).length,
+    checkwait: torrents.filter(item=>item.status === STATUS_TYPES.checkwait).length,
+    check: torrents.filter(item=>item.status === STATUS_TYPES.check).length,
+    downloadwait: torrents.filter(item=>item.status === STATUS_TYPES.downloadwait).length,
+    download: torrents.filter(item=>item.status === STATUS_TYPES.download).length,
+    seedwait: torrents.filter(item=>item.status === STATUS_TYPES.seedwait).length,
+    seed: torrents.filter(item => item.status === STATUS_TYPES.seed).length,
+    active: 0,
+  }
+
+  torrentNums.active = torrentNums.download + torrentNums.seed
 
   const open = menuTemporaryOpen || menuOpen
   return (
@@ -131,47 +146,57 @@ export default function MenuBar() {
       <ListItem button>
         <ListItemIcon><AllInboxIcon /></ListItemIcon>
         <ListItemText primary="All" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.all}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><InboxIcon /></ListItemIcon>
         <ListItemText primary="Downloading" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.download}</span>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon><InboxIcon /></ListItemIcon>
+        <ListItemText primary="Download Waiting" />
+        <span className={'MuiLabel-amount'}>{torrentNums.downloadwait}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><PauseCircleOutlineIcon /></ListItemIcon>
         <ListItemText primary="Paused" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.stopped}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><SwapVertOutlinedIcon /></ListItemIcon>
         <ListItemText primary="Active" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.active}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><CloudUploadIcon /></ListItemIcon>
         <ListItemText primary="Seeding" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+          <span className={'MuiLabel-amount'}>{torrentNums.seed}</span>
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon><CloudUploadIcon /></ListItemIcon>
+        <ListItemText primary="Seed Waiting" />
+        <span className={'MuiLabel-amount'}>{torrentNums.seedwait}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><FindInPageIcon /></ListItemIcon>
         <ListItemText primary="Checking" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.check}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><HourglassEmptyIcon /></ListItemIcon>
-        <ListItemText primary="Waiting" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <ListItemText primary="Check Waiting" />
+        <span className={'MuiLabel-amount'}>{torrentNums.checkwait}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><WarningIcon /></ListItemIcon>
         <ListItemText primary="Warning" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.seed}</span>
       </ListItem>
       <ListItem button>
         <ListItemIcon><ErrorOutlineIcon /></ListItemIcon>
         <ListItemText primary="Error" />
-        <span className={'MuiLabel-amount'}>1,183</span>
+        <span className={'MuiLabel-amount'}>{torrentNums.seed}</span>
       </ListItem>
     </List>
   </Drawer>
