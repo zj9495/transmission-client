@@ -9,8 +9,9 @@ interface Props {
   locale: string;
   children: object;
 }
+
 function getMessages(locale: string): Record<string, string> {
-  let messages = en_US;
+  let messages:Record<string, string>;
   switch (locale) {
     case 'en':
       messages = en_US;
