@@ -6,9 +6,13 @@
 A Web Client for [Transmission](https://github.com/transmission/transmission), build with Material-UI and Typescript.
 
 # Features
-- [ ] Start, stop, upload and delete torrents
-- [x] Mobile friendly UI
-- [x] Pure html, css, js (easy to deploy and use)
+- [ ] Moden Mobile friendly UI
+- [x] Dark mode
+- [ ] Start, stop, upload, delete and recheck torrents
+- [x] Multi-language support.
+- [ ] Site icon
 
 # Demo
-[Live Demo](https://zj9495.github.io/transmission-client/)
+[Live Demo](https://zj9495.github.io/transmission-client/)  
+Username: zj9495  
+Password: zj9495  
