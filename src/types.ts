@@ -1,4 +1,5 @@
 export interface ITorrent {
+  id: number;
   name: string;
   totalSize: number;
   downloadedEver: number;
@@ -9,6 +10,16 @@ export interface ITorrent {
   uploadedEver: number;
   status: number;
   uploadRatio: number;
+  seederCount: string;
+  leecherCount: string;
+  completeSize: number;
+  addedDate: number;
+  trackers: string;
+  downloadDir: string;
+  labels: string[];
+  doneDate: number;
+  queuePosition: number;
+  activityDate: number;
 }
 
 export type ITorrents = ITorrent[]

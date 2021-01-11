@@ -34,6 +34,8 @@ import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
 import { getMenuOpen } from '../../store/selector'
 import { IAppState, ISession } from "../../types";
 
+import TorrentTable from "../TorrentTable"
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -89,7 +91,8 @@ const Torrents: React.FC = () => {
         [classes.menuOpen]: menuOpen,
       })}>
         <ActionBar />
-        <List component="nav" aria-label="main mailbox folders">
+        <TorrentTable />
+        {/* <List component="nav" aria-label="main mailbox folders">
           {torrents.map((torrent, index) => {
             return (
               <ListItem
@@ -110,7 +113,7 @@ const Torrents: React.FC = () => {
               </ListItem>
             );
           })}
-        </List>
+        </List> */}
       </Box>
     </div>
   );
