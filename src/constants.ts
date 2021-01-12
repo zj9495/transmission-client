@@ -61,7 +61,7 @@ export const LANGUAGES = [
   },
   {
     code: 'ru',
-    text: 'Russian',
+    text: 'Русский',
   },
   {
     code: 'uk',

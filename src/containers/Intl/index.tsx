@@ -10,7 +10,7 @@ interface Props {
 function getMessages(locale: string): Record<string, string> {
   let messages: Record<string, string>;
   try {
-    messages = require(`../../i18n/lang/${locale}.json`)
+    messages = require(`../../i18n/lang/${locale.replace('-','_')}.json`)
   } catch (error) {
     messages = require(`../../i18n/lang/en.json`)
   }
