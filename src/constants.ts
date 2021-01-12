@@ -13,7 +13,59 @@ export const LANGUAGES = [
   },
   {
     code: 'zh-CN',
-    text: '中文(简体)',
+    text: '中文 - 简体',
+  },
+  {
+    code: 'zh-TW',
+    text: '中文 - 繁体',
+  },
+  {
+    code: 'de',
+    text: 'Deutsch',
+  },
+  {
+    code: 'es',
+    text: 'Español',
+  },
+  {
+    code: 'fr',
+    text: 'Français',
+  },
+  {
+    code: 'hu',
+    text: 'Magyar',
+  },
+  {
+    code: 'it',
+    text: 'Italiano',
+  },
+  {
+    code: 'ko',
+    text: 'Korean',
+  },
+  {
+    code: 'nl',
+    text: 'Nederlands',
+  },
+  {
+    code: 'pt-BR',
+    text: 'Português - Brasil',
+  },
+  {
+    code: 'pt-PT',
+    text: 'Português - Portugal',
+  },
+  {
+    code: 'ro',
+    text: 'Romanian',
+  },
+  {
+    code: 'ru',
+    text: 'Russian',
+  },
+  {
+    code: 'uk',
+    text: 'українська мова',
   },
 ];
 
