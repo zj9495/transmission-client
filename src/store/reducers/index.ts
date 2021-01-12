@@ -25,7 +25,7 @@ const initialState: IAppState = {
       speedUnits: []
     }
   },
-  menuOpen: true
+  menuOpen: false
 };
 
 export interface Action {
