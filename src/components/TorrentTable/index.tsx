@@ -1,40 +1,44 @@
 import React from "react"
-import { DataGrid, ColDef } from '@material-ui/data-grid';
-
+import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux'
+import { XGrid, ColDef } from '@material-ui/x-grid';
 
 import { getAllTorrents } from '../../store/selector'
 
 
-const columns: ColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'name', headerName: 'Name', width: 130 },
-  { field: 'totalSize', headerName: 'Total size'},
-  { field: 'percentDone', headerName: 'Progress'},
-  { field: 'leftUntilDone', headerName: 'Left Time'},
-  { field: 'uploadRatio', headerName: 'Upload Ratio'},
-  { field: 'status', headerName: 'Status'},
-  { field: 'seederCount', headerName: 'Seeder'},
-  { field: 'leecherCount', headerName: 'Leecher'},
-  { field: 'rateDownload', headerName: 'Download Speed'},
-  { field: 'rateUpload', headerName: 'Upload Speed'},
-  { field: 'completeSize', headerName: 'Complete size'},
-  { field: 'uploadedEver', headerName: 'Uploaded size'},
-  { field: 'addedDate', headerName: 'Date added'},
-  { field: 'queuePosition', headerName: 'Queue'},
-  { field: 'trackers', headerName: 'Trackers'},
-  { field: 'downloadDir', headerName: 'Download Dir'},
-  { field: 'activityDate', headerName: 'Activity Date'},
-  { field: 'labels', headerName: 'User Labels'},
-  { field: 'doneDate', headerName: 'Completed Date'},
-];
-
 const TorrentTable: React.FC = () => {
   const torrents = useSelector(getAllTorrents)
-
+  const intl = useIntl();
+  const columns: ColDef[] = [
+    { field: 'name', headerName: intl.formatMessage({ id: 'torrent.fields.name' }), width: 130 },
+    { field: 'totalSize', headerName: intl.formatMessage({ id: 'torrent.fields.totalSize' })},
+    { field: 'percentDone', headerName: intl.formatMessage({ id: 'torrent.fields.percentDone' })},
+    { field: 'leftUntilDone', headerName: intl.formatMessage({ id: 'torrent.fields.remainingTime' })},
+    { field: 'uploadRatio', headerName: intl.formatMessage({ id: 'torrent.fields.uploadRatio' })},
+    { field: 'status', headerName: intl.formatMessage({ id: 'torrent.fields.status' })},
+    { field: 'seederCount', headerName: intl.formatMessage({ id: 'torrent.fields.seederCount' })},
+    { field: 'leecherCount', headerName: intl.formatMessage({ id: 'torrent.fields.leecherCount' })},
+    { field: 'rateDownload', headerName: intl.formatMessage({ id: 'torrent.fields.rateDownload' })},
+    { field: 'rateUpload', headerName: intl.formatMessage({ id: 'torrent.fields.rateUpload' })},
+    { field: 'completeSize', headerName: intl.formatMessage({ id: 'torrent.fields.completeSize' })},
+    { field: 'uploadedEver', headerName: intl.formatMessage({ id: 'torrent.fields.uploadedEver' })},
+    { field: 'addedDate', headerName: intl.formatMessage({ id: 'torrent.fields.addedDate' })},
+    { field: 'queuePosition', headerName: intl.formatMessage({ id: 'torrent.fields.queuePosition' })},
+    { field: 'trackers', headerName: intl.formatMessage({ id: 'torrent.fields.trackers' })},
+    { field: 'downloadDir', headerName: intl.formatMessage({ id: 'torrent.fields.downloadDir' })},
+    { field: 'activityDate', headerName: intl.formatMessage({ id: 'torrent.fields.activityDate' })},
+    { field: 'labels', headerName: intl.formatMessage({ id: 'torrent.fields.labels' })},
+    { field: 'doneDate', headerName: intl.formatMessage({ id: 'torrent.fields.doneDate' })},
+  ];
+  
   return (
     <div style={{ height: 800, width: '100%' }}>
-      <DataGrid rows={torrents} columns={columns} pageSize={20} checkboxSelection />
+      <XGrid
+        rows={torrents} columns={columns} pageSize={20}
+        loading={torrents.length === 0}
+        checkboxSelection
+        disableSelectionOnClick
+      />
     </div>
   );
 }

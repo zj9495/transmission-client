@@ -1596,16 +1596,6 @@
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/data-grid@^4.0.0-alpha.15":
-  version "4.0.0-alpha.15"
-  resolved "https://registry.yarnpkg.com/@material-ui/data-grid/-/data-grid-4.0.0-alpha.15.tgz#9dd25210adcea283cb6e6d3b15aab51a2180207e"
-  integrity sha512-jm4n1qs3TX0wLvDsa0lwDEkAHdWcxp0pN/e8zTfdxAYrziO3VluKyS79Zjgr8l/urmgqoERVF2P6gN8iwp5/Uw==
-  dependencies:
-    "@material-ui/utils" "^5.0.0-alpha.14"
-    prop-types "^15.7.2"
-    reselect "^4.0.0"
-    tslib "^2.0.0"
-
 "@material-ui/icons@^4.11.2":
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
@@ -1669,6 +1659,25 @@
     "@types/react-is" "^16.7.1 || ^17.0.0"
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
+
+"@material-ui/x-grid@^4.0.0-alpha.15":
+  version "4.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@material-ui/x-grid/-/x-grid-4.0.0-alpha.15.tgz#1dbc40790180420a456990510465f3a146a4c43e"
+  integrity sha512-POoMSNwbYs4zUlKeS+xGvN819aYkL0hwJ82eu0NM+kYMz/41s06Cx7HFEtoVR4uyQDMdYuHOdT2Wpy2CbXi9pg==
+  dependencies:
+    "@material-ui/utils" "^5.0.0-alpha.14"
+    "@material-ui/x-license" "^4.0.0-alpha.15"
+    prop-types "^15.7.2"
+    reselect "^4.0.0"
+    tslib "^2.0.0"
+
+"@material-ui/x-license@^4.0.0-alpha.15":
+  version "4.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@material-ui/x-license/-/x-license-4.0.0-alpha.15.tgz#c0be826b7b7326adea428e9adc2fd76fc83857e7"
+  integrity sha512-WGpPhxoWsniEtuW01p927tJEormvc3w3QrdjUjv3/Ad/nZxcB/1diMVkZZMcEOrvvirz1uVVU7s+jZQb+i8rYQ==
+  dependencies:
+    commander "^6.1.0"
+    esm "^3.2.25"
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
@@ -3758,7 +3767,7 @@ commander@^4.1.1:
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
 
-commander@^6.2.0:
+commander@^6.1.0, commander@^6.2.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
   integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
@@ -5123,6 +5132,11 @@ eslint@^7.11.0:
     table "^5.2.3"
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
+
+esm@^3.2.25:
+  version "3.2.25"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
 
 espree@^7.3.0:
   version "7.3.0"
