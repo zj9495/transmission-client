@@ -150,6 +150,7 @@ export default function SearchAppBar() {
           </div>
           <Tooltip title={intl.formatMessage({ id: 'changeLanguage' })} enterDelay={300}>
             <Button
+              id="switch-language"
               color="inherit"
               onClick={handleLanguageIconClick}
               data-ga-event-category="header"
@@ -181,6 +182,7 @@ export default function SearchAppBar() {
           >
             {LANGUAGES.map((language) => (
               <MenuItem
+                id={'lang-item-'+language.code}
                 data-no-link="true"
                 key={language.code}
                 value={language.code}

@@ -47,13 +47,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cy": "cypress"
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": ["cypress"]
   },
   "browserslist": {
     "production": [
@@ -66,5 +67,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-cypress": "^2.11.2"
   }
 }
