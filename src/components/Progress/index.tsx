@@ -7,7 +7,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { ITorrent, IUnits } from '../../types'
-import { formatSize, formatSpeed } from '../../utils/units'
+import { formatSize, formatSpeed } from '../../utils/formatter'
 import { formatLeftTime } from '../../utils/times'
 import { STATUS_COLORS } from '../../constants'
 
