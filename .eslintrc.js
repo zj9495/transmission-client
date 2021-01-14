@@ -21,6 +21,7 @@ module.exports = {
         'prettier',
         'prettier/react',
         'prettier/@typescript-eslint',
+        'plugin:cypress/recommended'
     ],
     globals: {
         Atomics: 'readonly',
@@ -45,7 +46,7 @@ module.exports = {
             },
         },
     },
-    plugins: ['react', '@typescript-eslint', 'unicorn', 'promise', 'plugin:cypress/recommended'],
+    plugins: ['react', '@typescript-eslint', 'unicorn', 'promise'],
     rules: {
         'eslint-comments/disable-enable-pair': [ERROR, { allowWholeFile: true }],
 
