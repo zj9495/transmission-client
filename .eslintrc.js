@@ -45,7 +45,7 @@ module.exports = {
             },
         },
     },
-    plugins: ['react', '@typescript-eslint', 'unicorn', 'promise'],
+    plugins: ['react', '@typescript-eslint', 'unicorn', 'promise', 'plugin:cypress/recommended'],
     rules: {
         'eslint-comments/disable-enable-pair': [ERROR, { allowWholeFile: true }],
 
