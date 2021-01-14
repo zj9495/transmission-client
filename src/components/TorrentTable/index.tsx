@@ -7,7 +7,7 @@ import renderProgress from './renderProgress';
 import renderName from './renderName';
 
 import { getAllTorrents } from '../../store/selector'
-import { formatSize, formatSpeed, formatUnixTimeStamp } from '../../utils/formatter'
+import { formatSize, formatSpeed, formatUnixTimeStamp, formatLeftTime } from '../../utils/formatter'
 
 const useSize: ColTypeDef = {
   type: 'number',
@@ -27,8 +27,6 @@ const useTime: ColTypeDef = {
   valueFormatter: ({ value }) => formatUnixTimeStamp(Number(value)),
 }
 
-
-
 const TorrentTable: React.FC = () => {
   const torrents = useSelector(getAllTorrents)
   const intl = useIntl();
@@ -41,7 +39,7 @@ const TorrentTable: React.FC = () => {
     {
       field: 'percentDone', headerName: intl.formatMessage({ id: 'torrent.fields.percentDone' }), type: 'number', width: 120, renderCell: renderProgress
     },
-    { field: 'leftUntilDone', headerName: intl.formatMessage({ id: 'torrent.fields.remainingTime' }) },
+    { field: 'leftUntilDone', headerName: intl.formatMessage({ id: 'torrent.fields.remainingTime' }), valueFormatter: ({ value, row }) => value && row.rateDownload ? formatLeftTime(Number(value) / Number(row.rateDownload)) : ' ', },
     { field: 'uploadRatio', headerName: intl.formatMessage({ id: 'torrent.fields.uploadRatio' }) },
     { field: 'status', headerName: intl.formatMessage({ id: 'torrent.fields.status' }), valueFormatter: ({ value }) => formatStatus(Number(value)), },
     { field: 'seederCount', headerName: intl.formatMessage({ id: 'torrent.fields.seederCount' }) },
@@ -60,7 +58,7 @@ const TorrentTable: React.FC = () => {
   ];
 
   return (
-    <div style={{ height: 800, width: '100%' }}>
+    <div style={{ height: 'calc(100vh - 112px)', width: '100%' }}>
       <XGrid
         rows={torrents} columns={columns} pageSize={20}
         loading={torrents.length === 0}

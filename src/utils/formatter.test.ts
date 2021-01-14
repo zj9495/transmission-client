@@ -3,6 +3,7 @@ import {
   formatSize,
   formatSpeed,
   formatUnixTimeStamp,
+  formatLeftTime
 } from "./formatter";
 import store from "../store";
 
@@ -130,5 +131,28 @@ describe.each`
 `("test formatUnixTimeStamp($timeStamp)", ({ timeStamp, expected }) => {
   test(`returns ${expected}`, () => {
     expect(formatUnixTimeStamp(timeStamp)).toBe(expected);
+  });
+});
+
+describe.each`
+  ms            | expected
+  ${1}       | ${"0:00:01"}
+  ${10}      | ${"0:00:10"}
+  ${100}     | ${"0:01:40"}
+  ${1000}    | ${"0:16:40"}
+  ${10000}   | ${"2:46:40"}
+  ${100000}  | ${"27:46:40"}
+  ${1000000} | ${"277:46:40"}
+  ${621658}  | ${"172:40:58"}
+  ${4047585} | ${"1124:19:45"}
+  ${4694212} | ${"1303:56:52"}
+  ${309051}  | ${"85:50:51"}
+  ${439418}  | ${"122:03:38"}
+  ${350371}  | ${"97:19:31"}
+  ${628029}  | ${"174:27:09"}
+  ${Infinity}   | ${"--:--:--"}
+`("test formatLeftTime($ms)", ({ ms, expected }) => {
+  test(`returns ${expected}`, () => {
+    expect(formatLeftTime(ms)).toBe(expected);
   });
 });

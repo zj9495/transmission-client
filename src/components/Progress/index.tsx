@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { ITorrent, IUnits } from '../../types'
 import { formatSize, formatSpeed } from '../../utils/formatter'
-import { formatLeftTime } from '../../utils/times'
+import { formatLeftTime } from '../../utils/formatter'
 import { STATUS_COLORS } from '../../constants'
 
 
@@ -27,7 +27,6 @@ export default function Progress(props: Props) {
   const classes = useStyles();
 
   const { totalSize, leftUntilDone, percentDone, rateUpload, rateDownload, uploadedEver, status, uploadRatio } = props.torrent;
-  console.log('status: ', status);
   const torrentSize = formatSize(totalSize)
   const leftTime = leftUntilDone ? formatLeftTime(leftUntilDone / rateDownload * 1000) : ''
   const uploadSpeed = formatSpeed(rateUpload)
