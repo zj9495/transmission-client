@@ -48,17 +48,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint --ext js,ts,tsx src",
+    "lint:fix": "yarn lint --fix",
     "cy": "cypress",
     "cy:open": "cypress open"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "plugins": [
-      "cypress"
-    ]
   },
   "browserslist": {
     "production": [
@@ -73,7 +66,19 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-cypress": "^2.11.2"
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-unicorn": "^26.0.1"
   },
   "husky": {
     "hooks": {

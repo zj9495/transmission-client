@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect } from "react";
-import clsx from 'clsx';
+import clsx from "clsx";
 import {
   IconButton,
   Paper,
@@ -14,7 +15,7 @@ import {
   ListItemText,
   LinearProgress,
   Divider,
-  Box
+  Box,
 } from "@material-ui/core";
 import { LinearProgressProps } from "@material-ui/core/LinearProgress";
 import GitHubIcon from "@material-ui/icons/GitHub";
@@ -24,17 +25,23 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
-import { getSizeBytesSelector, getSizeUnitsSelector, getSpeedBytesSelector, getSpeedUnitsSelector } from '../../store/selector'
+import {
+  getSizeBytesSelector,
+  getSizeUnitsSelector,
+  getSpeedBytesSelector,
+  getSpeedUnitsSelector,
+  getMenuOpen,
+} from "../../store/selector";
 
-import Progress from "../Progress"
-import ActionBar from "../ActionBar"
-import MenuBar from "../MenuBar"
+import Progress from "../Progress";
+import ActionBar from "../ActionBar";
+import MenuBar from "../MenuBar";
 
 import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
-import { getMenuOpen } from '../../store/selector'
+
 import { IAppState, ISession } from "../../types";
 
-import TorrentTable from "../TorrentTable"
+import TorrentTable from "../TorrentTable";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,11 +50,11 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
     container: {
-      marginLeft: 56
+      marginLeft: 56,
     },
     menuOpen: {
-      marginLeft: 240
-    }
+      marginLeft: 240,
+    },
   })
 );
 
@@ -60,13 +67,13 @@ const Torrents: React.FC = () => {
     sizeUnits: useSelector(getSizeUnitsSelector),
     speedBytes: useSelector(getSpeedBytesSelector),
     speedUnits: useSelector(getSpeedUnitsSelector),
-  }
+  };
 
   useEffect(() => {
     dispatch(getSessionAction());
     setInterval(() => {
       dispatch(getAllTorrentsAction());
-    }, 5000)
+    }, 5000);
   }, []);
 
   const classes = useStyles();
@@ -87,9 +94,11 @@ const Torrents: React.FC = () => {
   return (
     <div className={classes.root}>
       <MenuBar />
-      <Box className={clsx(classes.container, {
-        [classes.menuOpen]: menuOpen,
-      })}>
+      <Box
+        className={clsx(classes.container, {
+          [classes.menuOpen]: menuOpen,
+        })}
+      >
         <ActionBar />
         <TorrentTable />
         {/* <List component="nav" aria-label="main mailbox folders">

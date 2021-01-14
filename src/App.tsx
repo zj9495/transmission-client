@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 import {
   HashRouter as Router,
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { Provider } from 'react-redux';
+} from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { Provider } from "react-redux";
 
-import { APP_ROUTES } from './constants';
-import Intl from './containers/Intl';
-import Theme from './containers/Theme';
-import SignIn from './containers/SignIn';
-import List from './components/List';
-import Header from './components/Header';
-import store from './store';
+import { APP_ROUTES } from "./constants";
+import Intl from "./containers/Intl";
+import Theme from "./containers/Theme";
+import SignIn from "./containers/SignIn";
+import List from "./components/List";
+import Header from "./components/Header";
+import store from "./store";
 
-const App = () => (
+const App = (): JSX.Element => (
   <Provider store={store}>
     <Intl>
       <Theme>

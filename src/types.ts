@@ -22,7 +22,7 @@ export interface ITorrent {
   activityDate: number;
 }
 
-export type ITorrents = ITorrent[]
+export type ITorrents = ITorrent[];
 
 export interface IUnits {
   memoryBytes?: number;
@@ -34,7 +34,7 @@ export interface IUnits {
 }
 
 export interface ISession {
-  units: IUnits
+  units: IUnits;
 }
 
 export interface IAppState {
@@ -47,5 +47,5 @@ export interface IAppState {
 }
 
 export interface IStatusColor {
-  [propName: number]: 'primary'|'disabled';
+  [propName: number]: "primary" | "disabled";
 }

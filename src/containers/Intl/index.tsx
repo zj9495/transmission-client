@@ -1,18 +1,21 @@
-import React from 'react';
-import { IntlProvider } from 'react-intl';
-import { connect } from 'react-redux';
+/* eslint-disable import/no-dynamic-require */
+import React from "react";
+import { IntlProvider } from "react-intl";
+import { connect } from "react-redux";
 
 interface Props {
   locale: string;
-  children: object;
+  children: JSX.Element;
 }
 
 function getMessages(locale: string): Record<string, string> {
   let messages: Record<string, string>;
   try {
-    messages = require(`../../i18n/lang/${locale.replace('-','_')}.json`)
-  } catch (error) {
-    messages = require(`../../i18n/lang/en.json`)
+    // eslint-disable-next-line global-require
+    messages = require(`../../i18n/lang/${locale.replace("-", "_")}.json`);
+  } catch {
+    // eslint-disable-next-line global-require
+    messages = require(`../../i18n/lang/en.json`);
   }
   return messages;
 }

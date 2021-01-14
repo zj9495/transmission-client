@@ -1,80 +1,80 @@
-import {IStatusColor} from './types'
+import { IStatusColor } from "./types";
 
 export const APP_ROUTES = {
-  base: '/',
-  signIn: '/sign-in',
-  list: '/list',
+  base: "/",
+  signIn: "/sign-in",
+  list: "/list",
 };
 
 export const LANGUAGES = [
   {
-    code: 'en',
-    text: 'English',
+    code: "en",
+    text: "English",
   },
   {
-    code: 'zh-CN',
-    text: '中文 - 简体',
+    code: "zh-CN",
+    text: "中文 - 简体",
   },
   {
-    code: 'zh-TW',
-    text: '中文 - 繁体',
+    code: "zh-TW",
+    text: "中文 - 繁体",
   },
   {
-    code: 'de',
-    text: 'Deutsch',
+    code: "de",
+    text: "Deutsch",
   },
   {
-    code: 'es',
-    text: 'Español',
+    code: "es",
+    text: "Español",
   },
   {
-    code: 'fr',
-    text: 'Français',
+    code: "fr",
+    text: "Français",
   },
   {
-    code: 'hu',
-    text: 'Magyar',
+    code: "hu",
+    text: "Magyar",
   },
   {
-    code: 'it',
-    text: 'Italiano',
+    code: "it",
+    text: "Italiano",
   },
   {
-    code: 'ko',
-    text: 'Korean',
+    code: "ko",
+    text: "Korean",
   },
   {
-    code: 'nl',
-    text: 'Nederlands',
+    code: "nl",
+    text: "Nederlands",
   },
   {
-    code: 'pt-BR',
-    text: 'Português - Brasil',
+    code: "pt-BR",
+    text: "Português - Brasil",
   },
   {
-    code: 'pt-PT',
-    text: 'Português - Portugal',
+    code: "pt-PT",
+    text: "Português - Portugal",
   },
   {
-    code: 'ro',
-    text: 'Romanian',
+    code: "ro",
+    text: "Romanian",
   },
   {
-    code: 'ru',
-    text: 'Русский',
+    code: "ru",
+    text: "Русский",
   },
   {
-    code: 'uk',
-    text: 'українська мова',
+    code: "uk",
+    text: "українська мова",
   },
 ];
 
-export const GITHUB_REPO = 'https://github.com/zj9495/transmission-client'
+export const GITHUB_REPO = "https://github.com/zj9495/transmission-client";
 
-export const STATUS_COLORS:IStatusColor = {
-  3: 'disabled',
-  4: 'primary'
-}
+export const STATUS_COLORS: IStatusColor = {
+  3: "disabled",
+  4: "primary",
+};
 
 export const STATUS_TYPES = {
   stopped: 0,
@@ -84,4 +84,4 @@ export const STATUS_TYPES = {
   download: 4,
   seedwait: 5,
   seed: 6,
-}
+};

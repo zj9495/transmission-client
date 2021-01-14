@@ -1,11 +1,12 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import SignIn from '../../components/SignIn';
-import { setLocale } from '../../store/actions';
+import SignIn from "../../components/SignIn";
+import { setLocale } from "../../store/actions";
 
 const mapStateToProps = (state: { locale: string }) => ({
   locale: state.locale,
 });
+// eslint-disable-next-line @typescript-eslint/ban-types
 const mapDispatchToProps = (dispatch: Function) => ({
   setLocale: (val: string) => dispatch(setLocale(val)),
 });

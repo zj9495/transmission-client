@@ -1,13 +1,22 @@
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
+/* eslint-disable unicorn/consistent-function-scoping */
+/* eslint-disable promise/always-return */
+/* eslint-disable @typescript-eslint/ban-types */
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
-import { SET_LOCALE, CHANGE_THEME, SET_ALL_TORRENTS, SET_SESSION, TOGGLE_MENUOPEN } from '../constants';
-import { IAppState } from '../../types';
-import { getSession, getAllTorrents } from '../../api';
-import { objectToCamelCase } from '../../utils/object'
+import {
+  SET_LOCALE,
+  CHANGE_THEME,
+  SET_ALL_TORRENTS,
+  SET_SESSION,
+  TOGGLE_MENUOPEN,
+} from "../constants";
+import { IAppState } from "../../types";
+import { getSession, getAllTorrents } from "../../api";
+import { objectToCamelCase } from "../../utils/object";
 
 export const setLocale = (val: string) => (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>,
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   dispatch({
     type: SET_LOCALE,
@@ -20,7 +29,7 @@ export const toggleTheme = () => (
   getState: () => IAppState
 ) => {
   const state = getState();
-  const payload = state.theme === 'light' ? 'dark' : 'light';
+  const payload = state.theme === "light" ? "dark" : "light";
   dispatch({
     type: CHANGE_THEME,
     payload,
@@ -28,29 +37,29 @@ export const toggleTheme = () => (
 };
 
 export const getSessionAction = () => (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>,
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
-  const setSession = () => getSession().then(res => {
-    dispatch({
-      type: SET_SESSION,
-      payload: objectToCamelCase(res.data.arguments)
-    })
-  })
+  const setSession = () =>
+    getSession().then((res) => {
+      dispatch({
+        type: SET_SESSION,
+        payload: objectToCamelCase(res.data.arguments),
+      });
+    });
   return setSession().catch(() => {
-    setSession()
-  })
-}
+    setSession();
+  });
+};
 
 export const getAllTorrentsAction = () => (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>,
-) => {
-  return getAllTorrents().then((res) => {
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) =>
+  getAllTorrents().then((res) => {
     dispatch({
       type: SET_ALL_TORRENTS,
       payload: res.data.arguments.torrents,
-    })
-  })
-}
+    });
+  });
 
 export const toggleMenuOpen = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
@@ -62,4 +71,4 @@ export const toggleMenuOpen = () => (
     type: TOGGLE_MENUOPEN,
     payload,
   });
-}
+};

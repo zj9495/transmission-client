@@ -22,10 +22,10 @@ const initialState: IAppState = {
       sizeBytes: 1000,
       sizeUnits: [],
       speedBytes: 1000,
-      speedUnits: []
-    }
+      speedUnits: [],
+    },
   },
-  menuOpen: false
+  menuOpen: false,
 };
 
 export interface Action {
@@ -33,8 +33,8 @@ export interface Action {
   payload: any;
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action: Action) =>
+  // eslint-disable-next-line consistent-return
   produce(state, (draft) => {
     switch (action.type) {
       case SET_LOCALE:
