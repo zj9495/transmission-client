@@ -122,17 +122,19 @@ test("formatSpeed format zero", () => {
   expect(formatSpeed(0)).toBe(" ");
 });
 
-describe.each`
-  timeStamp     | expected
-  ${0}          | ${" "}
-  ${1610249550} | ${"2021-01-10 11:32:30"}
-  ${1608518614} | ${"2020-12-21 10:43:34"}
-  ${1609340446} | ${"2020-12-30 23:00:46"}
-`("test formatUnixTimeStamp($timeStamp)", ({ timeStamp, expected }) => {
-  test(`returns ${expected}`, () => {
-    expect(formatUnixTimeStamp(timeStamp)).toBe(expected);
+if (process.env.CI) {
+  describe.each`
+    timeStamp     | expected
+    ${0}          | ${" "}
+    ${1610249550} | ${"2021-01-10 11:32:30"}
+    ${1608518614} | ${"2020-12-21 10:43:34"}
+    ${1609340446} | ${"2020-12-30 23:00:46"}
+  `("test formatUnixTimeStamp($timeStamp)", ({ timeStamp, expected }) => {
+    test(`returns ${expected}`, () => {
+      expect(formatUnixTimeStamp(timeStamp)).toBe(expected);
+    });
   });
-});
+}
 
 describe.each`
   ms                          | expected
