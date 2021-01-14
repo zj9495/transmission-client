@@ -89,8 +89,6 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': ERROR,
 
         'react/jsx-filename-extension': [ERROR, { extensions: ['.tsx'] }],
-        'react/jsx-indent-props': [ERROR, 4],
-        'react/jsx-indent': [ERROR, 4],
         'react/require-default-props': OFF,
         'react-hooks/exhaustive-deps': OFF,
 
