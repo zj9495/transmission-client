@@ -23,11 +23,12 @@
     "axios": "^0.21.0",
     "clsx": "^1.1.1",
     "cypress": "^6.2.1",
-    "husky": "^4.3.6",
+    "husky": "^4.3.7",
     "immer": "^8.0.0",
     "lint-staged": "^10.5.3",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-intl": "^5.10.6",
@@ -55,7 +56,9 @@
       "react-app",
       "react-app/jest"
     ],
-    "plugins": ["cypress"]
+    "plugins": [
+      "cypress"
+    ]
   },
   "browserslist": {
     "production": [
@@ -71,5 +74,16 @@
   },
   "devDependencies": {
     "eslint-plugin-cypress": "^2.11.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   }
 }
