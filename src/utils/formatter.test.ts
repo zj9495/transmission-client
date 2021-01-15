@@ -122,7 +122,7 @@ test("formatSpeed format zero", () => {
   expect(formatSpeed(0)).toBe(" ");
 });
 
-if (process.env.CI) {
+if (!process.env.CI) {
   describe.each`
     timeStamp     | expected
     ${0}          | ${" "}
