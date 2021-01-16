@@ -8,9 +8,9 @@ import {
   SET_SESSION,
   TOGGLE_MENUOPEN,
 } from "../constants";
-import { IAppState } from "../../types";
+import { IRootState } from "../../types";
 
-const initialState: IAppState = {
+const initialState: IRootState = {
   locale: "zh-CN",
   theme: "light",
   sessionId: undefined,

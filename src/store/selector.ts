@@ -1,14 +1,14 @@
 import { IAppState } from "../types";
 
 export const getSpeedBytesSelector = (state: IAppState) =>
-  state.session.units.speedBytes;
+  state.root.session.units.speedBytes;
 export const getSpeedUnitsSelector = (state: IAppState) =>
-  state.session.units.speedUnits;
+  state.root.session.units.speedUnits;
 export const getSizeBytesSelector = (state: IAppState) =>
-  state.session.units.sizeBytes;
+  state.root.session.units.sizeBytes;
 export const getSizeUnitsSelector = (state: IAppState) =>
-  state.session.units.sizeUnits;
+  state.root.session.units.sizeUnits;
 
-export const getMenuOpen = (state: IAppState) => state.menuOpen;
+export const getMenuOpen = (state: IAppState) => state.root.menuOpen;
 
-export const getAllTorrents = (state: IAppState) => state.allTorrents;
+export const getAllTorrents = (state: IAppState) => state.root.allTorrents;

@@ -12,7 +12,7 @@ import { toggleTheme } from "../../store/actions";
 const ThemeToggle = () => {
   const dispatch = useDispatch();
   const intl = useIntl();
-  const theme = useSelector((state: IAppState) => state.theme);
+  const theme = useSelector((state: IAppState) => state.root.theme);
 
   const handleChangeTheme = () => {
     dispatch(toggleTheme());

@@ -3,6 +3,8 @@ import React from "react";
 import { IntlProvider } from "react-intl";
 import { connect } from "react-redux";
 
+import { IAppState } from "../../types";
+
 interface Props {
   locale: string;
   children: JSX.Element;
@@ -30,8 +32,8 @@ const Intl = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: { locale: string }) => ({
-  locale: state.locale,
+const mapStateToProps = (state: IAppState) => ({
+  locale: state.root.locale,
 });
 
 export default connect(mapStateToProps)(Intl);

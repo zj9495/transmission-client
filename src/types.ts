@@ -37,7 +37,7 @@ export interface ISession {
   units: IUnits;
 }
 
-export interface IAppState {
+export interface IRootState {
   locale: string;
   theme: "light" | "dark" | "auto";
   sessionId: string | undefined;
@@ -48,4 +48,8 @@ export interface IAppState {
 
 export interface IStatusColor {
   [propName: number]: "primary" | "disabled";
+}
+
+export interface IAppState {
+  root: IRootState;
 }

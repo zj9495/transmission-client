@@ -100,8 +100,8 @@ export default function SearchAppBar() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const themeType = useSelector((state: IAppState) => state.theme);
-  const locale = useSelector((state: IAppState) => state.locale);
+  const themeType = useSelector((state: IAppState) => state.root.theme);
+  const locale = useSelector((state: IAppState) => state.root.locale);
 
   const [languageMenu, setLanguageMenu] = useState(null);
 
