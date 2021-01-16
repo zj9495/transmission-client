@@ -50,6 +50,11 @@ export interface IStatusColor {
   [propName: number]: "primary" | "disabled";
 }
 
+export interface IAddState {
+  open: false;
+}
+
 export interface IAppState {
   root: IRootState;
+  add: IAddState;
 }

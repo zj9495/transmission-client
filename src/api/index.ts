@@ -47,3 +47,17 @@ export const getAllTorrents = () =>
       tag: "",
     },
   });
+
+export const addTorrent = (filename: string, downloadDir: string) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-add",
+      arguments: {
+        filename,
+        paused: false,
+        "download-dir": downloadDir,
+      },
+      tag: "",
+    },
+  });

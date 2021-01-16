@@ -1,6 +1,6 @@
 import produce from "immer";
 
-import { TOGGLE_INPUT_LINK_DIALOG } from "../constants";
+import { TOGGLE_ADD_TORRENT_DIALOG } from "../constants";
 
 export interface Action {
   type: string;
@@ -8,19 +8,19 @@ export interface Action {
 }
 
 export interface State {
-  show: boolean;
+  open: boolean;
 }
 
 const initialAddState: State = {
-  show: false,
+  open: false,
 };
 
 export default (state = initialAddState, action: Action) =>
   // eslint-disable-next-line consistent-return
   produce(state, (draft) => {
     switch (action.type) {
-      case TOGGLE_INPUT_LINK_DIALOG:
-        draft.show = action.payload;
+      case TOGGLE_ADD_TORRENT_DIALOG:
+        draft.open = action.payload;
         break;
       default:
         return state;

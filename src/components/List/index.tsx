@@ -42,6 +42,7 @@ import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
 import { IAppState, ISession } from "../../types";
 
 import TorrentTable from "../TorrentTable";
+import AddTorrentDialog from "../AddTorrentDialog";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -100,6 +101,7 @@ const Torrents: React.FC = () => {
         })}
       >
         <ActionBar />
+        <AddTorrentDialog />
         <TorrentTable />
         {/* <List component="nav" aria-label="main mailbox folders">
           {torrents.map((torrent, index) => {

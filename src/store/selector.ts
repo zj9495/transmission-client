@@ -12,3 +12,6 @@ export const getSizeUnitsSelector = (state: IAppState) =>
 export const getMenuOpen = (state: IAppState) => state.root.menuOpen;
 
 export const getAllTorrents = (state: IAppState) => state.root.allTorrents;
+
+// Add Torrent
+export const getAddTorrentDialogOpen = (state: IAppState) => state.add.open;
