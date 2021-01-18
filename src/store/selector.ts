@@ -15,3 +15,5 @@ export const getAllTorrents = (state: IAppState) => state.root.allTorrents;
 
 // Add Torrent
 export const getAddTorrentDialogOpen = (state: IAppState) => state.add.open;
+
+export const getSelectedIds = (state: IAppState) => state.root.selectedIds;

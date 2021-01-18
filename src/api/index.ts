@@ -61,3 +61,47 @@ export const addTorrent = (filename: string, downloadDir: string) =>
       tag: "",
     },
   });
+
+export const startTorrents = (ids: number[]) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-start",
+      arguments: {
+        ids,
+      },
+    },
+  });
+
+export const stopTorrents = (ids: number[]) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-stop",
+      arguments: {
+        ids,
+      },
+    },
+  });
+
+export const verifyTorrents = (ids: number[]) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-verify",
+      arguments: {
+        ids,
+      },
+    },
+  });
+
+export const reannounceTorrents = (ids: number[]) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-reannounce",
+      arguments: {
+        ids,
+      },
+    },
+  });
