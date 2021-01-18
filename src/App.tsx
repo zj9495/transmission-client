@@ -16,6 +16,10 @@ import List from "./components/List";
 import Header from "./components/Header";
 import store from "./store";
 
+import appStart from "./appStart";
+
+appStart.start();
+
 const App = (): JSX.Element => (
   <Provider store={store}>
     <Intl>
