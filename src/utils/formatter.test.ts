@@ -70,10 +70,12 @@ describe.each`
 
 test("formatSize", () => {
   store.getState = jest.fn().mockReturnValue({
-    session: {
-      units: {
-        sizeBytes: 1000,
-        sizeUnits: ["kB", "MB", "GB", "TB"],
+    root: {
+      session: {
+        units: {
+          sizeBytes: 1000,
+          sizeUnits: ["kB", "MB", "GB", "TB"],
+        },
       },
     },
   });
@@ -83,10 +85,12 @@ test("formatSize", () => {
 
 test("formatSize format zero", () => {
   store.getState = jest.fn().mockReturnValue({
-    session: {
-      units: {
-        sizeBytes: 1000,
-        sizeUnits: ["kB", "MB", "GB", "TB"],
+    root: {
+      session: {
+        units: {
+          sizeBytes: 1000,
+          sizeUnits: ["kB", "MB", "GB", "TB"],
+        },
       },
     },
   });
@@ -97,10 +101,12 @@ test("formatSize format zero", () => {
 
 test("formatSpeed", () => {
   store.getState = jest.fn().mockReturnValue({
-    session: {
-      units: {
-        speedBytes: 1000,
-        speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
+    root: {
+      session: {
+        units: {
+          speedBytes: 1000,
+          speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
+        },
       },
     },
   });
@@ -110,10 +116,12 @@ test("formatSpeed", () => {
 
 test("formatSpeed format zero", () => {
   store.getState = jest.fn().mockReturnValue({
-    session: {
-      units: {
-        speedBytes: 1000,
-        speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
+    root: {
+      session: {
+        units: {
+          speedBytes: 1000,
+          speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
+        },
       },
     },
   });
