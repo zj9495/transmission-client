@@ -7,6 +7,7 @@ import {
   SET_ALL_TORRENTS,
   SET_SESSION,
   TOGGLE_MENUOPEN,
+  SET_SELECTED_IDS,
 } from "../constants";
 import { IRootState } from "../../types";
 
@@ -26,6 +27,7 @@ const initialState: IRootState = {
     },
   },
   menuOpen: false,
+  selectedIds: [],
 };
 
 export interface Action {
@@ -54,6 +56,9 @@ export default (state = initialState, action: Action) =>
         break;
       case TOGGLE_MENUOPEN:
         draft.menuOpen = action.payload;
+        break;
+      case SET_SELECTED_IDS:
+        draft.selectedIds = action.payload;
         break;
       default:
         return state;

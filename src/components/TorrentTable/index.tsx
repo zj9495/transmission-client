@@ -1,12 +1,19 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { useSelector } from "react-redux";
-import { XGrid, ColDef, ColTypeDef, CellParams } from "@material-ui/x-grid";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  XGrid,
+  ColDef,
+  ColTypeDef,
+  CellParams,
+  SelectionChangeParams,
+} from "@material-ui/x-grid";
 
 import renderProgress from "./renderProgress";
 import renderName from "./renderName";
 
 import { getAllTorrents } from "../../store/selector";
+import { setSelectedIds } from "../../store/actions";
 import {
   formatSize,
   formatSpeed,
@@ -173,6 +180,11 @@ const columns: ColDef[] = [
 
 const TorrentTable: React.FC = () => {
   const torrents = useSelector(getAllTorrents);
+  const dispatch = useDispatch();
+
+  const handleSelectionChange = (params: SelectionChangeParams) => {
+    dispatch(setSelectedIds(params.rowIds as string[]));
+  };
 
   return (
     <div style={{ height: "calc(100vh - 112px)", width: "100%" }}>
@@ -183,6 +195,7 @@ const TorrentTable: React.FC = () => {
         loading={torrents.length === 0}
         checkboxSelection
         disableSelectionOnClick
+        onSelectionChange={handleSelectionChange}
       />
     </div>
   );

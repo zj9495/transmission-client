@@ -10,6 +10,7 @@ import {
   SET_ALL_TORRENTS,
   SET_SESSION,
   TOGGLE_MENUOPEN,
+  SET_SELECTED_IDS,
 } from "../constants";
 import { IAppState } from "../../types";
 import { getSession, getAllTorrents } from "../../api";
@@ -69,6 +70,15 @@ export const toggleMenuOpen = () => (
   const payload = !state.root.menuOpen;
   dispatch({
     type: TOGGLE_MENUOPEN,
+    payload,
+  });
+};
+
+export const setSelectedIds = (payload: string[]) => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => {
+  dispatch({
+    type: SET_SELECTED_IDS,
     payload,
   });
 };
