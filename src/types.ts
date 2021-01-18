@@ -44,7 +44,7 @@ export interface IRootState {
   allTorrents: ITorrents;
   session: ISession;
   menuOpen: boolean;
-  selectedIds: string[];
+  selectedIds: number[];
 }
 
 export interface IStatusColor {

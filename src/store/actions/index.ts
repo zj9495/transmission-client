@@ -74,7 +74,7 @@ export const toggleMenuOpen = () => (
   });
 };
 
-export const setSelectedIds = (payload: string[]) => (
+export const setSelectedIds = (payload: number[]) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   dispatch({

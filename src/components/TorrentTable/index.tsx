@@ -183,7 +183,7 @@ const TorrentTable: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleSelectionChange = (params: SelectionChangeParams) => {
-    dispatch(setSelectedIds(params.rowIds as string[]));
+    dispatch(setSelectedIds(params.rowIds.map((id) => Number(id))));
   };
 
   return (
