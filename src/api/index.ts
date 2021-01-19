@@ -105,3 +105,15 @@ export const reannounceTorrents = (ids: number[]) =>
       },
     },
   });
+
+export const removeTorrents = (ids: number[], deleteLocalData = false) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-remove",
+      arguments: {
+        ids,
+        "delete-local-data": deleteLocalData,
+      },
+    },
+  });

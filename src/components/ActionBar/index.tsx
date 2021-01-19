@@ -1,17 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Box, IconButton } from "@material-ui/core";
+import { Box, IconButton, Tooltip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
+import StorageIcon from "@material-ui/icons/Storage";
+import { FormattedMessage } from "react-intl";
 
 import { toggleAddTorrentDialog } from "../../store/actions/add";
 import { getSelectedIds } from "../../store/selector";
 
-import { startTorrents, stopTorrents, reannounceTorrents } from "../../api";
+import {
+  startTorrents,
+  stopTorrents,
+  reannounceTorrents,
+  verifyTorrents,
+  removeTorrents,
+} from "../../api";
 
 const ActionBar = () => {
   const dispatch = useDispatch();
@@ -33,23 +41,46 @@ const ActionBar = () => {
     reannounceTorrents(selectedIds);
   };
 
+  const handleVerify = () => {
+    verifyTorrents(selectedIds);
+  };
+
+  const handleRemove = () => {
+    removeTorrents(selectedIds, true);
+  };
+
   return (
     <Box>
-      <IconButton onClick={handleAdd}>
-        <AddIcon />
-      </IconButton>
-      <IconButton>
-        <PlayArrowIcon onClick={handleStart} />
-      </IconButton>
-      <IconButton onClick={handleStop}>
-        <PauseIcon />
-      </IconButton>
-      <IconButton>
-        <DeleteIcon />
-      </IconButton>
-      <IconButton onClick={handleReannounce}>
-        <SettingsInputAntennaIcon />
-      </IconButton>
+      <Tooltip title={<FormattedMessage id="toolbar.tip.addTorrent" />}>
+        <IconButton onClick={handleAdd}>
+          <AddIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={<FormattedMessage id="toolbar.tip.start" />}>
+        <IconButton>
+          <PlayArrowIcon onClick={handleStart} />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={<FormattedMessage id="toolbar.tip.pause" />}>
+        <IconButton onClick={handleStop}>
+          <PauseIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={<FormattedMessage id="toolbar.tip.deleteData" />}>
+        <IconButton onClick={handleRemove}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={<FormattedMessage id="toolbar.tip.recheck" />}>
+        <IconButton onClick={handleVerify}>
+          <StorageIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={<FormattedMessage id="toolbar.tip.morePeers" />}>
+        <IconButton onClick={handleReannounce}>
+          <SettingsInputAntennaIcon />
+        </IconButton>
+      </Tooltip>
     </Box>
   );
 };
