@@ -13,4 +13,4 @@ jobs:
         with:
           spec: cypress/integration/*.spec.js
           start: npm start
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://localhost:8888'
