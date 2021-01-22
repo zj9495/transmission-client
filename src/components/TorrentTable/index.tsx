@@ -187,7 +187,10 @@ const TorrentTable: React.FC = () => {
   };
 
   return (
-    <div style={{ height: "calc(100vh - 112px)", width: "100%" }}>
+    <div
+      id="torrent-table"
+      style={{ height: "calc(100vh - 112px)", width: "100%" }}
+    >
       <XGrid
         rows={torrents}
         columns={columns}

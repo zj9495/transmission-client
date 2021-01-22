@@ -164,7 +164,7 @@ export default function SearchAppBar() {
               data-ga-event-action="language"
             >
               <LanguageIcon />
-              <span className={classes.language}>
+              <span id="selected-language" className={classes.language}>
                 {LANGUAGES.find((language) => language.code === locale)?.text}
               </span>
               <ExpandMoreIcon fontSize="small" />
