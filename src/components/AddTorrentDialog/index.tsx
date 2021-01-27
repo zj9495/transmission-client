@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 
 import { getAddTorrentDialogOpen } from "../../store/selector";
-import { toggleAddTorrentDialog } from "../../store/actions/add";
+import { toggleAddTorrentDialog } from "../../store/actions/app";
 
 import { addTorrent } from "../../api";
 

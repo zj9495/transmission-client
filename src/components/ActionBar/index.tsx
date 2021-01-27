@@ -10,7 +10,7 @@ import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
 import StorageIcon from "@material-ui/icons/Storage";
 import { FormattedMessage } from "react-intl";
 
-import { toggleAddTorrentDialog } from "../../store/actions/add";
+import { toggleAddTorrentDialog } from "../../store/actions/app";
 import { getSelectedIds } from "../../store/selector";
 
 import {

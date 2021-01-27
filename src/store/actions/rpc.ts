@@ -31,7 +31,7 @@ export const toggleTheme = () => (
   getState: () => IAppState
 ) => {
   const state = getState();
-  const payload = state.root.theme === "light" ? "dark" : "light";
+  const payload = state.rpc.theme === "light" ? "dark" : "light";
   dispatch({
     type: CHANGE_THEME,
     payload,
@@ -77,7 +77,7 @@ export const toggleMenuOpen = () => (
   getState: () => IAppState
 ) => {
   const state = getState();
-  const payload = !state.root.menuOpen;
+  const payload = !state.rpc.menuOpen;
   dispatch({
     type: TOGGLE_MENUOPEN,
     payload,

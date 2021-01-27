@@ -42,8 +42,8 @@ const Theme = (props: Props) => {
 };
 
 const mapStateToProps = (state: IAppState) => ({
-  locale: state.root.locale,
-  themeType: state.root.theme,
+  locale: state.rpc.locale,
+  themeType: state.rpc.theme,
 });
 
 export default connect(mapStateToProps)(Theme);

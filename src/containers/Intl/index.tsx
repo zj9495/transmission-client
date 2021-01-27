@@ -33,7 +33,7 @@ const Intl = (props: Props) => {
 };
 
 const mapStateToProps = (state: IAppState) => ({
-  locale: state.root.locale,
+  locale: state.rpc.locale,
 });
 
 export default connect(mapStateToProps)(Intl);

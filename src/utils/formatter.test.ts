@@ -70,7 +70,7 @@ describe.each`
 
 test("formatSize", () => {
   store.getState = jest.fn().mockReturnValue({
-    root: {
+    rpc: {
       session: {
         units: {
           sizeBytes: 1000,
@@ -85,7 +85,7 @@ test("formatSize", () => {
 
 test("formatSize format zero", () => {
   store.getState = jest.fn().mockReturnValue({
-    root: {
+    rpc: {
       session: {
         units: {
           sizeBytes: 1000,
@@ -101,7 +101,7 @@ test("formatSize format zero", () => {
 
 test("formatSpeed", () => {
   store.getState = jest.fn().mockReturnValue({
-    root: {
+    rpc: {
       session: {
         units: {
           speedBytes: 1000,
@@ -116,7 +116,7 @@ test("formatSpeed", () => {
 
 test("formatSpeed format zero", () => {
   store.getState = jest.fn().mockReturnValue({
-    root: {
+    rpc: {
       session: {
         units: {
           speedBytes: 1000,

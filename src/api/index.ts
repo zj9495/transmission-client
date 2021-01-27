@@ -6,7 +6,7 @@ export const getSession = () =>
     method: "post",
     data: { method: "session-get", arguments: {}, tag: "" },
     headers: {
-      "x-transmission-session-id": store.getState().root.sessionId,
+      "x-transmission-session-id": store.getState().rpc.sessionId,
     },
   });
 

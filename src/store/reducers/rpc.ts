@@ -10,9 +10,9 @@ import {
   SET_SELECTED_IDS,
   SET_SESSION_STATS,
 } from "../constants";
-import { IRootState } from "../../types";
+import { IRPCState } from "../../types";
 
-const initialState: IRootState = {
+const initialState: IRPCState = {
   locale: "zh-CN",
   theme: "light",
   sessionId: undefined,

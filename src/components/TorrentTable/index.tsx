@@ -13,7 +13,7 @@ import renderProgress from "./renderProgress";
 import renderName from "./renderName";
 
 import { getAllTorrents } from "../../store/selector";
-import { setSelectedIds } from "../../store/actions";
+import { setSelectedIds } from "../../store/actions/rpc";
 import {
   formatSize,
   formatSpeed,

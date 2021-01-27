@@ -18,7 +18,7 @@ export const formatBytes = (
 };
 
 export const formatSize = (number: number, allowZero = false): string => {
-  const { session } = store.getState().root;
+  const { session } = store.getState().rpc;
   const { sizeBytes, sizeUnits } = session.units;
   if (!allowZero && !number) {
     return " ";
@@ -27,7 +27,7 @@ export const formatSize = (number: number, allowZero = false): string => {
 };
 
 export const formatSpeed = (number: number, allowZero = false): string => {
-  const { session } = store.getState().root;
+  const { session } = store.getState().rpc;
   const { speedBytes, speedUnits } = session.units;
   if (!allowZero && !number) {
     return " ";

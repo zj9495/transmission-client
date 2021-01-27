@@ -26,7 +26,7 @@ import { useIntl } from "react-intl";
 
 import ThemeToggle from "../ThemeToggle";
 
-import { toggleMenuOpen, setLocale } from "../../store/actions";
+import { toggleMenuOpen, setLocale } from "../../store/actions/rpc";
 import { IAppState } from "../../types";
 import { LANGUAGES, GITHUB_REPO } from "../../constants";
 
@@ -100,8 +100,8 @@ export default function SearchAppBar() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const themeType = useSelector((state: IAppState) => state.root.theme);
-  const locale = useSelector((state: IAppState) => state.root.locale);
+  const themeType = useSelector((state: IAppState) => state.rpc.theme);
+  const locale = useSelector((state: IAppState) => state.rpc.locale);
 
   const [languageMenu, setLanguageMenu] = useState(null);
 

@@ -41,7 +41,7 @@ import {
   getSessionAction,
   getAllTorrentsAction,
   getSessionStatsAction,
-} from "../../store/actions";
+} from "../../store/actions/rpc";
 
 import { IAppState, ISession } from "../../types";
 
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Torrents: React.FC = () => {
   const dispatch = useDispatch();
-  const torrents = useSelector((state: IAppState) => state.root.allTorrents);
+  const torrents = useSelector((state: IAppState) => state.rpc.allTorrents);
 
   const progressConfig = {
     sizeBytes: useSelector(getSizeBytesSelector),

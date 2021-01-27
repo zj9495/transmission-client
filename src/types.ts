@@ -48,7 +48,7 @@ export interface IStats {
   uploadSpeed: number;
 }
 
-export interface IRootState {
+export interface IRPCState {
   locale: string;
   theme: "light" | "dark" | "auto";
   sessionId: string | undefined;
@@ -63,11 +63,11 @@ export interface IStatusColor {
   [propName: number]: "primary" | "disabled";
 }
 
-export interface IAddState {
+export interface IAppState {
   open: false;
 }
 
 export interface IAppState {
-  root: IRootState;
-  add: IAddState;
+  rpc: IRPCState;
+  app: IAppState;
 }
