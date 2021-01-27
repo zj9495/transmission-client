@@ -21,7 +21,7 @@ const AppStatusBar = () => {
       &nbsp;|&nbsp;
       <FormattedMessage id="dialog.systemConfig.downloadDirFreeSpace" />
       {freeSpace}
-      &nbsp;|&nbsp; Transmisson <FormattedMessage id="statusbar.version" />
+      &nbsp;|&nbsp; Transmission <FormattedMessage id="statusbar.version" />
       {session.version}
       &nbsp;|&nbsp; RPC: {session.rpcVersion}
     </div>
