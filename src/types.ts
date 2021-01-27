@@ -67,7 +67,7 @@ export interface IAppState {
   open: false;
 }
 
-export interface IAppState {
+export interface IState {
   rpc: IRPCState;
   app: IAppState;
 }

@@ -13,7 +13,7 @@ import {
   SET_SELECTED_IDS,
   SET_SESSION_STATS,
 } from "../constants";
-import { IAppState } from "../../types";
+import { IState } from "../../types";
 import { getSession, getAllTorrents, getSessionStats } from "../../api";
 import { objectToCamelCase } from "../../utils/object";
 
@@ -28,7 +28,7 @@ export const setLocale = (val: string) => (
 
 export const toggleTheme = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
-  getState: () => IAppState
+  getState: () => IState
 ) => {
   const state = getState();
   const payload = state.rpc.theme === "light" ? "dark" : "light";
@@ -74,7 +74,7 @@ export const getAllTorrentsAction = () => (
 
 export const toggleMenuOpen = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
-  getState: () => IAppState
+  getState: () => IState
 ) => {
   const state = getState();
   const payload = !state.rpc.menuOpen;

@@ -3,7 +3,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { enUS, zhCN, Localization } from "@material-ui/core/locale";
 
-import { IAppState } from "../../types";
+import { IState } from "../../types";
 
 interface Props {
   locale: string;
@@ -41,7 +41,7 @@ const Theme = (props: Props) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
-const mapStateToProps = (state: IAppState) => ({
+const mapStateToProps = (state: IState) => ({
   locale: state.rpc.locale,
   themeType: state.rpc.theme,
 });

@@ -3,7 +3,7 @@ import React from "react";
 import { IntlProvider } from "react-intl";
 import { connect } from "react-redux";
 
-import { IAppState } from "../../types";
+import { IState } from "../../types";
 
 interface Props {
   locale: string;
@@ -32,7 +32,7 @@ const Intl = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: IAppState) => ({
+const mapStateToProps = (state: IState) => ({
   locale: state.rpc.locale,
 });
 
