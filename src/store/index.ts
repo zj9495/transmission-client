@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers/rpc";
 import appReducer from "./reducers/app";
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   rpc: rootReducer,
   app: appReducer,
 });

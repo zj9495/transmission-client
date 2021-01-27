@@ -64,7 +64,7 @@ export interface IStatusColor {
 }
 
 export interface IAppState {
-  open: false;
+  open: boolean;
 }
 
 export interface IState {

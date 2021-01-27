@@ -12,7 +12,7 @@ import {
 } from "../constants";
 import { IRPCState } from "../../types";
 
-const initialState: IRPCState = {
+export const initialRPCState: IRPCState = {
   locale: "zh-CN",
   theme: "light",
   sessionId: undefined,
@@ -22,9 +22,9 @@ const initialState: IRPCState = {
       memoryBytes: 1024,
       memoryUnits: [],
       sizeBytes: 1000,
-      sizeUnits: [],
+      sizeUnits: ["kB", "MB", "GB", "TB"],
       speedBytes: 1000,
-      speedUnits: [],
+      speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
     },
     downloadDirFreeSpace: 0,
     version: "",
@@ -46,7 +46,7 @@ export interface Action {
   payload: any;
 }
 
-export default (state = initialState, action: Action) =>
+export default (state = initialRPCState, action: Action) =>
   // eslint-disable-next-line consistent-return
   produce(state, (draft) => {
     switch (action.type) {
