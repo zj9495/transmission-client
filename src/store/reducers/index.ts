@@ -8,6 +8,7 @@ import {
   SET_SESSION,
   TOGGLE_MENUOPEN,
   SET_SELECTED_IDS,
+  SET_SESSION_STATS,
 } from "../constants";
 import { IRootState } from "../../types";
 
@@ -25,6 +26,16 @@ const initialState: IRootState = {
       speedBytes: 1000,
       speedUnits: [],
     },
+    downloadDirFreeSpace: 0,
+    version: "",
+    rpcVersion: 0,
+  },
+  stats: {
+    activeTorrentCount: 0,
+    downloadSpeed: 0,
+    pausedTorrentCount: 0,
+    torrentCount: 0,
+    uploadSpeed: 0,
   },
   menuOpen: false,
   selectedIds: [],
@@ -59,6 +70,9 @@ export default (state = initialState, action: Action) =>
         break;
       case SET_SELECTED_IDS:
         draft.selectedIds = action.payload;
+        break;
+      case SET_SESSION_STATS:
+        draft.stats = action.payload;
         break;
       default:
         return state;

@@ -37,12 +37,17 @@ import Progress from "../Progress";
 import ActionBar from "../ActionBar";
 import MenuBar from "../MenuBar";
 
-import { getSessionAction, getAllTorrentsAction } from "../../store/actions";
+import {
+  getSessionAction,
+  getAllTorrentsAction,
+  getSessionStatsAction,
+} from "../../store/actions";
 
 import { IAppState, ISession } from "../../types";
 
 import TorrentTable from "../TorrentTable";
 import AddTorrentDialog from "../AddTorrentDialog";
+import AppStatusBar from "../AppStatusBar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,6 +79,7 @@ const Torrents: React.FC = () => {
     dispatch(getSessionAction());
     setInterval(() => {
       dispatch(getAllTorrentsAction());
+      dispatch(getSessionStatsAction());
     }, 5000);
   }, []);
 
@@ -125,6 +131,7 @@ const Torrents: React.FC = () => {
             );
           })}
         </List> */}
+        <AppStatusBar />
       </Box>
     </div>
   );

@@ -35,6 +35,17 @@ export interface IUnits {
 
 export interface ISession {
   units: IUnits;
+  downloadDirFreeSpace: number;
+  version: string;
+  rpcVersion: number;
+}
+
+export interface IStats {
+  activeTorrentCount: number;
+  downloadSpeed: number;
+  pausedTorrentCount: number;
+  torrentCount: number;
+  uploadSpeed: number;
 }
 
 export interface IRootState {
@@ -45,6 +56,7 @@ export interface IRootState {
   session: ISession;
   menuOpen: boolean;
   selectedIds: number[];
+  stats: IStats;
 }
 
 export interface IStatusColor {

@@ -1,5 +1,7 @@
 import { IAppState } from "../types";
 
+export const getSessionSelector = (state: IAppState) => state.root.session;
+export const getStatsSelector = (state: IAppState) => state.root.stats;
 export const getSpeedBytesSelector = (state: IAppState) =>
   state.root.session.units.speedBytes;
 export const getSpeedUnitsSelector = (state: IAppState) =>

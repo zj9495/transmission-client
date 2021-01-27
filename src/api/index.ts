@@ -10,6 +10,12 @@ export const getSession = () =>
     },
   });
 
+export const getSessionStats = () =>
+  request({
+    method: "post",
+    data: { method: "session-stats", arguments: {}, tag: "" },
+  });
+
 export const getAllTorrents = () =>
   request({
     method: "post",

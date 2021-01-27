@@ -11,9 +11,10 @@ import {
   SET_SESSION,
   TOGGLE_MENUOPEN,
   SET_SELECTED_IDS,
+  SET_SESSION_STATS,
 } from "../constants";
 import { IAppState } from "../../types";
-import { getSession, getAllTorrents } from "../../api";
+import { getSession, getAllTorrents, getSessionStats } from "../../api";
 import { objectToCamelCase } from "../../utils/object";
 
 export const setLocale = (val: string) => (
@@ -52,6 +53,15 @@ export const getSessionAction = () => (
   });
 };
 
+export const getSessionStatsAction = () => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) =>
+  getSessionStats().then((res) => {
+    dispatch({
+      type: SET_SESSION_STATS,
+      payload: objectToCamelCase(res.data.arguments),
+    });
+  });
 export const getAllTorrentsAction = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) =>
