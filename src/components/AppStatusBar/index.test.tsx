@@ -10,17 +10,22 @@ test("renders Transmission", () => {
     rpc: {
       locale: "en-US",
       stats: {
-        downloadSpeed: 102400,
-        uploadSpeed: 102400,
+        downloadSpeed: 100000,
+        uploadSpeed: 200000,
       },
       session: {
-        downloadDirFreeSpace: 102400,
+        downloadDirFreeSpace: 500000000000,
         version: "MOCK_VERSION",
         rpcVersion: 10,
       },
     },
   };
   renderWithProviders(<AppStatusBar />, state);
-  const linkElement = screen.getByText(/Transmission/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByText("Download speed:100kB/s")).toBeInTheDocument();
+  expect(screen.getByText("Seed speed:200kB/s")).toBeInTheDocument();
+  expect(screen.getByText("Free space:500GB")).toBeInTheDocument();
+  expect(
+    screen.getByText("Transmission Version:MOCK_VERSION")
+  ).toBeInTheDocument();
+  expect(screen.getByText("RPC: 10")).toBeInTheDocument();
 });
