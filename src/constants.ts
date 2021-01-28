@@ -3,7 +3,8 @@ import { IStatusColor } from "./types";
 export const APP_ROUTES = {
   base: "/",
   signIn: "/sign-in",
-  list: "/list",
+  list: "/list/:torrentStatus",
+  allList: "list/all",
 };
 
 export const LANGUAGES = [
@@ -77,7 +78,7 @@ export const STATUS_COLORS: IStatusColor = {
 };
 
 export const STATUS_TYPES = {
-  stopped: 0,
+  paused: 0,
   checkwait: 1,
   check: 2,
   downloadwait: 3,

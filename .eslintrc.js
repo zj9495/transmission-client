@@ -92,6 +92,8 @@ module.exports = {
         'react/jsx-filename-extension': [ERROR, { extensions: ['.tsx'] }],
         'react/require-default-props': OFF,
         'react-hooks/exhaustive-deps': OFF,
+        'react/jsx-props-no-spreading': OFF,
+        'react-hooks/rules-of-hooks': OFF,
 
         'func-names': OFF,
         'lines-between-class-members': OFF,

@@ -30,7 +30,7 @@ const App = (): JSX.Element => (
           <Switch>
             <Route path={APP_ROUTES.signIn} component={SignIn} />
             <Route path={APP_ROUTES.list} component={List} />
-            <Redirect from={APP_ROUTES.base} to={APP_ROUTES.list} />
+            <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
           </Switch>
         </Router>
       </Theme>

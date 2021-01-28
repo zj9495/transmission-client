@@ -52,7 +52,7 @@ export interface IRPCState {
   locale: string;
   theme: "light" | "dark" | "auto";
   sessionId: string | undefined;
-  allTorrents: ITorrents;
+  torrents: ITorrents;
   session: ISession;
   menuOpen: boolean;
   selectedIds: number[];
@@ -70,4 +70,8 @@ export interface IAppState {
 export interface IState {
   rpc: IRPCState;
   app: IAppState;
+}
+
+export interface IParamTypes {
+  torrentStatus: string;
 }

@@ -16,7 +16,7 @@ export const initialRPCState: IRPCState = {
   locale: "zh-CN",
   theme: "light",
   sessionId: undefined,
-  allTorrents: [],
+  torrents: [],
   session: {
     units: {
       memoryBytes: 1024,
@@ -60,7 +60,7 @@ export default (state = initialRPCState, action: Action) =>
         draft.sessionId = action.payload;
         break;
       case SET_ALL_TORRENTS:
-        draft.allTorrents = action.payload;
+        draft.torrents = action.payload;
         break;
       case SET_SESSION:
         draft.session = action.payload;

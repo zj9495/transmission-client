@@ -3,9 +3,6 @@ import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import AllInboxIcon from "@material-ui/icons/AllInbox";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
@@ -17,12 +14,98 @@ import WarningIcon from "@material-ui/icons/Warning";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 
 import { useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
-import { getMenuOpen, getAllTorrents } from "../../store/selector";
-import { STATUS_TYPES } from "../../constants";
+import renderListItem from "./renderListItem";
+
+import {
+  getMenuOpen,
+  getAllTorrents,
+  getDownloadingTorrents,
+  getDownloadWaitingTorrents,
+  getPausedTorrents,
+  getActiveTorrents,
+  getSeedingTorrents,
+  getSeedWaitingTorrents,
+  getCheckingTorrents,
+  getCheckWaitingTorrents,
+  getWarningTorrents,
+  getErrorTorrents,
+} from "../../store/selector";
+import { IParamTypes } from "../../types";
 
 const drawerWidth = 240;
 const closedDrawerWidth = 56;
+
+const torrentStatusList = [
+  {
+    status: "all",
+    textId: "tree.all",
+    icon: <AllInboxIcon />,
+    hideOnZero: false,
+  },
+  {
+    status: "downloading",
+    textId: "tree.downloading",
+    icon: <InboxIcon />,
+    hideOnZero: false,
+    children: {
+      status: "download-waiting",
+      textId: "tree.wait",
+      icon: <HourglassEmptyIcon />,
+      hideOnZero: true,
+    },
+  },
+  {
+    status: "paused",
+    textId: "tree.paused",
+    icon: <PauseCircleOutlineIcon />,
+    hideOnZero: false,
+  },
+  {
+    status: "active",
+    textId: "tree.active",
+    icon: <SwapVertOutlinedIcon />,
+    hideOnZero: false,
+  },
+  {
+    status: "seeding",
+    textId: "tree.sending",
+    icon: <CloudUploadIcon />,
+    hideOnZero: false,
+    children: {
+      status: "seed-waiting",
+      textId: "tree.wait",
+      icon: <HourglassEmptyIcon />,
+      hideOnZero: true,
+    },
+  },
+  {
+    status: "checking",
+    textId: "tree.check",
+    icon: <FindInPageIcon />,
+    hideOnZero: true,
+    children: {
+      status: "check-waiting",
+      textId: "tree.wait",
+      icon: <HourglassEmptyIcon />,
+      hideOnZero: true,
+    },
+  },
+  {
+    status: "warning",
+    textId: "tree.warning",
+    icon: <WarningIcon />,
+    hideOnZero: true,
+  },
+  {
+    status: "error",
+    textId: "tree.error",
+    icon: <ErrorOutlineIcon />,
+    hideOnZero: true,
+  },
+];
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -95,32 +178,34 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface ITorrentNums {
+  [propName: string]: number;
+}
+
 export default function MenuBar() {
+  const { torrentStatus } = useParams<IParamTypes>();
+  const history = useHistory();
   const classes = useStyles();
   const menuOpen = useSelector(getMenuOpen);
-  const torrents = useSelector(getAllTorrents);
   const [menuTemporaryOpen, setMenuTemporaryOpen] = React.useState(false);
-  const torrentNums = {
-    all: torrents.length,
-    stopped: torrents.filter((item) => item.status === STATUS_TYPES.stopped)
-      .length,
-    checkwait: torrents.filter((item) => item.status === STATUS_TYPES.checkwait)
-      .length,
-    check: torrents.filter((item) => item.status === STATUS_TYPES.check).length,
-    downloadwait: torrents.filter(
-      (item) => item.status === STATUS_TYPES.downloadwait
-    ).length,
-    download: torrents.filter((item) => item.status === STATUS_TYPES.download)
-      .length,
-    seedwait: torrents.filter((item) => item.status === STATUS_TYPES.seedwait)
-      .length,
-    seed: torrents.filter((item) => item.status === STATUS_TYPES.seed).length,
-    active: 0,
+  const torrentNums: ITorrentNums = {
+    all: useSelector(getAllTorrents).length,
+    paused: useSelector(getPausedTorrents).length,
+    checkWaiting: useSelector(getCheckWaitingTorrents).length,
+    checking: useSelector(getCheckingTorrents).length,
+    downloadWaiting: useSelector(getDownloadWaitingTorrents).length,
+    downloading: useSelector(getDownloadingTorrents).length,
+    seedWaiting: useSelector(getSeedWaitingTorrents).length,
+    seeding: useSelector(getSeedingTorrents).length,
+    active: useSelector(getActiveTorrents).length,
+    warning: useSelector(getWarningTorrents).length,
+    error: useSelector(getErrorTorrents).length,
   };
-
-  torrentNums.active = torrentNums.download + torrentNums.seed;
-
   const open = menuTemporaryOpen || menuOpen;
+
+  const handleListItemClick = (status: string) => {
+    history.push(`/list/${status}`);
+  };
   return (
     <Drawer
       variant="permanent"
@@ -144,83 +229,31 @@ export default function MenuBar() {
       }}
     >
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <AllInboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="All" />
-          <span className="MuiLabel-amount">{torrentNums.all}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Downloading" />
-          <span className="MuiLabel-amount">{torrentNums.download}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Download Waiting" />
-          <span className="MuiLabel-amount">{torrentNums.downloadwait}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <PauseCircleOutlineIcon />
-          </ListItemIcon>
-          <ListItemText primary="Paused" />
-          <span className="MuiLabel-amount">{torrentNums.stopped}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SwapVertOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Active" />
-          <span className="MuiLabel-amount">{torrentNums.active}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <CloudUploadIcon />
-          </ListItemIcon>
-          <ListItemText primary="Seeding" />
-          <span className="MuiLabel-amount">{torrentNums.seed}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <CloudUploadIcon />
-          </ListItemIcon>
-          <ListItemText primary="Seed Waiting" />
-          <span className="MuiLabel-amount">{torrentNums.seedwait}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <FindInPageIcon />
-          </ListItemIcon>
-          <ListItemText primary="Checking" />
-          <span className="MuiLabel-amount">{torrentNums.check}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <HourglassEmptyIcon />
-          </ListItemIcon>
-          <ListItemText primary="Check Waiting" />
-          <span className="MuiLabel-amount">{torrentNums.checkwait}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <WarningIcon />
-          </ListItemIcon>
-          <ListItemText primary="Warning" />
-          <span className="MuiLabel-amount">{torrentNums.seed}</span>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <ErrorOutlineIcon />
-          </ListItemIcon>
-          <ListItemText primary="Error" />
-          <span className="MuiLabel-amount">{torrentNums.seed}</span>
-        </ListItem>
+        {torrentStatusList.map((item) =>
+          item.hideOnZero && !torrentNums[item.status]
+            ? null
+            : renderListItem({
+                text: <FormattedMessage id={item.textId} />,
+                icon: item.icon,
+                num: torrentNums[item.status],
+                selected: torrentStatus === item.status,
+                onClick: () => {
+                  handleListItemClick(item.status);
+                },
+                children: item.children
+                  ? renderListItem({
+                      text: <FormattedMessage id={item.children.textId} />,
+                      icon: item.children.icon,
+                      onClick: () => {
+                        handleListItemClick(item.children.status);
+                      },
+                      selected: torrentStatus === item.children.status,
+                      num: torrentNums[item.children.status],
+                      isChildren: true,
+                    })
+                  : null,
+              })
+        )}
       </List>
     </Drawer>
   );

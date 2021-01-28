@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Torrents: React.FC = () => {
   const dispatch = useDispatch();
-  const torrents = useSelector((state: IState) => state.rpc.allTorrents);
+  const torrents = useSelector((state: IState) => state.rpc.torrents);
 
   const progressConfig = {
     sizeBytes: useSelector(getSizeBytesSelector),
