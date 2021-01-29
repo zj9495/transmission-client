@@ -4,7 +4,7 @@ import renderWithProviders from "../renderWithProviders";
 
 import AppStatusBar from "./index";
 
-test("renders Transmission", () => {
+test("renders AppStatusBar", () => {
   const state = {
     app: { open: true },
     rpc: {
