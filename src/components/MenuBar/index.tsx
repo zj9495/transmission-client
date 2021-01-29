@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
-import renderListItem from "./renderListItem";
+import MenuItem from "./MenuItem";
 
 import {
   getMenuOpen,
@@ -50,12 +50,12 @@ const torrentStatusList = [
     textId: "tree.downloading",
     icon: <InboxIcon />,
     hideOnZero: false,
-    children: {
-      status: "download-waiting",
-      textId: "tree.wait",
-      icon: <HourglassEmptyIcon />,
-      hideOnZero: true,
-    },
+  },
+  {
+    status: "download-waiting",
+    textId: "tree.wait",
+    icon: <HourglassEmptyIcon />,
+    hideOnZero: true,
   },
   {
     status: "paused",
@@ -74,24 +74,24 @@ const torrentStatusList = [
     textId: "tree.sending",
     icon: <CloudUploadIcon />,
     hideOnZero: false,
-    children: {
-      status: "seed-waiting",
-      textId: "tree.wait",
-      icon: <HourglassEmptyIcon />,
-      hideOnZero: true,
-    },
+  },
+  {
+    status: "seed-waiting",
+    textId: "tree.wait",
+    icon: <HourglassEmptyIcon />,
+    hideOnZero: true,
   },
   {
     status: "checking",
     textId: "tree.check",
     icon: <FindInPageIcon />,
     hideOnZero: true,
-    children: {
-      status: "check-waiting",
-      textId: "tree.wait",
-      icon: <HourglassEmptyIcon />,
-      hideOnZero: true,
-    },
+  },
+  {
+    status: "check-waiting",
+    textId: "tree.wait",
+    icon: <HourglassEmptyIcon />,
+    hideOnZero: true,
   },
   {
     status: "warning",
@@ -191,11 +191,11 @@ export default function MenuBar() {
   const torrentNums: ITorrentNums = {
     all: useSelector(getAllTorrents).length,
     paused: useSelector(getPausedTorrents).length,
-    checkWaiting: useSelector(getCheckWaitingTorrents).length,
+    "check-waiting": useSelector(getCheckWaitingTorrents).length,
     checking: useSelector(getCheckingTorrents).length,
-    downloadWaiting: useSelector(getDownloadWaitingTorrents).length,
+    "download-waiting": useSelector(getDownloadWaitingTorrents).length,
     downloading: useSelector(getDownloadingTorrents).length,
-    seedWaiting: useSelector(getSeedWaitingTorrents).length,
+    "seed-waiting": useSelector(getSeedWaitingTorrents).length,
     seeding: useSelector(getSeedingTorrents).length,
     active: useSelector(getActiveTorrents).length,
     warning: useSelector(getWarningTorrents).length,
@@ -229,31 +229,21 @@ export default function MenuBar() {
       }}
     >
       <List>
-        {torrentStatusList.map((item) =>
-          item.hideOnZero && !torrentNums[item.status]
-            ? null
-            : renderListItem({
-                text: <FormattedMessage id={item.textId} />,
-                icon: item.icon,
-                num: torrentNums[item.status],
-                selected: torrentStatus === item.status,
-                onClick: () => {
-                  handleListItemClick(item.status);
-                },
-                children: item.children
-                  ? renderListItem({
-                      text: <FormattedMessage id={item.children.textId} />,
-                      icon: item.children.icon,
-                      onClick: () => {
-                        handleListItemClick(item.children.status);
-                      },
-                      selected: torrentStatus === item.children.status,
-                      num: torrentNums[item.children.status],
-                      isChildren: true,
-                    })
-                  : null,
-              })
-        )}
+        {torrentStatusList
+          .filter((item) => !item.hideOnZero || torrentNums[item.status])
+          .map((item) => (
+            <MenuItem
+              key={item.status}
+              text={<FormattedMessage id={item.textId} />}
+              icon={item.icon}
+              num={torrentNums[item.status]}
+              selected={torrentStatus === item.status}
+              menuOpen={open}
+              onClick={() => {
+                handleListItemClick(item.status);
+              }}
+            />
+          ))}
       </List>
     </Drawer>
   );
