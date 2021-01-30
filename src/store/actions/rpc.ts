@@ -3,18 +3,20 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
+import { STATUS_TYPES } from "../../constants";
+import { ITorrent, ITorrents, IState } from "../../types";
 
 import {
   SET_LOCALE,
   CHANGE_THEME,
-  SET_ALL_TORRENTS,
+  SET_TORRENTS,
   SET_SESSION,
   TOGGLE_MENUOPEN,
   SET_SELECTED_IDS,
   SET_SESSION_STATS,
 } from "../constants";
-import { IState } from "../../types";
-import { getSession, getAllTorrents, getSessionStats } from "../../api";
+
+import { getSession, getTorrents, getSessionStats } from "../../api";
 import { objectToCamelCase } from "../../utils/object";
 
 export const setLocale = (val: string) => (
@@ -62,13 +64,36 @@ export const getSessionStatsAction = () => (
       payload: objectToCamelCase(res.data.arguments),
     });
   });
-export const getAllTorrentsAction = () => (
+export const getTorrentsAction = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) =>
-  getAllTorrents().then((res) => {
+  getTorrents().then((res) => {
+    const torrents: ITorrent[] = res.data.arguments.torrents || [];
+    const payload: ITorrents = {
+      all: torrents,
+      downloading: torrents.filter(
+        (item) => item.status === STATUS_TYPES.download
+      ),
+      downloadWaiting: torrents.filter(
+        (item) => item.status === STATUS_TYPES.downloadwait
+      ),
+      paused: torrents.filter((item) => item.status === STATUS_TYPES.paused),
+      active: torrents.filter((item) => item.rateDownload || item.rateUpload),
+      seeding: torrents.filter((item) => item.status === STATUS_TYPES.seed),
+      seedWaiting: torrents.filter(
+        (item) => item.status === STATUS_TYPES.seedwait
+      ),
+      checking: torrents.filter((item) => item.status === STATUS_TYPES.check),
+      checkWaiting: torrents.filter(
+        (item) => item.status === STATUS_TYPES.checkwait
+      ),
+      warning: [],
+      error: torrents.filter((item) => item.error),
+    };
+
     dispatch({
-      type: SET_ALL_TORRENTS,
-      payload: res.data.arguments.torrents,
+      type: SET_TORRENTS,
+      payload,
     });
   });
 

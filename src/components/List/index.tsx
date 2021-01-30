@@ -39,7 +39,7 @@ import MenuBar from "../MenuBar";
 
 import {
   getSessionAction,
-  getAllTorrentsAction,
+  getTorrentsAction,
   getSessionStatsAction,
 } from "../../store/actions/rpc";
 
@@ -78,7 +78,7 @@ const Torrents: React.FC = () => {
   useEffect(() => {
     dispatch(getSessionAction());
     setInterval(() => {
-      dispatch(getAllTorrentsAction());
+      dispatch(getTorrentsAction());
       dispatch(getSessionStatsAction());
     }, 5000);
   }, []);
@@ -93,10 +93,6 @@ const Torrents: React.FC = () => {
   ) => {
     setSelectedIndex(index);
   };
-
-  // const handleClick = () => {
-  //   dispatch(getAllTorrentsAction());
-  // };
 
   return (
     <div className={classes.root}>

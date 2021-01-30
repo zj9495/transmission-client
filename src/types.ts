@@ -20,9 +20,24 @@ export interface ITorrent {
   doneDate: number;
   queuePosition: number;
   activityDate: number;
+  error: number;
+  errorString: string;
+  hashString: string;
 }
 
-export type ITorrents = ITorrent[];
+export interface ITorrents {
+  all: ITorrent[];
+  downloading: ITorrent[];
+  downloadWaiting: ITorrent[];
+  paused: ITorrent[];
+  active: ITorrent[];
+  seeding: ITorrent[];
+  seedWaiting: ITorrent[];
+  checking: ITorrent[];
+  checkWaiting: ITorrent[];
+  warning: ITorrent[];
+  error: ITorrent[];
+}
 
 export interface IUnits {
   memoryBytes?: number;
@@ -72,6 +87,19 @@ export interface IState {
   app: IAppState;
 }
 
+export type TorrentStatus =
+  | "all"
+  | "downloading"
+  | "downloadWaiting"
+  | "paused"
+  | "active"
+  | "seeding"
+  | "seedWaiting"
+  | "checking"
+  | "checkWaiting"
+  | "warning"
+  | "error";
+
 export interface IParamTypes {
-  torrentStatus: string;
+  torrentStatus: TorrentStatus;
 }

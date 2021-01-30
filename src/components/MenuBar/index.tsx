@@ -10,7 +10,7 @@ import SwapVertOutlinedIcon from "@material-ui/icons/SwapVertOutlined";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
-import WarningIcon from "@material-ui/icons/Warning";
+// import WarningIcon from "@material-ui/icons/Warning";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 
 import { useSelector } from "react-redux";
@@ -19,26 +19,20 @@ import { FormattedMessage } from "react-intl";
 
 import MenuItem from "./MenuItem";
 
-import {
-  getMenuOpen,
-  getAllTorrents,
-  getDownloadingTorrents,
-  getDownloadWaitingTorrents,
-  getPausedTorrents,
-  getActiveTorrents,
-  getSeedingTorrents,
-  getSeedWaitingTorrents,
-  getCheckingTorrents,
-  getCheckWaitingTorrents,
-  getWarningTorrents,
-  getErrorTorrents,
-} from "../../store/selector";
-import { IParamTypes } from "../../types";
+import { getMenuOpen, getTorrents } from "../../store/selector";
+import { IParamTypes, TorrentStatus } from "../../types";
+
+export interface IMenu {
+  status: TorrentStatus;
+  textId: string;
+  icon: React.ReactNode;
+  hideOnZero: boolean;
+}
 
 const drawerWidth = 240;
 const closedDrawerWidth = 56;
 
-const torrentStatusList = [
+const menus: IMenu[] = [
   {
     status: "all",
     textId: "tree.all",
@@ -52,7 +46,7 @@ const torrentStatusList = [
     hideOnZero: false,
   },
   {
-    status: "download-waiting",
+    status: "downloadWaiting",
     textId: "tree.wait",
     icon: <HourglassEmptyIcon />,
     hideOnZero: true,
@@ -76,7 +70,7 @@ const torrentStatusList = [
     hideOnZero: false,
   },
   {
-    status: "seed-waiting",
+    status: "seedWaiting",
     textId: "tree.wait",
     icon: <HourglassEmptyIcon />,
     hideOnZero: true,
@@ -88,17 +82,17 @@ const torrentStatusList = [
     hideOnZero: true,
   },
   {
-    status: "check-waiting",
+    status: "checkWaiting",
     textId: "tree.wait",
     icon: <HourglassEmptyIcon />,
     hideOnZero: true,
   },
-  {
-    status: "warning",
-    textId: "tree.warning",
-    icon: <WarningIcon />,
-    hideOnZero: true,
-  },
+  // {
+  //   status: "warning",
+  //   textId: "tree.warning",
+  //   icon: <WarningIcon />,
+  //   hideOnZero: true,
+  // },
   {
     status: "error",
     textId: "tree.error",
@@ -178,34 +172,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ITorrentNums {
-  [propName: string]: number;
-}
-
 export default function MenuBar() {
   const { torrentStatus } = useParams<IParamTypes>();
   const history = useHistory();
   const classes = useStyles();
   const menuOpen = useSelector(getMenuOpen);
+  const torrents = useSelector(getTorrents);
   const [menuTemporaryOpen, setMenuTemporaryOpen] = React.useState(false);
-  const torrentNums: ITorrentNums = {
-    all: useSelector(getAllTorrents).length,
-    paused: useSelector(getPausedTorrents).length,
-    "check-waiting": useSelector(getCheckWaitingTorrents).length,
-    checking: useSelector(getCheckingTorrents).length,
-    "download-waiting": useSelector(getDownloadWaitingTorrents).length,
-    downloading: useSelector(getDownloadingTorrents).length,
-    "seed-waiting": useSelector(getSeedWaitingTorrents).length,
-    seeding: useSelector(getSeedingTorrents).length,
-    active: useSelector(getActiveTorrents).length,
-    warning: useSelector(getWarningTorrents).length,
-    error: useSelector(getErrorTorrents).length,
-  };
-  const open = menuTemporaryOpen || menuOpen;
 
+  const open = menuTemporaryOpen || menuOpen;
   const handleListItemClick = (status: string) => {
     history.push(`/list/${status}`);
   };
+
   return (
     <Drawer
       variant="permanent"
@@ -229,14 +208,16 @@ export default function MenuBar() {
       }}
     >
       <List>
-        {torrentStatusList
-          .filter((item) => !item.hideOnZero || torrentNums[item.status])
+        {menus
+          .filter(
+            (item) => !item.hideOnZero || torrents[item.status].length > 0
+          )
           .map((item) => (
             <MenuItem
               key={item.status}
               text={<FormattedMessage id={item.textId} />}
               icon={item.icon}
-              num={torrentNums[item.status]}
+              num={torrents[item.status].length}
               selected={torrentStatus === item.status}
               menuOpen={open}
               onClick={() => {

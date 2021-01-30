@@ -4,7 +4,7 @@ import {
   SET_LOCALE,
   CHANGE_THEME,
   SET_SESSION_ID,
-  SET_ALL_TORRENTS,
+  SET_TORRENTS,
   SET_SESSION,
   TOGGLE_MENUOPEN,
   SET_SELECTED_IDS,
@@ -16,7 +16,19 @@ export const initialRPCState: IRPCState = {
   locale: "zh-CN",
   theme: "light",
   sessionId: undefined,
-  torrents: [],
+  torrents: {
+    all: [],
+    downloading: [],
+    downloadWaiting: [],
+    paused: [],
+    active: [],
+    seeding: [],
+    seedWaiting: [],
+    checking: [],
+    checkWaiting: [],
+    warning: [],
+    error: [],
+  },
   session: {
     units: {
       memoryBytes: 1024,
@@ -59,7 +71,7 @@ export default (state = initialRPCState, action: Action) =>
       case SET_SESSION_ID:
         draft.sessionId = action.payload;
         break;
-      case SET_ALL_TORRENTS:
+      case SET_TORRENTS:
         draft.torrents = action.payload;
         break;
       case SET_SESSION:

@@ -16,7 +16,7 @@ export const getSessionStats = () =>
     data: { method: "session-stats", arguments: {}, tag: "" },
   });
 
-export const getAllTorrents = () =>
+export const getTorrents = () =>
   request({
     method: "post",
     data: {

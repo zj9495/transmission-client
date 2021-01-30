@@ -9,10 +9,11 @@ import {
   SelectionChangeParams,
 } from "@material-ui/x-grid";
 
+import { useParams } from "react-router-dom";
 import renderProgress from "./renderProgress";
 import renderName from "./renderName";
 
-import { getAllTorrents } from "../../store/selector";
+import { getTorrents } from "../../store/selector";
 import { setSelectedIds } from "../../store/actions/rpc";
 import {
   formatSize,
@@ -20,6 +21,7 @@ import {
   formatUnixTimeStamp,
   formatLeftTime,
 } from "../../utils/formatter";
+import { IParamTypes } from "../../types";
 
 const useSize: ColTypeDef = {
   type: "number",
@@ -179,8 +181,11 @@ const columns: ColDef[] = [
 ];
 
 const TorrentTable: React.FC = () => {
-  const torrents = useSelector(getAllTorrents);
+  const { torrentStatus } = useParams<IParamTypes>();
   const dispatch = useDispatch();
+  const torrents = useSelector(getTorrents);
+
+  const rows = torrents[torrentStatus];
 
   const handleSelectionChange = (params: SelectionChangeParams) => {
     dispatch(setSelectedIds(params.rowIds.map((id) => Number(id))));
@@ -193,10 +198,9 @@ const TorrentTable: React.FC = () => {
     >
       <XGrid
         showToolbar
-        rows={torrents}
+        rows={rows}
         columns={columns}
         pageSize={20}
-        loading={torrents.length === 0}
         checkboxSelection
         disableSelectionOnClick
         onSelectionChange={handleSelectionChange}
