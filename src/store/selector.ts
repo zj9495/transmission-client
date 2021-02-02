@@ -1,6 +1,8 @@
 import { IState } from "../types";
 
 export const getSessionSelector = (state: IState) => state.rpc.session;
+export const getDownloadDirSelector = (state: IState) =>
+  state.rpc.session.downloadDir;
 export const getStatsSelector = (state: IState) => state.rpc.stats;
 export const getSpeedBytesSelector = (state: IState) =>
   state.rpc.session.units.speedBytes;

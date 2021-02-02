@@ -30,6 +30,7 @@ export const initialRPCState: IRPCState = {
     error: [],
   },
   session: {
+    downloadDir: "",
     units: {
       memoryBytes: 1024,
       memoryUnits: [],

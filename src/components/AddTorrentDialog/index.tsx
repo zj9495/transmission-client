@@ -10,7 +10,10 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 
-import { getAddTorrentDialogOpen } from "../../store/selector";
+import {
+  getAddTorrentDialogOpen,
+  getDownloadDirSelector,
+} from "../../store/selector";
 import { toggleAddTorrentDialog } from "../../store/actions/app";
 
 import { addTorrent } from "../../api";
@@ -18,8 +21,13 @@ import { addTorrent } from "../../api";
 const AddTorrentDialog = () => {
   const dispatch = useDispatch();
   const open = useSelector(getAddTorrentDialogOpen);
+  const downloadDirFromStore = useSelector(getDownloadDirSelector);
   const [downloadDir, setDownloadDir] = React.useState("");
   const [torrentUrl, setTorrentUrl] = React.useState("");
+
+  React.useEffect(() => {
+    setDownloadDir(downloadDirFromStore);
+  }, [downloadDirFromStore]);
 
   const handleDownloadDirChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -35,7 +43,6 @@ const AddTorrentDialog = () => {
 
   const handleClose = () => {
     dispatch(toggleAddTorrentDialog(false));
-    setDownloadDir("");
     setTorrentUrl("");
   };
 

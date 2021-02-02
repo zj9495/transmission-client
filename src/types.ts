@@ -53,6 +53,7 @@ export interface ISession {
   downloadDirFreeSpace: number;
   version: string;
   rpcVersion: number;
+  downloadDir: string;
 }
 
 export interface IStats {
