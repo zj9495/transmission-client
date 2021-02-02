@@ -1,5 +1,4 @@
 import * as React from "react";
-import clsx from "clsx";
 import { CellParams } from "@material-ui/x-grid";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
@@ -22,15 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     bar: {
       height: "100%",
-      "&.low": {
-        backgroundColor: "#f44336",
-      },
-      "&.medium": {
-        backgroundColor: "#efbb5aa3",
-      },
-      "&.high": {
-        backgroundColor: "#088208a3",
-      },
+      backgroundColor: "#088208a3",
     },
   })
 );
@@ -50,14 +41,7 @@ const ProgressBar = React.memo((props: ProgressBarProps) => {
       <div
         className={classes.value}
       >{`${valueInPercent.toLocaleString()} %`}</div>
-      <div
-        className={clsx(classes.bar, {
-          low: valueInPercent < 30,
-          medium: valueInPercent >= 30 && valueInPercent <= 70,
-          high: valueInPercent > 70,
-        })}
-        style={{ maxWidth: `${valueInPercent}%` }}
-      />
+      <div className={classes.bar} style={{ maxWidth: `${valueInPercent}%` }} />
     </div>
   );
 });
