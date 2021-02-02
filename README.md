@@ -14,7 +14,8 @@
 A Web Client for [Transmission](https://github.com/transmission/transmission), build with Material-UI and Typescript.
 
 # Features
-- [x] Moden ~~Mobile friendly~~ UI
+- [x] Moden UI
+- [ ] Mobile friendly UI
 - [x] Dark mode
 - [x] Multi-language support.
 - [x] Start, stop, upload, delete and recheck torrents
