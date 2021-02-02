@@ -25,6 +25,8 @@ const ActionBar = () => {
   const dispatch = useDispatch();
   const selectedIds = useSelector(getSelectedIds);
 
+  const disableAction = selectedIds.length === 0;
+
   const handleAdd = () => {
     dispatch(toggleAddTorrentDialog(true));
   };
@@ -57,27 +59,27 @@ const ActionBar = () => {
         </IconButton>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.start" />}>
-        <IconButton>
-          <PlayArrowIcon onClick={handleStart} />
+        <IconButton disabled={disableAction} onClick={handleStart}>
+          <PlayArrowIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.pause" />}>
-        <IconButton onClick={handleStop}>
+        <IconButton disabled={disableAction} onClick={handleStop}>
           <PauseIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.deleteData" />}>
-        <IconButton onClick={handleRemove}>
+        <IconButton disabled={disableAction} onClick={handleRemove}>
           <DeleteIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.recheck" />}>
-        <IconButton onClick={handleVerify}>
+        <IconButton disabled={disableAction} onClick={handleVerify}>
           <StorageIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.morePeers" />}>
-        <IconButton onClick={handleReannounce}>
+        <IconButton disabled={disableAction} onClick={handleReannounce}>
           <SettingsInputAntennaIcon />
         </IconButton>
       </Tooltip>
