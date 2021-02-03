@@ -24,11 +24,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 
-import ThemeToggle from "../ThemeToggle";
-
-import { toggleMenuOpen, setLocale } from "../../store/actions/rpc";
-import { IState } from "../../types";
-import { LANGUAGES, GITHUB_REPO } from "../../constants";
+import { toggleMenuOpen, setLocale } from "src/store/actions/rpc";
+import { IState } from "src/types";
+import { LANGUAGES, GITHUB_REPO } from "src/constants";
+import ThemeToggle from "src/components/ThemeToggle";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,6 +1,6 @@
 import React from "react";
 import { screen } from "@testing-library/react";
-import renderWithProviders from "../renderWithProviders";
+import renderWithProviders from "src/components/renderWithProviders";
 
 import AppStatusBar from "./index";
 

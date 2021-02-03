@@ -13,10 +13,10 @@ import {
 import {
   getAddTorrentDialogOpen,
   getDownloadDirSelector,
-} from "../../store/selector";
-import { toggleAddTorrentDialog } from "../../store/actions/app";
+} from "src/store/selector";
+import { toggleAddTorrentDialog } from "src/store/actions/app";
 
-import { addTorrent } from "../../api";
+import { addTorrent } from "src/api";
 
 const AddTorrentDialog = () => {
   const dispatch = useDispatch();

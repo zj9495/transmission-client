@@ -5,10 +5,10 @@ import { Provider } from "react-redux";
 
 import { merge, cloneDeep } from "lodash";
 
-import Intl from "../../containers/Intl";
-import Theme from "../../containers/Theme";
-import { reducer } from "../../store";
-import initialState from "../../store/initialState";
+import Intl from "src/containers/Intl";
+import Theme from "src/containers/Theme";
+import { reducer } from "src/store";
+import initialState from "src/store/initialState";
 
 const initialMockState = {
   rpc: {

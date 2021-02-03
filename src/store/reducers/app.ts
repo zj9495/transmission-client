@@ -1,7 +1,7 @@
 import produce from "immer";
 
+import { IAppState } from "src/types";
 import { TOGGLE_ADD_TORRENT_DIALOG } from "../constants";
-import { IAppState } from "../../types";
 
 export interface Action {
   type: string;

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import store from "../store";
-import { SET_SESSION_ID } from "../store/constants";
+import store from "src/store";
+import { SET_SESSION_ID } from "src/store/constants";
 
 const request = axios.create({
   baseURL: `${process.env.REACT_APP_TR_RPC_HOST}/transmission/rpc`,

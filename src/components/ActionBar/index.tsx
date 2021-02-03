@@ -10,8 +10,8 @@ import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
 import StorageIcon from "@material-ui/icons/Storage";
 import { FormattedMessage } from "react-intl";
 
-import { toggleAddTorrentDialog } from "../../store/actions/app";
-import { getSelectedIds } from "../../store/selector";
+import { toggleAddTorrentDialog } from "src/store/actions/app";
+import { getSelectedIds } from "src/store/selector";
 
 import {
   startTorrents,
@@ -19,7 +19,7 @@ import {
   reannounceTorrents,
   verifyTorrents,
   removeTorrents,
-} from "../../api";
+} from "src/api";
 
 const ActionBar = () => {
   const dispatch = useDispatch();

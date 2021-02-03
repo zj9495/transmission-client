@@ -1,3 +1,4 @@
+import store from "src/store";
 import {
   formatBytes,
   formatSize,
@@ -5,7 +6,6 @@ import {
   formatUnixTimeStamp,
   formatLeftTime,
 } from "./formatter";
-import store from "../store";
 
 describe.each`
   number                                   | bytes   | units                       | digits       | expected

@@ -1,4 +1,4 @@
-import { IState } from "../types";
+import { IState } from "src/types";
 
 export const getSessionSelector = (state: IState) => state.rpc.session;
 export const getDownloadDirSelector = (state: IState) =>

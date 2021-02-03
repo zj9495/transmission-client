@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
-import SignIn from "../../components/SignIn";
-import { setLocale } from "../../store/actions/rpc";
+import SignIn from "src/components/SignIn";
+import { setLocale } from "src/store/actions/rpc";
 
 const mapStateToProps = (state: { locale: string }) => ({
   locale: state.locale,

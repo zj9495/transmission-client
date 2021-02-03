@@ -3,8 +3,8 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { getStatsSelector, getSessionSelector } from "../../store/selector";
-import { formatSpeed, formatSize } from "../../utils/formatter";
+import { getStatsSelector, getSessionSelector } from "src/store/selector";
+import { formatSpeed, formatSize } from "src/utils/formatter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

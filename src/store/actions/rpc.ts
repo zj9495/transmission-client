@@ -3,9 +3,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { STATUS_TYPES } from "../../constants";
-import { ITorrent, ITorrents, IState } from "../../types";
+import { STATUS_TYPES } from "src/constants";
+import { ITorrent, ITorrents, IState } from "src/types";
 
+import { getSession, getTorrents, getSessionStats } from "src/api";
+import { objectToCamelCase } from "src/utils/object";
 import {
   SET_LOCALE,
   CHANGE_THEME,
@@ -15,9 +17,6 @@ import {
   SET_SELECTED_IDS,
   SET_SESSION_STATS,
 } from "../constants";
-
-import { getSession, getTorrents, getSessionStats } from "../../api";
-import { objectToCamelCase } from "../../utils/object";
 
 export const setLocale = (val: string) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>

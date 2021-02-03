@@ -24,7 +24,7 @@ import {
 } from "@material-ui/core/styles";
 import { useIntl } from "react-intl";
 
-import { LANGUAGES } from "../../constants";
+import { LANGUAGES } from "src/constants";
 
 export const styles = (theme: Theme) =>
   createStyles({

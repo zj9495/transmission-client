@@ -17,10 +17,9 @@ import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
+import { getMenuOpen, getTorrents } from "src/store/selector";
+import { IParamTypes, TorrentStatus } from "src/types";
 import MenuItem from "./MenuItem";
-
-import { getMenuOpen, getTorrents } from "../../store/selector";
-import { IParamTypes, TorrentStatus } from "../../types";
 
 export interface IMenu {
   status: TorrentStatus;

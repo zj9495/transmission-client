@@ -3,7 +3,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { enUS, zhCN, Localization } from "@material-ui/core/locale";
 
-import { IState } from "../../types";
+import { IState } from "src/types";
 
 interface Props {
   locale: string;

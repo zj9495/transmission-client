@@ -1,5 +1,5 @@
+import store from "src/store";
 import request from "./request";
-import store from "../store";
 
 export const getSession = () =>
   request({

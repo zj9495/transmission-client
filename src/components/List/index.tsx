@@ -31,23 +31,21 @@ import {
   getSpeedBytesSelector,
   getSpeedUnitsSelector,
   getMenuOpen,
-} from "../../store/selector";
-
-import Progress from "../Progress";
-import ActionBar from "../ActionBar";
-import MenuBar from "../MenuBar";
+} from "src/store/selector";
 
 import {
   getSessionAction,
   getTorrentsAction,
   getSessionStatsAction,
-} from "../../store/actions/rpc";
+} from "src/store/actions/rpc";
+import { IState, ISession } from "src/types";
+import Progress from "src/components/Progress";
+import ActionBar from "src/components/ActionBar";
+import MenuBar from "src/components/MenuBar";
 
-import { IState, ISession } from "../../types";
-
-import TorrentTable from "../TorrentTable";
-import AddTorrentDialog from "../AddTorrentDialog";
-import AppStatusBar from "../AppStatusBar";
+import TorrentTable from "src/components/TorrentTable";
+import AddTorrentDialog from "src/components/AddTorrentDialog";
+import AppStatusBar from "src/components/AppStatusBar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

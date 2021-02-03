@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import store from "../store";
+import store from "src/store";
 
 export const formatBytes = (
   number: number,

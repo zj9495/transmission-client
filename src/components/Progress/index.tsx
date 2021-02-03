@@ -6,8 +6,8 @@ import Box from "@material-ui/core/Box";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
-import { ITorrent } from "../../types";
-import { formatSize, formatSpeed, formatLeftTime } from "../../utils/formatter";
+import { ITorrent } from "src/types";
+import { formatSize, formatSpeed, formatLeftTime } from "src/utils/formatter";
 
 const useStyles = makeStyles({
   root: {

@@ -1,5 +1,6 @@
 import produce from "immer";
 
+import { IRPCState } from "src/types";
 import {
   SET_LOCALE,
   CHANGE_THEME,
@@ -10,7 +11,6 @@ import {
   SET_SELECTED_IDS,
   SET_SESSION_STATS,
 } from "../constants";
-import { IRPCState } from "../../types";
 
 export const initialRPCState: IRPCState = {
   locale: "zh-CN",

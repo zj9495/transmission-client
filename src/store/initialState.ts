@@ -1,4 +1,4 @@
-import { IState } from "../types";
+import { IState } from "src/types";
 
 import { initialAppState } from "./reducers/app";
 import { initialRPCState } from "./reducers/rpc";

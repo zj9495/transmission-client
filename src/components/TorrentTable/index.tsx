@@ -10,18 +10,18 @@ import {
 } from "@material-ui/x-grid";
 
 import { useParams } from "react-router-dom";
-import renderProgress from "./renderProgress";
-import renderName from "./renderName";
 
-import { getTorrents } from "../../store/selector";
-import { setSelectedIds } from "../../store/actions/rpc";
+import { getTorrents } from "src/store/selector";
+import { setSelectedIds } from "src/store/actions/rpc";
 import {
   formatSize,
   formatSpeed,
   formatUnixTimeStamp,
   formatLeftTime,
-} from "../../utils/formatter";
-import { IParamTypes } from "../../types";
+} from "src/utils/formatter";
+import { IParamTypes } from "src/types";
+import renderName from "./renderName";
+import renderProgress from "./renderProgress";
 
 const useSize: ColTypeDef = {
   type: "number",

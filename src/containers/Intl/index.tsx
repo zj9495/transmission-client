@@ -3,7 +3,7 @@ import React from "react";
 import { IntlProvider } from "react-intl";
 import { connect } from "react-redux";
 
-import { IState } from "../../types";
+import { IState } from "src/types";
 
 interface Props {
   locale: string;
@@ -14,10 +14,10 @@ function getMessages(locale: string): Record<string, string> {
   let messages: Record<string, string>;
   try {
     // eslint-disable-next-line global-require
-    messages = require(`../../i18n/lang/${locale.replace("-", "_")}.json`);
+    messages = require(`src/i18n/lang/${locale.replace("-", "_")}.json`);
   } catch {
     // eslint-disable-next-line global-require
-    messages = require(`../../i18n/lang/en.json`);
+    messages = require(`src/i18n/lang/en.json`);
   }
   return messages;
 }
