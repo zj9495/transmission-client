@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage } from "react-intl";
+import { useForm } from "react-hook-form";
 import {
   Button,
   TextField,
@@ -18,36 +19,30 @@ import { toggleAddTorrentDialog } from "src/store/actions/app";
 
 import { addTorrent } from "src/api";
 
+interface IFormInput {
+  downloadDir: string;
+  torrentUrl: string;
+}
+
 const AddTorrentDialog = () => {
   const dispatch = useDispatch();
   const open = useSelector(getAddTorrentDialogOpen);
   const downloadDirFromStore = useSelector(getDownloadDirSelector);
-  const [downloadDir, setDownloadDir] = React.useState("");
-  const [torrentUrl, setTorrentUrl] = React.useState("");
+  const { register, handleSubmit, reset, errors } = useForm();
 
   React.useEffect(() => {
-    setDownloadDir(downloadDirFromStore);
+    reset({
+      downloadDir: downloadDirFromStore,
+      torrentUrl: null,
+    });
   }, [downloadDirFromStore]);
-
-  const handleDownloadDirChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDownloadDir(event.target.value);
-  };
-
-  const handleTorrentUrlChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setTorrentUrl(event.target.value);
-  };
 
   const handleClose = () => {
     dispatch(toggleAddTorrentDialog(false));
-    setTorrentUrl("");
   };
 
-  const handleSubmit = () => {
-    addTorrent(torrentUrl, downloadDir);
+  const onSubmit = (data: IFormInput) => {
+    addTorrent(data.torrentUrl, data.downloadDir);
     handleClose();
   };
   return (
@@ -60,33 +55,43 @@ const AddTorrentDialog = () => {
         <DialogTitle id="form-dialog-title">
           <FormattedMessage id="toolbar.addTorrent" />
         </DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            id="download-dir"
-            value={downloadDir}
-            label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
-            fullWidth
-            onChange={handleDownloadDirChange}
-          />
-          <TextField
-            id="torrent-link"
-            value={torrentUrl}
-            label={<FormattedMessage id="dialog.torrentAdd.torrentUrl" />}
-            multiline
-            rows={4}
-            fullWidth
-            onChange={handleTorrentUrlChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            <FormattedMessage id="dialog.public.buttonCancel" />
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            <FormattedMessage id="dialog.public.buttonOk" />
-          </Button>
-        </DialogActions>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogContent>
+            <TextField
+              id="download-dir"
+              error={!!errors.downloadDir}
+              name="downloadDir"
+              label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
+              fullWidth
+              inputRef={register({
+                required: "please input download dir",
+              })}
+              helperText={errors.downloadDir?.message || ""}
+            />
+            <TextField
+              id="torrent-link"
+              autoFocus
+              error={!!errors.torrentUrl}
+              name="torrentUrl"
+              label={<FormattedMessage id="dialog.torrentAdd.torrentUrl" />}
+              multiline
+              rows={4}
+              fullWidth
+              inputRef={register({
+                required: "please input torrent link",
+              })}
+              helperText={errors.torrentUrl?.message || ""}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              <FormattedMessage id="dialog.public.buttonCancel" />
+            </Button>
+            <Button type="submit" color="primary">
+              <FormattedMessage id="dialog.public.buttonOk" />
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );
