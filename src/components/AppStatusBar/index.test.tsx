@@ -6,7 +6,7 @@ import AppStatusBar from "./index";
 
 test("renders AppStatusBar", () => {
   const state = {
-    app: { open: true },
+    app: { open: false },
     rpc: {
       locale: "en-US",
       stats: {

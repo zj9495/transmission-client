@@ -46,6 +46,7 @@ import MenuBar from "src/components/MenuBar";
 import TorrentTable from "src/components/TorrentTable";
 import AddTorrentDialog from "src/components/AddTorrentDialog";
 import AppStatusBar from "src/components/AppStatusBar";
+import MessageBar from "src/components/MessageBar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -126,6 +127,7 @@ const Torrents: React.FC = () => {
           })}
         </List> */}
         <AppStatusBar />
+        <MessageBar />
       </Box>
     </div>
   );

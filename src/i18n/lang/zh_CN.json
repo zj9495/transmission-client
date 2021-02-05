@@ -370,5 +370,10 @@
   "public.textOff": "关",
   "public.textHowToUpdate": "如何更新？",
   "public.textIgnoreThisVersion": "忽略这个版本",
-  "public.textJsonFileParsingFailed": "JSON文件解析失败！"
+  "public.textJsonFileParsingFailed": "JSON文件解析失败！",
+  "message.adding": "正在添加中...",
+  "message.added": "添加种子成功！",
+  "message.duplicate": "种子已存在！",
+  "message.failure": "添加种子失败！",
+  "message.unknownError": "未知错误"
 }

@@ -369,5 +369,10 @@
   "public.textOff": "OFF",
   "public.textHowToUpdate": "How to update?",
   "public.textIgnoreThisVersion": "Ignore this version",
-  "public.textJsonFileParsingFailed": "JSON file parsing failed!"
+  "public.textJsonFileParsingFailed": "JSON file parsing failed!",
+  "message.adding": "Adding...",
+  "message.added": "Successfully added!",
+  "message.duplicate": "Duplicated!",
+  "message.failure": "Failed to add torrent!",
+  "message.unknownError": "Unknown error"
 }

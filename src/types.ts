@@ -79,8 +79,17 @@ export interface IStatusColor {
   [propName: number]: "primary" | "disabled";
 }
 
+export interface IMessageConfig {
+  key?: number;
+  open: boolean;
+  loading: boolean;
+  message: React.ReactNode;
+  severity: "error" | "info" | "success" | "warning";
+}
+
 export interface IAppState {
   open: boolean;
+  messageConfig: IMessageConfig;
 }
 
 export interface IState {
