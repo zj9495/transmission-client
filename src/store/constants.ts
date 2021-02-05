@@ -9,3 +9,5 @@ export const SET_SELECTED_IDS = "SET_SELECTED_IDS";
 
 // Add Torrent
 export const TOGGLE_ADD_TORRENT_DIALOG = "TOGGLE_ADD_TORRENT_DIALOG";
+
+export const SET_MESSAGE_BAR = "SET_MESSAGE_BAR";

@@ -1,7 +1,7 @@
 import produce from "immer";
 
 import { IAppState } from "src/types";
-import { TOGGLE_ADD_TORRENT_DIALOG } from "../constants";
+import { TOGGLE_ADD_TORRENT_DIALOG, SET_MESSAGE_BAR } from "../constants";
 
 export interface Action {
   type: string;
@@ -10,6 +10,13 @@ export interface Action {
 
 export const initialAppState: IAppState = {
   open: false,
+  messageConfig: {
+    key: 0,
+    open: false,
+    loading: false,
+    message: "",
+    severity: "info",
+  },
 };
 
 export default (state = initialAppState, action: Action) =>
@@ -18,6 +25,9 @@ export default (state = initialAppState, action: Action) =>
     switch (action.type) {
       case TOGGLE_ADD_TORRENT_DIALOG:
         draft.open = action.payload;
+        break;
+      case SET_MESSAGE_BAR:
+        draft.messageConfig = action.payload;
         break;
       default:
         return state;
