@@ -89,7 +89,7 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': OFF,
         '@typescript-eslint/no-unused-vars': ERROR,
 
-        'react/jsx-filename-extension': [ERROR, { extensions: ['.tsx'] }],
+        'react/jsx-filename-extension': [ERROR, { extensions: ['.tsx', 'jsx'] }],
         'react/require-default-props': OFF,
         'react-hooks/exhaustive-deps': OFF,
         'react/jsx-props-no-spreading': OFF,
@@ -108,7 +108,8 @@ module.exports = {
         'no-useless-constructor': OFF,
         'import/prefer-default-export': OFF,
         'unicorn/no-abusive-eslint-disable': OFF,
-        'eslint-comments/no-unlimited-disable': OFF
+        'eslint-comments/no-unlimited-disable': OFF,
+        'import/no-extraneous-dependencies': [ERROR, { 'devDependencies': ['**/*.test.js', '**/*.spec.js'] }]
     },
     overrides: [
         {

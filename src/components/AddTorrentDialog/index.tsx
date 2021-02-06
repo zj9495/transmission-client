@@ -126,6 +126,7 @@ const AddTorrentDialog = () => {
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
+      data-testid="add-torrent-dialog"
     >
       <DialogTitle id="form-dialog-title">
         <FormattedMessage id="toolbar.addTorrent" />
@@ -133,7 +134,9 @@ const AddTorrentDialog = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
           <TextField
-            id="download-dir"
+            inputProps={{
+              "data-testid": "download-dir",
+            }}
             error={!!errors.downloadDir}
             name="downloadDir"
             label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
@@ -144,7 +147,9 @@ const AddTorrentDialog = () => {
             helperText={errors.downloadDir?.message || ""}
           />
           <TextField
-            id="torrent-link"
+            inputProps={{
+              "data-testid": "orrent-link",
+            }}
             autoFocus
             error={!!errors.torrentUrl}
             name="torrentUrl"

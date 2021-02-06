@@ -30,3 +30,24 @@ export default function renderWithProviders(component: any, mockState: any) {
     </Provider>
   );
 }
+
+interface IProvidersProps {
+  state: Record<string, any>;
+  children: React.ReactNode;
+}
+
+export function Providers(props: IProvidersProps) {
+  const { children, state: mockState = {} } = props;
+  const state = merge(cloneDeep(initialState), initialMockState, mockState);
+  const store = createStore(reducer, state);
+  const id = "providers";
+  return (
+    <Provider store={store}>
+      <Intl>
+        <Theme>
+          <div id={id}>{children}</div>
+        </Theme>
+      </Intl>
+    </Provider>
+  );
+}

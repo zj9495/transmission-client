@@ -13,7 +13,7 @@ import {
 } from "../constants";
 
 export const initialRPCState: IRPCState = {
-  locale: "zh-CN",
+  locale: "en-US",
   theme: "light",
   sessionId: undefined,
   torrents: {
