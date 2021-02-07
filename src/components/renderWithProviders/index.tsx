@@ -1,45 +1,39 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 
-import { merge, cloneDeep } from "lodash";
+import { cloneDeep } from "lodash";
 
 import Intl from "src/containers/Intl";
 import Theme from "src/containers/Theme";
 import { reducer } from "src/store";
-import initialState from "src/store/initialState";
 
-const initialMockState = {
-  rpc: {
-    locale: "en-US",
-  },
-};
+type State = Record<string, any>;
+type Children = React.ReactNode;
+interface IProvidersProps {
+  state: State;
+  children: Children;
+}
 
-export default function renderWithProviders(component: any, mockState: any) {
-  const state = merge(cloneDeep(initialState), initialMockState, mockState);
-  const store = createStore(reducer, state);
+export default function renderWithProviders(children: Children, state: State) {
+  const store = createStore(reducer, cloneDeep(state), applyMiddleware(thunk));
   const id = "render-with-providers-container";
   return render(
     <Provider store={store}>
       <Intl>
         <Theme>
-          <div id={id}>{component}</div>
+          <div id={id}>{children}</div>
         </Theme>
       </Intl>
     </Provider>
   );
 }
 
-interface IProvidersProps {
-  state: Record<string, any>;
-  children: React.ReactNode;
-}
-
 export function Providers(props: IProvidersProps) {
-  const { children, state: mockState = {} } = props;
-  const state = merge(cloneDeep(initialState), initialMockState, mockState);
-  const store = createStore(reducer, state);
+  const { children, state = {} } = props;
+  const store = createStore(reducer, cloneDeep(state), applyMiddleware(thunk));
   const id = "providers";
   return (
     <Provider store={store}>
