@@ -5,6 +5,19 @@ context('i18n', () => {
     cy.visit(`http://zj9495:zj9495@localhost:8888/transmission-client`)
   })
 
+  it('test default language', () => {
+    const defaultLanguageInfo = {
+      code: "en",
+      text: "English",
+      name: "Name",
+      totalSize: "Total size"
+    }
+
+    cy.get('#selected-language').contains(defaultLanguageInfo.text)
+    cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(defaultLanguageInfo.name)
+    cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(defaultLanguageInfo.totalSize)
+  })
+
   it('test switch language', () => {
     cy.contains('Transmission')
     const langs = [
