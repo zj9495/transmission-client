@@ -117,7 +117,7 @@ export default function SearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Transmission
+            Transmission Client
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
