@@ -11,4 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: preactjs/compressed-size-action@v2
       with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        repo-token: "${{ secrets.GITHUB_TOKEN }}",
+        pattern: "{**/build/**/*.js,**/build/**/*.css}"
