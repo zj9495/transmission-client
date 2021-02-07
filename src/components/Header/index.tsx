@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   Toolbar,
   Typography,
   InputBase,
   Tooltip,
-  Button,
   IconButton,
-  Menu,
-  MenuItem,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -16,18 +13,17 @@ import {
   Theme,
   makeStyles,
 } from "@material-ui/core/styles";
-import LanguageIcon from "@material-ui/icons/Translate";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SearchIcon from "@material-ui/icons/Search";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 
-import { toggleMenuOpen, setLocale } from "src/store/actions/rpc";
+import { toggleMenuOpen } from "src/store/actions/rpc";
 import { IState } from "src/types";
-import { LANGUAGES, GITHUB_REPO } from "src/constants";
+import { GITHUB_REPO } from "src/constants";
 import ThemeToggle from "src/components/ThemeToggle";
+import LanguageToggle from "src/components/LanguageToggle";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -100,23 +96,8 @@ export default function SearchAppBar() {
   const intl = useIntl();
 
   const themeType = useSelector((state: IState) => state.rpc.theme);
-  const locale = useSelector((state: IState) => state.rpc.locale);
-
-  const [languageMenu, setLanguageMenu] = useState(null);
 
   const appBarColor = themeType === "dark" ? "transparent" : undefined;
-
-  const handleLanguageIconClick = (event: any) => {
-    setLanguageMenu(event.currentTarget);
-  };
-  const handleLanguageMenuClose = () => {
-    setLanguageMenu(null);
-  };
-
-  const handleLanguageMenuItemClick = (code: string) => {
-    dispatch(setLocale(code));
-    handleLanguageMenuClose();
-  };
 
   const handleMenuClick = () => {
     dispatch(toggleMenuOpen());
@@ -151,24 +132,7 @@ export default function SearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <Tooltip
-            title={intl.formatMessage({ id: "changeLanguage" })}
-            enterDelay={300}
-          >
-            <Button
-              id="switch-language"
-              color="inherit"
-              onClick={handleLanguageIconClick}
-              data-ga-event-category="header"
-              data-ga-event-action="language"
-            >
-              <LanguageIcon />
-              <span id="selected-language" className={classes.language}>
-                {LANGUAGES.find((language) => language.code === locale)?.text}
-              </span>
-              <ExpandMoreIcon fontSize="small" />
-            </Button>
-          </Tooltip>
+          <LanguageToggle />
           <ThemeToggle />
           <Tooltip title="Github" enterDelay={300}>
             <IconButton
@@ -182,28 +146,6 @@ export default function SearchAppBar() {
               <GitHubIcon />
             </IconButton>
           </Tooltip>
-          <Menu
-            id="language-menu"
-            anchorEl={languageMenu}
-            open={Boolean(languageMenu)}
-            onClose={handleLanguageMenuClose}
-          >
-            {LANGUAGES.map((language) => (
-              <MenuItem
-                id={`lang-item-${language.code}`}
-                data-no-link="true"
-                key={language.code}
-                value={language.code}
-                selected={locale === language.code}
-                onClick={() => {
-                  handleLanguageMenuItemClick(language.code);
-                }}
-                lang={language.code}
-              >
-                {language.text}
-              </MenuItem>
-            ))}
-          </Menu>
         </Toolbar>
       </AppBar>
     </div>
