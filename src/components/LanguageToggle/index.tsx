@@ -52,13 +52,18 @@ export default function LanguageToggle() {
       >
         <Button
           id="switch-language"
+          data-testid="switch-language"
           color="inherit"
           onClick={handleLanguageIconClick}
           data-ga-event-category="header"
           data-ga-event-action="language"
         >
           <LanguageIcon />
-          <span id="selected-language" className={classes.language}>
+          <span
+            id="selected-language"
+            data-testid="selected-language"
+            className={classes.language}
+          >
             {LANGUAGES.find((language) => language.code === locale)?.text}
           </span>
           <ExpandMoreIcon fontSize="small" />
@@ -66,6 +71,7 @@ export default function LanguageToggle() {
       </Tooltip>
       <Menu
         id="language-menu"
+        data-testid="language-menu"
         anchorEl={languageMenu}
         open={Boolean(languageMenu)}
         onClose={handleLanguageMenuClose}
