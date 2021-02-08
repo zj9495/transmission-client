@@ -6,6 +6,6 @@ context('app', () => {
   })
 
   it('boot', () => {
-    cy.contains('Transmission')
+    cy.contains('Transmission Client')
   })
 })

@@ -19,7 +19,7 @@ context('i18n', () => {
   })
 
   it('test switch language', () => {
-    cy.contains('Transmission')
+    cy.contains('Transmission Client')
     const langs = [
       {
         code: "en",

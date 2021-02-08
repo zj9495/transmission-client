@@ -4,6 +4,6 @@ import App from "./App";
 
 test("renders Transmission", () => {
   render(<App />);
-  const linkElement = screen.getAllByText(/transmission/i)[0];
+  const linkElement = screen.getAllByText(/transmission client/i)[0];
   expect(linkElement).toBeInTheDocument();
 });
