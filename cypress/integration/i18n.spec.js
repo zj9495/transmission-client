@@ -3,6 +3,7 @@
 context('i18n', () => {
   beforeEach(() => {
     cy.visit(`http://zj9495:zj9495@localhost:8888/transmission-client`)
+    cy.verifyLogin()
   })
 
   it('test default language', () => {
@@ -19,7 +20,6 @@ context('i18n', () => {
   })
 
   it('test switch language', () => {
-    cy.contains('Transmission Client')
     const langs = [
       {
         code: "en",

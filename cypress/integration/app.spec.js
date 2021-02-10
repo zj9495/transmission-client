@@ -6,6 +6,6 @@ context('app', () => {
   })
 
   it('boot', () => {
-    cy.contains('Transmission Client')
+    cy.verifyLogin()
   })
 })

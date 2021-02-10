@@ -45,7 +45,9 @@ const AppStatusBar = () => {
         {session.version}
       </span>
       <span className={classes.split}>|</span>
-      <span>RPC: {session.rpcVersion}</span>
+      <span>
+        RPC: <span data-testid="rpc-version">{session.rpcVersion}</span>
+      </span>
     </div>
   );
 };
