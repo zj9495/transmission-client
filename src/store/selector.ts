@@ -21,5 +21,9 @@ export const getTorrents = (state: IState) => state.rpc.torrents;
 export const getAddTorrentDialogOpen = (state: IState) => state.app.open;
 
 export const getSelectedIds = (state: IState) => state.rpc.selectedIds;
+export const getSelectedTorrents = (state: IState) =>
+  state.rpc.torrents.all.filter((torrent) =>
+    state.rpc.selectedIds.includes(torrent.id)
+  );
 
 export const getMessageConfig = (state: IState) => state.app.messageConfig;
