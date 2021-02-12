@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/transmission-client/static/css/main.4a4137e4.chunk.css",
+    "main.js": "/transmission-client/static/js/main.6108486a.chunk.js",
+    "main.js.map": "/transmission-client/static/js/main.6108486a.chunk.js.map",
+    "runtime-main.js": "/transmission-client/static/js/runtime-main.b52f8eff.js",
+    "runtime-main.js.map": "/transmission-client/static/js/runtime-main.b52f8eff.js.map",
+    "static/js/2.406d8f2a.chunk.js": "/transmission-client/static/js/2.406d8f2a.chunk.js",
+    "static/js/2.406d8f2a.chunk.js.map": "/transmission-client/static/js/2.406d8f2a.chunk.js.map",
+    "static/js/3.baef753c.chunk.js": "/transmission-client/static/js/3.baef753c.chunk.js",
+    "static/js/3.baef753c.chunk.js.map": "/transmission-client/static/js/3.baef753c.chunk.js.map",
+    "index.html": "/transmission-client/index.html",
+    "static/css/main.4a4137e4.chunk.css.map": "/transmission-client/static/css/main.4a4137e4.chunk.css.map",
+    "static/js/2.406d8f2a.chunk.js.LICENSE.txt": "/transmission-client/static/js/2.406d8f2a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b52f8eff.js",
+    "static/js/2.406d8f2a.chunk.js",
+    "static/css/main.4a4137e4.chunk.css",
+    "static/js/main.6108486a.chunk.js"
+  ]
+}
