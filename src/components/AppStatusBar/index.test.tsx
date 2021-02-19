@@ -27,5 +27,5 @@ test("renders AppStatusBar", () => {
   expect(
     screen.getByText("Transmission Version:MOCK_VERSION")
   ).toBeInTheDocument();
-  expect(screen.getByText("RPC: 10")).toBeInTheDocument();
+  expect(screen.getByTestId("rpc-version").textContent).toBe("10");
 });
