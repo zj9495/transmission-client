@@ -2,7 +2,7 @@
   "name": "transmission-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zj9495.github.io/transmission-client",
+  "homepage": "http://transmission.zj9495.com/transmission/web/",
   "dependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
