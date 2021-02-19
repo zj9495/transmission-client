@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: npm build
+      - run: npm run build
         env:
           REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
       - uses: appleboy/scp-action@master
@@ -24,6 +24,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "*"
+          source: "build/*"
           target: "/mnt/disks/disk1/transmission/transmission-client"
           debug: true
