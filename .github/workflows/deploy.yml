@@ -27,6 +27,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "build/*"
+          source: "build/index.html"
           target: "/mnt/disks/disk1/transmission/transmission-client"
           debug: true
