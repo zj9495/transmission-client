@@ -118,7 +118,10 @@ const AddTorrentDialog = () => {
   };
 
   const onSubmit = (data: IFormInput) => {
-    handleAdd(data);
+    handleAdd({
+      downloadDir: data.downloadDir.trim(),
+      torrentUrl: data.torrentUrl.trim(),
+    });
     handleClose();
   };
   return (
