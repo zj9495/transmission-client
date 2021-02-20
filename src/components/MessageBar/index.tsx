@@ -36,6 +36,7 @@ const MessageBar = () => {
         onClose={onClose}
       >
         <Alert
+          data-testid="message-bar"
           elevation={6}
           variant="filled"
           onClose={onClose}

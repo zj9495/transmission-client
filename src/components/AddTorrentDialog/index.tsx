@@ -151,7 +151,7 @@ const AddTorrentDialog = () => {
           />
           <TextField
             inputProps={{
-              "data-testid": "orrent-link",
+              "data-testid": "torrent-link",
             }}
             autoFocus
             error={!!errors.torrentUrl}
@@ -170,7 +170,7 @@ const AddTorrentDialog = () => {
           <Button onClick={handleClose} color="primary">
             <FormattedMessage id="dialog.public.buttonCancel" />
           </Button>
-          <Button type="submit" color="primary">
+          <Button data-testid="add-form-submit" type="submit" color="primary">
             <FormattedMessage id="dialog.public.buttonOk" />
           </Button>
         </DialogActions>

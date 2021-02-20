@@ -54,7 +54,7 @@ const ActionBar = () => {
   return (
     <Box>
       <Tooltip title={<FormattedMessage id="toolbar.tip.addTorrent" />}>
-        <IconButton onClick={handleAdd}>
+        <IconButton data-testid="add-btn" onClick={handleAdd}>
           <AddIcon />
         </IconButton>
       </Tooltip>
@@ -69,7 +69,11 @@ const ActionBar = () => {
         </IconButton>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.deleteData" />}>
-        <IconButton disabled={disableAction} onClick={handleRemove}>
+        <IconButton
+          data-testid="delete-btn"
+          disabled={disableAction}
+          onClick={handleRemove}
+        >
           <DeleteIcon />
         </IconButton>
       </Tooltip>

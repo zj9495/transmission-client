@@ -109,7 +109,9 @@ module.exports = {
         'import/prefer-default-export': OFF,
         'unicorn/no-abusive-eslint-disable': OFF,
         'eslint-comments/no-unlimited-disable': OFF,
-        'import/no-extraneous-dependencies': [ERROR, { 'devDependencies': ['**/*.test.js', '**/*.spec.js'] }]
+        'import/no-extraneous-dependencies': [ERROR, { 'devDependencies': ['**/*.test.js', '**/*.spec.js'] }],
+        'promise/always-return': OFF,
+        'promise/catch-or-return': OFF
     },
     overrides: [
         {

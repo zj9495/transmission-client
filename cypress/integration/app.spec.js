@@ -6,6 +6,6 @@ context('app', () => {
   })
 
   it('boot', () => {
-    cy.verifyLogin()
+    cy.verifyConnected()
   })
 })

@@ -3,7 +3,7 @@
 context('i18n', () => {
   beforeEach(() => {
     cy.visit(`http://zj9495:zj9495@localhost:8888/transmission-client`)
-    cy.verifyLogin()
+    cy.verifyConnected()
   })
 
   it('test default language', () => {

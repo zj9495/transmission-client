@@ -23,7 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-Cypress.Commands.add('verifyLogin', () => {
+Cypress.Commands.add('verifyConnected', () => {
   cy.contains('Transmission Client')
   cy.contains('[data-testid=rpc-version]', /^[1-9]+$/, {timeout: 600000})
 })
+
+Cypress.Commands.add('getByTestId', (selector, ...args) => cy.get(`[data-testid=${selector}]`, ...args))
