@@ -114,9 +114,9 @@ const AddTorrentDialog = () => {
             label={<FormattedMessage id="dialog.torrentRemove.removeData" />}
             control={
               <Switch
-                data-testid="advanced-mode"
+                data-testid="delete-local-data"
                 color="primary"
-                name="advancedMode"
+                name="deleteLocalData"
                 inputRef={register}
               />
             }
