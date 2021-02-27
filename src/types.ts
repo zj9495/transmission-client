@@ -87,9 +87,14 @@ export interface IMessageConfig {
   severity: "error" | "info" | "success" | "warning";
 }
 
+type RemoveTorrents = {
+  open: boolean;
+};
+
 export interface IAppState {
   open: boolean;
   messageConfig: IMessageConfig;
+  removeTorrents: RemoveTorrents;
 }
 
 export interface IState {

@@ -17,6 +17,9 @@ export const getMenuOpen = (state: IState) => state.rpc.menuOpen;
 
 export const getTorrents = (state: IState) => state.rpc.torrents;
 
+// Message
+export const getMessageConfig = (state: IState) => state.app.messageConfig;
+
 // Add Torrent
 export const getAddTorrentDialogOpen = (state: IState) => state.app.open;
 
@@ -26,4 +29,6 @@ export const getSelectedTorrents = (state: IState) =>
     state.rpc.selectedIds.includes(torrent.id)
   );
 
-export const getMessageConfig = (state: IState) => state.app.messageConfig;
+// Remove Torrents
+export const getRemoveTorrentsDialogOpen = (state: IState) =>
+  state.app.removeTorrents.open;

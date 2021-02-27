@@ -197,6 +197,7 @@
   "dialog.public.buttonDelete": "Delete",
   "dialog.public.buttonExport": "Export",
   "dialog.public.buttonImport": "Import",
+  "dialog.public.buttonNext": "Next",
   "dialog.about.infos": "Author：culturist<br/>Statement：Most of the icons used in this program from the network, if any violation of your rights, please contact me delete.",
   "dialog.about.checkUpdate": "Check Update",
   "dialog.about.home": "Project Home",
@@ -371,8 +372,10 @@
   "public.textIgnoreThisVersion": "Ignore this version",
   "public.textJsonFileParsingFailed": "JSON file parsing failed!",
   "message.adding": "Adding...",
+  "message.removing": "Removing...",
   "message.added": "Successfully added!",
+  "message.removed": "Successfully removed!",
   "message.duplicate": "Duplicated!",
-  "message.failure": "Failed to add torrent!",
+  "message.failedAdd": "Failed to add torrent!",
   "message.unknownError": "Unknown error"
 }
