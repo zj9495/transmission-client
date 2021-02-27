@@ -46,7 +46,7 @@ module.exports = {
             },
         },
     },
-    plugins: ['react', '@typescript-eslint', 'unicorn', 'promise'],
+    plugins: ['react', '@typescript-eslint', 'unicorn', 'promise', 'mui-unused-classes'],
     rules: {
         'eslint-comments/disable-enable-pair': [ERROR, { allowWholeFile: true }],
 
@@ -111,7 +111,8 @@ module.exports = {
         'eslint-comments/no-unlimited-disable': OFF,
         'import/no-extraneous-dependencies': [ERROR, { 'devDependencies': ['**/*.test.js', '**/*.spec.js'] }],
         'promise/always-return': OFF,
-        'promise/catch-or-return': OFF
+        'promise/catch-or-return': OFF,
+        'unicorn/consistent-function-scoping': OFF
     },
     overrides: [
         {
