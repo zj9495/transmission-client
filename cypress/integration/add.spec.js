@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 import locale from "../../src/i18n/lang/en"
 
+import { removeTestTorrent } from "./common"
+
 const DOWNLOAD_DIR = "/downloads/complete"
 const TORRENT = {
   URL: "https://www.hdarea.co/download.php?id=39380&passkey=ddeb644cd5dac0c3c3b00152e415fdf8",
@@ -24,8 +26,7 @@ context('app', () => {
     cy.contains('[data-testid=message-bar]', locale["message.added"])
     cy.contains(TORRENT.NAME)
 
-    // remove torrent
-    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('input[type=checkbox]').check()
-    cy.getByTestId('delete-btn').click()
+    // should remove torrent before exit
+    removeTestTorrent()
   })
 })
