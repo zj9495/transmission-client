@@ -6104,6 +6104,11 @@ eslint-plugin-jsx-a11y@^6.3.1, eslint-plugin-jsx-a11y@^6.4.1:
     jsx-ast-utils "^3.1.0"
     language-tags "^1.0.5"
 
+eslint-plugin-mui-unused-classes@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-mui-unused-classes/download/eslint-plugin-mui-unused-classes-1.0.3.tgz#5601c17ac6094b36452117fe84792eeaaddc23a8"
+  integrity sha1-VgHBesYJSzZFIRf+hHku6q3cI6g=
+
 eslint-plugin-promise@^4.2.1:
   version "4.2.1"
   resolved "https://registry.npm.taobao.org/eslint-plugin-promise/download/eslint-plugin-promise-4.2.1.tgz#845fd8b2260ad8f82564c1222fce44ad71d9418a"
