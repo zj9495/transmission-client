@@ -1,0 +1,36 @@
+name: Pre-release
+
+on: [push]
+# on:
+#   push:
+#     branches:
+#       - master
+
+jobs:
+  pre-release:
+    name: Pre Release
+    environment: prod
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: install
+      - name: Build
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: build
+        env:
+          REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
+
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest
+          prerelease: true
+          title: Development Build
+          files: |
+            LICENSE
+            build
