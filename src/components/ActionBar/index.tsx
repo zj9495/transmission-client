@@ -10,7 +10,10 @@ import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
 import StorageIcon from "@material-ui/icons/Storage";
 import { FormattedMessage } from "react-intl";
 
-import { toggleAddTorrentDialog } from "src/store/actions/app";
+import {
+  toggleAddTorrentDialog,
+  toggleRemoveTorrentsDialog,
+} from "src/store/actions/app";
 import { getSelectedIds } from "src/store/selector";
 
 import {
@@ -18,7 +21,6 @@ import {
   stopTorrents,
   reannounceTorrents,
   verifyTorrents,
-  removeTorrents,
 } from "src/api";
 
 const ActionBar = () => {
@@ -48,7 +50,7 @@ const ActionBar = () => {
   };
 
   const handleRemove = () => {
-    removeTorrents(selectedIds, true);
+    dispatch(toggleRemoveTorrentsDialog(true));
   };
 
   return (

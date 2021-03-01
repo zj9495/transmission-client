@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
-/* eslint-disable promise/always-return */
 /* eslint-disable @typescript-eslint/ban-types */
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";

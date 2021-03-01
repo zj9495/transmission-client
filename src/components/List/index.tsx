@@ -45,6 +45,7 @@ import MenuBar from "src/components/MenuBar";
 
 import TorrentTable from "src/components/TorrentTable";
 import AddTorrentDialog from "src/components/AddTorrentDialog";
+import RemoveTorrentDialog from "src/components/RemoveTorrentDialog";
 import AppStatusBar from "src/components/AppStatusBar";
 import MessageBar from "src/components/MessageBar";
 
@@ -103,6 +104,7 @@ const Torrents: React.FC = () => {
       >
         <ActionBar />
         <AddTorrentDialog />
+        <RemoveTorrentDialog />
         <TorrentTable />
         {/* <List component="nav" aria-label="main mailbox folders">
           {torrents.map((torrent, index) => {
