@@ -93,7 +93,6 @@ const AddTorrentDialog = () => {
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
-      data-testid="add-torrent-dialog"
     >
       <DialogTitle id="form-dialog-title">
         <FormattedMessage id="dialog.torrentRemove.title" />
