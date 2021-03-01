@@ -37,7 +37,7 @@ jobs:
         env:
           REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
       - name: Zip
-        run: cd build && zip -r build.zip *
+        run: cd build && zip -r ../build.zip *
 
       - uses: marvinpinto/action-automatic-releases@latest
         with:
