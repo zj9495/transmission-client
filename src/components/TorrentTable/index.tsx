@@ -3,10 +3,11 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 import {
   XGrid,
-  ColDef,
-  ColTypeDef,
-  CellParams,
-  SelectionChangeParams,
+  GridColDef,
+  GridColTypeDef,
+  GridCellParams,
+  GridSelectionModelChangeParams,
+  GridToolbar,
 } from "@material-ui/x-grid";
 
 import { useParams } from "react-router-dom";
@@ -23,25 +24,25 @@ import { IParamTypes } from "src/types";
 import renderName from "./renderName";
 import renderProgress from "./renderProgress";
 
-const useSize: ColTypeDef = {
+const useSize: GridColTypeDef = {
   type: "number",
   width: 130,
   valueFormatter: ({ value }) => formatSize(Number(value)),
 };
 
-const useSpeed: ColTypeDef = {
+const useSpeed: GridColTypeDef = {
   type: "number",
   width: 130,
   valueFormatter: ({ value }) => formatSpeed(Number(value)),
 };
 
-const useTime: ColTypeDef = {
+const useTime: GridColTypeDef = {
   type: "number",
   width: 200,
   valueFormatter: ({ value }) => formatUnixTimeStamp(Number(value)),
 };
 
-const renderStatus = ({ value }: CellParams) => (
+const renderStatus = ({ value }: GridCellParams) => (
   <FormattedMessage id={`torrent.statusText.${value}`} />
 );
 
@@ -50,7 +51,7 @@ const TorrentTable: React.FC = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const torrents = useSelector(getTorrents);
-  const columns: ColDef[] = [
+  const columns: GridColDef[] = [
     {
       field: "name",
       headerName: intl.formatMessage({ id: "torrent.fields.name" }),
@@ -148,8 +149,8 @@ const TorrentTable: React.FC = () => {
   ];
   const rows = torrents[torrentStatus];
 
-  const handleSelectionChange = (params: SelectionChangeParams) => {
-    dispatch(setSelectedIds(params.rowIds.map((id) => Number(id))));
+  const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
+    dispatch(setSelectedIds(params.selectionModel.map((id) => Number(id))));
   };
 
   return (
@@ -158,13 +159,15 @@ const TorrentTable: React.FC = () => {
       style={{ height: "calc(100vh - 132px)", width: "100%" }}
     >
       <XGrid
-        showToolbar
+        components={{
+          Toolbar: GridToolbar,
+        }}
         rows={rows}
         columns={columns}
         pageSize={20}
         checkboxSelection
         disableSelectionOnClick
-        onSelectionChange={handleSelectionChange}
+        onSelectionModelChange={handleSelectionChange}
       />
     </div>
   );

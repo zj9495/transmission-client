@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CellParams } from "@material-ui/x-grid";
+import { GridCellParams } from "@material-ui/x-grid";
 import { Link } from "@material-ui/core";
 
 interface NameLinkProps {
@@ -22,7 +22,7 @@ const NameLink = React.memo((props: NameLinkProps) => {
   );
 });
 
-export default function renderName(params: CellParams) {
+export default function renderName(params: GridCellParams) {
   return (
     <NameLink value={params.value as string} id={params.row.id as number} />
   );

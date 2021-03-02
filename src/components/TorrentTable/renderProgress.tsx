@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CellParams } from "@material-ui/x-grid";
+import { GridCellParams } from "@material-ui/x-grid";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,6 +46,6 @@ const ProgressBar = React.memo((props: ProgressBarProps) => {
   );
 });
 
-export default function renderProgress(params: CellParams) {
+export default function renderProgress(params: GridCellParams) {
   return <ProgressBar value={Number(params.value)!} />;
 }
