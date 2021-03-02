@@ -30,6 +30,7 @@ context('app', () => {
     // should remove the test torrent before exit
     removeTestTorrent()
   })
+
   it('test add a torrent from url - advanced mode', () => {
     cy.getByTestId('add-btn').click()
     cy.contains('Add Torrent')
@@ -40,14 +41,14 @@ context('app', () => {
     cy.contains('Next').click()
     cy.contains('Adding...')
     cy.contains(TORRENT.NAME)
-    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    cy.contains('Paused')
+    // cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
     cy.contains('OK').click()
     cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Downloading')
 
     // should remove the test torrent before exit
     removeTestTorrent()
   })
-
 
   it('should remove the torrent after cancel download - advanced mode', () => {
     cy.getByTestId('add-btn').click()
