@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import locale from "../../src/i18n/lang/en"
 
 import { removeTestTorrent } from "./common"
 
@@ -15,18 +14,52 @@ context('app', () => {
     cy.verifyConnected()
   })
 
-  it('test add a torrent from url', () => {
+  it('test add a torrent from url - basic mode', () => {
     cy.getByTestId('add-btn').click()
-    cy.contains(locale["toolbar.addTorrent"])
+    cy.contains('Add Torrent')
     cy.getByTestId('download-dir').clear()
     cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
     cy.getByTestId('torrent-link').type(TORRENT.URL)
-    cy.getByTestId('add-form-submit').click()
-    cy.contains('[data-testid=message-bar]', locale["message.adding"])
-    cy.contains('[data-testid=message-bar]', locale["message.added"])
+    cy.get('[data-testid=advanced-mode] [type=checkbox]').uncheck()
+    cy.contains('OK').click()
+    cy.contains('Adding...')
+    cy.contains('Successfully added!')
     cy.contains(TORRENT.NAME)
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Downloading')
 
-    // should remove torrent before exit
+    // should remove the test torrent before exit
     removeTestTorrent()
+  })
+  it('test add a torrent from url - advanced mode', () => {
+    cy.getByTestId('add-btn').click()
+    cy.contains('Add Torrent')
+    cy.getByTestId('download-dir').clear()
+    cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
+    cy.getByTestId('torrent-link').type(TORRENT.URL)
+    cy.get('[data-testid=advanced-mode] [type=checkbox]').check()
+    cy.contains('Next').click()
+    cy.contains('Adding...')
+    cy.contains(TORRENT.NAME)
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    cy.contains('OK').click()
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Downloading')
+
+    // should remove the test torrent before exit
+    removeTestTorrent()
+  })
+
+
+  it('should remove the torrent after cancel download - advanced mode', () => {
+    cy.getByTestId('add-btn').click()
+    cy.contains('Add Torrent')
+    cy.getByTestId('download-dir').clear()
+    cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
+    cy.getByTestId('torrent-link').type(TORRENT.URL)
+    cy.get('[data-testid=advanced-mode] [type=checkbox]').check()
+    cy.contains('Next').click()
+    cy.contains('Adding...')
+    cy.contains(TORRENT.NAME)
+    cy.contains('Cancel').click()
+    cy.contains(TORRENT.NAME).should('not.exist')
   })
 })

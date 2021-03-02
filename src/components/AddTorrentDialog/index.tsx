@@ -9,13 +9,19 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControlLabel,
+  Switch,
 } from "@material-ui/core";
 
 import {
   getAddTorrentDialogOpen,
   getDownloadDirSelector,
 } from "src/store/selector";
-import { toggleAddTorrentDialog, setMessageBar } from "src/store/actions/app";
+import {
+  toggleAddTorrentDialog,
+  setMessageBar,
+  showTorrentDownloadOptions,
+} from "src/store/actions/app";
 
 import { addTorrent } from "src/api";
 
@@ -24,6 +30,7 @@ import { IMessageConfig } from "src/types";
 interface IFormInput {
   downloadDir: string;
   torrentUrl: string;
+  advancedMode: boolean;
 }
 
 interface IAddResultTorrentInfo {
@@ -40,17 +47,23 @@ interface IAddResult {
   >;
 }
 
+const DEFAULT_ADVANCED_MODE = true;
+const AUTO_START = true;
+
 const AddTorrentDialog = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const open = useSelector(getAddTorrentDialogOpen);
   const downloadDirFromStore = useSelector(getDownloadDirSelector);
-  const { register, handleSubmit, reset, errors } = useForm();
+  const { register, watch, handleSubmit, reset, errors } = useForm();
+  const isAdvancedMode = watch("advancedMode", DEFAULT_ADVANCED_MODE);
 
   React.useEffect(() => {
     reset({
       downloadDir: downloadDirFromStore,
       torrentUrl: null,
+      advancedMode: DEFAULT_ADVANCED_MODE,
+      autoStart: AUTO_START,
     });
   }, [downloadDirFromStore]);
 
@@ -58,22 +71,29 @@ const AddTorrentDialog = () => {
     dispatch(toggleAddTorrentDialog(false));
   };
 
-  const handleAddResult = (result: IAddResult) => {
-    let messageConfig: IMessageConfig;
+  const handleAddResult = (result: IAddResult, advancedMode: boolean) => {
+    let messageConfig: IMessageConfig | null = null;
     if (result.result !== "success") {
       messageConfig = {
         open: true,
         loading: false,
-        message: intl.formatMessage({ id: "message.failure" }) + result.result,
+        message:
+          intl.formatMessage({ id: "message.failedAdd" }) + result.result,
         severity: "error",
       };
     } else if (result.arguments["torrent-added"]) {
-      messageConfig = {
-        open: true,
-        loading: false,
-        message: intl.formatMessage({ id: "message.added" }),
-        severity: "success",
-      };
+      if (advancedMode) {
+        dispatch(
+          showTorrentDownloadOptions(result.arguments["torrent-added"].id)
+        );
+      } else {
+        messageConfig = {
+          open: true,
+          loading: false,
+          message: intl.formatMessage({ id: "message.added" }),
+          severity: "success",
+        };
+      }
     } else if (result.arguments["torrent-duplicate"]) {
       messageConfig = {
         open: true,
@@ -86,12 +106,13 @@ const AddTorrentDialog = () => {
         open: true,
         loading: false,
         message:
-          intl.formatMessage({ id: "message.failure" }) +
+          intl.formatMessage({ id: "message.failedAdd" }) +
           intl.formatMessage({ id: "message.unknownError" }),
         severity: "error",
       };
     }
-    dispatch(setMessageBar(messageConfig));
+
+    messageConfig && dispatch(setMessageBar(messageConfig));
   };
 
   const handleAdd = (data: IFormInput) => {
@@ -103,8 +124,10 @@ const AddTorrentDialog = () => {
         severity: "info",
       })
     );
-    addTorrent(data.torrentUrl, data.downloadDir)
-      .then((result) => handleAddResult(result.data as IAddResult))
+    addTorrent(data.torrentUrl, data.downloadDir, data.advancedMode)
+      .then((result) =>
+        handleAddResult(result.data as IAddResult, data.advancedMode)
+      )
       .catch(() => {
         dispatch(
           setMessageBar({
@@ -119,6 +142,7 @@ const AddTorrentDialog = () => {
 
   const onSubmit = (data: IFormInput) => {
     handleAdd({
+      ...data,
       downloadDir: data.downloadDir.trim(),
       torrentUrl: data.torrentUrl.trim(),
     });
@@ -165,13 +189,31 @@ const AddTorrentDialog = () => {
             })}
             helperText={errors.torrentUrl?.message || ""}
           />
+          <FormControlLabel
+            label="Advaced mode"
+            control={
+              <Switch
+                data-testid="advanced-mode"
+                defaultChecked={DEFAULT_ADVANCED_MODE}
+                color="primary"
+                name="advancedMode"
+                inputRef={register}
+              />
+            }
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             <FormattedMessage id="dialog.public.buttonCancel" />
           </Button>
           <Button data-testid="add-form-submit" type="submit" color="primary">
-            <FormattedMessage id="dialog.public.buttonOk" />
+            <FormattedMessage
+              id={
+                isAdvancedMode
+                  ? "dialog.public.buttonNext"
+                  : "dialog.public.buttonOk"
+              }
+            />
           </Button>
         </DialogActions>
       </form>

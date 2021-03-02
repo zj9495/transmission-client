@@ -54,14 +54,18 @@ export const getTorrents = () =>
     },
   });
 
-export const addTorrent = (filename: string, downloadDir: string) =>
+export const addTorrent = (
+  filename: string,
+  downloadDir: string,
+  paused = false
+) =>
   request({
     method: "post",
     data: {
       method: "torrent-add",
       arguments: {
         filename,
-        paused: false,
+        paused,
         "download-dir": downloadDir,
       },
       tag: "",
@@ -120,6 +124,43 @@ export const removeTorrents = (ids: number[], deleteLocalData = false) =>
       arguments: {
         ids,
         "delete-local-data": deleteLocalData,
+      },
+    },
+  });
+
+export const getTorrent = (id: number) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-get",
+      arguments: {
+        ids: id,
+        fields: [
+          "bandwidthPriority",
+          "downloadDir",
+          "downloadLimited",
+          "downloadLimit",
+          "fileStats",
+          "files",
+          "hashString",
+          "id",
+          "isPrivate",
+          "labels",
+          "magnetLink",
+          "metadataPercentComplete",
+          "name",
+          "peer-limit",
+          "queuePosition",
+          "seedIdleMode",
+          "seedIdleLimit",
+          "seedRatioMode",
+          "seedRatioLimit",
+          "status",
+          "totalSize",
+          "uploadLimited",
+          "uploadLimit",
+          "wanted",
+        ],
       },
     },
   });
