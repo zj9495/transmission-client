@@ -7,7 +7,7 @@ export const addTestTorrent = () => {
   cy.getByTestId("download-dir").clear();
   cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
   cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-  // cy.get("[data-testid=advanced-mode] [type=checkbox]").uncheck();
+  cy.get("[data-testid=advanced-mode] [type=checkbox]").uncheck();
   cy.contains("OK").click();
   cy.contains("Successfully added!");
   cy.contains(TEST_TORRENT.NAME);

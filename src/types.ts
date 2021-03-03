@@ -87,6 +87,60 @@ export interface IMessageConfig {
   severity: "error" | "info" | "success" | "warning";
 }
 
+export type Torrent = {
+  bandwidthPriority: number;
+  downloadDir: string;
+  downloadLimit: number;
+  downloadLimited: boolean;
+  fileStats: {
+    bytesCompleted: number;
+    priority: number;
+    wanted: boolean;
+  }[];
+  files: {
+    bytesCompleted: number;
+    length: number;
+    name: string;
+  }[];
+  hashString: string;
+  id: number;
+  isPrivate: boolean;
+  labels: string[];
+  magnetLink: string;
+  metadataPercentComplete: number;
+  name: string;
+  peerLimit: number;
+  queuePosition: number;
+  seedIdleLimit: number;
+  seedIdleMode: number;
+  seedRatioLimit: number;
+  seedRatioMode: number;
+  status: number;
+  totalSize: number;
+  uploadLimit: number;
+  uploadLimited: boolean;
+  wanted: (0 | 1)[];
+};
+
+export type TFiles = {
+  id: number;
+  bytesCompleted: number;
+  length: number;
+  name: string;
+  priority: number;
+  wanted: boolean;
+  percentDone: number;
+  fileFormat: string;
+}[];
+
+export interface ITorrentDownloadOptions {
+  id: number | null;
+  open: boolean;
+  info: Torrent | null;
+  files: TFiles;
+  selectedFilesIds: (number | string)[];
+}
+
 type RemoveTorrents = {
   open: boolean;
 };
@@ -94,6 +148,7 @@ type RemoveTorrents = {
 export interface IAppState {
   open: boolean;
   messageConfig: IMessageConfig;
+  torrentDownloadOptions: ITorrentDownloadOptions;
   removeTorrents: RemoveTorrents;
 }
 

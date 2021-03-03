@@ -4,7 +4,10 @@ import { IAppState } from "src/types";
 import {
   TOGGLE_ADD_TORRENT_DIALOG,
   SET_MESSAGE_BAR,
+  SHOW_TORRENT_DOWNLOAD_OPTIONS,
+  CLOSE_TORRENT_DOWNLOAD_OPTIONS,
   TOGGLE_REMOVE_TORRENTS_DIALOG,
+  SET_DOWNLOAD_SELECTED_FILES,
 } from "../constants";
 
 export interface Action {
@@ -21,6 +24,13 @@ export const initialAppState: IAppState = {
     message: "",
     severity: "info",
   },
+  torrentDownloadOptions: {
+    id: null,
+    open: false,
+    info: null,
+    files: [],
+    selectedFilesIds: [],
+  },
   removeTorrents: {
     open: false,
   },
@@ -35,6 +45,21 @@ export default (state = initialAppState, action: Action) =>
         break;
       case SET_MESSAGE_BAR:
         draft.messageConfig = action.payload;
+        break;
+      case SHOW_TORRENT_DOWNLOAD_OPTIONS:
+        draft.torrentDownloadOptions.id = action.payload.id;
+        draft.torrentDownloadOptions.info = action.payload.info;
+        draft.torrentDownloadOptions.open = true;
+        draft.torrentDownloadOptions.files = action.payload.files;
+        break;
+      case CLOSE_TORRENT_DOWNLOAD_OPTIONS:
+        draft.torrentDownloadOptions.id = null;
+        draft.torrentDownloadOptions.info = null;
+        draft.torrentDownloadOptions.open = false;
+        draft.torrentDownloadOptions.files = [];
+        break;
+      case SET_DOWNLOAD_SELECTED_FILES:
+        draft.torrentDownloadOptions.selectedFilesIds = action.payload;
         break;
       case TOGGLE_REMOVE_TORRENTS_DIALOG:
         draft.removeTorrents.open = action.payload;

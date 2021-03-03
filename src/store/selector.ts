@@ -22,6 +22,8 @@ export const getMessageConfig = (state: IState) => state.app.messageConfig;
 
 // Add Torrent
 export const getAddTorrentDialogOpen = (state: IState) => state.app.open;
+export const getTorrentDownloadOptions = (state: IState) =>
+  state.app.torrentDownloadOptions;
 
 export const getSelectedIds = (state: IState) => state.rpc.selectedIds;
 export const getSelectedTorrents = (state: IState) =>
