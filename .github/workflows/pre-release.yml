@@ -8,7 +8,7 @@ on:
 jobs:
   pre-release:
     name: Pre Release
-    environment: prod
+    environment: stage
     runs-on: ubuntu-latest
 
     steps:

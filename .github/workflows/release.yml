@@ -8,6 +8,7 @@ on:
 jobs:
   tagged-release:
     name: Tagged release
+    environment: prod
     runs-on: ubuntu-latest
 
     steps:
