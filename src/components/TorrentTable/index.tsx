@@ -51,11 +51,11 @@ const TorrentTable: React.FC = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const torrents = useSelector(getTorrents);
-  const columns: GridColDef[] = [
+  const [columns] = React.useState<GridColDef[]>([
     {
       field: "name",
       headerName: intl.formatMessage({ id: "torrent.fields.name" }),
-      width: 130,
+      width: 300,
       renderCell: renderName,
     },
     {
@@ -146,7 +146,7 @@ const TorrentTable: React.FC = () => {
       headerName: intl.formatMessage({ id: "torrent.fields.doneDate" }),
       ...useTime,
     },
-  ];
+  ]);
   const rows = torrents[torrentStatus];
 
   const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
