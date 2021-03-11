@@ -1,5 +1,7 @@
 import { IState } from "src/types";
 
+export const getLocale = (state: IState) => state.rpc.locale;
+
 export const getSessionSelector = (state: IState) => state.rpc.session;
 export const getDownloadDirSelector = (state: IState) =>
   state.rpc.session.downloadDir;
