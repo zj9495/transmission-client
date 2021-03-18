@@ -94,7 +94,7 @@ export type Torrent = {
   downloadLimited: boolean;
   fileStats: {
     bytesCompleted: number;
-    priority: number;
+    priority: -1 | 0 | 1;
     wanted: boolean;
   }[];
   files: {
@@ -127,7 +127,7 @@ export type TFiles = {
   bytesCompleted: number;
   length: number;
   name: string;
-  priority: number;
+  priority: -1 | 0 | 1;
   wanted: boolean;
   percentDone: number;
   fileFormat: string;
