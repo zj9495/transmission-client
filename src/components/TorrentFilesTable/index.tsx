@@ -12,10 +12,12 @@ import { getTorrentDownloadOptions } from "src/store/selector";
 import { setDownloadSelectedFiles } from "src/store/actions/app";
 import { formatSize } from "src/utils/formatter";
 import renderProgress from "src/components/TorrentTable/renderProgress";
+import renderWantedSelect from "./renderWantedSelect";
+import renderPrioritySelect from "./renderPrioritySelect";
 
 const useSize: GridColTypeDef = {
   type: "number",
-  width: 130,
+  width: 100,
   valueFormatter: ({ value }) => formatSize(Number(value)),
 };
 
@@ -63,8 +65,9 @@ const TorrentFilesTable: React.FC = () => {
         id: "torrent.attribute.filesFields.wanted",
       }),
       type: "number",
-      width: 120,
+      width: 110,
       valueFormatter: ({ value }) => (value ? "Yes" : "No"),
+      renderCell: renderWantedSelect,
     },
     {
       field: "priority",
@@ -73,6 +76,7 @@ const TorrentFilesTable: React.FC = () => {
       }),
       type: "number",
       width: 120,
+      renderCell: renderPrioritySelect,
     },
   ];
 
@@ -81,7 +85,7 @@ const TorrentFilesTable: React.FC = () => {
   };
 
   return (
-    <div data-testid="files-table" style={{ height: "300px", width: "640px" }}>
+    <div data-testid="files-table" style={{ height: "400px", width: "640px" }}>
       <XGrid
         density="compact"
         rows={rows}
