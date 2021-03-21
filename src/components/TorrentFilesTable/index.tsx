@@ -68,6 +68,7 @@ const TorrentFilesTable: React.FC = () => {
       width: 110,
       valueFormatter: ({ value }) => (value ? "Yes" : "No"),
       renderCell: renderWantedSelect,
+      hide: true,
     },
     {
       field: "priority",
