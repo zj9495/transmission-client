@@ -86,3 +86,7 @@ export const STATUS_TYPES = {
   seedwait: 5,
   seed: 6,
 };
+
+export const PRIORITY_HIGH = 1;
+export const PRIORITY_NORMAL = 0;
+export const PRIORITY_LOW = -1;

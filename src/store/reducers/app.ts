@@ -8,6 +8,7 @@ import {
   CLOSE_TORRENT_DOWNLOAD_OPTIONS,
   TOGGLE_REMOVE_TORRENTS_DIALOG,
   SET_DOWNLOAD_SELECTED_FILES,
+  SET_DOWNLOAD_FILES,
 } from "../constants";
 
 export interface Action {
@@ -60,6 +61,9 @@ export default (state = initialAppState, action: Action) =>
         break;
       case SET_DOWNLOAD_SELECTED_FILES:
         draft.torrentDownloadOptions.selectedFilesIds = action.payload;
+        break;
+      case SET_DOWNLOAD_FILES:
+        draft.torrentDownloadOptions.files = action.payload;
         break;
       case TOGGLE_REMOVE_TORRENTS_DIALOG:
         draft.removeTorrents.open = action.payload;

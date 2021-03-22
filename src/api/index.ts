@@ -164,3 +164,57 @@ export const getTorrent = (id: number) =>
       },
     },
   });
+
+export const setTorrent = ({
+  id,
+  location,
+  filesWanted,
+  filesUnwanted,
+  priorityHigh,
+  priorityNormal,
+  priorityLow,
+}: {
+  id: number;
+  location?: string;
+  filesWanted?: number[];
+  filesUnwanted?: number[];
+  priorityHigh?: number[];
+  priorityNormal?: number[];
+  priorityLow?: number[];
+}) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-set",
+      arguments: {
+        ids: id,
+        location,
+        "files-wanted": filesWanted,
+        "files-unwanted": filesUnwanted,
+        "priority-high": priorityHigh,
+        "priority-normal": priorityNormal,
+        "priority-low": priorityLow,
+      },
+    },
+  });
+
+export const renameTorrent = ({
+  id,
+  path,
+  name,
+}: {
+  id: number;
+  path: string;
+  name: string;
+}) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-rename-path",
+      arguments: {
+        ids: id,
+        path,
+        name,
+      },
+    },
+  });
