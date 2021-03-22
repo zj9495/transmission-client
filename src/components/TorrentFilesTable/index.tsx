@@ -9,11 +9,16 @@ import {
 } from "@material-ui/x-grid";
 
 import { getTorrentDownloadOptions } from "src/store/selector";
-import { setDownloadSelectedFiles } from "src/store/actions/app";
+import {
+  setDownloadSelectedFiles,
+  setDownloadFilesWanted,
+  setDownloadFilesPriority,
+} from "src/store/actions/app";
 import { formatSize } from "src/utils/formatter";
 import renderProgress from "src/components/TorrentTable/renderProgress";
 import renderWantedSelect from "./renderWantedSelect";
 import renderPrioritySelect from "./renderPrioritySelect";
+import { SelectChange } from "./types";
 
 const useSize: GridColTypeDef = {
   type: "number",
@@ -67,7 +72,15 @@ const TorrentFilesTable: React.FC = () => {
       type: "number",
       width: 110,
       valueFormatter: ({ value }) => (value ? "Yes" : "No"),
-      renderCell: renderWantedSelect,
+      renderCell: (props) => {
+        const onChange: SelectChange = (event, params) => {
+          const value = Boolean(event.target.value);
+          const rowIndex = params.rowIndex as number;
+          dispatch(setDownloadFilesWanted({ rowIndex, value }));
+        };
+        return renderWantedSelect({ ...props, onChange });
+      },
+      hide: true,
     },
     {
       field: "priority",
@@ -76,7 +89,14 @@ const TorrentFilesTable: React.FC = () => {
       }),
       type: "number",
       width: 120,
-      renderCell: renderPrioritySelect,
+      renderCell: (props) => {
+        const onChange: SelectChange = (event, params) => {
+          const value = event.target.value as 1 | 0 | -1;
+          const rowIndex = params.rowIndex as number;
+          dispatch(setDownloadFilesPriority({ rowIndex, value }));
+        };
+        return renderPrioritySelect({ ...props, onChange });
+      },
     },
   ];
 
@@ -85,7 +105,7 @@ const TorrentFilesTable: React.FC = () => {
   };
 
   return (
-    <div data-testid="files-table" style={{ height: "400px", width: "640px" }}>
+    <div data-testid="files-table" style={{ height: "400px" }}>
       <XGrid
         density="compact"
         rows={rows}

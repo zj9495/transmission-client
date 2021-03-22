@@ -9,14 +9,21 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Box,
 } from "@material-ui/core";
 
 import { getTorrentDownloadOptions } from "src/store/selector";
-import { closeTorrentDownloadOptionsDialog } from "src/store/actions/app";
-
-import { startTorrents } from "src/api";
+import {
+  closeTorrentDownloadOptionsDialog,
+  addTorrentAdvancedMode,
+} from "src/store/actions/app";
 
 import TorrentFilesTable from "src/components/TorrentFilesTable";
+
+type TFormInput = {
+  downloadDir: string;
+  name: string;
+};
 
 const TorrentDownloadOptionsDialog = () => {
   const dispatch = useDispatch();
@@ -33,17 +40,16 @@ const TorrentDownloadOptionsDialog = () => {
     });
   }, [downloadDir, name]);
 
-  const handleClose = () => {
-    dispatch(closeTorrentDownloadOptionsDialog(id as number));
-  };
-
   const handleCancel = () => {
     dispatch(closeTorrentDownloadOptionsDialog(id as number, true));
   };
 
-  const onSubmit = () => {
-    startTorrents([id]);
-    handleClose();
+  const onSubmit = (data: TFormInput) => {
+    dispatch(
+      addTorrentAdvancedMode({
+        location: data.downloadDir,
+      })
+    );
   };
 
   return (
@@ -52,40 +58,47 @@ const TorrentDownloadOptionsDialog = () => {
       onClose={handleCancel}
       aria-labelledby="form-dialog-title"
       data-testid="add-torrent-dialog"
-      maxWidth="lg"
+      maxWidth="md"
+      fullWidth
     >
       <DialogTitle id="form-dialog-title">
         <FormattedMessage id="toolbar.addTorrent" />
       </DialogTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
-          <TextField
-            inputProps={{
-              "data-testid": "download-dir",
-            }}
-            error={!!errors.downloadDir}
-            name="downloadDir"
-            label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
-            fullWidth
-            inputRef={register({
-              required: "please input download dir",
-            })}
-            helperText={errors.downloadDir?.message || ""}
-          />
-          <TextField
-            inputProps={{
-              "data-testid": "torrent-name",
-            }}
-            error={!!errors.name}
-            name="name"
-            label={<FormattedMessage id="torrent.fields.name" />}
-            fullWidth
-            inputRef={register({
-              required: "please input torrent name",
-            })}
-            helperText={errors.name?.message || ""}
-          />
-          <TorrentFilesTable />
+          <Box mb={1}>
+            <TextField
+              inputProps={{
+                "data-testid": "download-dir",
+              }}
+              error={!!errors.downloadDir}
+              name="downloadDir"
+              label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
+              fullWidth
+              inputRef={register({
+                required: "please input download dir",
+              })}
+              helperText={errors.downloadDir?.message || ""}
+            />
+          </Box>
+          <Box mb={1}>
+            <TextField
+              inputProps={{
+                "data-testid": "torrent-name",
+              }}
+              error={!!errors.name}
+              name="name"
+              label={<FormattedMessage id="torrent.fields.name" />}
+              fullWidth
+              inputRef={register({
+                required: "please input torrent name",
+              })}
+              helperText={errors.name?.message || ""}
+            />
+          </Box>
+          <Box>
+            <TorrentFilesTable />
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel} color="primary">

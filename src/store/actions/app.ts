@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
+import { cloneDeep } from "lodash";
 
 import {
   TOGGLE_ADD_TORRENT_DIALOG,
@@ -9,9 +10,12 @@ import {
   CLOSE_TORRENT_DOWNLOAD_OPTIONS,
   TOGGLE_REMOVE_TORRENTS_DIALOG,
   SET_DOWNLOAD_SELECTED_FILES,
+  SET_DOWNLOAD_FILES,
 } from "src/store/constants";
 import { IMessageConfig, IState, Torrent } from "src/types";
-import { getTorrent, removeTorrents } from "src/api";
+import { getTorrent, removeTorrents, setTorrent, startTorrents } from "src/api";
+
+import { PRIORITY_HIGH, PRIORITY_NORMAL, PRIORITY_LOW } from "src/constants";
 
 type TGetTorrentResult = {
   data: {
@@ -103,4 +107,80 @@ export const toggleRemoveTorrentsDialog = (open?: boolean) => (
     type: TOGGLE_REMOVE_TORRENTS_DIALOG,
     payload,
   });
+};
+
+type filesWantedChangeParams = {
+  value: boolean;
+  rowIndex: number;
+};
+
+export const setDownloadFilesWanted = ({
+  value,
+  rowIndex,
+}: filesWantedChangeParams) => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>,
+  getState: () => IState
+) => {
+  const files = cloneDeep(getState().app.torrentDownloadOptions.files);
+
+  files[rowIndex].wanted = value;
+  dispatch({
+    type: SET_DOWNLOAD_FILES,
+    payload: files,
+  });
+};
+
+type filesPriorityChangeParams = {
+  value: 1 | 0 | -1;
+  rowIndex: number;
+};
+
+export const setDownloadFilesPriority = ({
+  value,
+  rowIndex,
+}: filesPriorityChangeParams) => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>,
+  getState: () => IState
+) => {
+  const files = cloneDeep(getState().app.torrentDownloadOptions.files);
+
+  files[rowIndex].priority = value;
+  dispatch({
+    type: SET_DOWNLOAD_FILES,
+    payload: files,
+  });
+};
+
+export const addTorrentAdvancedMode = ({
+  location,
+}: {
+  name?: string;
+  location?: string;
+}) => (dispatch: ThunkDispatch<{}, {}, AnyAction>, getState: () => IState) => {
+  const { id, files, selectedFilesIds } = getState().app.torrentDownloadOptions;
+  const filesWanted = selectedFilesIds.map((fileIdStr) => Number(fileIdStr));
+  const filesUnwanted = files
+    .filter((file) => !filesWanted.includes(file.id))
+    .map((file) => file.id);
+  const priorityHigh = files
+    .filter((file) => file.priority === PRIORITY_HIGH)
+    .map((file) => file.id);
+  const priorityNormal = files
+    .filter((file) => file.priority === PRIORITY_NORMAL)
+    .map((file) => file.id);
+  const priorityLow = files
+    .filter((file) => file.priority === PRIORITY_LOW)
+    .map((file) => file.id);
+
+  setTorrent({
+    id: id as number,
+    filesWanted,
+    filesUnwanted,
+    priorityHigh,
+    priorityNormal,
+    priorityLow,
+    location,
+  });
+  startTorrents([id as number]);
+  dispatch(closeTorrentDownloadOptionsDialog(id as number));
 };
