@@ -8,30 +8,32 @@
 
 </div>
 
-
 # Introduction
+
 A Web Client for [Transmission](https://github.com/transmission/transmission), build with Material-UI and Typescript.
 
 # Features
+
 - [x] Moden UI
 - [ ] Mobile friendly UI
 - [x] Dark mode
 - [x] Multi-language support.
 - [x] Start, stop, upload, delete and recheck torrents
-- [ ] Select files to download
-- [ ] Choose files priority
+- [x] Select files to download
+- [x] Choose files priority
 - [ ] View details about connected peers
 - [ ] Full information about each torrent
 - [ ] Per torrent options
 - [ ] PT site classification
 
 # Demo
-Demo Url: http://transmission.zj9495.com  
 
-Test Account Information:  
- - Username: `zj9495`  
- - Password: `zj9495`  
+Demo Url: http://transmission.zj9495.com
+
+- Username: `zj9495`
+- Password: `zj9495`
 
 # License
+
 ![license](https://img.shields.io/github/license/zj9495/transmission-client)  
 This project is licensed under the terms of the [MIT license](https://github.com/zj9495/transmission-client/blob/master/LICENSE).
