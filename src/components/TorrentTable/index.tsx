@@ -9,6 +9,7 @@ import {
   GridSelectionModelChangeParams,
   GridToolbar,
 } from "@material-ui/x-grid";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import { useParams } from "react-router-dom";
 
@@ -44,6 +45,19 @@ const useTime: GridColTypeDef = {
 
 const renderStatus = ({ value }: GridCellParams) => (
   <FormattedMessage id={`torrent.statusText.${value}`} />
+);
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      backgroundColor: theme.palette.background.paper,
+    },
+    table: {
+      border: 0,
+      padding: theme.spacing(0, 1),
+    },
+  })
 );
 
 const columns: GridColDef[] = [
@@ -185,6 +199,8 @@ const TorrentTable: React.FC = () => {
   const { torrentStatus } = useParams<IParamTypes>();
   const torrents = useSelector(getTorrents);
   const dispatch = useDispatch();
+  const classes = useStyles();
+
   const rows = torrents[torrentStatus];
 
   const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
@@ -197,6 +213,7 @@ const TorrentTable: React.FC = () => {
       style={{ height: "calc(100vh - 132px)", width: "100%" }}
     >
       <XGrid
+        className={classes.table}
         components={{
           Toolbar: GridToolbar,
         }}

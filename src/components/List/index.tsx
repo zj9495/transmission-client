@@ -58,6 +58,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     container: {
       marginLeft: 56,
+      transition: theme.transitions.create("margin-left", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     menuOpen: {
       marginLeft: 240,

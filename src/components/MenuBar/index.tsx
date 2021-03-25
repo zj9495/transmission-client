@@ -131,8 +131,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexShrink: 0,
       whiteSpace: "nowrap",
     },
+    drawerPaper: {
+      borderRight: 0,
+    },
     drawerTop: {
-      top: 64,
+      top: 48,
     },
     drawerShadow: {
       boxShadow:
@@ -188,7 +191,7 @@ export default function MenuBar() {
     <Drawer
       variant="permanent"
       classes={{
-        paper: clsx({
+        paper: clsx(classes.drawerPaper, {
           [classes.drawerTop]: true,
           [classes.drawerShadow]: menuTemporaryOpen && !menuOpen,
           [classes.drawerOpen]: open,

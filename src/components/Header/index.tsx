@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
+    appBar: {
+      zIndex: 1201,
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -105,8 +108,12 @@ export default function SearchAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color={appBarColor}>
-        <Toolbar>
+      <AppBar
+        position="relative"
+        className={classes.appBar}
+        color={appBarColor}
+      >
+        <Toolbar variant="dense">
           <IconButton
             edge="start"
             className={classes.menuButton}
