@@ -21,9 +21,9 @@ test("renders AppStatusBar", () => {
     },
   };
   renderWithProviders(<AppStatusBar />, state);
-  expect(screen.getByText("Download speed:100kB/s")).toBeInTheDocument();
-  expect(screen.getByText("Seed speed:200kB/s")).toBeInTheDocument();
-  expect(screen.getByText("Free space:500GB")).toBeInTheDocument();
+  expect(screen.getByTestId("download-speed").textContent).toBe("100kB/s");
+  expect(screen.getByTestId("seed-speed").textContent).toBe("200kB/s");
+  expect(screen.getByTestId("free-space").textContent).toBe("500GB");
   expect(
     screen.getByText("Transmission Version:MOCK_VERSION")
   ).toBeInTheDocument();
