@@ -27,7 +27,7 @@ import renderProgress from "./renderProgress";
 
 const useSize: GridColTypeDef = {
   type: "number",
-  width: 130,
+  width: 100,
   valueFormatter: ({ value }) => formatSize(Number(value)),
 };
 
@@ -66,7 +66,7 @@ const columns: GridColDef[] = [
     headerName: ((
       <FormattedMessage id="torrent.fields.name" />
     ) as unknown) as string,
-    width: 300,
+    width: 360,
     renderCell: renderName,
   },
   {
@@ -82,7 +82,7 @@ const columns: GridColDef[] = [
       <FormattedMessage id="torrent.fields.percentDone" />
     ) as unknown) as string,
     type: "number",
-    width: 120,
+    width: 100,
     renderCell: renderProgress,
   },
   {
@@ -210,7 +210,7 @@ const TorrentTable: React.FC = () => {
   return (
     <div
       id="torrent-table"
-      style={{ height: "calc(100vh - 132px)", width: "100%" }}
+      style={{ height: "calc(100vh - 117px)", width: "100%" }}
     >
       <XGrid
         className={classes.table}
