@@ -11,7 +11,7 @@ context('i18n', () => {
       code: "en",
       text: "English",
       name: "Name",
-      totalSize: "Total size"
+      totalSize: "Size"
     }
 
     cy.get('#selected-language').contains(defaultLanguageInfo.text)
@@ -25,7 +25,7 @@ context('i18n', () => {
         code: "en",
         text: "English",
         name: "Name",
-        totalSize: "Total size"
+        totalSize: "Size"
       },
       {
         code: "zh-CN",

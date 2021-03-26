@@ -31,6 +31,9 @@ const Theme = (props: Props) => {
   const messages = getMessages(locale);
   const theme = createMuiTheme(
     {
+      typography: {
+        fontSize: 12,
+      },
       palette: {
         type: themeType === "auto" ? undefined : themeType,
       },

@@ -9,6 +9,7 @@ import {
   GridSelectionModelChangeParams,
   GridToolbar,
 } from "@material-ui/x-grid";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import { useParams } from "react-router-dom";
 
@@ -26,7 +27,7 @@ import renderProgress from "./renderProgress";
 
 const useSize: GridColTypeDef = {
   type: "number",
-  width: 130,
+  width: 100,
   valueFormatter: ({ value }) => formatSize(Number(value)),
 };
 
@@ -46,13 +47,26 @@ const renderStatus = ({ value }: GridCellParams) => (
   <FormattedMessage id={`torrent.statusText.${value}`} />
 );
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      backgroundColor: theme.palette.background.paper,
+    },
+    table: {
+      border: 0,
+      padding: theme.spacing(0, 1),
+    },
+  })
+);
+
 const columns: GridColDef[] = [
   {
     field: "name",
     headerName: ((
       <FormattedMessage id="torrent.fields.name" />
     ) as unknown) as string,
-    width: 300,
+    width: 360,
     renderCell: renderName,
   },
   {
@@ -68,7 +82,7 @@ const columns: GridColDef[] = [
       <FormattedMessage id="torrent.fields.percentDone" />
     ) as unknown) as string,
     type: "number",
-    width: 120,
+    width: 100,
     renderCell: renderProgress,
   },
   {
@@ -185,6 +199,8 @@ const TorrentTable: React.FC = () => {
   const { torrentStatus } = useParams<IParamTypes>();
   const torrents = useSelector(getTorrents);
   const dispatch = useDispatch();
+  const classes = useStyles();
+
   const rows = torrents[torrentStatus];
 
   const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
@@ -194,9 +210,10 @@ const TorrentTable: React.FC = () => {
   return (
     <div
       id="torrent-table"
-      style={{ height: "calc(100vh - 132px)", width: "100%" }}
+      style={{ height: "calc(100vh - 117px)", width: "100%" }}
     >
       <XGrid
+        className={classes.table}
         components={{
           Toolbar: GridToolbar,
         }}
