@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import langs from "../../src/i18n/lang"
+
 context('i18n', () => {
   beforeEach(() => {
     cy.visit(`http://zj9495:zj9495@localhost:8888/transmission-client`)
@@ -20,99 +22,99 @@ context('i18n', () => {
   })
 
   it('test switch language', () => {
-    const langs = [
+    const TEST_LANGS = [
       {
         code: "en",
         text: "English",
-        name: "Name",
-        totalSize: "Size"
+        name: langs.en['torrent.fields.name'],
+        totalSize: langs.en['torrent.fields.totalSize']
       },
       {
         code: "zh-CN",
         text: "中文 - 简体",
-        name: "名称",
-        totalSize: "总大小"
+        name: langs.zh_CN['torrent.fields.name'],
+        totalSize: langs.zh_CN['torrent.fields.totalSize']
       },
       {
         code: "zh-TW",
         text: "中文 - 繁体",
-        name: "名稱",
-        totalSize: "大小"
+        name: langs.zh_TW['torrent.fields.name'],
+        totalSize: langs.zh_TW['torrent.fields.totalSize']
       },
       {
         code: "de",
         text: "Deutsch",
-        name: "Name",
-        totalSize: "Größe"
+        name: langs.de['torrent.fields.name'],
+        totalSize: langs.de['torrent.fields.totalSize']
       },
       {
         code: "es",
         text: "Español",
-        name: "Nombre",
-        totalSize: "Tamaño"
+        name: langs.es['torrent.fields.name'],
+        totalSize: langs.es['torrent.fields.totalSize']
       },
       {
         code: "fr",
         text: "Français",
-        name: "Nom",
-        totalSize: "Taille totale"
+        name: langs.fr['torrent.fields.name'],
+        totalSize: langs.fr['torrent.fields.totalSize']
       },
       {
         code: "hu",
         text: "Magyar",
-        name: "Név",
-        totalSize: "Méret"
+        name: langs.hu['torrent.fields.name'],
+        totalSize: langs.hu['torrent.fields.totalSize']
       },
       {
         code: "it",
         text: "Italiano",
-        name: "Nome",
-        totalSize: "Dimensione totale"
+        name: langs.it['torrent.fields.name'],
+        totalSize: langs.it['torrent.fields.totalSize']
       },
       {
         code: "ko",
         text: "Korean",
-        name: "이름",
-        totalSize: "총 크기"
+        name: langs.ko['torrent.fields.name'],
+        totalSize: langs.ko['torrent.fields.totalSize']
       },
       {
         code: "nl",
         text: "Nederlands",
-        name: "Naam",
-        totalSize: "Totale grootte"
+        name: langs.nl['torrent.fields.name'],
+        totalSize: langs.nl['torrent.fields.totalSize']
       },
       {
         code: "pt-BR",
         text: "Português - Brasil",
-        name: "Nome",
-        totalSize: "Tamanho"
+        name: langs.pt_BR['torrent.fields.name'],
+        totalSize: langs.pt_BR['torrent.fields.totalSize']
       },
       {
         code: "pt-PT",
         text: "Português - Portugal",
-        name: "Nome",
-        totalSize: "Tamanho total"
+        name: langs.pt_PT['torrent.fields.name'],
+        totalSize: langs.pt_PT['torrent.fields.totalSize']
       },
       {
         code: "ro",
         text: "Romanian",
-        name: "Nume",
-        totalSize: "Mărime totală"
+        name: langs.ro['torrent.fields.name'],
+        totalSize: langs.ro['torrent.fields.totalSize']
       },
       {
         code: "ru",
         text: "Русский",
-        name: "Название",
-        totalSize: "Размер"
+        name: langs.ru['torrent.fields.name'],
+        totalSize: langs.ru['torrent.fields.totalSize']
       },
       {
         code: "uk",
         text: "українська мова",
-        name: "Назва",
-        totalSize: "Розмір"
+        name: langs.uk['torrent.fields.name'],
+        totalSize: langs.uk['torrent.fields.totalSize']
       },
     ]
-    langs.forEach(item => {
+    TEST_LANGS.forEach(item => {
       cy.get('#switch-language').click()
       cy.get('#language-menu li[role="menuitem"]').contains(item.text).click()
       cy.get('#selected-language').contains(item.text)
