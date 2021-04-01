@@ -1,11 +1,9 @@
-import { merge, cloneDeep } from "lodash";
-
+import { createState } from "src/components/renderWithProviders";
 import { getSelectedTorrents } from "./selector";
-import initialState from "./initialState";
 
 describe("test selector", () => {
   it("test getSelectedTorrents", () => {
-    const state = merge(cloneDeep(initialState), {
+    const state = createState({
       rpc: {
         selectedIds: [1, 3, 5],
         torrents: {
