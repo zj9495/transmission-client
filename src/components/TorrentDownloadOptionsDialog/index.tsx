@@ -10,6 +10,8 @@ import {
   DialogContent,
   DialogTitle,
   Box,
+  Switch,
+  FormControlLabel,
 } from "@material-ui/core";
 
 import { getTorrentDownloadOptions } from "src/store/selector";
@@ -23,7 +25,10 @@ import TorrentFilesTable from "src/components/TorrentFilesTable";
 type TFormInput = {
   downloadDir: string;
   name: string;
+  autoStart: boolean;
 };
+
+const AUTO_START = true;
 
 const TorrentDownloadOptionsDialog = () => {
   const dispatch = useDispatch();
@@ -48,6 +53,7 @@ const TorrentDownloadOptionsDialog = () => {
     dispatch(
       addTorrentAdvancedMode({
         location: data.downloadDir,
+        paused: !data.autoStart,
       })
     );
   };
@@ -98,6 +104,25 @@ const TorrentDownloadOptionsDialog = () => {
           </Box>
           <Box>
             <TorrentFilesTable />
+          </Box>
+          <Box>
+            <FormControlLabel
+              label="Start torrent"
+              control={
+                <Switch
+                  inputProps={{
+                    // waiting for https://github.com/microsoft/TypeScript/issues/28960
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    "data-testid": "auto-start",
+                  }}
+                  defaultChecked={AUTO_START}
+                  color="primary"
+                  name="autoStart"
+                  inputRef={register}
+                />
+              }
+            />
           </Box>
         </DialogContent>
         <DialogActions>

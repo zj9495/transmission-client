@@ -153,9 +153,11 @@ export const setDownloadFilesPriority = ({
 
 export const addTorrentAdvancedMode = ({
   location,
+  paused = false,
 }: {
   name?: string;
   location?: string;
+  paused: boolean;
 }) => (dispatch: ThunkDispatch<{}, {}, AnyAction>, getState: () => IState) => {
   const { id, files, selectedFilesIds } = getState().app.torrentDownloadOptions;
   const filesWanted = selectedFilesIds.map((fileIdStr) => Number(fileIdStr));
@@ -181,6 +183,8 @@ export const addTorrentAdvancedMode = ({
     priorityLow,
     location,
   });
-  startTorrents([id as number]);
+  if (!paused) {
+    startTorrents([id as number]);
+  }
   dispatch(closeTorrentDownloadOptionsDialog(id as number));
 };

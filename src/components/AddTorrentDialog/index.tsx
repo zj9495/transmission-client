@@ -11,6 +11,7 @@ import {
   DialogTitle,
   FormControlLabel,
   Switch,
+  Box,
 } from "@material-ui/core";
 
 import {
@@ -23,7 +24,7 @@ import {
   showTorrentDownloadOptions,
 } from "src/store/actions/app";
 
-import { addTorrent } from "src/api";
+import * as api from "src/api";
 
 import { IMessageConfig } from "src/types";
 
@@ -31,6 +32,7 @@ interface IFormInput {
   downloadDir: string;
   torrentUrl: string;
   advancedMode: boolean;
+  autoStart: boolean;
 }
 
 interface IAddResultTorrentInfo {
@@ -124,7 +126,12 @@ const AddTorrentDialog = () => {
         severity: "info",
       })
     );
-    addTorrent(data.torrentUrl, data.downloadDir, data.advancedMode)
+    api
+      .addTorrent(
+        data.torrentUrl,
+        data.downloadDir,
+        data.advancedMode || !data.autoStart
+      )
       .then((result) =>
         handleAddResult(result.data as IAddResult, data.advancedMode)
       )
@@ -148,6 +155,7 @@ const AddTorrentDialog = () => {
     });
     handleClose();
   };
+
   return (
     <Dialog
       open={open}
@@ -189,18 +197,45 @@ const AddTorrentDialog = () => {
             })}
             helperText={errors.torrentUrl?.message || ""}
           />
-          <FormControlLabel
-            label="Advaced mode"
-            control={
-              <Switch
-                data-testid="advanced-mode"
-                defaultChecked={DEFAULT_ADVANCED_MODE}
-                color="primary"
-                name="advancedMode"
-                inputRef={register}
-              />
-            }
-          />
+          <Box>
+            <FormControlLabel
+              label="Advaced mode"
+              control={
+                <Switch
+                  inputProps={{
+                    // waiting for https://github.com/microsoft/TypeScript/issues/28960
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    "data-testid": "advanced-mode",
+                  }}
+                  defaultChecked={DEFAULT_ADVANCED_MODE}
+                  color="primary"
+                  name="advancedMode"
+                  inputRef={register}
+                />
+              }
+            />
+          </Box>
+          <Box>
+            <FormControlLabel
+              disabled={isAdvancedMode}
+              label="Start torrent"
+              control={
+                <Switch
+                  inputProps={{
+                    // waiting for https://github.com/microsoft/TypeScript/issues/28960
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    "data-testid": "auto-start",
+                  }}
+                  defaultChecked={AUTO_START}
+                  color="primary"
+                  name="autoStart"
+                  inputRef={register}
+                />
+              }
+            />
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
