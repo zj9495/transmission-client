@@ -63,4 +63,80 @@ context('app', () => {
     cy.contains('Cancel').click()
     cy.contains(TORRENT.NAME).should('not.exist')
   })
+
+  it('test auto start - basic mode', () => {
+    cy.getByTestId('add-btn').click()
+    cy.contains('Add Torrent')
+    cy.getByTestId('download-dir').clear()
+    cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
+    cy.getByTestId('torrent-link').type(TORRENT.URL)
+    cy.get('[data-testid=advanced-mode]').uncheck()
+    cy.get('[data-testid=auto-start]').check()
+    cy.contains('OK').click()
+    cy.contains('Adding...')
+    cy.contains('Successfully added!')
+    cy.contains(TORRENT.NAME)
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Downloading')
+
+    // should remove the test torrent before exit
+    removeTestTorrent()
+  })
+
+  it('test disable auto start - basic mode', () => {
+    cy.getByTestId('add-btn').click()
+    cy.contains('Add Torrent')
+    cy.getByTestId('download-dir').clear()
+    cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
+    cy.getByTestId('torrent-link').type(TORRENT.URL)
+    cy.get('[data-testid=advanced-mode]').uncheck()
+    cy.get('[data-testid=auto-start]').uncheck()
+    cy.contains('OK').click()
+    cy.contains('Adding...')
+    cy.contains('Successfully added!')
+    cy.contains(TORRENT.NAME)
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+
+    // should remove the test torrent before exit
+    removeTestTorrent()
+  })
+
+  it('test auto start - advanced mode', () => {
+    cy.getByTestId('add-btn').click()
+    cy.contains('Add Torrent')
+    cy.getByTestId('download-dir').clear()
+    cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
+    cy.getByTestId('torrent-link').type(TORRENT.URL)
+    cy.get('[data-testid=advanced-mode]').check()
+    cy.contains('Next').click()
+    cy.contains('Adding...')
+    cy.contains(TORRENT.NAME)
+    cy.contains('Paused')
+    // cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    cy.get('[data-testid=auto-start]').check({ force: true })
+    cy.contains('OK').click()
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Downloading')
+
+    // should remove the test torrent before exit
+    removeTestTorrent()
+  })
+
+  it('test disable auto start - advanced mode', () => {
+    cy.getByTestId('add-btn').click()
+    cy.contains('Add Torrent')
+    cy.getByTestId('download-dir').clear()
+    cy.getByTestId('download-dir').type(DOWNLOAD_DIR)
+    cy.getByTestId('torrent-link').type(TORRENT.URL)
+    cy.get('[data-testid=advanced-mode]').check()
+    cy.contains('Next').click()
+    cy.contains('Adding...')
+    cy.contains(TORRENT.NAME)
+    cy.contains('Paused')
+    // cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    cy.get('[data-testid=auto-start]').uncheck({ force: true })
+    cy.contains('OK').click()
+    cy.contains(TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+
+    // should remove the test torrent before exit
+    removeTestTorrent()
+  })
 })
