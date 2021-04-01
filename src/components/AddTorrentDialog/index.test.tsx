@@ -113,16 +113,16 @@ describe("test AddTorrentDialog", () => {
         <AddTorrentDialog />
       </Providers>
     );
-    const downloadDirInput = screen.getByTestId(
+    const autoStartSwitch = screen.getByTestId(
       "auto-start"
     ) as HTMLInputElement;
 
-    expect(downloadDirInput.disabled).toBe(true);
+    expect(autoStartSwitch.disabled).toBe(true);
 
     // switch to basic mode
     fireEvent.click(screen.getByTestId("advanced-mode"));
 
-    expect(downloadDirInput.disabled).toBe(false);
+    expect(autoStartSwitch.disabled).toBe(false);
   });
 
   it("auto start should be enabled by default in basic mode", () => {
@@ -143,11 +143,11 @@ describe("test AddTorrentDialog", () => {
     // switch to basic mode
     fireEvent.click(screen.getByTestId("advanced-mode"));
 
-    const downloadDirInput = screen.getByTestId(
+    const autoStartSwitch = screen.getByTestId(
       "auto-start"
     ) as HTMLInputElement;
 
-    expect(downloadDirInput.checked).toBe(true);
+    expect(autoStartSwitch.checked).toBe(true);
   });
 
   it("test auto start in basic mode", async () => {
