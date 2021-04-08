@@ -21,6 +21,7 @@ import {
 } from "src/store/actions/app";
 
 import TorrentFilesTable from "src/components/TorrentFilesTable";
+import FilesFilter from "src/components/FilesFilter";
 
 type TFormInput = {
   downloadDir: string;
@@ -101,6 +102,9 @@ const TorrentDownloadOptionsDialog = () => {
               })}
               helperText={errors.name?.message || ""}
             />
+          </Box>
+          <Box>
+            <FilesFilter />
           </Box>
           <Box>
             <TorrentFilesTable />
