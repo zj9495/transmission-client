@@ -36,3 +36,10 @@ export const getSelectedTorrents = (state: IState) =>
 // Remove Torrents
 export const getRemoveTorrentsDialogOpen = (state: IState) =>
   state.app.removeTorrents.open;
+
+// Files filter
+export const getSelectedFiles = (state: IState) => {
+  const { files, selectedFilesIds } = state.app.torrentDownloadOptions;
+
+  return files.filter((file) => selectedFilesIds.includes(file.id.toString()));
+};
