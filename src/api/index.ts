@@ -218,3 +218,14 @@ export const renameTorrent = ({
       },
     },
   });
+
+export const getFreeSpace = ({ path }: { path: string }) =>
+  request({
+    method: "post",
+    data: {
+      method: "free-space",
+      arguments: {
+        path,
+      },
+    },
+  });

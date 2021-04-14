@@ -221,6 +221,8 @@
   "dialog.torrentChangeSpeedLimit.seedIdleMode": "当种子超过这个时间没有流量时，自动停止做种：",
   "dialog.torrentChangeSpeedLimit.doneDate": "完成时间：",
   "dialog.torrentChangeSpeedLimit.seedTime": "做种时间：",
+  "dialog.addTorrent.size": "下载大小",
+  "dialog.addTorrent.freeSpace": "可用空间",
   "dialog.systemReplaceTracker.title": "替换 Tracker 地址",
   "dialog.systemReplaceTracker.oldTracker": "原 Tracker：",
   "dialog.systemReplaceTracker.newTracker": "新 Tracker：",

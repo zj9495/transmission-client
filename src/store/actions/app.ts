@@ -11,9 +11,16 @@ import {
   TOGGLE_REMOVE_TORRENTS_DIALOG,
   SET_DOWNLOAD_SELECTED_FILES,
   SET_DOWNLOAD_FILES,
+  SET_FREE_DISK_SPACE,
 } from "src/store/constants";
 import { IMessageConfig, IState, Torrent } from "src/types";
-import { getTorrent, removeTorrents, setTorrent, startTorrents } from "src/api";
+import {
+  getTorrent,
+  removeTorrents,
+  setTorrent,
+  startTorrents,
+  getFreeSpace,
+} from "src/api";
 
 import { PRIORITY_HIGH, PRIORITY_NORMAL, PRIORITY_LOW } from "src/constants";
 
@@ -51,17 +58,36 @@ export const setMessageBar = (payload: IMessageConfig) => (
   });
 };
 
-export const setDownloadSelectedFiles = (ids: (number | string)[]) => (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>
-) => {
+export const setDownloadSelectedFiles = (
+  selectedFilesIds: (number | string)[]
+) => (dispatch: ThunkDispatch<{}, {}, AnyAction>, getState: () => IState) => {
+  const { files } = getState().app.torrentDownloadOptions;
+  const selectedFiles = files.filter((file) =>
+    selectedFilesIds.map((id) => Number(id)).includes(file.id)
+  );
   dispatch({
     type: SET_DOWNLOAD_SELECTED_FILES,
-    payload: ids,
+    payload: {
+      selectedFilesIds,
+      selectedFiles,
+    },
+  });
+};
+
+export const setFreeDiskSpace = (path: string) => async (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => {
+  getFreeSpace({ path }).then((res) => {
+    dispatch({
+      type: SET_FREE_DISK_SPACE,
+      payload: res.data.arguments["size-bytes"],
+    });
   });
 };
 
 export const showTorrentDownloadOptions = (id: number) => async (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>
+  dispatch: ThunkDispatch<{}, {}, AnyAction>,
+  getState: () => IState
 ) => {
   const result: TGetTorrentResult = await getTorrent(id);
   const info = result.data.arguments.torrents[0];
@@ -80,7 +106,8 @@ export const showTorrentDownloadOptions = (id: number) => async (
     payload: { id, info, files },
   });
   const selectedFilesIds = files.map((item) => item.id);
-  dispatch(setDownloadSelectedFiles(selectedFilesIds));
+  setDownloadSelectedFiles(selectedFilesIds)(dispatch, getState);
+  setFreeDiskSpace(info.downloadDir)(dispatch);
 };
 
 export const closeTorrentDownloadOptionsDialog = (

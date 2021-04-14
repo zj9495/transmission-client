@@ -18,10 +18,12 @@ import { getTorrentDownloadOptions } from "src/store/selector";
 import {
   closeTorrentDownloadOptionsDialog,
   addTorrentAdvancedMode,
+  setFreeDiskSpace,
 } from "src/store/actions/app";
 
 import TorrentFilesTable from "src/components/TorrentFilesTable";
 import FilesFilter from "src/components/FilesFilter";
+import SizeIndicator from "src/components/SizeIndicator";
 
 type TFormInput = {
   downloadDir: string;
@@ -59,6 +61,13 @@ const TorrentDownloadOptionsDialog = () => {
     );
   };
 
+  const handleDownloadDirBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const newPath = event.target.value;
+    if (newPath) {
+      dispatch(setFreeDiskSpace(newPath));
+    }
+  };
+
   return (
     <Dialog
       open={open}
@@ -86,6 +95,7 @@ const TorrentDownloadOptionsDialog = () => {
                 required: "please input download dir",
               })}
               helperText={errors.downloadDir?.message || ""}
+              onBlur={handleDownloadDirBlur}
             />
           </Box>
           <Box mb={1}>
@@ -102,6 +112,9 @@ const TorrentDownloadOptionsDialog = () => {
               })}
               helperText={errors.name?.message || ""}
             />
+          </Box>
+          <Box>
+            <SizeIndicator />
           </Box>
           <Box>
             <FilesFilter />

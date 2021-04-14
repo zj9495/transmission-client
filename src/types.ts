@@ -122,7 +122,7 @@ export type Torrent = {
   wanted: (0 | 1)[];
 };
 
-export type TFiles = {
+export type TFile = {
   id: number;
   bytesCompleted: number;
   length: number;
@@ -131,14 +131,16 @@ export type TFiles = {
   wanted: boolean;
   percentDone: number;
   fileFormat: string;
-}[];
+};
 
 export interface ITorrentDownloadOptions {
   id: number | null;
   open: boolean;
+  freeDiskSpace: number;
   info: Torrent | null;
-  files: TFiles;
+  files: TFile[];
   selectedFilesIds: (number | string)[];
+  selectedFiles: TFile[];
 }
 
 type RemoveTorrents = {

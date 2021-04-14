@@ -222,6 +222,8 @@
   "dialog.torrentChangeSpeedLimit.seedIdleMode": "Torrents we're seeding will be stopped if they're idle for this long:",
   "dialog.torrentChangeSpeedLimit.doneDate": "Finish Time:",
   "dialog.torrentChangeSpeedLimit.seedTime": "Seed Time:",
+  "dialog.addTorrent.size": "Size",
+  "dialog.addTorrent.freeSpace": "Free disk space",
   "dialog.systemReplaceTracker.title": "Replace Trackers",
   "dialog.systemReplaceTracker.oldTracker": "Old tracker:",
   "dialog.systemReplaceTracker.newTracker": "New tracker:",

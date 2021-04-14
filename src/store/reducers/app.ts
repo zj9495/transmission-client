@@ -9,6 +9,7 @@ import {
   TOGGLE_REMOVE_TORRENTS_DIALOG,
   SET_DOWNLOAD_SELECTED_FILES,
   SET_DOWNLOAD_FILES,
+  SET_FREE_DISK_SPACE,
 } from "../constants";
 
 export interface Action {
@@ -27,10 +28,12 @@ export const initialAppState: IAppState = {
   },
   torrentDownloadOptions: {
     id: null,
+    freeDiskSpace: 0,
     open: false,
     info: null,
     files: [],
     selectedFilesIds: [],
+    selectedFiles: [],
   },
   removeTorrents: {
     open: false,
@@ -60,10 +63,16 @@ export default (state = initialAppState, action: Action) =>
         draft.torrentDownloadOptions.files = [];
         break;
       case SET_DOWNLOAD_SELECTED_FILES:
-        draft.torrentDownloadOptions.selectedFilesIds = action.payload;
+        draft.torrentDownloadOptions.selectedFilesIds =
+          action.payload.selectedFilesIds;
+        draft.torrentDownloadOptions.selectedFiles =
+          action.payload.selectedFiles;
         break;
       case SET_DOWNLOAD_FILES:
         draft.torrentDownloadOptions.files = action.payload;
+        break;
+      case SET_FREE_DISK_SPACE:
+        draft.torrentDownloadOptions.freeDiskSpace = action.payload;
         break;
       case TOGGLE_REMOVE_TORRENTS_DIALOG:
         draft.removeTorrents.open = action.payload;
