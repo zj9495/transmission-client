@@ -28,7 +28,7 @@ A Web Client for [Transmission](https://github.com/transmission/transmission), b
 
 # Demo
 
-Demo Url: http://transmission.zj9495.com
+Demo Url: http://tr.zj9495.com
 
 - Username: `zj9495`
 - Password: `zj9495`
