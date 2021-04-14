@@ -22,7 +22,12 @@ import {
   getFreeSpace,
 } from "src/api";
 
-import { PRIORITY_HIGH, PRIORITY_NORMAL, PRIORITY_LOW } from "src/constants";
+import {
+  PRIORITY_HIGH,
+  PRIORITY_NORMAL,
+  PRIORITY_LOW,
+  INVALID_STATUS,
+} from "src/constants";
 
 type TGetTorrentResult = {
   data: {
@@ -77,12 +82,19 @@ export const setDownloadSelectedFiles = (
 export const setFreeDiskSpace = (path: string) => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
-  getFreeSpace({ path }).then((res) => {
+  if (path) {
+    getFreeSpace({ path }).then((res) => {
+      dispatch({
+        type: SET_FREE_DISK_SPACE,
+        payload: res.data.arguments["size-bytes"],
+      });
+    });
+  } else {
     dispatch({
       type: SET_FREE_DISK_SPACE,
-      payload: res.data.arguments["size-bytes"],
+      payload: INVALID_STATUS,
     });
-  });
+  }
 };
 
 export const showTorrentDownloadOptions = (id: number) => async (

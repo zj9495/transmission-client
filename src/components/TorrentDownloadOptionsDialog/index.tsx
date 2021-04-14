@@ -63,9 +63,7 @@ const TorrentDownloadOptionsDialog = () => {
 
   const handleDownloadDirBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const newPath = event.target.value;
-    if (newPath) {
-      dispatch(setFreeDiskSpace(newPath));
-    }
+    dispatch(setFreeDiskSpace(newPath));
   };
 
   return (

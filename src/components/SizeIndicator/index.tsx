@@ -33,7 +33,7 @@ const SizeIndicator = () => {
         <FormattedMessage id="dialog.addTorrent.size" />: {selectedFilesSize}
       </Box>
       <Box>
-        <FormattedMessage id="dialog.addTorrent.freeSpace" />:{" "}
+        <FormattedMessage id="dialog.addTorrent.freeSpace" />:
         {formattedFreeDiskSpace}
       </Box>
     </>
