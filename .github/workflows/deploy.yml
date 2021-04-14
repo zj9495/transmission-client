@@ -35,7 +35,7 @@ jobs:
           REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
       - uses: appleboy/scp-action@master
         with:
-          host: transmission.zj9495.com
+          host: tr.zj9495.com
           username: zj9495
           port: 22
           key: ${{ secrets.DEPLOY_SSH_KEY }}
