@@ -26,6 +26,12 @@ export const getMessageConfig = (state: IState) => state.app.messageConfig;
 export const getAddTorrentDialogOpen = (state: IState) => state.app.open;
 export const getTorrentDownloadOptions = (state: IState) =>
   state.app.torrentDownloadOptions;
+export const getFreeDiskSpace = (state: IState) =>
+  state.app.torrentDownloadOptions.freeDiskSpace;
+
+// Files filter
+export const getSelectedFiles = (state: IState) =>
+  state.app.torrentDownloadOptions.selectedFiles;
 
 export const getSelectedIds = (state: IState) => state.rpc.selectedIds;
 export const getSelectedTorrents = (state: IState) =>
@@ -36,10 +42,3 @@ export const getSelectedTorrents = (state: IState) =>
 // Remove Torrents
 export const getRemoveTorrentsDialogOpen = (state: IState) =>
   state.app.removeTorrents.open;
-
-// Files filter
-export const getSelectedFiles = (state: IState) => {
-  const { files, selectedFilesIds } = state.app.torrentDownloadOptions;
-
-  return files.filter((file) => selectedFilesIds.includes(file.id.toString()));
-};

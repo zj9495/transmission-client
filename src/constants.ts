@@ -90,3 +90,5 @@ export const STATUS_TYPES = {
 export const PRIORITY_HIGH = 1;
 export const PRIORITY_NORMAL = 0;
 export const PRIORITY_LOW = -1;
+
+export const INVALID_STATUS = -1;
