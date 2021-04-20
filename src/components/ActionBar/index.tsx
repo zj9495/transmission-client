@@ -56,38 +56,50 @@ const ActionBar = () => {
   return (
     <Box>
       <Tooltip title={<FormattedMessage id="toolbar.tip.addTorrent" />}>
-        <IconButton data-testid="add-btn" onClick={handleAdd}>
-          <AddIcon />
-        </IconButton>
+        <span>
+          <IconButton data-testid="add-btn" onClick={handleAdd}>
+            <AddIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.start" />}>
-        <IconButton disabled={disableAction} onClick={handleStart}>
-          <PlayArrowIcon />
-        </IconButton>
+        <span>
+          <IconButton disabled={disableAction} onClick={handleStart}>
+            <PlayArrowIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.pause" />}>
-        <IconButton disabled={disableAction} onClick={handleStop}>
-          <PauseIcon />
-        </IconButton>
+        <span>
+          <IconButton disabled={disableAction} onClick={handleStop}>
+            <PauseIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.deleteData" />}>
-        <IconButton
-          data-testid="delete-btn"
-          disabled={disableAction}
-          onClick={handleRemove}
-        >
-          <DeleteIcon />
-        </IconButton>
+        <span>
+          <IconButton
+            data-testid="delete-btn"
+            disabled={disableAction}
+            onClick={handleRemove}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.recheck" />}>
-        <IconButton disabled={disableAction} onClick={handleVerify}>
-          <StorageIcon />
-        </IconButton>
+        <span>
+          <IconButton disabled={disableAction} onClick={handleVerify}>
+            <StorageIcon />
+          </IconButton>
+        </span>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="toolbar.tip.morePeers" />}>
-        <IconButton disabled={disableAction} onClick={handleReannounce}>
-          <SettingsInputAntennaIcon />
-        </IconButton>
+        <span>
+          <IconButton disabled={disableAction} onClick={handleReannounce}>
+            <SettingsInputAntennaIcon />
+          </IconButton>
+        </span>
       </Tooltip>
     </Box>
   );
