@@ -68,7 +68,7 @@ export const setDownloadSelectedFiles = (
 ) => (dispatch: ThunkDispatch<{}, {}, AnyAction>, getState: () => IState) => {
   const { files } = getState().app.torrentDownloadOptions;
   const selectedFiles = files.filter((file) =>
-    selectedFilesIds.map((id) => Number(id)).includes(file.id)
+    selectedFilesIds.includes(file.id)
   );
   dispatch({
     type: SET_DOWNLOAD_SELECTED_FILES,
@@ -199,7 +199,7 @@ export const addTorrentAdvancedMode = ({
   paused: boolean;
 }) => (dispatch: ThunkDispatch<{}, {}, AnyAction>, getState: () => IState) => {
   const { id, files, selectedFilesIds } = getState().app.torrentDownloadOptions;
-  const filesWanted = selectedFilesIds.map((fileIdStr) => Number(fileIdStr));
+  const filesWanted = selectedFilesIds;
   const filesUnwanted = files
     .filter((file) => !filesWanted.includes(file.id))
     .map((file) => file.id);

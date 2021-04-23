@@ -204,7 +204,7 @@ const TorrentTable: React.FC = () => {
   const rows = torrents[torrentStatus];
 
   const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
-    dispatch(setSelectedIds(params.selectionModel.map((id) => Number(id))));
+    dispatch(setSelectedIds(params.selectionModel as number[]));
   };
 
   return (
