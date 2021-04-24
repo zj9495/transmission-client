@@ -139,7 +139,7 @@ export interface ITorrentDownloadOptions {
   freeDiskSpace: number;
   info: Torrent | null;
   files: TFile[];
-  selectedFilesIds: (number | string)[];
+  selectedFilesIds: number[];
   selectedFiles: TFile[];
 }
 

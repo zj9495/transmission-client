@@ -28,7 +28,7 @@ const FilesFilter: React.FC = () => {
         file.name.toLowerCase().endsWith(extension)
       );
       const selectedMatchFiles = matchFiles.filter((file) =>
-        selectedFilesIds.includes(file.id.toString())
+        selectedFilesIds.includes(file.id)
       );
       const indeterminate =
         selectedMatchFiles.length > 0 &&
@@ -62,10 +62,7 @@ const FilesFilter: React.FC = () => {
         .map((file) => file.id);
       const newSelectedFilesIds = checked
         ? union(selectedFilesIds, matchFilesIds)
-        : without(
-            selectedFilesIds.map((id) => Number(id)),
-            ...matchFilesIds
-          );
+        : without(selectedFilesIds, ...matchFilesIds);
       dispatch(setDownloadSelectedFiles(newSelectedFilesIds));
     }
   };
