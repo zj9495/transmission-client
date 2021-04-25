@@ -100,6 +100,7 @@ const columns: GridColDef[] = [
     headerName: ((
       <FormattedMessage id="torrent.fields.uploadRatio" />
     ) as unknown) as string,
+    valueFormatter: ({ value }) => (Number(value) < 0 ? 0 : value),
   },
   {
     field: "status",

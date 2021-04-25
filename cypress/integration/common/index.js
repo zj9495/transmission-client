@@ -2,12 +2,18 @@
 
 import { DOWNLOAD_DIR, TEST_TORRENT } from "../../fixtures/constants"
 
-export const addTestTorrent = () => {
+export const addTestTorrent = (autoStart = true) => {
   cy.getByTestId("add-btn").click();
   cy.getByTestId("download-dir").clear();
   cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
   cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
   cy.get("[data-testid=advanced-mode]").uncheck();
+  if (autoStart) {
+    cy.get("[data-testid=auto-start]").check();
+  } else {
+    cy.get("[data-testid=auto-start]").uncheck();
+  }
+  cy.get("[data-testid=auto-start]").uncheck();
   cy.contains("OK").click();
   cy.contains("Successfully added!");
   cy.contains(TEST_TORRENT.NAME);
