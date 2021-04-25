@@ -15,6 +15,6 @@ context('test torrent list', () => {
   })
 
   it('should format ratio if ratio < 0', () => {
-    cy.contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=ratio]').contains('0')
+    cy.contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=uploadRatio]').contains('0')
   })
 })
