@@ -1,5 +1,5 @@
 import React from "react";
-import { Snackbar, CircularProgress } from "@material-ui/core";
+import { Snackbar, CircularProgress, Typography } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -47,7 +47,7 @@ const MessageBar = () => {
             ) : undefined
           }
         >
-          {message}
+          <Typography>{message}</Typography>
         </Alert>
       </Snackbar>
     </>
