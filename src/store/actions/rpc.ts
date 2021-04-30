@@ -23,6 +23,7 @@ export const setLocale = (val: string) => (
     type: SET_LOCALE,
     payload: val,
   });
+  window.localStorage.locale = val;
 };
 
 export const toggleTheme = () => (

@@ -1,9 +1,10 @@
-/* eslint-disable import/no-dynamic-require */
 import React from "react";
 import { IntlProvider } from "react-intl";
 import { connect } from "react-redux";
+import { find } from "lodash";
 
 import { IState } from "src/types";
+import { LANGUAGES, DEFAULT_LANGUAGE } from "src/constants";
 
 interface Props {
   locale: string;
@@ -11,15 +12,9 @@ interface Props {
 }
 
 function getMessages(locale: string): Record<string, string> {
-  let messages: Record<string, string>;
-  try {
-    // eslint-disable-next-line global-require
-    messages = require(`src/i18n/lang/${locale.replace("-", "_")}.json`);
-  } catch {
-    // eslint-disable-next-line global-require
-    messages = require(`src/i18n/lang/en.json`);
-  }
-  return messages;
+  return (
+    find(LANGUAGES, { code: locale })?.langFile || DEFAULT_LANGUAGE.langFile
+  );
 }
 const Intl = (props: Props) => {
   const { locale, children } = props;
