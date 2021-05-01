@@ -5,6 +5,7 @@ import {
   formatSpeed,
   formatUnixTimeStamp,
   formatLeftTime,
+  formatLocale,
 } from "./formatter";
 
 describe.each`
@@ -166,3 +167,121 @@ describe.each`
     expect(formatLeftTime(ms)).toBe(expected);
   });
 });
+
+describe.each`
+  locale     | expected
+  ${"en"}    | ${"en"}
+  ${"en-US"} | ${"en"}
+  ${"en-AU"} | ${"en"}
+  ${"en-CA"} | ${"en"}
+  ${"en-GB"} | ${"en"}
+  ${"de"}    | ${"de"}
+  ${"de-DE"} | ${"de"}
+  ${"es"}    | ${"es"}
+  ${"es-ES"} | ${"es"}
+  ${"es-PR"} | ${"es"}
+  ${"fr"}    | ${"fr"}
+  ${"fr-FR"} | ${"fr"}
+  ${"fr-CA"} | ${"fr"}
+  ${"hu"}    | ${"hu"}
+  ${"hu-HU"} | ${"hu"}
+  ${"it"}    | ${"it"}
+  ${"it-IT"} | ${"it"}
+  ${"it-CH"} | ${"it"}
+  ${"ko"}    | ${"ko"}
+  ${"ko-KR"} | ${"ko"}
+  ${"nl"}    | ${"nl"}
+  ${"nl-BE"} | ${"nl"}
+  ${"nl-NL"} | ${"nl"}
+  ${"pl"}    | ${"pl"}
+  ${"pt"}    | ${"pt-BR"}
+  ${"pt-BR"} | ${"pt-BR"}
+  ${"pt-PT"} | ${"pt-PT"}
+  ${"ro"}    | ${"ro"}
+  ${"ro-RO"} | ${"ro"}
+  ${"ru"}    | ${"ru"}
+  ${"ru-RU"} | ${"ru"}
+  ${"uk"}    | ${"uk"}
+  ${"uk-UA"} | ${"uk"}
+  ${"zh"}    | ${"zh-CN"}
+  ${"zh-CN"} | ${"zh-CN"}
+  ${"zh-TW"} | ${"zh-TW"}
+  ${"zh-HK"} | ${"zh-CN"}
+`("test formatLocale($locale)", ({ locale, expected }) => {
+  test(`returns ${expected}`, () => {
+    expect(formatLocale(locale)).toBe(expected);
+  });
+});
+
+describe.each`
+  locale     | expected
+  ${"en_US"} | ${"en"}
+  ${"en_AU"} | ${"en"}
+  ${"en_CA"} | ${"en"}
+  ${"en_GB"} | ${"en"}
+  ${"de_DE"} | ${"de"}
+  ${"es_ES"} | ${"es"}
+  ${"es_PR"} | ${"es"}
+  ${"fr_FR"} | ${"fr"}
+  ${"fr_CA"} | ${"fr"}
+  ${"hu_HU"} | ${"hu"}
+  ${"it_IT"} | ${"it"}
+  ${"it_CH"} | ${"it"}
+  ${"ko_KR"} | ${"ko"}
+  ${"nl_BE"} | ${"nl"}
+  ${"nl_NL"} | ${"nl"}
+  ${"pt_BR"} | ${"pt-BR"}
+  ${"pt_PT"} | ${"pt-PT"}
+  ${"zh_CN"} | ${"zh-CN"}
+  ${"zh_TW"} | ${"zh-TW"}
+`("should correctly formatLocale($locale) with _", ({ locale, expected }) => {
+  test(`returns ${expected}`, () => {
+    expect(formatLocale(locale)).toBe(expected);
+  });
+});
+
+describe.each`
+  unsupportedLoacle | expected
+  ${"af"}           | ${"en"}
+  ${"af-ZA"}        | ${"en"}
+  ${"sq-AL"}        | ${"en"}
+  ${"ar"}           | ${"en"}
+  ${"ar-DZ"}        | ${"en"}
+  ${"hy-AM"}        | ${"en"}
+  ${"eu-ES"}        | ${"en"}
+`(
+  "should correctly formatLocale($unsupportedLoacle) with _",
+  ({ unsupportedLoacle, expected }) => {
+    test(`returns ${expected}`, () => {
+      expect(formatLocale(unsupportedLoacle)).toBe(expected);
+    });
+  }
+);
+
+describe.each`
+  locale       | useDefaultLang | expected
+  ${undefined} | ${false}       | ${undefined}
+  ${undefined} | ${true}        | ${"en"}
+  ${undefined} | ${undefined}   | ${"en"}
+  ${"af"}      | ${false}       | ${undefined}
+  ${"af"}      | ${true}        | ${"en"}
+  ${"af-ZA"}   | ${false}       | ${undefined}
+  ${"af-ZA"}   | ${true}        | ${"en"}
+  ${"sq-AL"}   | ${false}       | ${undefined}
+  ${"sq-AL"}   | ${true}        | ${"en"}
+  ${"ar"}      | ${false}       | ${undefined}
+  ${"ar"}      | ${true}        | ${"en"}
+  ${"ar-DZ"}   | ${false}       | ${undefined}
+  ${"ar-DZ"}   | ${true}        | ${"en"}
+  ${"hy-AM"}   | ${false}       | ${undefined}
+  ${"hy-AM"}   | ${true}        | ${"en"}
+  ${"eu-ES"}   | ${false}       | ${undefined}
+  ${"eu-ES"}   | ${true}        | ${"en"}
+`(
+  "test formatLocale($locale, $useDefaultLang) with useDefaultLang param",
+  ({ locale, useDefaultLang, expected }) => {
+    test(`returns ${expected}`, () => {
+      expect(formatLocale(locale, useDefaultLang)).toBe(expected);
+    });
+  }
+);

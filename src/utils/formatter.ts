@@ -1,6 +1,8 @@
 import moment from "moment";
+import { find } from "lodash";
 
 import store from "src/store";
+import { LANGUAGES, DEFAULT_LANGUAGE } from "src/constants";
 
 export const formatBytes = (
   number: number,
@@ -59,4 +61,23 @@ export const formatLeftTime = (second: number): string => {
   }
 
   return `${hours}:${minutes}:${seconds}`;
+};
+
+export const formatLocale = (
+  locale = "",
+  useDefaultLang = true
+): string | undefined => {
+  if (!locale && !useDefaultLang) {
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    return undefined;
+  }
+  const [lang, country] = locale.split(/-|_/);
+  locale = `${lang}-${country}`;
+  let localeConfig =
+    find(LANGUAGES, (o) => o.code === lang || o.code === locale) ||
+    find(LANGUAGES, (o) => o.code.startsWith(lang));
+  if (useDefaultLang && !localeConfig) {
+    localeConfig = DEFAULT_LANGUAGE;
+  }
+  return localeConfig?.code;
 };

@@ -1,3 +1,9 @@
+/*
+ * @Author: yincheng
+ * @Date: 2021-02-04 23:09:31
+ * @LastEditors: yincheng
+ * @LastEditTime: 2021-04-28 21:39:44
+ */
 import produce from "immer";
 
 import { IRPCState } from "src/types";
@@ -13,7 +19,7 @@ import {
 } from "../constants";
 
 export const initialRPCState: IRPCState = {
-  locale: "en",
+  locale: "",
   theme: "light",
   sessionId: undefined,
   torrents: {
