@@ -250,7 +250,7 @@ describe.each`
   ${"hy-AM"}        | ${"en"}
   ${"eu-ES"}        | ${"en"}
 `(
-  "should correctly formatLocale($unsupportedLoacle) with _",
+  "should return `en` when formatLocale($unsupportedLoacle)",
   ({ unsupportedLoacle, expected }) => {
     test(`returns ${expected}`, () => {
       expect(formatLocale(unsupportedLoacle)).toBe(expected);

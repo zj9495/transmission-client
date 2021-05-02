@@ -5,7 +5,7 @@ import { TEST_TORRENT } from "../fixtures/constants"
 
 context('app', () => {
   beforeEach(() => {
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission-client`)
+    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`)
     cy.verifyConnected()
   })
 
