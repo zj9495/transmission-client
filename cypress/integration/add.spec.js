@@ -61,6 +61,8 @@ context('app', () => {
     cy.contains('Adding...')
     cy.contains(TORRENT.NAME)
     cy.contains('Cancel').click()
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(3000);
     cy.contains(TORRENT.NAME).should('not.exist')
   })
 
