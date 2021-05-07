@@ -2,7 +2,7 @@
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { STATUS_TYPES } from "src/constants";
-import { ITorrent, ITorrents, IState } from "src/types";
+import { ITorrent, ITorrents, IState, Theme } from "src/types";
 
 import { getSession, getTorrents, getSessionStats } from "src/api";
 import { objectToCamelCase } from "src/utils/object";
@@ -26,15 +26,21 @@ export const setLocale = (val: string) => (
   window.localStorage.locale = val;
 };
 
-export const toggleTheme = () => (
+export const toggleTheme = (theme?: Theme) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
   getState: () => IState
 ) => {
+  const nextThemeMap: Record<Theme, Theme> = {
+    light: "dark",
+    dark: "auto",
+    auto: "light",
+  };
   const state = getState();
-  const payload = state.rpc.theme === "light" ? "dark" : "light";
+  const currentTheme: Theme = state.rpc.theme;
+  const nextTheme: Theme = theme || nextThemeMap[currentTheme];
   dispatch({
     type: CHANGE_THEME,
-    payload,
+    payload: nextTheme,
   });
 };
 

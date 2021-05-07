@@ -64,9 +64,11 @@ export interface IStats {
   uploadSpeed: number;
 }
 
+export type Theme = "light" | "dark" | "auto";
+
 export interface IRPCState {
   locale: string;
-  theme: "light" | "dark" | "auto";
+  theme: Theme;
   sessionId: string | undefined;
   torrents: ITorrents;
   session: ISession;

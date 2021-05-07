@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { enUS, zhCN, Localization } from "@material-ui/core/locale";
 
-import { IState } from "src/types";
+import { Theme as ITheme } from "src/types";
+import { getLocale, getTheme } from "src/store/selector";
 
 interface Props {
-  locale: string;
-  themeType: "light" | "dark" | "auto";
   children?: JSX.Element;
 }
 
@@ -26,8 +25,31 @@ function getMessages(locale: string): Localization {
   return muiLocale;
 }
 
+const getThemeType = (theme: ITheme) => {
+  if (theme === "auto") {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+  return theme;
+};
+
 const Theme = (props: Props) => {
-  const { locale, themeType, children } = props;
+  const locale = useSelector(getLocale);
+  const themeFromStore = useSelector(getTheme);
+  const [themeType, setThemeType] = useState(getThemeType(themeFromStore));
+  useEffect(() => {
+    setThemeType(getThemeType(themeFromStore));
+  }, [themeFromStore]);
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const callback = () => {
+      setThemeType(getThemeType(themeFromStore));
+    };
+    media.addEventListener("change", callback);
+    return () => media.removeEventListener("change", callback);
+  }, []);
+  const { children } = props;
   const messages = getMessages(locale);
   const theme = createMuiTheme(
     {
@@ -35,7 +57,7 @@ const Theme = (props: Props) => {
         fontSize: 12,
       },
       palette: {
-        type: themeType === "auto" ? undefined : themeType,
+        type: themeType,
       },
     },
     messages
@@ -44,9 +66,4 @@ const Theme = (props: Props) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
-const mapStateToProps = (state: IState) => ({
-  locale: state.rpc.locale,
-  themeType: state.rpc.theme,
-});
-
-export default connect(mapStateToProps)(Theme);
+export default Theme;
