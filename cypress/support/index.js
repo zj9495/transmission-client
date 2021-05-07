@@ -20,5 +20,5 @@ import './commands'
 // require('./commands')
 
 Cypress.on('window:before:load', window => {
-  Object.defineProperty(window.navigator, 'language', { value: 'en-US' });
+  Object.defineProperty(window.navigator, 'language', { value: 'en-US', configurable: true });
 });
