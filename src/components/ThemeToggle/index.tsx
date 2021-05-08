@@ -26,8 +26,8 @@ const ThemeToggle = () => {
         data-ga-event-category="header"
         data-ga-event-action="dark"
       >
-        {theme === "light" && <Brightness4Icon />}
-        {theme === "dark" && <Brightness7Icon />}
+        {theme === "light" && <Brightness7Icon />}
+        {theme === "dark" && <Brightness4Icon />}
         {theme === "auto" && <BrightnessAutoIcon />}
       </IconButton>
     </Tooltip>
