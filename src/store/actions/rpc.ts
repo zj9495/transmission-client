@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { STATUS_TYPES } from "src/constants";
+import { STATUS_TYPES, STORAGE_KEYS } from "src/constants";
 import { ITorrent, ITorrents, IState, Theme } from "src/types";
 
 import { getSession, getTorrents, getSessionStats } from "src/api";
@@ -23,7 +23,7 @@ export const setLocale = (val: string) => (
     type: SET_LOCALE,
     payload: val,
   });
-  window.localStorage.locale = val;
+  window.localStorage.setItem(STORAGE_KEYS.LOCALE, val);
 };
 
 export const toggleTheme = (theme?: Theme) => (
@@ -42,6 +42,7 @@ export const toggleTheme = (theme?: Theme) => (
     type: CHANGE_THEME,
     payload: nextTheme,
   });
+  window.localStorage.setItem(STORAGE_KEYS.THEME, nextTheme);
 };
 
 export const getSessionAction = () => (
