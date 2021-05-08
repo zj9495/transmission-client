@@ -16,11 +16,10 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useIntl } from "react-intl";
 
 import { toggleMenuOpen } from "src/store/actions/rpc";
-import { IState } from "src/types";
 import { GITHUB_REPO } from "src/constants";
 import ThemeToggle from "src/components/ThemeToggle";
 import LanguageToggle from "src/components/LanguageToggle";
@@ -32,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
       zIndex: 1201,
+      backgroundColor:
+        theme.palette.type === "dark" ? "transparent" : undefined,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -98,21 +99,13 @@ export default function SearchAppBar() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const themeType = useSelector((state: IState) => state.rpc.theme);
-
-  const appBarColor = themeType === "dark" ? "transparent" : undefined;
-
   const handleMenuClick = () => {
     dispatch(toggleMenuOpen());
   };
 
   return (
     <div className={classes.root}>
-      <AppBar
-        position="relative"
-        className={classes.appBar}
-        color={appBarColor}
-      >
+      <AppBar position="relative" className={classes.appBar}>
         <Toolbar variant="dense">
           <IconButton
             edge="start"

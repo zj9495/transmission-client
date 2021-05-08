@@ -115,3 +115,8 @@ export const PRIORITY_NORMAL = 0;
 export const PRIORITY_LOW = -1;
 
 export const INVALID_STATUS = -1;
+
+export const STORAGE_KEYS = {
+  LOCALE: "LOCALE",
+  THEME: "THEME",
+};
