@@ -23,12 +23,13 @@ const ThemeToggle = () => {
       <IconButton
         color="inherit"
         onClick={handleChangeTheme}
+        data-testid="theme-toggle-button"
         data-ga-event-category="header"
-        data-ga-event-action="dark"
+        data-ga-event-action={theme}
       >
-        {theme === "light" && <Brightness7Icon />}
-        {theme === "dark" && <Brightness4Icon />}
-        {theme === "auto" && <BrightnessAutoIcon />}
+        {theme === "light" && <Brightness7Icon data-test-id="light" />}
+        {theme === "dark" && <Brightness4Icon data-test-id="dark" />}
+        {theme === "auto" && <BrightnessAutoIcon data-test-id="auto" />}
       </IconButton>
     </Tooltip>
   );
