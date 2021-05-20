@@ -30,7 +30,7 @@ context("test torrent list", () => {
       cy.get(`[data-field=${name}]`).should("be.exist")
     })
     COLUMNS.HIDE.forEach(name => {
-      // should be display
+      // should not be display
       cy.get(`[data-field=${name}]`).should("not.exist")
     })
   })
