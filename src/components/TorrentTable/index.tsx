@@ -136,37 +136,11 @@ const columns: GridColDef[] = [
     ...useSpeed,
   },
   {
-    field: "completeSize",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.completeSize" />
-    ) as unknown) as string,
-    ...useSize,
-  },
-  {
-    field: "uploadedEver",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.uploadedEver" />
-    ) as unknown) as string,
-    ...useSize,
-  },
-  {
     field: "addedDate",
     headerName: ((
       <FormattedMessage id="torrent.fields.addedDate" />
     ) as unknown) as string,
     ...useTime,
-  },
-  {
-    field: "queuePosition",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.queuePosition" />
-    ) as unknown) as string,
-  },
-  {
-    field: "trackers",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.trackers" />
-    ) as unknown) as string,
   },
   {
     field: "downloadDir",
@@ -175,7 +149,38 @@ const columns: GridColDef[] = [
     ) as unknown) as string,
   },
   {
+    field: "completeSize",
+    hide: true,
+    headerName: ((
+      <FormattedMessage id="torrent.fields.completeSize" />
+    ) as unknown) as string,
+    ...useSize,
+  },
+  {
+    field: "uploadedEver",
+    hide: true,
+    headerName: ((
+      <FormattedMessage id="torrent.fields.uploadedEver" />
+    ) as unknown) as string,
+    ...useSize,
+  },
+  {
+    field: "queuePosition",
+    hide: true,
+    headerName: ((
+      <FormattedMessage id="torrent.fields.queuePosition" />
+    ) as unknown) as string,
+  },
+  {
+    field: "trackers",
+    hide: true,
+    headerName: ((
+      <FormattedMessage id="torrent.fields.trackers" />
+    ) as unknown) as string,
+  },
+  {
     field: "activityDate",
+    hide: true,
     headerName: ((
       <FormattedMessage id="torrent.fields.activityDate" />
     ) as unknown) as string,
@@ -183,12 +188,14 @@ const columns: GridColDef[] = [
   },
   {
     field: "labels",
+    hide: true,
     headerName: ((
       <FormattedMessage id="torrent.fields.labels" />
     ) as unknown) as string,
   },
   {
     field: "doneDate",
+    hide: true,
     headerName: ((
       <FormattedMessage id="torrent.fields.doneDate" />
     ) as unknown) as string,
