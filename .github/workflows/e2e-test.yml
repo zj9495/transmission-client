@@ -10,6 +10,23 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
+    services:
+      transmission-rpc:
+        image: linuxserver/transmission:latest
+        env:
+          PUID: 1000
+          PGID: 1000
+          TZ: Europe/London
+          USER: zj9495
+          PASS: zj9495
+        ports:
+          - 9091:9091
+      nginx:
+        image: nginx:latest
+        env:
+          NGINX_PORT: 80
+        ports:
+          - 8080:80
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -26,3 +43,4 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REACT_APP_TRANSMISSION_RPC: http://localhost:9091
