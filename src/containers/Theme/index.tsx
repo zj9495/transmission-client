@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { enUS, zhCN, Localization } from "@material-ui/core/locale";
+import { blue } from "@material-ui/core/colors";
 
 import { Theme as ITheme } from "src/types";
 import { getLocale, getTheme } from "src/store/selector";
@@ -58,6 +59,10 @@ const Theme = (props: Props) => {
       },
       palette: {
         type: themeType,
+        primary: {
+          main: themeType === "light" ? blue[700] : blue[200],
+          contrastText: "#fff",
+        },
       },
     },
     messages
