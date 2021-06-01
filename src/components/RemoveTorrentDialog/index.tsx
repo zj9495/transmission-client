@@ -23,6 +23,7 @@ import {
   toggleRemoveTorrentsDialog,
   setMessageBar,
 } from "src/store/actions/app";
+import { setSelectedIds } from "src/store/actions/rpc";
 import { removeTorrents } from "src/api";
 
 interface IFormInput {
@@ -71,7 +72,10 @@ const AddTorrentDialog = () => {
       })
     );
     removeTorrents(selectIds, data.deleteLocalData)
-      .then((result) => handleResult(result.data as TResult))
+      .then((result) => {
+        handleResult(result.data as TResult);
+        dispatch(setSelectedIds([]));
+      })
       .catch(() => {
         dispatch(
           setMessageBar({
