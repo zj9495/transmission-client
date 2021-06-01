@@ -13,7 +13,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import { useParams } from "react-router-dom";
 
-import { getTorrents } from "src/store/selector";
+import { getTorrents, getSelectedIds } from "src/store/selector";
 import { setSelectedIds } from "src/store/actions/rpc";
 import {
   formatSize,
@@ -206,6 +206,7 @@ const columns: GridColDef[] = [
 const TorrentTable: React.FC = () => {
   const { torrentStatus } = useParams<IParamTypes>();
   const torrents = useSelector(getTorrents);
+  const selectedIds = useSelector(getSelectedIds);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -227,6 +228,7 @@ const TorrentTable: React.FC = () => {
         }}
         rows={rows}
         columns={columns}
+        selectionModel={selectedIds}
         pageSize={20}
         checkboxSelection
         disableSelectionOnClick
