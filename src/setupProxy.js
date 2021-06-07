@@ -2,12 +2,9 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const proxyDelay = function (req, res, next) {
-  const isLocalhost = /localhost|127.0.0.1/.test(
-    process.env.REACT_APP_TRANSMISSION_RPC
-  );
-  if (process.env.CI && isLocalhost) {
-    // Delay request by 0.1 seconds
-    setTimeout(next, 100);
+  const delay = Number(process.env.REACT_APP_RPC_DELAY);
+  if (delay) {
+    setTimeout(next, delay);
   } else {
     next();
   }
