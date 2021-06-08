@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { removeTestTorrent } from "./common"
+import { removeTestTorrent, TEST_URL } from "./common"
 
 const DOWNLOAD_DIR = "/downloads/complete"
 const TORRENT = {
@@ -10,7 +10,7 @@ const TORRENT = {
 
 context('app', () => {
   beforeEach(() => {
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`)
+    cy.visit(TEST_URL)
     cy.verifyConnected()
   })
 
