@@ -57,4 +57,5 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REACT_APP_TRANSMISSION_RPC: http://localhost:9091
+          REACT_APP_TRANSMISSION_RPC: http://transmission-rpc:9091
+          REACT_APP_RPC_DELAY: 100
