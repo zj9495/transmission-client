@@ -26,3 +26,12 @@ export const removeTestTorrent = () => {
   cy.contains('OK').click()
   cy.contains(TEST_TORRENT.NAME).should('not.exist')
 };
+
+export const getUrl = () => {
+  console.log('TEST_URL: ');
+  const { env } = Cypress
+  // result example: protocol://user:password@host:port/path
+  return `${env('protocol')}://${env('user')}:${env('password')}@${env('host')}:${env('port')}${env('path')}`
+}
+
+export const TEST_URL = getUrl()

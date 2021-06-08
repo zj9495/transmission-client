@@ -1,8 +1,10 @@
 /// <reference types="cypress" />
 
+import { TEST_URL } from "./common"
+
 context('app', () => {
   beforeEach(() => {
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`)
+    cy.visit(TEST_URL)
   })
 
   it('boot', () => {

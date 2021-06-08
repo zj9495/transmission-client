@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /// <reference types="cypress" />
 
+import { TEST_URL } from "./common"
+
 context('app', () => {
   beforeEach(() => {
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`)
+    cy.visit(TEST_URL)
     cy.verifyConnected()
   })
 
@@ -35,7 +37,7 @@ context('app', () => {
     }
 
     cy.clearLocalStorage();
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`, {
+    cy.visit(TEST_URL, {
       onBeforeLoad: (window) => {
         cy.stub(window, 'matchMedia')
       .withArgs('(prefers-color-scheme: dark)')
@@ -50,7 +52,7 @@ context('app', () => {
     cy.get("body").invoke("css", "background-color").should("eq", "rgb(48, 48, 48)");
 
     cy.clearLocalStorage();
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`, {
+    cy.visit(TEST_URL, {
       onBeforeLoad: (window) => {
         cy.stub(window, 'matchMedia')
         .withArgs('(prefers-color-scheme: dark)')

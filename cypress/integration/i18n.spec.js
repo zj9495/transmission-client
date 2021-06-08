@@ -1,11 +1,12 @@
 /// <reference types="cypress" />
 
+import { TEST_URL } from "./common"
 import langs from "../../src/i18n/lang"
 import { STORAGE_KEYS } from "../../src/constants"
 
 context('i18n', () => {
   beforeEach(() => {
-    cy.visit(`http://zj9495:zj9495@localhost:8888/transmission/web`)
+    cy.visit(TEST_URL)
     cy.verifyConnected()
   })
 
@@ -217,7 +218,7 @@ context('i18n', () => {
         totalSize: langs.uk['torrent.fields.totalSize']
       },
     ]
-    const url = "http://zj9495:zj9495@localhost:8888/transmission/web?locale="
+    const url = `${TEST_URL}?locale=`
     TEST_LANGS.forEach(language => {
       language.codes.forEach(locale => {
         cy.visit(`${url}${locale}`)
@@ -322,10 +323,9 @@ context('i18n', () => {
         totalSize: langs.uk['torrent.fields.totalSize']
       },
     ]
-    const url = "http://zj9495:zj9495@localhost:8888/transmission/web"
     TEST_LANGS.forEach(language => {
       language.codes.forEach(locale => {
-        cy.visit(url, {
+        cy.visit(TEST_URL, {
           onBeforeLoad: (window) => {
             // 'window:before:load:' will be fired before 'onBeforeLoad', so use setTimeout to hack it
             setTimeout(() => {
