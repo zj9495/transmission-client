@@ -9,7 +9,10 @@ on:
 
 jobs:
   e2e-on-edge:
-    runs-on: windows-latest
+    runs-on: ubuntu-20.04
+    container:
+      image: cypress/browsers:node14.10.1-edge88
+      options: --user 1001
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -45,6 +48,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: edge
+          headless: true
           start: npm start
           wait-on: "http://localhost:8888"
           record: true
@@ -54,4 +58,5 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REACT_APP_TRANSMISSION_RPC: http://localhost:9091
+          REACT_APP_TRANSMISSION_RPC: http://transmission-rpc:9091
+          REACT_APP_RPC_DELAY: 100
