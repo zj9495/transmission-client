@@ -1,4 +1,4 @@
-name: End-to-end tests
+name: E2E on Edge
 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -8,8 +8,11 @@ on:
     branches: [master]
 
 jobs:
-  cypress-run:
+  e2e-on-edge:
     runs-on: ubuntu-20.04
+    container:
+      image: cypress/browsers:node14.10.1-edge88
+      options: --user 1001
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -17,7 +20,7 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        # run 3 copies of the current job in parallel
+        # run 4 copies of the current job in parallel
         containers: [1, 2, 3, 4]
     services:
       transmission-rpc:
@@ -44,6 +47,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+          browser: edge
+          headless: true
           start: npm start
           wait-on: "http://localhost:8888"
           record: true
@@ -53,5 +58,5 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REACT_APP_TRANSMISSION_RPC: http://localhost:9091
+          REACT_APP_TRANSMISSION_RPC: http://transmission-rpc:9091
           REACT_APP_RPC_DELAY: 100
