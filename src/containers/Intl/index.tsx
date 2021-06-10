@@ -12,9 +12,12 @@ interface Props {
 }
 
 function getMessages(locale: string): Record<string, string> {
-  return (
-    find(LANGUAGES, { code: locale })?.langFile || DEFAULT_LANGUAGE.langFile
-  );
+  const messages = find(LANGUAGES, { code: locale })?.langFile || {};
+  const defaultMessages = DEFAULT_LANGUAGE.langFile;
+  return {
+    ...defaultMessages,
+    ...messages,
+  };
 }
 const Intl = (props: Props) => {
   const { locale, children } = props;
