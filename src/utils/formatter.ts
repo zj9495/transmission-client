@@ -71,6 +71,9 @@ export const formatLocale = (
     // eslint-disable-next-line unicorn/no-useless-undefined
     return undefined;
   }
+  if (["zh_HK", "zh-HK"].includes(locale)) {
+    return "zh-TW";
+  }
   const [lang, country] = locale.split(/-|_/);
   locale = `${lang}-${country}`;
   let localeConfig =
