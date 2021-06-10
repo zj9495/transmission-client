@@ -140,7 +140,7 @@ context('i18n', () => {
         totalSize: langs.zh_CN['torrent.fields.totalSize']
       },
       {
-        codes: ["zh_TW"],
+        codes: ["zh_TW", "zh_HK"],
         text: "中文 - 繁体",
         name: langs.zh_TW['torrent.fields.name'],
         totalSize: langs.zh_TW['torrent.fields.totalSize']
@@ -245,7 +245,7 @@ context('i18n', () => {
         totalSize: langs.zh_CN['torrent.fields.totalSize']
       },
       {
-        codes: ["zh_TW"],
+        codes: ["zh_TW", "zh_HK"],
         text: "中文 - 繁体",
         name: langs.zh_TW['torrent.fields.name'],
         totalSize: langs.zh_TW['torrent.fields.totalSize']

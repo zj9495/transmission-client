@@ -206,7 +206,7 @@ describe.each`
   ${"zh"}    | ${"zh-CN"}
   ${"zh-CN"} | ${"zh-CN"}
   ${"zh-TW"} | ${"zh-TW"}
-  ${"zh-HK"} | ${"zh-CN"}
+  ${"zh-HK"} | ${"zh-TW"}
 `("test formatLocale($locale)", ({ locale, expected }) => {
   test(`returns ${expected}`, () => {
     expect(formatLocale(locale)).toBe(expected);
@@ -234,6 +234,7 @@ describe.each`
   ${"pt_PT"} | ${"pt-PT"}
   ${"zh_CN"} | ${"zh-CN"}
   ${"zh_TW"} | ${"zh-TW"}
+  ${"zh_HK"} | ${"zh-TW"}
 `("should correctly formatLocale($locale) with _", ({ locale, expected }) => {
   test(`returns ${expected}`, () => {
     expect(formatLocale(locale)).toBe(expected);
