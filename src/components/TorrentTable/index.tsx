@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 import {
   XGrid,
@@ -13,7 +13,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import { useParams } from "react-router-dom";
 
-import { getTorrents, getSelectedIds } from "src/store/selector";
+import { getTorrents, getSelectedIds, getLocale } from "src/store/selector";
 import { setSelectedIds } from "src/store/actions/rpc";
 import {
   formatSize,
@@ -60,155 +60,121 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const columns: GridColDef[] = [
-  {
-    field: "name",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.name" />
-    ) as unknown) as string,
-    width: 360,
-    renderCell: renderName,
-  },
-  {
-    field: "totalSize",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.totalSize" />
-    ) as unknown) as string,
-    ...useSize,
-  },
-  {
-    field: "percentDone",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.percentDone" />
-    ) as unknown) as string,
-    type: "number",
-    width: 100,
-    renderCell: renderProgress,
-  },
-  {
-    field: "leftUntilDone",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.remainingTime" />
-    ) as unknown) as string,
-    valueFormatter: ({ value, row }) =>
-      value && row.rateDownload
-        ? formatLeftTime(Number(value) / Number(row.rateDownload))
-        : " ",
-  },
-  {
-    field: "uploadRatio",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.uploadRatio" />
-    ) as unknown) as string,
-    valueFormatter: ({ value }) => (Number(value) < 0 ? 0 : value),
-  },
-  {
-    field: "status",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.status" />
-    ) as unknown) as string,
-    renderCell: renderStatus,
-  },
-  {
-    field: "seederCount",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.seederCount" />
-    ) as unknown) as string,
-  },
-  {
-    field: "leecherCount",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.leecherCount" />
-    ) as unknown) as string,
-  },
-  {
-    field: "rateDownload",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.rateDownload" />
-    ) as unknown) as string,
-    ...useSpeed,
-  },
-  {
-    field: "rateUpload",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.rateUpload" />
-    ) as unknown) as string,
-    ...useSpeed,
-  },
-  {
-    field: "addedDate",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.addedDate" />
-    ) as unknown) as string,
-    ...useTime,
-  },
-  {
-    field: "downloadDir",
-    headerName: ((
-      <FormattedMessage id="torrent.fields.downloadDir" />
-    ) as unknown) as string,
-  },
-  {
-    field: "completeSize",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.completeSize" />
-    ) as unknown) as string,
-    ...useSize,
-  },
-  {
-    field: "uploadedEver",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.uploadedEver" />
-    ) as unknown) as string,
-    ...useSize,
-  },
-  {
-    field: "queuePosition",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.queuePosition" />
-    ) as unknown) as string,
-  },
-  {
-    field: "trackers",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.trackers" />
-    ) as unknown) as string,
-  },
-  {
-    field: "activityDate",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.activityDate" />
-    ) as unknown) as string,
-    ...useTime,
-  },
-  {
-    field: "labels",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.labels" />
-    ) as unknown) as string,
-  },
-  {
-    field: "doneDate",
-    hide: true,
-    headerName: ((
-      <FormattedMessage id="torrent.fields.doneDate" />
-    ) as unknown) as string,
-    ...useTime,
-  },
-];
-
 const TorrentTable: React.FC = () => {
   const { torrentStatus } = useParams<IParamTypes>();
   const torrents = useSelector(getTorrents);
+  const locale = useSelector(getLocale);
   const selectedIds = useSelector(getSelectedIds);
   const dispatch = useDispatch();
   const classes = useStyles();
+  const intl = useIntl();
+  const columns = React.useMemo<GridColDef[]>(
+    () => [
+      {
+        field: "name",
+        headerName: intl.formatMessage({ id: "torrent.fields.name" }),
+        width: 360,
+        renderCell: renderName,
+      },
+      {
+        field: "totalSize",
+        headerName: intl.formatMessage({ id: "torrent.fields.totalSize" }),
+        ...useSize,
+      },
+      {
+        field: "percentDone",
+        headerName: intl.formatMessage({ id: "torrent.fields.percentDone" }),
+        type: "number",
+        width: 100,
+        renderCell: renderProgress,
+      },
+      {
+        field: "leftUntilDone",
+        headerName: intl.formatMessage({ id: "torrent.fields.remainingTime" }),
+        valueFormatter: ({ value, row }) =>
+          value && row.rateDownload
+            ? formatLeftTime(Number(value) / Number(row.rateDownload))
+            : " ",
+      },
+      {
+        field: "uploadRatio",
+        headerName: intl.formatMessage({ id: "torrent.fields.uploadRatio" }),
+        valueFormatter: ({ value }) => (Number(value) < 0 ? 0 : value),
+      },
+      {
+        field: "status",
+        headerName: intl.formatMessage({ id: "torrent.fields.totalSize" }),
+        renderCell: renderStatus,
+      },
+      {
+        field: "seederCount",
+        headerName: intl.formatMessage({ id: "torrent.fields.seederCount" }),
+      },
+      {
+        field: "leecherCount",
+        headerName: intl.formatMessage({ id: "torrent.fields.leecherCount" }),
+      },
+      {
+        field: "rateDownload",
+        headerName: intl.formatMessage({ id: "torrent.fields.rateDownload" }),
+        ...useSpeed,
+      },
+      {
+        field: "rateUpload",
+        headerName: intl.formatMessage({ id: "torrent.fields.rateUpload" }),
+        ...useSpeed,
+      },
+      {
+        field: "addedDate",
+        headerName: intl.formatMessage({ id: "torrent.fields.addedDate" }),
+        ...useTime,
+      },
+      {
+        field: "downloadDir",
+        headerName: intl.formatMessage({ id: "torrent.fields.downloadDir" }),
+      },
+      {
+        field: "completeSize",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.completeSize" }),
+        ...useSize,
+      },
+      {
+        field: "uploadedEver",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.uploadedEver" }),
+        ...useSize,
+      },
+      {
+        field: "queuePosition",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.queuePosition" }),
+      },
+      {
+        field: "trackers",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.trackers" }),
+      },
+      {
+        field: "activityDate",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.activityDate" }),
+        ...useTime,
+      },
+      {
+        field: "labels",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.labels" }),
+      },
+      {
+        field: "doneDate",
+        hide: true,
+        headerName: intl.formatMessage({ id: "torrent.fields.doneDate" }),
+        ...useTime,
+      },
+    ],
+    [locale]
+  );
 
   const rows = torrents[torrentStatus];
 
