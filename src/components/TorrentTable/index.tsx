@@ -24,22 +24,20 @@ import {
 import { IParamTypes } from "src/types";
 import renderName from "./renderName";
 import renderProgress from "./renderProgress";
+import { COLUMNS_WIDTH } from "./constants";
 
 const useSize: GridColTypeDef = {
   type: "number",
-  width: 100,
   valueFormatter: ({ value }) => formatSize(Number(value)),
 };
 
 const useSpeed: GridColTypeDef = {
   type: "number",
-  width: 130,
   valueFormatter: ({ value }) => formatSpeed(Number(value)),
 };
 
 const useTime: GridColTypeDef = {
   type: "number",
-  width: 200,
   valueFormatter: ({ value }) => formatUnixTimeStamp(Number(value)),
 };
 
@@ -73,20 +71,21 @@ const TorrentTable: React.FC = () => {
       {
         field: "name",
         headerName: intl.formatMessage({ id: "torrent.fields.name" }),
-        width: 360,
         renderCell: renderName,
+        width: COLUMNS_WIDTH[locale].name,
       },
       {
         field: "totalSize",
         headerName: intl.formatMessage({ id: "torrent.fields.totalSize" }),
+        width: COLUMNS_WIDTH[locale].totalSize,
         ...useSize,
       },
       {
         field: "percentDone",
         headerName: intl.formatMessage({ id: "torrent.fields.percentDone" }),
         type: "number",
-        width: 100,
         renderCell: renderProgress,
+        width: COLUMNS_WIDTH[locale].percentDone,
       },
       {
         field: "leftUntilDone",
@@ -95,81 +94,97 @@ const TorrentTable: React.FC = () => {
           value && row.rateDownload
             ? formatLeftTime(Number(value) / Number(row.rateDownload))
             : " ",
+        width: COLUMNS_WIDTH[locale].leftUntilDone,
       },
       {
         field: "uploadRatio",
         headerName: intl.formatMessage({ id: "torrent.fields.uploadRatio" }),
         valueFormatter: ({ value }) => (Number(value) < 0 ? 0 : value),
+        width: COLUMNS_WIDTH[locale].uploadRatio,
       },
       {
         field: "status",
-        headerName: intl.formatMessage({ id: "torrent.fields.totalSize" }),
+        headerName: intl.formatMessage({ id: "torrent.fields.status" }),
         renderCell: renderStatus,
+        width: COLUMNS_WIDTH[locale].status,
       },
       {
         field: "seederCount",
         headerName: intl.formatMessage({ id: "torrent.fields.seederCount" }),
+        width: COLUMNS_WIDTH[locale].seederCount,
       },
       {
         field: "leecherCount",
         headerName: intl.formatMessage({ id: "torrent.fields.leecherCount" }),
+        width: COLUMNS_WIDTH[locale].leecherCount,
       },
       {
         field: "rateDownload",
         headerName: intl.formatMessage({ id: "torrent.fields.rateDownload" }),
+        width: COLUMNS_WIDTH[locale].rateDownload,
         ...useSpeed,
       },
       {
         field: "rateUpload",
         headerName: intl.formatMessage({ id: "torrent.fields.rateUpload" }),
+        width: COLUMNS_WIDTH[locale].rateUpload,
         ...useSpeed,
       },
       {
         field: "addedDate",
         headerName: intl.formatMessage({ id: "torrent.fields.addedDate" }),
+        width: COLUMNS_WIDTH[locale].addedDate,
         ...useTime,
       },
       {
         field: "downloadDir",
         headerName: intl.formatMessage({ id: "torrent.fields.downloadDir" }),
+        width: COLUMNS_WIDTH[locale].downloadDir,
       },
       {
         field: "completeSize",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.completeSize" }),
+        width: COLUMNS_WIDTH[locale].completeSize,
         ...useSize,
       },
       {
         field: "uploadedEver",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.uploadedEver" }),
+        width: COLUMNS_WIDTH[locale].uploadedEver,
         ...useSize,
       },
       {
         field: "queuePosition",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.queuePosition" }),
+        width: COLUMNS_WIDTH[locale].queuePosition,
       },
       {
         field: "trackers",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.trackers" }),
+        width: COLUMNS_WIDTH[locale].trackers,
       },
       {
         field: "activityDate",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.activityDate" }),
+        width: COLUMNS_WIDTH[locale].activityDate,
         ...useTime,
       },
       {
         field: "labels",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.labels" }),
+        width: COLUMNS_WIDTH[locale].labels,
       },
       {
         field: "doneDate",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.doneDate" }),
+        width: COLUMNS_WIDTH[locale].doneDate,
         ...useTime,
       },
     ],

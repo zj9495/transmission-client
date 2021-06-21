@@ -67,7 +67,24 @@ export interface IStats {
 export type Theme = "light" | "dark" | "auto";
 
 export interface IRPCState {
-  locale: string;
+  locale:
+    | "en"
+    | "zh-CN"
+    | "zh-TW"
+    | "de"
+    | "es"
+    | "fr"
+    | "hu"
+    | "it"
+    | "ko"
+    | "nl"
+    | "pl"
+    | "pt-BR"
+    | "pt-PT"
+    | "ro"
+    | "ru"
+    | "uk"
+    | "";
   theme: Theme;
   sessionId: string | undefined;
   torrents: ITorrents;
