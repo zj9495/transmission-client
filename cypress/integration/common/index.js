@@ -27,6 +27,12 @@ export const removeTestTorrent = () => {
   cy.contains(TEST_TORRENT.NAME).should('not.exist')
 };
 
+export const showAllColumns = () => {
+  cy.contains("Columns").click()
+  cy.contains("Show all").click()
+  cy.contains("Columns").click()
+}
+
 export const getUrl = () => {
   console.log('TEST_URL: ');
   const { env } = Cypress
