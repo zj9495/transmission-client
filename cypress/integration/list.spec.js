@@ -42,12 +42,14 @@ context("test torrent list", () => {
     // test for each language
     LANGUAGES.forEach(language => {
       cy.visit(url + language.code)
+      cy.log(`test ${language.code}`)
       showAllColumns()
 
       // test the locale has been set correctly
       cy.get('#selected-language').contains(language.text)
       
       COLUMNS.ALL.forEach(name => {
+        cy.log(`test ${name}`)
         cy.get(`[data-field=${name}] .MuiDataGrid-colCellTitle`).click().then(($field) => {
           // get the column title currently width
           const oldWidth = $field.width()
