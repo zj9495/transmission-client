@@ -42,7 +42,7 @@ context("test torrent list", () => {
     // test for each language
     LANGUAGES.forEach(language => {
       cy.visit(url + language.code)
-      cy.log(`test ${language.code}`)
+      cy.log(`visit: ${url + language.code}`)
       showAllColumns()
 
       // test the locale has been set correctly
