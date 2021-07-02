@@ -190,7 +190,7 @@ export const COLUMNS_WIDTH = {
   },
   ko: {
     name: 360,
-    totalSize: 120,
+    totalSize: 150,
     percentDone: 124,
     leftUntilDone: 120,
     uploadRatio: 96,
