@@ -49,7 +49,6 @@ context("test torrent list", () => {
       cy.get('#selected-language').contains(language.text)
       
       COLUMNS.ALL.forEach(name => {
-        cy.log(`test ${name}`)
         cy.get(`[data-field=${name}] .MuiDataGrid-colCellTitle`).click().then(($field) => {
           // get the column title currently width
           const oldWidth = $field.width()
@@ -59,6 +58,7 @@ context("test torrent list", () => {
           cy.get(`[data-field=${name}]`).invoke('css', 'min-width', BIG_WIDTH)
           cy.get(`[data-field=${name}]`).invoke('css', 'max-width', BIG_WIDTH)
 
+          cy.log(`language: ${language.code}, fieldName: ${name}`)
           // column title width should not be changed
           cy.get(`[data-field=${name}] .MuiDataGrid-colCellTitle`).invoke('width').should('eq', oldWidth)
   
