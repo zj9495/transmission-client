@@ -1,9 +1,3 @@
-/*
- * @Author: yincheng
- * @Date: 2021-06-21 11:41:59
- * @LastEditors: yincheng
- * @LastEditTime: 2021-07-02 14:08:03
- */
 /// <reference types="cypress" />
 
 import { removeTestTorrent, addTestTorrent, TEST_URL, showAllColumns } from "./common"
@@ -16,30 +10,30 @@ context("test torrent list", () => {
     cy.verifyConnected()
   })
 
-  // it("should format ratio if ratio < 0", () => {
-  //   addTestTorrent(false)
+  it("should format ratio if ratio < 0", () => {
+    addTestTorrent(false)
 
-  //   cy.contains(TEST_TORRENT.NAME).closest(".MuiDataGrid-row").find("[data-field=uploadRatio]").contains("0")
+    cy.contains(TEST_TORRENT.NAME).closest(".MuiDataGrid-row").find("[data-field=uploadRatio]").contains("0")
 
-  //   removeTestTorrent()
-  // })
+    removeTestTorrent()
+  })
 
-  // it("test the default display columns", () => {
+  it("test the default display columns", () => {
 
-  //   cy.viewport(1920, 1080)
+    cy.viewport(1920, 1080)
 
-  //   COLUMNS.DISPLAY.forEach(name => {
-  //     // should be display
-  //     cy.get(`[data-field=${name}]`).should("be.exist")
-  //   })
-  //   COLUMNS.HIDE.forEach(name => {
-  //     // should not be display
-  //     cy.get(`[data-field=${name}]`).should("not.exist")
-  //   })
-  // })
+    COLUMNS.DISPLAY.forEach(name => {
+      // should be display
+      cy.get(`[data-field=${name}]`).should("be.exist")
+    })
+    COLUMNS.HIDE.forEach(name => {
+      // should not be display
+      cy.get(`[data-field=${name}]`).should("not.exist")
+    })
+  })
 
   it("test the columns width", () => {
-    cy.viewport(1920, 1080)
+    cy.viewport(3840, 1920)
 
     const SMAILL_WIDTH = '100px'
     const BIG_WIDTH = '500px'
@@ -49,12 +43,12 @@ context("test torrent list", () => {
     LANGUAGES.forEach(language => {
       cy.visit(url + language.code)
       cy.log(`visit: ${url + language.code}`)
-      // showAllColumns()
+      showAllColumns()
 
       // test the locale has been set correctly
       cy.get('#selected-language').contains(language.text)
       
-      COLUMNS.DISPLAY.forEach(name => {
+      COLUMNS.ALL.forEach(name => {
         cy.get(`[data-field=${name}] .MuiDataGrid-colCellTitle`).click().then(($field) => {
           // get the column title currently width
           const oldWidth = $field.width()
