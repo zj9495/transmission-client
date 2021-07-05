@@ -197,7 +197,7 @@ export const COLUMNS_WIDTH = {
     status: 100,
     seederCount: 100,
     leecherCount: 100,
-    rateDownload: 154,
+    rateDownload: 156,
     rateUpload: 144,
     addedDate: 154,
     downloadDir: 154,
