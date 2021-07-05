@@ -5,3 +5,10 @@ export const TEST_TORRENT = {
   NAME:
     "Beethoven - Piano Trio in C minor, Triple Concerto [Oborin, Oistrakh, Knushevitskiy] (2011) [FLAC]",
 };
+export const COLUMNS = {
+  DISPLAY: ["name", "totalSize", "percentDone", "leftUntilDone", "uploadRatio", "status", "seederCount", "leecherCount", "rateDownload", "rateUpload", "addedDate", "downloadDir"],
+  HIDE: ["completeSize", "uploadedEver", "queuePosition", "trackers", "activityDate", "labels", "doneDate"],
+  ALL: []
+}
+
+COLUMNS.ALL = [...COLUMNS.DISPLAY, ...COLUMNS.HIDE]
