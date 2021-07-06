@@ -22,3 +22,7 @@ import './commands'
 Cypress.on('window:before:load', window => {
   Object.defineProperty(window.navigator, 'language', { value: 'en-US', configurable: true });
 });
+
+// returning false here prevents Cypress from
+// failing the test
+Cypress.on('uncaught:exception', () => false)
