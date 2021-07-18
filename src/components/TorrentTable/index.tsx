@@ -210,7 +210,9 @@ const TorrentTable: React.FC = () => {
         rows={rows}
         columns={columns}
         selectionModel={selectedIds}
+        pagination
         pageSize={20}
+        rowsPerPageOptions={[10, 20, 50, 100, 200, 5000, 10000]}
         checkboxSelection
         disableSelectionOnClick
         onSelectionModelChange={handleSelectionChange}
