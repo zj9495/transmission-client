@@ -6,9 +6,9 @@ import {
   GridColDef,
   GridColTypeDef,
   GridCellParams,
-  GridSelectionModelChangeParams,
   GridToolbar,
 } from "@material-ui/x-grid";
+import type { GridSelectionModelChangeParams } from "@material-ui/x-grid";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import { useParams } from "react-router-dom";

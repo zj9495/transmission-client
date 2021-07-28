@@ -1,0 +1,163 @@
+import React from "react";
+import { Grid, Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { FormattedMessage } from "react-intl";
+
+import { Torrent } from "src/types";
+import { formatUnixTimeStamp, formatSize } from "src/utils/formatter";
+
+export type BasicInfoProp = {
+  isLoading: boolean;
+  torrent: Torrent | undefined;
+};
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    container: {
+      marginBottom: theme.spacing(1.5),
+    },
+    value: {
+      wordBreak: "break-all",
+    },
+  })
+);
+
+const BasicInfo = (props: BasicInfoProp) => {
+  const { isLoading, torrent } = props;
+  const classes = useStyles();
+  const info = [
+    {
+      key: "general",
+      title: <FormattedMessage id="torrents.details.general.heading.general" />,
+      children: [
+        {
+          key: "addedDate",
+          title: <FormattedMessage id="torrent.attribute.label.addedDate" />,
+          value: torrent && formatUnixTimeStamp(torrent.addedDate),
+        },
+        {
+          key: "downloadDir",
+          title: <FormattedMessage id="torrent.attribute.label.downloadDir" />,
+          value: torrent?.downloadDir,
+        },
+        {
+          key: "labels",
+          title: <FormattedMessage id="torrents.properties.tags" />,
+          value: torrent?.labels.join(",") || "无",
+        },
+      ],
+    },
+    {
+      key: "transfer",
+      title: (
+        <FormattedMessage id="torrents.details.general.heading.transfer" />
+      ),
+      children: [
+        {
+          key: "doneDate",
+          title: <FormattedMessage id="torrent.attribute.label.doneDate" />,
+          value: torrent?.doneDate && formatUnixTimeStamp(torrent.doneDate),
+        },
+        {
+          key: "percentDone",
+          title: <FormattedMessage id="torrents.details.general.downloaded" />,
+          value: `${(torrent?.percentDone || 0) * 100}%`,
+        },
+        {
+          key: "leecherCount",
+          title: <FormattedMessage id="torrents.details.peers" />,
+          value: (
+            <FormattedMessage
+              id="torrents.details.general.connected"
+              values={{
+                connected: torrent?.peersGettingFromUs,
+                total: torrent?.leecherCount,
+              }}
+            />
+          ),
+        },
+        {
+          key: "seederCount",
+          title: <FormattedMessage id="torrents.details.general.seeds" />,
+          value: (
+            <FormattedMessage
+              id="torrents.details.general.connected"
+              values={{
+                connected: torrent?.peersSendingToUs,
+                total: torrent?.seederCount,
+              }}
+            />
+          ),
+        },
+        {
+          key: "activityDate",
+          title: <FormattedMessage id="torrents.details.general.date.active" />,
+          value:
+            torrent?.activityDate && formatUnixTimeStamp(torrent.activityDate),
+        },
+      ],
+    },
+    {
+      key: "torrent",
+      title: <FormattedMessage id="torrents.details.general.heading.torrent" />,
+      children: [
+        {
+          key: "dateCreated",
+          title: <FormattedMessage id="torrent.attribute.label.dateCreated" />,
+          value:
+            torrent?.dateCreated && formatUnixTimeStamp(torrent.dateCreated),
+        },
+        {
+          key: "hashString",
+          title: <FormattedMessage id="torrent.attribute.label.hashString" />,
+          value: torrent?.hashString,
+        },
+        {
+          key: "totalSize",
+          title: <FormattedMessage id="torrent.attribute.label.totalSize" />,
+          value: torrent?.totalSize && formatSize(torrent.totalSize),
+        },
+        {
+          key: "type",
+          title: <FormattedMessage id="torrents.details.general.type" />,
+          value: torrent?.isPrivate ? (
+            <FormattedMessage id="torrents.details.general.type.private" />
+          ) : (
+            <FormattedMessage id="torrents.details.general.type.public" />
+          ),
+        },
+        {
+          key: "comment",
+          title: <FormattedMessage id="torrent.attribute.label.comment" />,
+          value: torrent?.comment,
+        },
+      ],
+    },
+  ];
+  return (
+    <>
+      {info.map((group) => (
+        <Grid className={classes.container} key={group.key} container>
+          <Grid item xs={12}>
+            <Typography variant="h6">{group.title}</Typography>
+          </Grid>
+          {group.children.map((item) => (
+            <>
+              <Grid key={`${item.key}-title`} item xs={3}>
+                <Typography>{item.title}</Typography>
+              </Grid>
+              <Grid key={`${item.key}-value`} item xs={9}>
+                <Typography className={classes.value}>
+                  {isLoading ? <Skeleton /> : item.value}
+                </Typography>
+              </Grid>
+            </>
+          ))}
+        </Grid>
+      ))}
+    </>
+  );
+};
+
+export default React.memo(BasicInfo);

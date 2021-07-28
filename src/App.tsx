@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "react-redux";
+import { SnackbarProvider } from "notistack";
 
 import { APP_ROUTES } from "./constants";
 import Intl from "./containers/Intl";
@@ -24,15 +25,17 @@ const App = (): JSX.Element => (
   <Provider store={store}>
     <Intl>
       <Theme>
-        <Router>
-          <CssBaseline />
-          <Header />
-          <Switch>
-            <Route path={APP_ROUTES.signIn} component={SignIn} />
-            <Route path={APP_ROUTES.list} component={List} />
-            <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
-          </Switch>
-        </Router>
+        <SnackbarProvider>
+          <Router>
+            <CssBaseline />
+            <Header />
+            <Switch>
+              <Route path={APP_ROUTES.signIn} component={SignIn} />
+              <Route path={APP_ROUTES.list} component={List} />
+              <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
+            </Switch>
+          </Router>
+        </SnackbarProvider>
       </Theme>
     </Intl>
   </Provider>
