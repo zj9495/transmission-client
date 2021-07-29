@@ -43,10 +43,7 @@ interface IAddResultTorrentInfo {
 
 interface IAddResult {
   result: string;
-  arguments: Record<
-    "torrent-duplicate" | "torrent-added",
-    IAddResultTorrentInfo
-  >;
+  arguments: Record<"torrentDuplicate" | "torrentAdded", IAddResultTorrentInfo>;
 }
 
 const DEFAULT_ADVANCED_MODE = true;
@@ -83,11 +80,9 @@ const AddTorrentDialog = () => {
           intl.formatMessage({ id: "message.failedAdd" }) + result.result,
         severity: "error",
       };
-    } else if (result.arguments["torrent-added"]) {
+    } else if (result.arguments.torrentAdded) {
       if (advancedMode) {
-        dispatch(
-          showTorrentDownloadOptions(result.arguments["torrent-added"].id)
-        );
+        dispatch(showTorrentDownloadOptions(result.arguments.torrentAdded.id));
       } else {
         messageConfig = {
           open: true,
@@ -96,7 +91,7 @@ const AddTorrentDialog = () => {
           severity: "success",
         };
       }
-    } else if (result.arguments["torrent-duplicate"]) {
+    } else if (result.arguments.torrentDuplicate) {
       messageConfig = {
         open: true,
         loading: false,
