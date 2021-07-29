@@ -17,60 +17,63 @@ const useSpeed: GridColTypeDef = {
 const UserTable = (props: ServerTableProps) => {
   const intl = useIntl();
   const { rows } = props;
-  const columns: GridColDef[] = [
-    {
-      field: "address",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.address",
-      }),
-      flex: 1,
-    },
-    {
-      field: "port",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.port",
-      }),
-    },
-    {
-      field: "isUTP",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.isUtp",
-      }),
-    },
-    {
-      field: "clientName",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.clientName",
-      }),
-    },
-    {
-      field: "flagStr",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.flagStr",
-      }),
-    },
-    {
-      field: "progress",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.progress",
-      }),
-      renderCell: renderProgress,
-    },
-    {
-      field: "rateToClient",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.rateToClient",
-      }),
-      ...useSpeed,
-    },
-    {
-      field: "rateToPeer",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.peersFields.rateToPeer",
-      }),
-      ...useSpeed,
-    },
-  ];
+  const columns = React.useMemo<GridColDef[]>(
+    () => [
+      {
+        field: "address",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.address",
+        }),
+        flex: 1,
+      },
+      {
+        field: "port",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.port",
+        }),
+      },
+      {
+        field: "isUTP",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.isUtp",
+        }),
+      },
+      {
+        field: "clientName",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.clientName",
+        }),
+      },
+      {
+        field: "flagStr",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.flagStr",
+        }),
+      },
+      {
+        field: "progress",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.progress",
+        }),
+        renderCell: renderProgress,
+      },
+      {
+        field: "rateToClient",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.rateToClient",
+        }),
+        ...useSpeed,
+      },
+      {
+        field: "rateToPeer",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.peersFields.rateToPeer",
+        }),
+        ...useSpeed,
+      },
+    ],
+    [intl]
+  );
 
   return (
     <div data-testid="files-table" style={{ height: "400px" }}>

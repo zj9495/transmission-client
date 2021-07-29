@@ -227,7 +227,6 @@ export const showTorrentDetail = (id: Number) => (
   dispatch({
     type: SHOW_TORRENT_DETAIL,
     payload: {
-      open: true,
       id,
     },
   });
@@ -238,8 +237,5 @@ export const hideTorrentDetail = () => (
 ) => {
   dispatch({
     type: HIDE_TORRENT_DETAIL,
-    payload: {
-      open: false,
-    },
   });
 };

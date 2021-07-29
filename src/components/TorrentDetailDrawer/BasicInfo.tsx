@@ -9,7 +9,7 @@ import { formatUnixTimeStamp, formatSize } from "src/utils/formatter";
 
 export type BasicInfoProp = {
   isLoading: boolean;
-  torrent: Torrent | undefined;
+  torrent?: Torrent;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,7 +57,7 @@ const BasicInfo = (props: BasicInfoProp) => {
         {
           key: "doneDate",
           title: <FormattedMessage id="torrent.attribute.label.doneDate" />,
-          value: torrent?.doneDate && formatUnixTimeStamp(torrent.doneDate),
+          value: torrent && formatUnixTimeStamp(torrent.doneDate),
         },
         {
           key: "percentDone",
@@ -93,8 +93,7 @@ const BasicInfo = (props: BasicInfoProp) => {
         {
           key: "activityDate",
           title: <FormattedMessage id="torrents.details.general.date.active" />,
-          value:
-            torrent?.activityDate && formatUnixTimeStamp(torrent.activityDate),
+          value: torrent && formatUnixTimeStamp(torrent.activityDate),
         },
       ],
     },
@@ -105,8 +104,7 @@ const BasicInfo = (props: BasicInfoProp) => {
         {
           key: "dateCreated",
           title: <FormattedMessage id="torrent.attribute.label.dateCreated" />,
-          value:
-            torrent?.dateCreated && formatUnixTimeStamp(torrent.dateCreated),
+          value: torrent && formatUnixTimeStamp(torrent.dateCreated),
         },
         {
           key: "hashString",
@@ -116,7 +114,7 @@ const BasicInfo = (props: BasicInfoProp) => {
         {
           key: "totalSize",
           title: <FormattedMessage id="torrent.attribute.label.totalSize" />,
-          value: torrent?.totalSize && formatSize(torrent.totalSize),
+          value: torrent && formatSize(torrent.totalSize),
         },
         {
           key: "type",

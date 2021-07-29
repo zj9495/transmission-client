@@ -55,90 +55,93 @@ export const FilesTable = (props: FilesTableProps) => {
     onFileWantedChange,
     onFilePriorityChange,
   } = props;
-  const columns: GridColDef[] = [
-    {
-      field: "name",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.filesFields.name",
-      }),
-      flex: 1,
-    },
-    {
-      field: "length",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.filesFields.length",
-      }),
-      ...useSize,
-    },
-    {
-      field: "percentDone",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.filesFields.percentDone",
-      }),
-      type: "number",
-      width: 120,
-      renderCell: renderProgress,
-      hide: !simple,
-    },
-    {
-      field: "bytesCompleted",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.filesFields.bytesCompleted",
-      }),
-      ...useSize,
-      hide: !simple,
-    },
-    {
-      field: "wanted",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.filesFields.wanted",
-      }),
-      type: "number",
-      width: 110,
-      valueFormatter: ({ value }) => (value ? "Yes" : "No"),
-      renderCell: (cellProps) => {
-        const onChange = (
-          event: React.ChangeEvent<{
-            name?: string | undefined;
-            value: unknown;
-          }>
-        ) => {
-          const value = Boolean(event.target.value);
-          const rowIndex = cellProps.rowIndex as number;
-          onFileWantedChange && onFileWantedChange({ rowIndex, value });
-        };
-        return renderWantedSelect({
-          ...cellProps,
-          selectProps: { onChange, disabled: simple },
-        });
+  const columns: GridColDef[] = React.useMemo<GridColDef[]>(
+    () => [
+      {
+        field: "name",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.filesFields.name",
+        }),
+        flex: 1,
       },
-      hide: !simple,
-    },
-    {
-      field: "priority",
-      headerName: intl.formatMessage({
-        id: "torrent.attribute.filesFields.priority",
-      }),
-      type: "number",
-      width: 120,
-      renderCell: (cellProps) => {
-        const onChange = (
-          event: React.ChangeEvent<{
-            name?: string | undefined;
-            value: unknown;
-          }>
-        ) => {
-          const value = event.target.value as 1 | 0 | -1;
-          const rowIndex = cellProps.rowIndex as number;
-          onFilePriorityChange && onFilePriorityChange({ rowIndex, value });
-        };
-        return renderPrioritySelect({
-          ...cellProps,
-          selectProps: { onChange, disabled: simple },
-        });
+      {
+        field: "length",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.filesFields.length",
+        }),
+        ...useSize,
       },
-    },
-  ];
+      {
+        field: "percentDone",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.filesFields.percentDone",
+        }),
+        type: "number",
+        width: 120,
+        renderCell: renderProgress,
+        hide: !simple,
+      },
+      {
+        field: "bytesCompleted",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.filesFields.bytesCompleted",
+        }),
+        ...useSize,
+        hide: !simple,
+      },
+      {
+        field: "wanted",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.filesFields.wanted",
+        }),
+        type: "number",
+        width: 110,
+        valueFormatter: ({ value }) => (value ? "Yes" : "No"),
+        renderCell: (cellProps) => {
+          const onChange = (
+            event: React.ChangeEvent<{
+              name?: string | undefined;
+              value: unknown;
+            }>
+          ) => {
+            const value = Boolean(event.target.value);
+            const rowIndex = cellProps.rowIndex as number;
+            onFileWantedChange && onFileWantedChange({ rowIndex, value });
+          };
+          return renderWantedSelect({
+            ...cellProps,
+            selectProps: { onChange, disabled: simple },
+          });
+        },
+        hide: !simple,
+      },
+      {
+        field: "priority",
+        headerName: intl.formatMessage({
+          id: "torrent.attribute.filesFields.priority",
+        }),
+        type: "number",
+        width: 120,
+        renderCell: (cellProps) => {
+          const onChange = (
+            event: React.ChangeEvent<{
+              name?: string | undefined;
+              value: unknown;
+            }>
+          ) => {
+            const value = event.target.value as 1 | 0 | -1;
+            const rowIndex = cellProps.rowIndex as number;
+            onFilePriorityChange && onFilePriorityChange({ rowIndex, value });
+          };
+          return renderPrioritySelect({
+            ...cellProps,
+            selectProps: { onChange, disabled: simple },
+          });
+        },
+      },
+    ],
+    [intl]
+  );
 
   return (
     <div data-testid="files-table" style={{ height: "400px" }}>

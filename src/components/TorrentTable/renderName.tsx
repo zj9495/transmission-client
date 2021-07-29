@@ -1,21 +1,24 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
 import { GridCellParams } from "@material-ui/x-grid";
 import { Link, Tooltip } from "@material-ui/core";
-import { showTorrentDetail } from "src/store/actions/app";
+
+import { TorrentId } from "src/types";
 
 interface NameLinkProps {
   value: string;
   id: number;
+  onClick?: (id: TorrentId) => void;
 }
+
+type RenderNameProps = GridCellParams & Pick<NameLinkProps, "onClick">;
 
 // eslint-disable-next-line react/display-name
 const NameLink = React.memo((props: NameLinkProps) => {
-  const dispatch = useDispatch();
-  const { id, value } = props;
+  const { id, value, onClick } = props;
 
-  const handleClick = () => {
-    dispatch(showTorrentDetail(id));
+  const handleClick = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    onClick && onClick(id);
   };
 
   return (
@@ -28,8 +31,12 @@ const NameLink = React.memo((props: NameLinkProps) => {
   );
 });
 
-export default function renderName(params: GridCellParams) {
+export default function renderName(params: RenderNameProps) {
   return (
-    <NameLink value={params.value as string} id={params.row.id as number} />
+    <NameLink
+      value={params.value as string}
+      id={params.row.id as number}
+      onClick={params.onClick}
+    />
   );
 }

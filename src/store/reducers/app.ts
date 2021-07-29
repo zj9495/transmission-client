@@ -84,7 +84,7 @@ export default (state = initialAppState, action: Action) =>
         draft.removeTorrents.open = action.payload;
         break;
       case SHOW_TORRENT_DETAIL:
-        draft.detail.open = action.payload.open;
+        draft.detail.open = true;
         draft.detail.id = action.payload.id;
         break;
       case HIDE_TORRENT_DETAIL:
