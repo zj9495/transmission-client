@@ -108,7 +108,7 @@ export const showTorrentDownloadOptions = (id: number) => async (
   }));
   dispatch({
     type: SHOW_TORRENT_DOWNLOAD_OPTIONS,
-    payload: { id, result, files },
+    payload: { id, info: result, files },
   });
   const selectedFilesIds = files.map((item) => item.id);
   setDownloadSelectedFiles(selectedFilesIds)(dispatch, getState);
