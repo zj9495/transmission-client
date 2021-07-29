@@ -112,7 +112,8 @@ module.exports = {
         'import/no-extraneous-dependencies': [ERROR, { 'devDependencies': ['**/*.test.js', '**/*.spec.js'] }],
         'promise/always-return': OFF,
         'promise/catch-or-return': OFF,
-        'unicorn/consistent-function-scoping': OFF
+        'unicorn/consistent-function-scoping': OFF,
+        'no-shadow': OFF
     },
     overrides: [
         {
