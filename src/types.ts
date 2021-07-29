@@ -1,5 +1,52 @@
-export interface ITorrent {
+export type TorrentId = number;
+
+export type TrackerStats = {
+  announce: string;
+  announceState: 0 | 1;
+  downloadCount: number;
+  hasAnnounced: false;
+  hasScraped: true;
+  host: string;
   id: number;
+  isBackup: boolean;
+  lastAnnouncePeerCount: number;
+  lastAnnounceResult: string;
+  lastAnnounceStartTime: number;
+  lastAnnounceSucceeded: boolean;
+  lastAnnounceTime: number;
+  lastAnnounceTimedOut: boolean;
+  lastScrapeResult: string;
+  lastScrapeStartTime: number;
+  lastScrapeSucceeded: boolean;
+  lastScrapeTime: number;
+  lastScrapeTimedOut: boolean;
+  leecherCount: number;
+  nextAnnounceTime: number;
+  nextScrapeTime: number;
+  scrape: string;
+  scrapeState: 0 | 1;
+  seederCount: number;
+  tier: 0 | 1;
+}[];
+
+export type OriginTorrentSettings = {
+  downloadLimit: number;
+  downloadLimited: boolean;
+  "peer-limit": number;
+  seedIdleLimit: number;
+  seedIdleMode: number;
+  seedRatioLimit: number;
+  seedRatioMode: number;
+  uploadLimit: number;
+  uploadLimited: boolean;
+};
+
+export type TorrentSettings = Omit<OriginTorrentSettings, "peer-limit"> & {
+  peerLimit: number;
+};
+
+export interface ITorrent {
+  id: TorrentId;
   name: string;
   totalSize: number;
   downloadedEver: number;
@@ -122,7 +169,7 @@ export type Torrent = {
     name: string;
   }[];
   hashString: string;
-  id: number;
+  id: TorrentId;
   isPrivate: boolean;
   labels: string[];
   magnetLink: string;
@@ -139,6 +186,35 @@ export type Torrent = {
   uploadLimit: number;
   uploadLimited: boolean;
   wanted: (0 | 1)[];
+  addedDate: number;
+  doneDate: number;
+  percentDone: number;
+  peersGettingFromUs: number;
+  peersSendingToUs: number;
+  seederCount: number;
+  leecherCount: number;
+  activityDate: number;
+  dateCreated: number;
+  comment: string;
+  trackerStats: TrackerStats;
+  peers: {
+    address: string;
+    clientIsChoked: boolean;
+    clientIsInterested: boolean;
+    clientName: string;
+    flagStr: string;
+    isDownloadingFrom: boolean;
+    isEncrypted: boolean;
+    isIncoming: boolean;
+    isUTP: boolean;
+    isUploadingTo: boolean;
+    peerIsChoked: boolean;
+    peerIsInterested: boolean;
+    port: number;
+    progress: number;
+    rateToClient: number;
+    rateToPeer: number;
+  }[];
 };
 
 export type TFile = {
@@ -153,7 +229,7 @@ export type TFile = {
 };
 
 export interface ITorrentDownloadOptions {
-  id: number | null;
+  id: TorrentId | null;
   open: boolean;
   freeDiskSpace: number;
   info: Torrent | null;
@@ -166,12 +242,16 @@ type RemoveTorrents = {
   open: boolean;
 };
 
-export interface IAppState {
+export type IAppState = {
   open: boolean;
   messageConfig: IMessageConfig;
   torrentDownloadOptions: ITorrentDownloadOptions;
   removeTorrents: RemoveTorrents;
-}
+  detail: {
+    open: boolean;
+    id: TorrentId | null;
+  };
+};
 
 export interface IState {
   rpc: IRPCState;

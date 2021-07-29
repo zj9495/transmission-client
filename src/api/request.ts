@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import store from "src/store";
 import { SET_SESSION_ID } from "src/store/constants";
+import { objectToCamelCase } from "src/utils/object";
 
 const request = axios.create({
   baseURL: "/transmission/rpc",
@@ -15,7 +16,7 @@ request.interceptors.request.use((req) => {
 });
 
 request.interceptors.response.use(
-  (response) => response,
+  (response) => objectToCamelCase(response) as AxiosResponse<any>,
   (error) => {
     if (error.response.status === 409) {
       const sessionId = error.response.headers["x-transmission-session-id"];

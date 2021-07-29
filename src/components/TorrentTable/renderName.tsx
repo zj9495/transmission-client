@@ -1,29 +1,42 @@
 import * as React from "react";
 import { GridCellParams } from "@material-ui/x-grid";
-import { Link } from "@material-ui/core";
+import { Link, Tooltip } from "@material-ui/core";
+
+import { TorrentId } from "src/types";
 
 interface NameLinkProps {
   value: string;
-  // eslint-disable-next-line react/no-unused-prop-types
   id: number;
+  onClick?: (id: TorrentId) => void;
 }
 
-const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
+type RenderNameProps = GridCellParams & Pick<NameLinkProps, "onClick">;
 
 // eslint-disable-next-line react/display-name
 const NameLink = React.memo((props: NameLinkProps) => {
-  const { value } = props;
+  const { id, value, onClick } = props;
+
+  const handleClick = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    onClick && onClick(id);
+  };
 
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <Link href="#" onClick={preventDefault}>
-      {value}
-    </Link>
+    <Tooltip title={value}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+      <Link component="button" variant="body2" onClick={handleClick}>
+        {value}
+      </Link>
+    </Tooltip>
   );
 });
 
-export default function renderName(params: GridCellParams) {
+export default function renderName(params: RenderNameProps) {
   return (
-    <NameLink value={params.value as string} id={params.row.id as number} />
+    <NameLink
+      value={params.value as string}
+      id={params.row.id as number}
+      onClick={params.onClick}
+    />
   );
 }

@@ -12,8 +12,10 @@ import {
   SET_DOWNLOAD_SELECTED_FILES,
   SET_DOWNLOAD_FILES,
   SET_FREE_DISK_SPACE,
+  SHOW_TORRENT_DETAIL,
+  HIDE_TORRENT_DETAIL,
 } from "src/store/constants";
-import { IMessageConfig, IState, Torrent } from "src/types";
+import { IMessageConfig, IState } from "src/types";
 import {
   getTorrent,
   removeTorrents,
@@ -28,14 +30,6 @@ import {
   PRIORITY_LOW,
   INVALID_STATUS,
 } from "src/constants";
-
-type TGetTorrentResult = {
-  data: {
-    arguments: {
-      torrents: Torrent[];
-    };
-  };
-};
 
 export const toggleAddTorrentDialog = (open?: boolean) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
@@ -101,11 +95,10 @@ export const showTorrentDownloadOptions = (id: number) => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
   getState: () => IState
 ) => {
-  const result: TGetTorrentResult = await getTorrent(id);
-  const info = result.data.arguments.torrents[0];
-  const files = info.files.map((item, index) => ({
+  const result = await getTorrent(id);
+  const files = result.files.map((item, index) => ({
     ...item,
-    ...info.fileStats[index],
+    ...result.fileStats[index],
     id: index,
     percentDone: item.bytesCompleted / item.length,
     fileFormat: item.name.slice(
@@ -115,11 +108,11 @@ export const showTorrentDownloadOptions = (id: number) => async (
   }));
   dispatch({
     type: SHOW_TORRENT_DOWNLOAD_OPTIONS,
-    payload: { id, info, files },
+    payload: { id, info: result, files },
   });
   const selectedFilesIds = files.map((item) => item.id);
   setDownloadSelectedFiles(selectedFilesIds)(dispatch, getState);
-  setFreeDiskSpace(info.downloadDir)(dispatch);
+  setFreeDiskSpace(result.downloadDir)(dispatch);
 };
 
 export const closeTorrentDownloadOptionsDialog = (
@@ -226,4 +219,23 @@ export const addTorrentAdvancedMode = ({
     startTorrents([id as number]);
   }
   dispatch(closeTorrentDownloadOptionsDialog(id as number));
+};
+
+export const showTorrentDetail = (id: Number) => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => {
+  dispatch({
+    type: SHOW_TORRENT_DETAIL,
+    payload: {
+      id,
+    },
+  });
+};
+
+export const hideTorrentDetail = () => (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => {
+  dispatch({
+    type: HIDE_TORRENT_DETAIL,
+  });
 };

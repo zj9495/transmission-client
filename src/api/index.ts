@@ -1,4 +1,10 @@
 import store from "src/store";
+import type {
+  Torrent,
+  TorrentId,
+  TorrentSettings,
+  OriginTorrentSettings,
+} from "src/types";
 import request from "./request";
 
 export const getSession = () =>
@@ -128,7 +134,7 @@ export const removeTorrents = (ids: number[], deleteLocalData = false) =>
     },
   });
 
-export const getTorrent = (id: number) =>
+export const getTorrent = (id: number): Promise<Torrent> =>
   request({
     method: "post",
     data: {
@@ -145,6 +151,8 @@ export const getTorrent = (id: number) =>
           "hashString",
           "id",
           "isPrivate",
+          "addedDate",
+          "doneDate",
           "labels",
           "magnetLink",
           "metadataPercentComplete",
@@ -160,10 +168,29 @@ export const getTorrent = (id: number) =>
           "uploadLimited",
           "uploadLimit",
           "wanted",
+          "percentDone",
+          "peersGettingFromUs",
+          "peersSendingToUs",
+          "seederCount",
+          "leecherCount",
+          "activityDate",
+          "dateCreated",
+          "trackerStats",
+          "peers",
+          "comment",
+          "downloadLimit",
+          "downloadLimited",
+          "peer-limit",
+          "seedIdleLimit",
+          "seedIdleMode",
+          "seedRatioLimit",
+          "seedRatioMode",
+          "uploadLimit",
+          "uploadLimited",
         ],
       },
     },
-  });
+  }).then((res) => res.data.arguments.torrents[0]);
 
 export const setTorrent = ({
   id,
@@ -227,5 +254,41 @@ export const getFreeSpace = ({ path }: { path: string }) =>
       arguments: {
         path,
       },
+    },
+  });
+
+export const getTorrentSettings = (id: TorrentId): Promise<TorrentSettings> =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-get",
+      arguments: {
+        fields: [
+          "downloadLimit",
+          "downloadLimited",
+          "peer-limit",
+          "seedIdleLimit",
+          "seedIdleMode",
+          "seedRatioLimit",
+          "seedRatioMode",
+          "uploadLimit",
+          "uploadLimited",
+        ],
+        ids: id,
+      },
+    },
+  }).then((res) => res.data.arguments.torrents[0]);
+
+export const setTorrentSettings = (
+  id: TorrentId,
+  data: OriginTorrentSettings
+) =>
+  request({
+    method: "post",
+    data: {
+      method: "torrent-set",
+      arguments: data,
+      ids: id,
+      tag: "",
     },
   });

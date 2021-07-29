@@ -5,7 +5,6 @@ import { STATUS_TYPES, STORAGE_KEYS } from "src/constants";
 import { ITorrent, ITorrents, IState, Theme } from "src/types";
 
 import { getSession, getTorrents, getSessionStats } from "src/api";
-import { objectToCamelCase } from "src/utils/object";
 import {
   SET_LOCALE,
   CHANGE_THEME,
@@ -52,7 +51,7 @@ export const getSessionAction = () => (
     getSession().then((res) => {
       dispatch({
         type: SET_SESSION,
-        payload: objectToCamelCase(res.data.arguments),
+        payload: res.data.arguments,
       });
     });
   return setSession().catch(() => {
@@ -66,7 +65,7 @@ export const getSessionStatsAction = () => (
   getSessionStats().then((res) => {
     dispatch({
       type: SET_SESSION_STATS,
-      payload: objectToCamelCase(res.data.arguments),
+      payload: res.data.arguments,
     });
   });
 export const getTorrentsAction = () => (

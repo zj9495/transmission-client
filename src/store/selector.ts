@@ -43,3 +43,7 @@ export const getSelectedTorrents = (state: IState) =>
 // Remove Torrents
 export const getRemoveTorrentsDialogOpen = (state: IState) =>
   state.app.removeTorrents.open;
+
+// Torrent Detail
+export const getTorrentDetailOpen = (state: IState) => state.app.detail.open;
+export const getDetailId = (state: IState) => state.app.detail.id;

@@ -120,3 +120,5 @@ export const STORAGE_KEYS = {
   LOCALE: "LOCALE",
   THEME: "THEME",
 };
+
+export const REFRESH_INTERVAL = 5000;

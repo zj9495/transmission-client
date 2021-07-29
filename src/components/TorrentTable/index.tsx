@@ -6,22 +6,23 @@ import {
   GridColDef,
   GridColTypeDef,
   GridCellParams,
-  GridSelectionModelChangeParams,
   GridToolbar,
 } from "@material-ui/x-grid";
+import type { GridSelectionModelChangeParams } from "@material-ui/x-grid";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 import { useParams } from "react-router-dom";
 
 import { getTorrents, getSelectedIds, getLocale } from "src/store/selector";
 import { setSelectedIds } from "src/store/actions/rpc";
+import { showTorrentDetail } from "src/store/actions/app";
 import {
   formatSize,
   formatSpeed,
   formatUnixTimeStamp,
   formatLeftTime,
 } from "src/utils/formatter";
-import { IParamTypes } from "src/types";
+import { IParamTypes, TorrentId } from "src/types";
 import renderName from "./renderName";
 import renderProgress from "./renderProgress";
 import { COLUMNS_WIDTH } from "./constants";
@@ -71,7 +72,12 @@ const TorrentTable: React.FC = () => {
       {
         field: "name",
         headerName: intl.formatMessage({ id: "torrent.fields.name" }),
-        renderCell: renderName,
+        renderCell: (cellProps) => {
+          const onClick = (id: TorrentId) => {
+            dispatch(showTorrentDetail(id));
+          };
+          return renderName({ ...cellProps, onClick });
+        },
         width: COLUMNS_WIDTH[locale].name,
       },
       {

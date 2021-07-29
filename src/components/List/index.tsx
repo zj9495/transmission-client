@@ -32,7 +32,6 @@ import {
   getSpeedUnitsSelector,
   getMenuOpen,
 } from "src/store/selector";
-
 import {
   getSessionAction,
   getTorrentsAction,
@@ -42,13 +41,15 @@ import { IState, ISession } from "src/types";
 import Progress from "src/components/Progress";
 import ActionBar from "src/components/ActionBar";
 import MenuBar from "src/components/MenuBar";
-
 import TorrentTable from "src/components/TorrentTable";
 import AddTorrentDialog from "src/components/AddTorrentDialog";
 import TorrentDownloadOptionsDialog from "src/components/TorrentDownloadOptionsDialog";
 import RemoveTorrentDialog from "src/components/RemoveTorrentDialog";
 import AppStatusBar from "src/components/AppStatusBar";
 import MessageBar from "src/components/MessageBar";
+import { REFRESH_INTERVAL } from "src/constants";
+
+import TorrentDetailDrawer from "../TorrentDetailDrawer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,7 +86,7 @@ const Torrents: React.FC = () => {
     setInterval(() => {
       dispatch(getTorrentsAction());
       dispatch(getSessionStatsAction());
-    }, 5000);
+    }, REFRESH_INTERVAL);
   }, []);
 
   const classes = useStyles();
@@ -111,6 +112,7 @@ const Torrents: React.FC = () => {
         <AddTorrentDialog />
         <TorrentDownloadOptionsDialog />
         <RemoveTorrentDialog />
+        <TorrentDetailDrawer />
         <TorrentTable />
         {/* <List component="nav" aria-label="main mailbox folders">
           {torrents.map((torrent, index) => {

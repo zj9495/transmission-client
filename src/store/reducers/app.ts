@@ -10,6 +10,8 @@ import {
   SET_DOWNLOAD_SELECTED_FILES,
   SET_DOWNLOAD_FILES,
   SET_FREE_DISK_SPACE,
+  SHOW_TORRENT_DETAIL,
+  HIDE_TORRENT_DETAIL,
 } from "../constants";
 
 export interface Action {
@@ -37,6 +39,10 @@ export const initialAppState: IAppState = {
   },
   removeTorrents: {
     open: false,
+  },
+  detail: {
+    open: false,
+    id: null,
   },
 };
 
@@ -76,6 +82,13 @@ export default (state = initialAppState, action: Action) =>
         break;
       case TOGGLE_REMOVE_TORRENTS_DIALOG:
         draft.removeTorrents.open = action.payload;
+        break;
+      case SHOW_TORRENT_DETAIL:
+        draft.detail.open = true;
+        draft.detail.id = action.payload.id;
+        break;
+      case HIDE_TORRENT_DETAIL:
+        draft.detail.open = false;
         break;
       default:
         return state;

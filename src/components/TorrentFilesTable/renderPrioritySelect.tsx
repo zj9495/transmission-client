@@ -1,22 +1,19 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Select, MenuItem } from "@material-ui/core";
+import { Select, SelectProps, MenuItem } from "@material-ui/core";
 import { GridCellParams } from "@material-ui/x-grid";
 import FlagIcon from "@material-ui/icons/Flag";
-import { SelectChange } from "./types";
 
 type Props = {
-  onChange: SelectChange;
+  selectProps?: SelectProps;
 };
 
 const renderPrioritySelect = (props: GridCellParams & Props) => (
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
-    value={props.value}
-    onChange={(event) => {
-      props.onChange(event, props);
-    }}
+    defaultValue={props.value}
+    {...props.selectProps}
   >
     <MenuItem value={1}>
       <FlagIcon color="secondary" />
