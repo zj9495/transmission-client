@@ -1,11 +1,11 @@
 import React from "react";
 import { Checkbox, CheckboxProps } from "@material-ui/core";
 
-import { ModeValue, SEED_MODE, getNextValue } from "./constants";
+import { SEED_MODE, getNextValue } from "./constants";
 
 type Props = CheckboxProps & {
-  value: ModeValue;
-  onChange: (value: ModeValue) => void;
+  value: SEED_MODE;
+  onChange: (value: SEED_MODE) => void;
 };
 
 const SeedModeCheckbox = (props: Props) => {
