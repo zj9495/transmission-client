@@ -9,12 +9,6 @@ const request = axios.create({
   withCredentials: true,
 });
 
-request.interceptors.request.use((req) => {
-  req.headers["x-transmission-rpc-method"] =
-    req.data.method || "unknown-method";
-  return req;
-});
-
 request.interceptors.response.use(
   (response) => objectToCamelCase(response) as AxiosResponse<any>,
   (error) => {
