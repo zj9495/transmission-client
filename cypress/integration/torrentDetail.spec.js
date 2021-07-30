@@ -39,7 +39,7 @@ context("test torrent detail", () => {
     cy.contains("Trackers").click()
 
     // close detail dialog
-    cy.get(".MuiBackdrop-root").click()
+    cy.get(".MuiBackdrop-root").click({force: true})
     
     cy.contains(TEST_TORRENT.NAME).click()
     // should show Base as the default tab 
