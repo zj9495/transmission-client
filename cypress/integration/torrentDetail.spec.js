@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import moment from "moment"
 
 import { TEST_URL, addTestTorrent, removeTestTorrent } from "./common"
 import { TEST_TORRENT } from "../fixtures/constants"
@@ -58,7 +59,7 @@ context("test torrent detail", () => {
     cy.getByTestId("torrent-detail-tabs").find(".Mui-selected").contains("Base")
 
     cy.getByTestId("torrent-detail-addedDate").contains("Added date")
-    cy.getByTestId("torrent-detail-addedDate").contains("2021-07-30 15:21:28")
+    cy.getByTestId("torrent-detail-addedDate").contains(moment.unix(1627629688).format("YYYY-MM-DD HH:mm:ss"))
 
     cy.getByTestId("torrent-detail-downloadDir").contains("Download dir")
     cy.getByTestId("torrent-detail-downloadDir").contains("/downloads/complete")
@@ -67,7 +68,7 @@ context("test torrent detail", () => {
     cy.getByTestId("torrent-detail-labels").contains("无")
 
     cy.getByTestId("torrent-detail-doneDate").contains("Finish Time")
-    cy.getByTestId("torrent-detail-doneDate").contains("2021-07-30 15:40:23")
+    cy.getByTestId("torrent-detail-doneDate").contains(moment.unix(1627630823).format("YYYY-MM-DD HH:mm:ss"))
 
     cy.getByTestId("torrent-detail-percentDone").contains("Downloaded")
     cy.getByTestId("torrent-detail-percentDone").contains("100%")
@@ -79,10 +80,10 @@ context("test torrent detail", () => {
     cy.getByTestId("torrent-detail-seederCount").contains("2 connected of 4")
 
     cy.getByTestId("torrent-detail-activityDate").contains("Last Activity")
-    cy.getByTestId("torrent-detail-activityDate").contains("2021-07-30 15:21:48")
+    cy.getByTestId("torrent-detail-activityDate").contains(moment.unix(1627629708).format("YYYY-MM-DD HH:mm:ss"))
 
     cy.getByTestId("torrent-detail-dateCreated").contains("Date created")
-    cy.getByTestId("torrent-detail-dateCreated").contains("2021-02-07 13:27:19")
+    cy.getByTestId("torrent-detail-dateCreated").contains(moment.unix(1612675639).format("YYYY-MM-DD HH:mm:ss"))
 
     cy.getByTestId("torrent-detail-hashString").contains("HASH")
     cy.getByTestId("torrent-detail-hashString").contains("d3d0774b8d3d1389a956899250de94d5f11b29be")
@@ -130,12 +131,12 @@ context("test torrent detail", () => {
     cy.getByTestId("torrent-tracker-lastAnnounceSucceeded").contains("True")
     
     cy.getByTestId("torrent-tracker-lastAnnounceTime").contains("AnnounceTime")
-    cy.getByTestId("torrent-tracker-lastAnnounceTime").contains("2021-07-30 15:21:36")
+    cy.getByTestId("torrent-tracker-lastAnnounceTime").contains(moment.unix(1627629696).format("YYYY-MM-DD HH:mm:ss"))
     
     cy.getByTestId("torrent-tracker-lastAnnounceTimedOut").contains("TimedOut")
     cy.getByTestId("torrent-tracker-lastAnnounceTimedOut").contains("False")
     
     cy.getByTestId("torrent-tracker-nextAnnounceTime").contains("Next announce")
-    cy.getByTestId("torrent-tracker-nextAnnounceTime").contains("2021-07-30 16:21:36")
+    cy.getByTestId("torrent-tracker-nextAnnounceTime").contains(moment.unix(1627633296).format("YYYY-MM-DD HH:mm:ss"))
   })
 })
