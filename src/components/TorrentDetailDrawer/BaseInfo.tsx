@@ -134,27 +134,31 @@ const BasicInfo = (props: BasicInfoProp) => {
     },
   ];
   return (
-    <>
+    <div data-testid="base-info-container">
       {info.map((group) => (
         <Grid className={classes.container} key={group.key} container>
           <Grid item xs={12}>
             <Typography variant="h6">{group.title}</Typography>
           </Grid>
           {group.children.map((item) => (
-            <>
-              <Grid key={`${item.key}-title`} item xs={3}>
+            <Grid
+              container
+              key={item.key}
+              data-testid={`torrent-detail-${item.key}`}
+            >
+              <Grid item xs={3}>
                 <Typography>{item.title}</Typography>
               </Grid>
-              <Grid key={`${item.key}-value`} item xs={9}>
+              <Grid item xs={9}>
                 <Typography className={classes.value}>
                   {isLoading ? <Skeleton /> : item.value}
                 </Typography>
               </Grid>
-            </>
+            </Grid>
           ))}
         </Grid>
       ))}
-    </>
+    </div>
   );
 };
 

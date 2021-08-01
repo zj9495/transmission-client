@@ -5,7 +5,7 @@ import { SEED_MODE, getNextValue } from "./constants";
 
 type Props = CheckboxProps & {
   value: SEED_MODE;
-  onChange: (value: SEED_MODE) => void;
+  onChange?: (value: SEED_MODE) => void;
 };
 
 const SeedModeCheckbox = (props: Props) => {

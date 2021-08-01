@@ -190,6 +190,9 @@ export const getTorrent = (id: number): Promise<Torrent> =>
         ],
       },
     },
+    headers: {
+      "x-request-method": "get-torrent-detail",
+    },
   }).then((res) => res.data.arguments.torrents[0]);
 
 export const setTorrent = ({

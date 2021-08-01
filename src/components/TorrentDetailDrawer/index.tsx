@@ -19,9 +19,9 @@ import { FilesTable } from "src/components/TorrentFilesTable";
 import TorrentSettings from "src/components/TorrentSettings";
 import { TFile } from "src/types";
 
-import BasicInfo from "./BasicInfo";
-import ServerInfo from "./ServerInfo";
-import UserTable from "./UserTable";
+import BaseInfo from "./BaseInfo";
+import TrackersInfo from "./TrackersInfo";
+import PeersTable from "./PeersTable";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -96,8 +96,9 @@ const TorrentDetailDrawer = () => {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      data-testid="torrent-detail-drawer"
     >
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle id="alert-dialog-title" data-testid="torrent-detail-title">
         {isLoading ? <Skeleton /> : torrent?.name}
       </DialogTitle>
 
@@ -108,6 +109,7 @@ const TorrentDetailDrawer = () => {
           textColor="primary"
           onChange={handleChange}
           aria-label="disabled tabs example"
+          data-testid="torrent-detail-tabs"
         >
           <Tab
             label={<FormattedMessage id="torrent.attribute.tabs.base" />}
@@ -131,10 +133,10 @@ const TorrentDetailDrawer = () => {
           />
         </Tabs>
         <TabPanel value={currentTab} index={0}>
-          <BasicInfo isLoading={isLoading} torrent={torrent} />
+          <BaseInfo isLoading={isLoading} torrent={torrent} />
         </TabPanel>
         <TabPanel value={currentTab} index={1}>
-          <ServerInfo
+          <TrackersInfo
             isLoading={isLoading}
             trackerStats={torrent?.trackerStats || []}
           />
@@ -143,7 +145,7 @@ const TorrentDetailDrawer = () => {
           <FilesTable files={files} />
         </TabPanel>
         <TabPanel value={currentTab} index={3}>
-          <UserTable rows={torrent?.peers || []} />
+          <PeersTable rows={torrent?.peers || []} />
         </TabPanel>
         <TabPanel value={currentTab} index={4}>
           <TorrentSettings id={id} />
