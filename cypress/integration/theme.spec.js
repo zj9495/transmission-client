@@ -40,11 +40,11 @@ context('app', () => {
     cy.visit(TEST_URL, {
       onBeforeLoad: (window) => {
         cy.stub(window, 'matchMedia')
-      .withArgs('(prefers-color-scheme: dark)')
-      .returns({
-        matches: DAKR_THEME_SWITCH.ENABLED,
-        addEventListener: () => {}
-      })
+        .returns({
+          matches: DAKR_THEME_SWITCH.ENABLED,
+          addListener: () => {},
+          addEventListener: () => {}
+        })
       }
     })
 
@@ -55,9 +55,9 @@ context('app', () => {
     cy.visit(TEST_URL, {
       onBeforeLoad: (window) => {
         cy.stub(window, 'matchMedia')
-        .withArgs('(prefers-color-scheme: dark)')
         .returns({
           matches: DAKR_THEME_SWITCH.DISABLED,
+          addListener: () => {},
           addEventListener: () => {}
         })
       }

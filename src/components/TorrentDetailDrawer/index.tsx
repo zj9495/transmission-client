@@ -108,7 +108,7 @@ const TorrentDetailDrawer = () => {
           indicatorColor="primary"
           textColor="primary"
           onChange={handleChange}
-          aria-label="disabled tabs example"
+          aria-label="torrent detail tabs"
           data-testid="torrent-detail-tabs"
         >
           <Tab
@@ -142,7 +142,7 @@ const TorrentDetailDrawer = () => {
           />
         </TabPanel>
         <TabPanel value={currentTab} index={2}>
-          <FilesTable files={files} />
+          <FilesTable files={files} simple />
         </TabPanel>
         <TabPanel value={currentTab} index={3}>
           <PeersTable rows={torrent?.peers || []} />

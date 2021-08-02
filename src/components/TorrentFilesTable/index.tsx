@@ -49,7 +49,7 @@ export const FilesTable = (props: FilesTableProps) => {
   const intl = useIntl();
   const {
     files,
-    simple = true,
+    simple = false,
     selectedFilesIds,
     onSelectionModelChange,
     onFileWantedChange,
@@ -178,7 +178,6 @@ const TorrentFilesTable = () => {
   return (
     <FilesTable
       files={files}
-      simple
       selectedFilesIds={selectedFilesIds}
       onSelectionModelChange={handleSelectionChange}
       onFileWantedChange={handleFileWantedChange}
