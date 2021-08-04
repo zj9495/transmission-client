@@ -184,7 +184,7 @@
   "dialog.systemConfig.exportConfig": "导出当前配置到配置文件(内容包括：Transmission 参数、WebUI 配置)",
   "dialog.systemConfig.importConfigConfirm": "是否确认导入这些配置信息？这将覆盖当前配置。",
   "dialog.systemConfig.scriptTorrentDoneEnabled": "种子下载完成后执行以下脚本：",
-  "dialog.systemConfig.ipinfo": "IPinfo.io access token:",
+  "dialog.systemConfig.ipinfo": "IPinfo.io 访问令牌：",
   "dialog.public.buttonOk": "确定",
   "dialog.public.buttonCancel": "取消",
   "dialog.public.buttonReload": "刷新",
