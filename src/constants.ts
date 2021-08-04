@@ -12,82 +12,82 @@ export const LANGUAGES = [
   {
     code: "en",
     text: "English",
-    langFile: require("src/i18n/lang/en.json"),
+    strings: require("src/i18n/strings/en.json"),
   },
   {
     code: "zh-CN",
     text: "中文 - 简体",
-    langFile: require("src/i18n/lang/zh_CN.json"),
+    strings: require("src/i18n/strings/zh-Hans.json"),
   },
   {
     code: "zh-TW",
     text: "中文 - 繁体",
-    langFile: require("src/i18n/lang/zh_TW.json"),
+    strings: require("src/i18n/strings/zh-Hant.json"),
   },
   {
     code: "de",
     text: "Deutsch",
-    langFile: require("src/i18n/lang/de.json"),
+    strings: require("src/i18n/strings/de.json"),
   },
   {
     code: "es",
     text: "Español",
-    langFile: require("src/i18n/lang/es.json"),
+    strings: require("src/i18n/strings/es.json"),
   },
   {
     code: "fr",
     text: "Français",
-    langFile: require("src/i18n/lang/fr.json"),
+    strings: require("src/i18n/strings/fr.json"),
   },
   {
     code: "hu",
     text: "Magyar",
-    langFile: require("src/i18n/lang/hu.json"),
+    strings: require("src/i18n/strings/hu.json"),
   },
   {
     code: "it",
     text: "Italiano",
-    langFile: require("src/i18n/lang/it.json"),
+    strings: require("src/i18n/strings/it.json"),
   },
   {
     code: "ko",
     text: "Korean",
-    langFile: require("src/i18n/lang/ko.json"),
+    strings: require("src/i18n/strings/ko.json"),
   },
   {
     code: "nl",
     text: "Nederlands",
-    langFile: require("src/i18n/lang/nl.json"),
+    strings: require("src/i18n/strings/nl.json"),
   },
   {
     code: "pl",
     text: "Polska - Polski",
-    langFile: require("src/i18n/lang/pl.json"),
+    strings: require("src/i18n/strings/pl.json"),
   },
   {
     code: "pt-BR",
     text: "Português - Brasil",
-    langFile: require("src/i18n/lang/pt_BR.json"),
+    strings: require("src/i18n/strings/pt_BR.json"),
   },
   {
     code: "pt-PT",
     text: "Português - Portugal",
-    langFile: require("src/i18n/lang/pt_PT.json"),
+    strings: require("src/i18n/strings/pt.json"),
   },
   {
     code: "ro",
     text: "Romanian",
-    langFile: require("src/i18n/lang/ro.json"),
+    strings: require("src/i18n/strings/ro.json"),
   },
   {
     code: "ru",
     text: "Русский",
-    langFile: require("src/i18n/lang/ru.json"),
+    strings: require("src/i18n/strings/ru.json"),
   },
   {
     code: "uk",
     text: "українська мова",
-    langFile: require("src/i18n/lang/uk.json"),
+    strings: require("src/i18n/strings/uk.json"),
   },
 ];
 
