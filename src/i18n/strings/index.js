@@ -9,12 +9,12 @@ import ko from "./ko";
 import nl from "./nl";
 import pl from "./pl";
 import pt_BR from "./pt_BR";
-import pt_PT from "./pt_PT";
+import pt from "./pt";
 import ro from "./ro";
 import ru from "./ru";
 import uk from "./uk";
-import zh_CN from "./zh_CN";
-import zh_TW from "./zh_TW";
+import zh_Hans from "./zh-Hans";
+import zh_Hant from "./zh-Hant";
 
 const langs = {
   de,
@@ -27,12 +27,12 @@ const langs = {
   nl,
   pl,
   pt_BR,
-  pt_PT,
+  pt,
   ro,
   ru,
   uk,
-  zh_CN,
-  zh_TW,
+  zh_Hans,
+  zh_Hant,
 };
 
 export default langs;

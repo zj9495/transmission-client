@@ -12,8 +12,8 @@ interface Props {
 }
 
 function getMessages(locale: string): Record<string, string> {
-  const messages = find(LANGUAGES, { code: locale })?.langFile || {};
-  const defaultMessages = DEFAULT_LANGUAGE.langFile;
+  const messages = find(LANGUAGES, { code: locale })?.strings || {};
+  const defaultMessages = DEFAULT_LANGUAGE.strings;
   return {
     ...defaultMessages,
     ...messages,

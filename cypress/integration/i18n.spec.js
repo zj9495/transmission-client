@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { TEST_URL } from "./common"
-import langs from "../../src/i18n/lang"
+import langs from "../../src/i18n/strings"
 import { STORAGE_KEYS } from "../../src/constants"
 
 context('i18n', () => {
@@ -34,14 +34,14 @@ context('i18n', () => {
       {
         code: "zh-CN",
         text: "中文 - 简体",
-        name: langs.zh_CN['torrent.fields.name'],
-        totalSize: langs.zh_CN['torrent.fields.totalSize']
+        name: langs.zh_Hans['torrent.fields.name'],
+        totalSize: langs.zh_Hans['torrent.fields.totalSize']
       },
       {
         code: "zh-TW",
         text: "中文 - 繁体",
-        name: langs.zh_TW['torrent.fields.name'],
-        totalSize: langs.zh_TW['torrent.fields.totalSize']
+        name: langs.zh_Hant['torrent.fields.name'],
+        totalSize: langs.zh_Hant['torrent.fields.totalSize']
       },
       {
         code: "de",
@@ -94,8 +94,8 @@ context('i18n', () => {
       {
         code: "pt-PT",
         text: "Português - Portugal",
-        name: langs.pt_PT['torrent.fields.name'],
-        totalSize: langs.pt_PT['torrent.fields.totalSize']
+        name: langs.pt['torrent.fields.name'],
+        totalSize: langs.pt['torrent.fields.totalSize']
       },
       {
         code: "ro",
@@ -136,14 +136,14 @@ context('i18n', () => {
       {
         codes: ["zh", "zh_CN"],
         text: "中文 - 简体",
-        name: langs.zh_CN['torrent.fields.name'],
-        totalSize: langs.zh_CN['torrent.fields.totalSize']
+        name: langs.zh_Hans['torrent.fields.name'],
+        totalSize: langs.zh_Hans['torrent.fields.totalSize']
       },
       {
         codes: ["zh_TW", "zh_HK"],
         text: "中文 - 繁体",
-        name: langs.zh_TW['torrent.fields.name'],
-        totalSize: langs.zh_TW['torrent.fields.totalSize']
+        name: langs.zh_Hant['torrent.fields.name'],
+        totalSize: langs.zh_Hant['torrent.fields.totalSize']
       },
       {
         codes: ["de", "de_DE", "de_AT"],
@@ -196,8 +196,8 @@ context('i18n', () => {
       {
         codes: ["pt_PT"],
         text: "Português - Portugal",
-        name: langs.pt_PT['torrent.fields.name'],
-        totalSize: langs.pt_PT['torrent.fields.totalSize']
+        name: langs.pt['torrent.fields.name'],
+        totalSize: langs.pt['torrent.fields.totalSize']
       },
       {
         codes: ["ro", "ro_RO"],
@@ -241,14 +241,14 @@ context('i18n', () => {
       {
         codes: ["zh_CN"],
         text: "中文 - 简体",
-        name: langs.zh_CN['torrent.fields.name'],
-        totalSize: langs.zh_CN['torrent.fields.totalSize']
+        name: langs.zh_Hans['torrent.fields.name'],
+        totalSize: langs.zh_Hans['torrent.fields.totalSize']
       },
       {
         codes: ["zh_TW", "zh_HK"],
         text: "中文 - 繁体",
-        name: langs.zh_TW['torrent.fields.name'],
-        totalSize: langs.zh_TW['torrent.fields.totalSize']
+        name: langs.zh_Hant['torrent.fields.name'],
+        totalSize: langs.zh_Hant['torrent.fields.totalSize']
       },
       {
         codes: ["de_DE", "de_AT"],
@@ -301,8 +301,8 @@ context('i18n', () => {
       {
         codes: ["pt_PT"],
         text: "Português - Portugal",
-        name: langs.pt_PT['torrent.fields.name'],
-        totalSize: langs.pt_PT['torrent.fields.totalSize']
+        name: langs.pt['torrent.fields.name'],
+        totalSize: langs.pt['torrent.fields.totalSize']
       },
       {
         codes: ["ro_RO"],
@@ -334,7 +334,6 @@ context('i18n', () => {
             })
           }
         })
-        cy.verifyConnected()
         cy.get('#selected-language').contains(language.text)
         cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.name)
         cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.totalSize)
