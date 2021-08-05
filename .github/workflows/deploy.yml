@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches: [master]
 jobs:
   build-and-deploy:
     name: Deploy
@@ -12,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - uses: nogsantos/scp-deploy@master
+      - uses: appleboy/scp-action@master
         with:
           host: frp.zj9495.com
-          user: ubuntu
+          username: ubuntu
           port: 22
           key: ${{ secrets.DEPLOY_PREVIEW_SSH_KEY }}
-          src: ".github/*"
-          remote: "/home/ubuntu/transmission-client/"
+          source: ".github/*"
+          target: "/home/ubuntu/transmission-client"
+          strip_components: 1
