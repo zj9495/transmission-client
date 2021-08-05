@@ -13,12 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: appleboy/scp-action@master
+      - uses: cross-the-world/scp-pipeline@master
         with:
           host: frp.zj9495.com
-          username: ubuntu
+          user: ubuntu
           port: 22
           key: ${{ secrets.DEPLOY_PREVIEW_SSH_KEY }}
-          source: ".github/*"
-          target: "/home/ubuntu/transmission-client"
-          strip_components: 1
+          local: ".github/*"
+          remote: "/home/ubuntu/transmission-client/"
