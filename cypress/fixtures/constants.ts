@@ -1,9 +1,9 @@
 export const DOWNLOAD_DIR = "/downloads/complete";
 export const TEST_TORRENT = {
   URL:
-    "https://www.hdarea.co/download.php?id=39380&passkey=ddeb644cd5dac0c3c3b00152e415fdf8",
+    "https://pt.hdupt.com/download.php?id=30675&passkey=b4ab64d2f26b9134e00899443f2dd209",
   NAME:
-    "Beethoven - Piano Trio in C minor, Triple Concerto [Oborin, Oistrakh, Knushevitskiy] (2011) [FLAC]",
+    "Daft Punk - TRON Legacy - The Complete Edition (2020) Mp3 320kbps [PMEDIA]",
 };
 export const COLUMNS = {
   DISPLAY: ["name", "totalSize", "percentDone", "leftUntilDone", "uploadRatio", "status", "seederCount", "leecherCount", "rateDownload", "rateUpload", "addedDate", "downloadDir"],
