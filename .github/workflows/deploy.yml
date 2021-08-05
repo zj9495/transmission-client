@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: cross-the-world/scp-pipeline@master
+      - uses: nogsantos/scp-deploy@master
         with:
           host: frp.zj9495.com
           user: ubuntu
           port: 22
           key: ${{ secrets.DEPLOY_PREVIEW_SSH_KEY }}
-          local: ".github/*"
+          src: ".github/*"
           remote: "/home/ubuntu/transmission-client/"
