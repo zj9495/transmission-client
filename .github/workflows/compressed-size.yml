@@ -25,4 +25,4 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           pattern: "**/build/**/*.{js,css}"
-          strip-hash: "\\.(\\w{8})\\.chunk\\."
+          strip-hash: "\\.(\\w{8})(\\.chunk|)\\."
