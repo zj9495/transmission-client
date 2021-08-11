@@ -4,6 +4,7 @@ import type {
   TorrentId,
   TorrentSettings,
   OriginTorrentSettings,
+  QueueType,
 } from "src/types";
 import request from "./request";
 
@@ -54,6 +55,7 @@ export const getTorrents = () =>
           "doneDate",
           "queuePosition",
           "activityDate",
+          "magnetLink",
         ],
       },
       tag: "",
@@ -292,6 +294,17 @@ export const setTorrentSettings = (
       method: "torrent-set",
       arguments: data,
       ids: id,
+      tag: "",
+    },
+  });
+
+export const moveQueue = (type: QueueType, ids: number[]) =>
+  request({
+    method: "post",
+    data: {
+      method: `queue-move-${type}`,
+      arguments: {},
+      ids,
       tag: "",
     },
   });

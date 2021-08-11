@@ -70,6 +70,7 @@ export interface ITorrent {
   error: number;
   errorString: string;
   hashString: string;
+  magnetLink: string;
 }
 
 export interface ITorrents {
@@ -274,3 +275,5 @@ export type TorrentStatus =
 export interface IParamTypes {
   torrentStatus: TorrentStatus;
 }
+
+export type QueueType = "top" | "up" | "down" | "bottom";

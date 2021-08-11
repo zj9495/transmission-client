@@ -10,6 +10,7 @@ import {
 } from "@material-ui/x-grid";
 import type { GridSelectionModelChangeParams } from "@material-ui/x-grid";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { find } from "lodash";
 
 import { useParams } from "react-router-dom";
 
@@ -22,7 +23,8 @@ import {
   formatUnixTimeStamp,
   formatLeftTime,
 } from "src/utils/formatter";
-import { IParamTypes, TorrentId } from "src/types";
+import { IParamTypes, ITorrent, TorrentId } from "src/types";
+import ContextMenu, { ContextMenuProps } from "src/components/ContextMenu";
 import renderName from "./renderName";
 import renderProgress from "./renderProgress";
 import { COLUMNS_WIDTH } from "./constants";
@@ -60,6 +62,18 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TorrentTable: React.FC = () => {
+  const [gridRenderRef, setGridRenderRef] = React.useState<
+    HTMLDivElement | undefined
+  >();
+  const [contextMenuProps, setContextMenuProps] = React.useState<
+    Omit<ContextMenuProps, "onClose">
+  >({
+    id: 0,
+    open: false,
+    x: null,
+    y: null,
+    torrent: null,
+  });
   const { torrentStatus } = useParams<IParamTypes>();
   const torrents = useSelector(getTorrents);
   const locale = useSelector(getLocale);
@@ -199,8 +213,61 @@ const TorrentTable: React.FC = () => {
 
   const rows = torrents[torrentStatus];
 
+  React.useEffect(() => {
+    const handleRightClick = (event: MouseEvent): any => {
+      let target = event.target as HTMLElement;
+      while (target) {
+        if (target.classList.contains("MuiDataGrid-row")) {
+          break;
+        }
+        target = target.parentNode as HTMLElement;
+      }
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const clickedTorrentId = Number(target.dataset.id);
+      setContextMenuProps({
+        id: clickedTorrentId,
+        open: true,
+        x: event.clientX - 2,
+        y: event.clientY - 4,
+        torrent: find<ITorrent>(torrents[torrentStatus], {
+          id: clickedTorrentId,
+        }) as ITorrent,
+      });
+    };
+
+    if (gridRenderRef) {
+      gridRenderRef.addEventListener("contextmenu", handleRightClick);
+    }
+
+    return () => {
+      if (gridRenderRef) {
+        gridRenderRef.removeEventListener("contextmenu", handleRightClick);
+      }
+    };
+  }, [gridRenderRef, rows]);
+
+  const handleRef = (el: HTMLDivElement) => {
+    if (el) {
+      setGridRenderRef(
+        el.querySelector(".MuiDataGrid-renderingZone") as HTMLDivElement
+      );
+    }
+  };
+
   const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
     dispatch(setSelectedIds(params.selectionModel as number[]));
+  };
+
+  const handleClose = () => {
+    setContextMenuProps({
+      ...contextMenuProps,
+      open: false,
+    });
   };
 
   return (
@@ -209,6 +276,7 @@ const TorrentTable: React.FC = () => {
       style={{ height: "calc(100vh - 117px)", width: "100%" }}
     >
       <XGrid
+        ref={handleRef}
         className={classes.table}
         components={{
           Toolbar: GridToolbar,
@@ -223,6 +291,7 @@ const TorrentTable: React.FC = () => {
         disableSelectionOnClick
         onSelectionModelChange={handleSelectionChange}
       />
+      <ContextMenu {...contextMenuProps} onClose={handleClose} />
     </div>
   );
 };
