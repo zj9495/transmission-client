@@ -57,11 +57,15 @@ export interface ITorrent {
   uploadedEver: number;
   status: number;
   uploadRatio: number;
-  seederCount: string;
-  leecherCount: string;
+  seederCount: number;
+  leecherCount: number;
+  peersGettingFromUs: number;
+  peersSendingToUs: number;
+  recheckProgress: number;
   completeSize: number;
   addedDate: number;
-  trackers: string;
+  trackers: [];
+  trackerStats: [];
   downloadDir: string;
   labels: string[];
   doneDate: number;

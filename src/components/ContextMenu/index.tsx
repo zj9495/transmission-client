@@ -124,6 +124,7 @@ const ContextMenu = ({
 
   return (
     <Menu
+      data-testid="context-menu"
       keepMounted
       open={open}
       onClose={onClose}
@@ -131,30 +132,51 @@ const ContextMenu = ({
       anchorPosition={
         y !== null && x !== null ? { top: y, left: x } : undefined
       }
+      TransitionProps={{
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        "data-testid": "context-menu-transition",
+      }}
     >
-      <MenuItem onClick={handleStart} disabled={disableStart}>
+      <MenuItem
+        data-testid="context-menu-start"
+        onClick={handleStart}
+        disabled={disableStart}
+      >
         <PlayArrowIcon className={classes.icon} />
         <FormattedMessage id="toolbar.tip.start" />
       </MenuItem>
-      <MenuItem onClick={handleStop} disabled={disablePause}>
+      <MenuItem
+        data-testid="context-menu-pause"
+        onClick={handleStop}
+        disabled={disablePause}
+      >
         <PauseIcon className={classes.icon} />
         <FormattedMessage id="toolbar.tip.pause" />
       </MenuItem>
       <Divider />
-      <MenuItem onClick={onClose}>
+      <MenuItem data-testid="context-menu-rename" onClick={onClose}>
         <EditOutlinedIcon className={classes.icon} />
         <FormattedMessage id="toolbar.tip.rename" />
       </MenuItem>
-      <MenuItem onClick={handleRemove}>
+      <MenuItem data-testid="context-menu-remove" onClick={handleRemove}>
         <DeleteIcon className={classes.icon} />
         <FormattedMessage id="toolbar.tip.remove" />
       </MenuItem>
-      <MenuItem onClick={handleVerify} disabled={disableRecheck}>
+      <MenuItem
+        data-testid="context-menu-recheck"
+        onClick={handleVerify}
+        disabled={disableRecheck}
+      >
         <StorageIcon className={classes.icon} />
         <FormattedMessage id="toolbar.tip.recheck" />
       </MenuItem>
       <Divider />
-      <MenuItem onClick={handleReannounce} disabled={disableMorePeers}>
+      <MenuItem
+        data-testid="context-menu-more-peers"
+        onClick={handleReannounce}
+        disabled={disableMorePeers}
+      >
         <SettingsInputAntennaIcon className={classes.icon} />
         <FormattedMessage id="toolbar.tip.morePeers" />
       </MenuItem>
