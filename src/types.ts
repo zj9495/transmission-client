@@ -57,11 +57,15 @@ export interface ITorrent {
   uploadedEver: number;
   status: number;
   uploadRatio: number;
-  seederCount: string;
-  leecherCount: string;
+  seederCount: number;
+  leecherCount: number;
+  peersGettingFromUs: number;
+  peersSendingToUs: number;
+  recheckProgress: number;
   completeSize: number;
   addedDate: number;
-  trackers: string;
+  trackers: [];
+  trackerStats: [];
   downloadDir: string;
   labels: string[];
   doneDate: number;
@@ -70,6 +74,7 @@ export interface ITorrent {
   error: number;
   errorString: string;
   hashString: string;
+  magnetLink: string;
 }
 
 export interface ITorrents {
@@ -274,3 +279,5 @@ export type TorrentStatus =
 export interface IParamTypes {
   torrentStatus: TorrentStatus;
 }
+
+export type QueueType = "top" | "up" | "down" | "bottom";

@@ -34,7 +34,6 @@ export const showAllColumns = () => {
 }
 
 export const getUrl = () => {
-  console.log('TEST_URL: ');
   const { env } = Cypress
   // result example: protocol://user:password@host:port/path
   return `${env('protocol')}://${env('user')}:${env('password')}@${env('host')}:${env('port')}${env('path')}`
