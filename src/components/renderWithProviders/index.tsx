@@ -14,15 +14,9 @@ import initialState from "src/store/initialState";
 type State = Record<string, any>;
 type Children = React.ReactNode;
 interface IProvidersProps {
-  state?: State;
+  state: State;
   children: Children;
 }
-
-const defaultMockState = {
-  rpc: {
-    locale: "en",
-  },
-};
 
 export const createState = (state: State) =>
   merge(cloneDeep(initialState), state);
@@ -30,10 +24,7 @@ export const createState = (state: State) =>
 export const createMockStore = (state: State) =>
   createStore(reducer, createState(state), applyMiddleware(thunk));
 
-export default function renderWithProviders(
-  children: Children,
-  state: State = defaultMockState
-) {
+export default function renderWithProviders(children: Children, state: State) {
   const store = createMockStore(state);
   const id = "render-with-providers-container";
   return render(
@@ -48,7 +39,7 @@ export default function renderWithProviders(
 }
 
 export function Providers(props: IProvidersProps) {
-  const { children, state = defaultMockState } = props;
+  const { children, state = {} } = props;
   const store = createMockStore(state);
   const id = "providers";
   return (
