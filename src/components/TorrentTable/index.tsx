@@ -62,9 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TorrentTable: React.FC = () => {
-  const [gridRenderRef, setGridRenderRef] = React.useState<
-    HTMLDivElement | undefined
-  >();
+  const tableRef = React.useRef<HTMLDivElement>(null);
+
   const [contextMenuProps, setContextMenuProps] = React.useState<
     Omit<ContextMenuProps, "onClose">
   >({
@@ -217,7 +216,7 @@ const TorrentTable: React.FC = () => {
     const handleRightClick = (event: MouseEvent): any => {
       let target = event.target as HTMLElement;
       while (target) {
-        if (target.classList.contains("MuiDataGrid-row")) {
+        if (target.classList?.contains("MuiDataGrid-row")) {
           break;
         }
         target = target.parentNode as HTMLElement;
@@ -240,24 +239,16 @@ const TorrentTable: React.FC = () => {
       });
     };
 
-    if (gridRenderRef) {
-      gridRenderRef.addEventListener("contextmenu", handleRightClick);
+    if (tableRef.current) {
+      tableRef.current.addEventListener("contextmenu", handleRightClick);
     }
 
     return () => {
-      if (gridRenderRef) {
-        gridRenderRef.removeEventListener("contextmenu", handleRightClick);
+      if (tableRef.current) {
+        tableRef.current.removeEventListener("contextmenu", handleRightClick);
       }
     };
-  }, [gridRenderRef, rows]);
-
-  const handleRef = (el: HTMLDivElement) => {
-    if (el) {
-      setGridRenderRef(
-        el.querySelector(".MuiDataGrid-renderingZone") as HTMLDivElement
-      );
-    }
-  };
+  }, [tableRef, rows]);
 
   const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
     dispatch(setSelectedIds(params.selectionModel as number[]));
@@ -276,7 +267,7 @@ const TorrentTable: React.FC = () => {
       style={{ height: "calc(100vh - 117px)", width: "100%" }}
     >
       <XGrid
-        ref={handleRef}
+        ref={tableRef}
         className={classes.table}
         components={{
           Toolbar: GridToolbar,
