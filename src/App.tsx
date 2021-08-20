@@ -8,6 +8,7 @@ import {
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "react-redux";
 import { SnackbarProvider } from "notistack";
+import { PersistGate } from "redux-persist/integration/react";
 
 import { APP_ROUTES } from "./constants";
 import Intl from "./containers/Intl";
@@ -15,7 +16,7 @@ import Theme from "./containers/Theme";
 import SignIn from "./containers/SignIn";
 import List from "./components/List";
 import Header from "./components/Header";
-import store from "./store";
+import store, { persistor } from "./store";
 
 import appStart from "./appStart";
 
@@ -23,21 +24,23 @@ appStart.start();
 
 const App = (): JSX.Element => (
   <Provider store={store}>
-    <Intl>
-      <Theme>
-        <SnackbarProvider>
-          <Router>
-            <CssBaseline />
-            <Header />
-            <Switch>
-              <Route path={APP_ROUTES.signIn} component={SignIn} />
-              <Route path={APP_ROUTES.list} component={List} />
-              <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
-            </Switch>
-          </Router>
-        </SnackbarProvider>
-      </Theme>
-    </Intl>
+    <PersistGate persistor={persistor}>
+      <Intl>
+        <Theme>
+          <SnackbarProvider>
+            <Router>
+              <CssBaseline />
+              <Header />
+              <Switch>
+                <Route path={APP_ROUTES.signIn} component={SignIn} />
+                <Route path={APP_ROUTES.list} component={List} />
+                <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
+              </Switch>
+            </Router>
+          </SnackbarProvider>
+        </Theme>
+      </Intl>
+    </PersistGate>
   </Provider>
 );
 

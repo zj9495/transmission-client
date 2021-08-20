@@ -28,6 +28,8 @@ export const createState = (state: State) =>
   merge(cloneDeep(initialState), state);
 
 export const createMockStore = (state: State) =>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   createStore(reducer, createState(state), applyMiddleware(thunk));
 
 export default function renderWithProviders(
