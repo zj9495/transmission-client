@@ -36,9 +36,9 @@ context('app', () => {
       DISABLED: false
     }
 
-    cy.clearLocalStorage();
     cy.visit(TEST_URL, {
       onBeforeLoad: (window) => {
+        window.localStorage.clear()
         cy.stub(window, 'matchMedia')
         .returns({
           matches: DAKR_THEME_SWITCH.ENABLED,

@@ -10,19 +10,19 @@ import appReducer from "./reducers/app";
 const rootPersistConfig = {
   key: "root",
   storage,
-  blacklist: [],
+  blacklist: ["rpc", "app"],
 };
 
 const rpcPersistConfig = {
   key: "rpc",
   storage,
-  blacklist: [],
+  blacklist: ["session"],
 };
 
 const appPersistConfig = {
   key: "app",
   storage,
-  blacklist: [],
+  blacklist: ["detail"],
 };
 
 const rootReducer = combineReducers({

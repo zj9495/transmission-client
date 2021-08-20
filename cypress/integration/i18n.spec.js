@@ -2,7 +2,6 @@
 
 import { TEST_URL } from "./common"
 import { LANGUAGES } from "../fixtures/constants"
-import { STORAGE_KEYS } from "../../src/constants"
 
 context('i18n', () => {
 
@@ -41,10 +40,10 @@ context('i18n', () => {
         it(`should use ${language.code} (${language.text}) if browser's locale is ${locale} `, () => {
           cy.visit(TEST_URL, {
             onBeforeLoad: (window) => {
+              window.localStorage.clear()
               // 'window:before:load:' will be fired before 'onBeforeLoad', so use setTimeout to hack it
               setTimeout(() => {
                 Object.defineProperty(window.navigator, 'language', { value: locale, configurable: true });
-                window.localStorage.removeItem(STORAGE_KEYS.LOCALE)
               })
             }
           })
