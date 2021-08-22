@@ -25,7 +25,11 @@ context('i18n', () => {
       language.codes.forEach((locale) => {
         const url = `${TEST_URL}?locale=${locale}`
         it(`should use ${language.code} (${language.text}) for http://ip:port/transmission/web?locale=${locale}`, () => {
-          cy.visit(url)
+          cy.visit(url, {
+            onBeforeLoad: (window) => {
+              window.localStorage.clear()
+            }
+          })
           cy.get('#selected-language').contains(language.text)
           cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.strings['torrent.fields.name'])
           cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.strings['torrent.fields.totalSize'])
