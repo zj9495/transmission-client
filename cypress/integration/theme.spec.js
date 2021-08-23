@@ -3,35 +3,27 @@
 
 import { TEST_URL } from "./common"
 
-context('app', () => {
+context('theme', () => {
   beforeEach(() => {
-    cy.visit(TEST_URL)
-    cy.verifyConnected()
+    cy.visitWithoutLocalStorage(TEST_URL)
   })
 
   it('should use the auto theme at first boot', () => {
-    cy.clearLocalStorage();
-    cy.reload();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=auto]").should('be.exist');
   })
 
   it('should use the last theme when reloading', () => {
-    cy.clearLocalStorage();
-    cy.reload();
-
     cy.getByTestId("theme-toggle-button").click();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=light]").should('be.exist');
-    // waiting for redux-persist write the state to storage 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(50)
+    cy.waitForWritteState()
+    
     cy.reload();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=light]").should('be.exist');
 
     cy.getByTestId("theme-toggle-button").click();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=dark]").should('be.exist');
-    // waiting for redux-persist write the state to storage 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(50)
+    cy.waitForWritteState()
+
     cy.reload();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=dark]").should('be.exist');
   })

@@ -25,11 +25,8 @@ context('i18n', () => {
       language.codes.forEach((locale) => {
         const url = `${TEST_URL}?locale=${locale}`
         it(`should use ${language.code} (${language.text}) for http://ip:port/transmission/web?locale=${locale}`, () => {
-          cy.visit(url, {
-            onBeforeLoad: (window) => {
-              window.localStorage.clear()
-            }
-          })
+          cy.visitWithoutLocalStorage(url)
+
           cy.get('#selected-language').contains(language.text)
           cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.strings['torrent.fields.name'])
           cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.strings['torrent.fields.totalSize'])
@@ -41,7 +38,7 @@ context('i18n', () => {
   describe("should use the browser's language as the default language", () => {
     LANGUAGES.forEach((language) => {
       language.codes.forEach((locale) => {
-        it(`should use ${language.code} (${language.text}) if browser's locale is ${locale} `, () => {
+        it(`should use ${language.code} (${language.text}) if browser's locale is ${locale} `, () => {          
           cy.visit(TEST_URL, {
             onBeforeLoad: (window) => {
               window.localStorage.clear()

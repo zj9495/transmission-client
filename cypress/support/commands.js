@@ -29,3 +29,13 @@ Cypress.Commands.add('verifyConnected', () => {
 })
 
 Cypress.Commands.add('getByTestId', (selector, ...args) => cy.get(`[data-testid=${selector}]`, ...args))
+
+Cypress.Commands.add('visitWithoutLocalStorage', (url, options) => cy.visit(url, {
+  onBeforeLoad: (window) => {
+    window.localStorage.clear()
+  },
+  ...options
+}))
+
+// eslint-disable-next-line cypress/no-unnecessary-waiting
+Cypress.Commands.add('waitForWritteState', () => cy.wait(300))
