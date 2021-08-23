@@ -36,3 +36,6 @@ Cypress.Commands.add('visitWithoutLocalStorage', (url, options) => cy.visit(url,
   },
   ...options
 }))
+
+// eslint-disable-next-line cypress/no-unnecessary-waiting
+Cypress.Commands.add('waitForWritteState', () => cy.wait(300))
