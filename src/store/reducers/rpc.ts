@@ -13,6 +13,7 @@ import {
 } from "../constants";
 
 export const initialRPCState: IRPCState = {
+  connected: false,
   locale: "",
   theme: "auto",
   sessionId: undefined,
@@ -86,6 +87,7 @@ export default (state = initialRPCState, action: Action) =>
         break;
       case SET_SESSION_STATS:
         draft.stats = action.payload;
+        draft.connected = true;
         break;
       default:
         return state;

@@ -47,3 +47,6 @@ export const getRemoveTorrentsDialogOpen = (state: IState) =>
 // Torrent Detail
 export const getTorrentDetailOpen = (state: IState) => state.app.detail.open;
 export const getDetailId = (state: IState) => state.app.detail.id;
+
+// connect status
+export const getConnectedSelector = (state: IState) => state.rpc.connected;

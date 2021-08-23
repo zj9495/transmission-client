@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 Cypress.Commands.add('verifyConnected', () => {
   cy.contains('Transmission Client')
-  cy.contains('[data-testid=rpc-version]', /^[1-9]+$/, {timeout: 600000})
+  cy.getByTestId("connected-icon")
 })
 
 Cypress.Commands.add('getByTestId', (selector, ...args) => cy.get(`[data-testid=${selector}]`, ...args))
