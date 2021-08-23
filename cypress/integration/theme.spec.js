@@ -21,11 +21,17 @@ context('app', () => {
 
     cy.getByTestId("theme-toggle-button").click();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=light]").should('be.exist');
+    // waiting for redux-persist write the state to storage 
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(50)
     cy.reload();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=light]").should('be.exist');
 
     cy.getByTestId("theme-toggle-button").click();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=dark]").should('be.exist');
+    // waiting for redux-persist write the state to storage 
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(50)
     cy.reload();
     cy.getByTestId("theme-toggle-button").find("[data-test-id=dark]").should('be.exist');
   })
@@ -36,9 +42,9 @@ context('app', () => {
       DISABLED: false
     }
 
-    cy.clearLocalStorage();
     cy.visit(TEST_URL, {
       onBeforeLoad: (window) => {
+        window.localStorage.clear()
         cy.stub(window, 'matchMedia')
         .returns({
           matches: DAKR_THEME_SWITCH.ENABLED,

@@ -2,7 +2,6 @@
 
 import { TEST_URL } from "./common"
 import { LANGUAGES } from "../fixtures/constants"
-import { STORAGE_KEYS } from "../../src/constants"
 
 context('i18n', () => {
 
@@ -26,7 +25,11 @@ context('i18n', () => {
       language.codes.forEach((locale) => {
         const url = `${TEST_URL}?locale=${locale}`
         it(`should use ${language.code} (${language.text}) for http://ip:port/transmission/web?locale=${locale}`, () => {
-          cy.visit(url)
+          cy.visit(url, {
+            onBeforeLoad: (window) => {
+              window.localStorage.clear()
+            }
+          })
           cy.get('#selected-language').contains(language.text)
           cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.strings['torrent.fields.name'])
           cy.get('#torrent-table .MuiDataGrid-colCellTitle').contains(language.strings['torrent.fields.totalSize'])
@@ -41,10 +44,10 @@ context('i18n', () => {
         it(`should use ${language.code} (${language.text}) if browser's locale is ${locale} `, () => {
           cy.visit(TEST_URL, {
             onBeforeLoad: (window) => {
+              window.localStorage.clear()
               // 'window:before:load:' will be fired before 'onBeforeLoad', so use setTimeout to hack it
               setTimeout(() => {
                 Object.defineProperty(window.navigator, 'language', { value: locale, configurable: true });
-                window.localStorage.removeItem(STORAGE_KEYS.LOCALE)
               })
             }
           })

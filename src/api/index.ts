@@ -1,4 +1,3 @@
-import store from "src/store";
 import type {
   Torrent,
   TorrentId,
@@ -12,9 +11,6 @@ export const getSession = () =>
   request({
     method: "post",
     data: { method: "session-get", arguments: {}, tag: "" },
-    headers: {
-      "x-transmission-session-id": store.getState().rpc.sessionId,
-    },
   });
 
 export const getSessionStats = () =>
