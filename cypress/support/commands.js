@@ -29,3 +29,10 @@ Cypress.Commands.add('verifyConnected', () => {
 })
 
 Cypress.Commands.add('getByTestId', (selector, ...args) => cy.get(`[data-testid=${selector}]`, ...args))
+
+Cypress.Commands.add('visitWithoutLocalStorage', (url, options) => cy.visit(url, {
+  onBeforeLoad: (window) => {
+    window.localStorage.clear()
+  },
+  ...options
+}))
