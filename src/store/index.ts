@@ -16,7 +16,7 @@ const rootPersistConfig = {
 const rpcPersistConfig = {
   key: "rpc",
   storage,
-  blacklist: ["session"],
+  blacklist: ["session", "connected"],
 };
 
 const appPersistConfig = {

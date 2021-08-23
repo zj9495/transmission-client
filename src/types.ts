@@ -119,6 +119,7 @@ export interface IStats {
 export type Theme = "light" | "dark" | "auto";
 
 export interface IRPCState {
+  connected: boolean;
   locale:
     | "en"
     | "zh-CN"
