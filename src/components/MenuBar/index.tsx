@@ -1,8 +1,14 @@
 import React from "react";
 import clsx from "clsx";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
+import { useDebounce } from "react-use";
+
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import { Drawer, List, useMediaQuery } from "@material-ui/core";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import AllInboxIcon from "@material-ui/icons/AllInbox";
 import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
@@ -13,10 +19,11 @@ import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
 // import WarningIcon from "@material-ui/icons/Warning";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
+import { toggleMenuOpen } from "src/store/actions/rpc";
 import { getMenuOpen, getTorrents } from "src/store/selector";
 import { IParamTypes, TorrentStatus } from "src/types";
 import MenuItem from "./MenuItem";
@@ -155,61 +162,89 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
       overflowX: "hidden",
       width: closedDrawerWidth,
-      [theme.breakpoints.up("sm")]: {
-        width: closedDrawerWidth,
+      [theme.breakpoints.down("xs")]: {
+        width: 0,
       },
     },
-    toolbar: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
+    mobile: {
+      width: drawerWidth,
     },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
+    menuList: {
+      padding: 0,
     },
   })
 );
 
 export default function MenuBar() {
+  const dispatch = useDispatch();
   const { torrentStatus } = useParams<IParamTypes>();
+  const theme = useTheme();
   const history = useHistory();
   const classes = useStyles();
   const menuOpen = useSelector(getMenuOpen);
   const torrents = useSelector(getTorrents);
-  const [menuTemporaryOpen, setMenuTemporaryOpen] = React.useState(false);
+  const [mouseOver, setMouseOver] = React.useState(false);
+  const [debouncedMouseOver, setDebouncedMouseOver] = React.useState(false);
+  const isMoblie = useMediaQuery(theme.breakpoints.down("xs"));
 
+  const menuTemporaryOpen = mouseOver && debouncedMouseOver;
   const open = menuTemporaryOpen || menuOpen;
+
+  useDebounce(
+    () => {
+      setDebouncedMouseOver(mouseOver);
+    },
+    500,
+    [mouseOver]
+  );
+
   const handleListItemClick = (status: string) => {
     history.push(`/list/${status}`);
+    if (isMoblie) {
+      dispatch(toggleMenuOpen());
+    }
+  };
+
+  const handleClose = () => {
+    dispatch(toggleMenuOpen());
   };
 
   return (
     <Drawer
-      variant="permanent"
+      anchor="left"
+      variant={isMoblie ? undefined : "permanent"}
+      open={isMoblie ? menuOpen : false}
       classes={{
-        paper: clsx(classes.drawerPaper, {
-          [classes.drawerTop]: true,
-          [classes.drawerShadow]: menuTemporaryOpen && !menuOpen,
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        }),
+        paper: clsx(
+          classes.drawerPaper,
+          isMoblie
+            ? classes.mobile
+            : {
+                [classes.drawerShadow]:
+                  isMoblie || (menuTemporaryOpen && !menuOpen),
+                [classes.drawerTop]: true,
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+              }
+        ),
       }}
       className={clsx(classes.drawer, {
         [classes.drawerOpen]: open,
         [classes.drawerClose]: !open,
       })}
       onMouseOver={() => {
-        setMenuTemporaryOpen(true);
+        if (!isMoblie) {
+          setMouseOver(true);
+        }
       }}
       onMouseLeave={() => {
-        setMenuTemporaryOpen(false);
+        if (!isMoblie) {
+          setMouseOver(false);
+        }
       }}
+      onClose={handleClose}
     >
-      <List>
+      <List className={classes.menuList}>
         {menus
           .filter(
             (item) => !item.hideOnZero || torrents[item.status].length > 0

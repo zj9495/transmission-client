@@ -8,6 +8,7 @@ import {
   Drawer,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage } from "react-intl";
 
@@ -52,12 +53,21 @@ function a11yProps(index: any) {
   };
 }
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    title: {
+      wordBreak: "break-all",
+    },
+  })
+);
+
 const TorrentDetailDrawer = () => {
   const dispatch = useDispatch();
   const open = useSelector(getTorrentDetailOpen);
   const id = useSelector(getDetailId);
   const [currentTab, setCurrentTab] = useState(0);
   const { torrent, isLoading } = useTorrent(id);
+  const classes = useStyles();
 
   React.useEffect(() => {
     if (open) {
@@ -98,7 +108,11 @@ const TorrentDetailDrawer = () => {
       aria-describedby="alert-dialog-description"
       data-testid="torrent-detail-drawer"
     >
-      <DialogTitle id="alert-dialog-title" data-testid="torrent-detail-title">
+      <DialogTitle
+        className={classes.title}
+        id="alert-dialog-title"
+        data-testid="torrent-detail-title"
+      >
         {isLoading ? <Skeleton /> : torrent?.name}
       </DialogTitle>
 

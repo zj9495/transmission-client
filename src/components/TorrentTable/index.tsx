@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
     table: {
       border: 0,
       padding: theme.spacing(0, 1),
+      "& .MuiDataGrid-cell:focus-within": {
+        outline: "none",
+      },
     },
   })
 );
@@ -211,6 +214,9 @@ const TorrentTable: React.FC = () => {
   );
 
   const rows = torrents[torrentStatus];
+  const tableHeight = React.useMemo(() => window.innerHeight - 117, [
+    window.innerHeight,
+  ]);
 
   React.useEffect(() => {
     const handleRightClick = (event: MouseEvent): any => {
@@ -262,13 +268,11 @@ const TorrentTable: React.FC = () => {
   };
 
   return (
-    <div
-      id="torrent-table"
-      style={{ height: "calc(100vh - 117px)", width: "100%" }}
-    >
+    <div id="torrent-table" style={{ height: tableHeight, width: "100%" }}>
       <XGrid
         ref={tableRef}
         className={classes.table}
+        density="compact"
         components={{
           Toolbar: GridToolbar,
         }}

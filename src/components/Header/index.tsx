@@ -6,6 +6,7 @@ import {
   InputBase,
   Tooltip,
   IconButton,
+  Hidden,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -134,18 +135,20 @@ export default function SearchAppBar() {
           </div>
           <LanguageToggle />
           <ThemeToggle />
-          <Tooltip title="Github" enterDelay={300}>
-            <IconButton
-              component="a"
-              color="inherit"
-              href={GITHUB_REPO}
-              target="_blank"
-              data-ga-event-category="header"
-              data-ga-event-action="github"
-            >
-              <GitHubIcon />
-            </IconButton>
-          </Tooltip>
+          <Hidden xsDown>
+            <Tooltip title="Github" enterDelay={300}>
+              <IconButton
+                component="a"
+                color="inherit"
+                href={GITHUB_REPO}
+                target="_blank"
+                data-ga-event-category="header"
+                data-ga-event-action="github"
+              >
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+          </Hidden>
         </Toolbar>
       </AppBar>
     </div>

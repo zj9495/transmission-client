@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 
-import { Tooltip, Typography, Fade, Box } from "@material-ui/core";
+import { Tooltip, Typography, Fade, Box, Hidden } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
   getStatsSelector,
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       verticalAlign: "middle",
       position: "relative",
       display: "inline-block",
+      marginLeft: theme.spacing(1),
       marginRight: theme.spacing(0.5),
       "&::before, &::after": {
         content: '""',
@@ -120,15 +121,17 @@ const AppStatusBar = () => {
               <span data-testid="free-space">{freeSpace}</span>
             </span>
           </Tooltip>
-          <span className={classes.split}>|</span>
-          <span>
-            Transmission <FormattedMessage id="statusbar.version" />
-            {session.version}
-          </span>
-          <span className={classes.split}>|</span>
-          <span>
-            RPC: <span data-testid="rpc-version">{session.rpcVersion}</span>
-          </span>
+          <Hidden xsDown>
+            <span className={classes.split}>|</span>
+            <span>
+              Transmission <FormattedMessage id="statusbar.version" />
+              {session.version}
+            </span>
+            <span className={classes.split}>|</span>
+            <span>
+              RPC: <span data-testid="rpc-version">{session.rpcVersion}</span>
+            </span>
+          </Hidden>
         </Box>
       </Fade>
     </div>
