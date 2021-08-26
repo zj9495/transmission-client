@@ -43,13 +43,13 @@ export default function MenuItem(
   return (
     <ListItem button component="div" {...listItemProps}>
       <ListItemIcon>
-        <Badge badgeContent={menuOpen ? 0 : num} color="primary">
+        <Badge badgeContent={menuOpen ? 0 : num} max={999} color="primary">
           {icon}
         </Badge>
       </ListItemIcon>
       <ListItemText primary={text} />
       <ListItemSecondaryAction>
-        <Badge badgeContent={menuOpen ? num : 0} color="primary" />
+        <Badge badgeContent={menuOpen ? num : 0} max={999} color="primary" />
       </ListItemSecondaryAction>
     </ListItem>
   );
