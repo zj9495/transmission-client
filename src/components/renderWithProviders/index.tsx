@@ -6,8 +6,8 @@ import thunk from "redux-thunk";
 
 import { cloneDeep, merge } from "lodash";
 
-import Intl from "src/containers/Intl";
-import Theme from "src/containers/Theme";
+import Intl from "src/components/Intl";
+import Theme from "src/components/Theme";
 import { reducer } from "src/store";
 import initialState from "src/store/initialState";
 

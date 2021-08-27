@@ -11,9 +11,9 @@ import { SnackbarProvider } from "notistack";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { APP_ROUTES } from "./constants";
-import Intl from "./containers/Intl";
-import Theme from "./containers/Theme";
-import SignIn from "./containers/SignIn";
+import Intl from "./components/Intl";
+import Theme from "./components/Theme";
+import SignIn from "./components/SignIn";
 import List from "./components/List";
 import Header from "./components/Header";
 import store, { persistor } from "./store";

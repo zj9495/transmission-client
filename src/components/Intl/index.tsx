@@ -1,13 +1,13 @@
 import React from "react";
 import { IntlProvider } from "react-intl";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { find } from "lodash";
 
-import { IState } from "src/types";
+import { getLocale } from "src/store/selector";
+
 import { LANGUAGES, DEFAULT_LANGUAGE } from "src/constants";
 
 interface Props {
-  locale: string;
   children: JSX.Element;
 }
 
@@ -20,7 +20,8 @@ function getMessages(locale: string): Record<string, string> {
   };
 }
 const Intl = (props: Props) => {
-  const { locale, children } = props;
+  const locale = useSelector(getLocale);
+  const { children } = props;
   const messages = getMessages(locale);
 
   return (
@@ -30,8 +31,4 @@ const Intl = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: IState) => ({
-  locale: state.rpc.locale,
-});
-
-export default connect(mapStateToProps)(Intl);
+export default Intl;

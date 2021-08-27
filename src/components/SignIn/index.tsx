@@ -16,17 +16,16 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { LockOutlined as LockOutlinedIcon } from "@material-ui/icons";
-import {
-  Theme,
-  withStyles,
-  createStyles,
-  WithStyles,
-} from "@material-ui/core/styles";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { useIntl } from "react-intl";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setLocale } from "src/store/actions/rpc";
+import { getLocale } from "src/store/selector";
 
 import { LANGUAGES } from "src/constants";
 
-export const styles = (theme: Theme) =>
+export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       height: "100vh",
@@ -62,11 +61,8 @@ export const styles = (theme: Theme) =>
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
-  });
-interface Props extends WithStyles<typeof styles> {
-  locale: string;
-  setLocale: (locale: string) => void;
-}
+  })
+);
 
 function Copyright() {
   return (
@@ -80,11 +76,13 @@ function Copyright() {
   );
 }
 
-function SignIn(props: Props) {
-  const { classes, locale } = props;
+export default function SignIn() {
+  const dispatch = useDispatch();
+  const locale = useSelector(getLocale);
+  const classes = useStyles();
   const intl = useIntl();
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    props.setLocale(event.target.value as string);
+    dispatch(setLocale(event.target.value as string));
   };
 
   return (
@@ -154,5 +152,3 @@ function SignIn(props: Props) {
     </Grid>
   );
 }
-
-export default withStyles(styles)(SignIn);
