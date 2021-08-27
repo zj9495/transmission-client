@@ -1,10 +1,10 @@
 import { createState } from "src/components/renderWithProviders";
-import { getSelectedTorrents } from "./selector";
+import { getSelectedTorrents } from "./list";
 
-describe("test selector", () => {
+describe("test list selector", () => {
   it("test getSelectedTorrents", () => {
     const state = createState({
-      rpc: {
+      list: {
         selectedIds: [1, 3, 5],
         torrents: {
           all: [

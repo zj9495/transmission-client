@@ -30,13 +30,13 @@ import {
   getSizeUnitsSelector,
   getSpeedBytesSelector,
   getSpeedUnitsSelector,
-  getMenuOpen,
-} from "src/store/selector";
+} from "src/store/selector/session";
+import { getMenuOpen } from "src/store/selector/menu";
 import {
   getSessionAction,
-  getTorrentsAction,
   getSessionStatsAction,
-} from "src/store/actions/rpc";
+} from "src/store/actions/session";
+import { getTorrentsAction } from "src/store/actions/list";
 import { IState, ISession } from "src/types";
 import Progress from "src/components/Progress";
 import ActionBar from "src/components/ActionBar";
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Torrents: React.FC = () => {
   const dispatch = useDispatch();
-  const torrents = useSelector((state: IState) => state.rpc.torrents);
+  const torrents = useSelector((state: IState) => state.list.torrents);
 
   const progressConfig = {
     sizeBytes: useSelector(getSizeBytesSelector),

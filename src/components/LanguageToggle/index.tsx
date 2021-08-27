@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 
 import { LANGUAGES } from "src/constants";
-import { setLocale } from "src/store/actions/rpc";
-import { IState } from "src/types";
+import { setLocale } from "src/store/actions/app";
+import { getLocale } from "src/store/selector/app";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +28,7 @@ export default function LanguageToggle() {
   const intl = useIntl();
   const dispatch = useDispatch();
 
-  const locale = useSelector((state: IState) => state.rpc.locale);
+  const locale = useSelector(getLocale);
 
   const [languageMenu, setLanguageMenu] = useState(null);
 

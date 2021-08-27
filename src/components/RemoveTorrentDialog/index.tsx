@@ -15,13 +15,10 @@ import {
 } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 
-import {
-  getRemoveTorrentsDialogOpen,
-  getSelectedTorrents,
-  getSelectedIds,
-} from "src/store/selector";
+import { getSelectedTorrents, getSelectedIds } from "src/store/selector/list";
+import { getRemoveTorrentsDialogOpen } from "src/store/selector/app";
 import { toggleRemoveTorrentsDialog } from "src/store/actions/app";
-import { setSelectedIds } from "src/store/actions/rpc";
+import { setSelectedIds } from "src/store/actions/list";
 import { removeTorrents } from "src/api";
 
 interface IFormInput {

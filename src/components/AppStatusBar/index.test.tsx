@@ -23,8 +23,7 @@ describe("test AppStatusBar", () => {
   });
   it("renders AppStatusBar", () => {
     const state = {
-      app: { open: false },
-      rpc: {
+      session: {
         locale: "en-US",
         stats: {
           downloadSpeed: 100000,

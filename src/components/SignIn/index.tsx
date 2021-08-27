@@ -20,8 +20,8 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { useIntl } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setLocale } from "src/store/actions/rpc";
-import { getLocale } from "src/store/selector";
+import { setLocale } from "src/store/actions/app";
+import { getLocale } from "src/store/selector/app";
 
 import { LANGUAGES } from "src/constants";
 

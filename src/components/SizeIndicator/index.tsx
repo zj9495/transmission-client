@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 
 import { formatSize } from "src/utils/formatter";
-import { getSelectedFiles, getFreeDiskSpace } from "src/store/selector";
+import { getFreeDiskSpace, getSelectedFiles } from "src/store/selector/add";
 
 import { INVALID_STATUS } from "src/constants";
 

@@ -118,32 +118,10 @@ export interface IStats {
 
 export type Theme = "light" | "dark" | "auto";
 
-export interface IRPCState {
+export interface SessionState {
   connected: boolean;
-  locale:
-    | "en"
-    | "zh-CN"
-    | "zh-TW"
-    | "de"
-    | "es"
-    | "fr"
-    | "hu"
-    | "it"
-    | "ko"
-    | "nl"
-    | "pl"
-    | "pt-BR"
-    | "pt-PT"
-    | "ro"
-    | "ru"
-    | "uk"
-    | "";
-  theme: Theme;
   sessionId: string | undefined;
-  torrents: ITorrents;
   session: ISession;
-  menuOpen: boolean;
-  selectedIds: number[];
   stats: IStats;
 }
 
@@ -241,18 +219,54 @@ type RemoveTorrents = {
 };
 
 export type IAppState = {
+  removeTorrents: RemoveTorrents;
+  locale:
+    | "en"
+    | "zh-CN"
+    | "zh-TW"
+    | "de"
+    | "es"
+    | "fr"
+    | "hu"
+    | "it"
+    | "ko"
+    | "nl"
+    | "pl"
+    | "pt-BR"
+    | "pt-PT"
+    | "ro"
+    | "ru"
+    | "uk"
+    | "";
+  theme: Theme;
+};
+
+export type DetailState = {
+  open: boolean;
+  id: TorrentId | null;
+};
+
+export type ListState = {
+  torrents: ITorrents;
+  selectedIds: TorrentId[];
+};
+
+export type MenuState = {
+  open: boolean;
+};
+
+export type AddState = {
   open: boolean;
   torrentDownloadOptions: ITorrentDownloadOptions;
-  removeTorrents: RemoveTorrents;
-  detail: {
-    open: boolean;
-    id: TorrentId | null;
-  };
 };
 
 export interface IState {
-  rpc: IRPCState;
+  add: AddState;
   app: IAppState;
+  detail: DetailState;
+  list: ListState;
+  menu: MenuState;
+  session: SessionState;
 }
 
 export type TorrentStatus =

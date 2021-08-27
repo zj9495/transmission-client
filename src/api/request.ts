@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 import store from "src/store";
-import { SET_SESSION_ID } from "src/store/constants";
+import { SET_SESSION_ID } from "src/store/constants/session";
 import { objectToCamelCase } from "src/utils/object";
 
 const request = axios.create({

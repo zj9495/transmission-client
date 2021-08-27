@@ -3,7 +3,7 @@ import { IntlProvider } from "react-intl";
 import { useSelector } from "react-redux";
 import { find } from "lodash";
 
-import { getLocale } from "src/store/selector";
+import { getLocale } from "src/store/selector/app";
 
 import { LANGUAGES, DEFAULT_LANGUAGE } from "src/constants";
 

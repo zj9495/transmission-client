@@ -9,7 +9,7 @@ import {
   getStatsSelector,
   getSessionSelector,
   getConnectedSelector,
-} from "src/store/selector";
+} from "src/store/selector/session";
 import { formatSpeed, formatSize } from "src/utils/formatter";
 import UploadIcon from "@material-ui/icons/Publish";
 import DownloadIcon from "@material-ui/icons/GetApp";

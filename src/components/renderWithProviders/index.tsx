@@ -20,7 +20,7 @@ interface IProvidersProps {
 }
 
 const defaultMockState = {
-  rpc: {
+  app: {
     locale: "en",
   },
 };

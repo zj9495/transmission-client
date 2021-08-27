@@ -1,35 +1,15 @@
 import produce from "immer";
 
-import { IRPCState } from "src/types";
+import { SessionState } from "src/types";
 import {
-  SET_LOCALE,
-  CHANGE_THEME,
   SET_SESSION_ID,
-  SET_TORRENTS,
   SET_SESSION,
-  TOGGLE_MENUOPEN,
-  SET_SELECTED_IDS,
   SET_SESSION_STATS,
-} from "../constants";
+} from "src/store/constants/session";
 
-export const initialRPCState: IRPCState = {
+export const initialSessionState: SessionState = {
   connected: false,
-  locale: "",
-  theme: "auto",
   sessionId: undefined,
-  torrents: {
-    all: [],
-    downloading: [],
-    downloadWaiting: [],
-    paused: [],
-    active: [],
-    seeding: [],
-    seedWaiting: [],
-    checking: [],
-    checkWaiting: [],
-    warning: [],
-    error: [],
-  },
   session: {
     downloadDir: "",
     units: {
@@ -51,8 +31,6 @@ export const initialRPCState: IRPCState = {
     torrentCount: 0,
     uploadSpeed: 0,
   },
-  menuOpen: false,
-  selectedIds: [],
 };
 
 export interface Action {
@@ -60,30 +38,15 @@ export interface Action {
   payload: any;
 }
 
-export default (state = initialRPCState, action: Action) =>
+export default (state = initialSessionState, action: Action) =>
   // eslint-disable-next-line consistent-return
   produce(state, (draft) => {
     switch (action.type) {
-      case SET_LOCALE:
-        draft.locale = action.payload;
-        break;
-      case CHANGE_THEME:
-        draft.theme = action.payload;
-        break;
       case SET_SESSION_ID:
         draft.sessionId = action.payload;
         break;
-      case SET_TORRENTS:
-        draft.torrents = action.payload;
-        break;
       case SET_SESSION:
         draft.session = action.payload;
-        break;
-      case TOGGLE_MENUOPEN:
-        draft.menuOpen = action.payload;
-        break;
-      case SET_SELECTED_IDS:
-        draft.selectedIds = action.payload;
         break;
       case SET_SESSION_STATS:
         draft.stats = action.payload;

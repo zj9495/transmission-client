@@ -3,8 +3,8 @@ import { FormGroup, FormControlLabel, Checkbox } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { union, without } from "lodash";
 
-import { getTorrentDownloadOptions } from "src/store/selector";
-import { setDownloadSelectedFiles } from "src/store/actions/app";
+import { getTorrentDownloadOptions } from "src/store/selector/add";
+import { setDownloadSelectedFiles } from "src/store/actions/add";
 
 const FilesFilter: React.FC = () => {
   const dispatch = useDispatch();

@@ -6,13 +6,13 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import BrightnessAutoIcon from "@material-ui/icons/BrightnessAuto";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IState } from "src/types";
-import { toggleTheme } from "src/store/actions/rpc";
+import { toggleTheme } from "src/store/actions/app";
+import { getTheme } from "src/store/selector/app";
 
 const ThemeToggle = () => {
   const dispatch = useDispatch();
   const intl = useIntl();
-  const theme = useSelector((state: IState) => state.rpc.theme);
+  const theme = useSelector(getTheme);
 
   const handleChangeTheme = () => {
     dispatch(toggleTheme());

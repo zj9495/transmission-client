@@ -8,12 +8,12 @@ import {
   GridSelectionModelChangeParams,
 } from "@material-ui/x-grid";
 
-import { getTorrentDownloadOptions } from "src/store/selector";
+import { getTorrentDownloadOptions } from "src/store/selector/add";
 import {
   setDownloadSelectedFiles,
   setDownloadFilesWanted,
   setDownloadFilesPriority,
-} from "src/store/actions/app";
+} from "src/store/actions/add";
 import { formatSize } from "src/utils/formatter";
 import { TFile } from "src/types";
 import renderProgress from "src/components/TorrentTable/renderProgress";

@@ -23,8 +23,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
-import { toggleMenuOpen } from "src/store/actions/rpc";
-import { getMenuOpen, getTorrents } from "src/store/selector";
+import { toggleMenuOpen } from "src/store/actions/menu";
+import { getMenuOpen } from "src/store/selector/menu";
+import { getTorrents } from "src/store/selector/list";
 import { IParamTypes, TorrentStatus } from "src/types";
 import MenuItem from "./MenuItem";
 

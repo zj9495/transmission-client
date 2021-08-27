@@ -16,12 +16,12 @@ import {
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 
-import { getTorrentDownloadOptions } from "src/store/selector";
+import { getTorrentDownloadOptions } from "src/store/selector/add";
 import {
   closeTorrentDownloadOptionsDialog,
   addTorrentAdvancedMode,
   setFreeDiskSpace,
-} from "src/store/actions/app";
+} from "src/store/actions/add";
 
 import TorrentFilesTable from "src/components/TorrentFilesTable";
 import FilesFilter from "src/components/FilesFilter";

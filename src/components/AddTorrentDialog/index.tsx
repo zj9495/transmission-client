@@ -15,14 +15,12 @@ import {
 } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 
-import {
-  getAddTorrentDialogOpen,
-  getDownloadDirSelector,
-} from "src/store/selector";
+import { getAddTorrentDialogOpen } from "src/store/selector/add";
+import { getDownloadDirSelector } from "src/store/selector/session";
 import {
   toggleAddTorrentDialog,
   showTorrentDownloadOptions,
-} from "src/store/actions/app";
+} from "src/store/actions/add";
 
 import * as api from "src/api";
 

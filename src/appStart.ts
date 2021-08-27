@@ -2,7 +2,8 @@
 import { LicenseInfo } from "@material-ui/x-grid";
 
 import store from "src/store";
-import { setLocale } from "src/store/actions/rpc";
+import { setLocale } from "src/store/actions/app";
+import { getLocale } from "src/store/selector/app";
 import { DEFAULT_LANGUAGE } from "src/constants";
 import { formatLocale } from "src/utils/formatter";
 import qs from "query-string";
@@ -13,7 +14,7 @@ class AppStart {
   }
   setupLocale() {
     const localeFromQs = qs.parse(window.location.search).locale as string;
-    const localeFromStore = store.getState().rpc.locale;
+    const localeFromStore = getLocale(store.getState());
     const localeFromNavigator = formatLocale(navigator.language, false);
     const locale =
       formatLocale(localeFromQs, false) ||
