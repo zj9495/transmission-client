@@ -46,7 +46,6 @@ import AddTorrentDialog from "src/components/AddTorrentDialog";
 import TorrentDownloadOptionsDialog from "src/components/TorrentDownloadOptionsDialog";
 import RemoveTorrentDialog from "src/components/RemoveTorrentDialog";
 import AppStatusBar from "src/components/AppStatusBar";
-import MessageBar from "src/components/MessageBar";
 import { REFRESH_INTERVAL } from "src/constants";
 
 import TorrentDetailDrawer from "../TorrentDetailDrawer";
@@ -143,7 +142,6 @@ const Torrents: React.FC = () => {
           })}
         </List> */}
         <AppStatusBar />
-        <MessageBar />
       </Box>
     </div>
   );

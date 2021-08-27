@@ -20,9 +20,6 @@ export const getMenuOpen = (state: IState) => state.rpc.menuOpen;
 
 export const getTorrents = (state: IState) => state.rpc.torrents;
 
-// Message
-export const getMessageConfig = (state: IState) => state.app.messageConfig;
-
 // Add Torrent
 export const getAddTorrentDialogOpen = (state: IState) => state.app.open;
 export const getTorrentDownloadOptions = (state: IState) =>

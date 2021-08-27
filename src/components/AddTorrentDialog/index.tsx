@@ -13,6 +13,7 @@ import {
   Switch,
   Box,
 } from "@material-ui/core";
+import { useSnackbar } from "notistack";
 
 import {
   getAddTorrentDialogOpen,
@@ -20,13 +21,10 @@ import {
 } from "src/store/selector";
 import {
   toggleAddTorrentDialog,
-  setMessageBar,
   showTorrentDownloadOptions,
 } from "src/store/actions/app";
 
 import * as api from "src/api";
-
-import { IMessageConfig } from "src/types";
 
 interface IFormInput {
   downloadDir: string;
@@ -52,6 +50,8 @@ const AUTO_START = true;
 const AddTorrentDialog = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
   const open = useSelector(getAddTorrentDialogOpen);
   const downloadDirFromStore = useSelector(getDownloadDirSelector);
   const { register, watch, handleSubmit, reset, errors } = useForm();
@@ -71,56 +71,38 @@ const AddTorrentDialog = () => {
   };
 
   const handleAddResult = (result: IAddResult, advancedMode: boolean) => {
-    let messageConfig: IMessageConfig | null = null;
     if (result.result !== "success") {
-      messageConfig = {
-        open: true,
-        loading: false,
-        message:
-          intl.formatMessage({ id: "message.failedAdd" }) + result.result,
-        severity: "error",
-      };
+      enqueueSnackbar(
+        intl.formatMessage({ id: "message.failedAdd" }) + result.result,
+        {
+          variant: "error",
+        }
+      );
     } else if (result.arguments.torrentAdded) {
       if (advancedMode) {
         dispatch(showTorrentDownloadOptions(result.arguments.torrentAdded.id));
       } else {
-        messageConfig = {
-          open: true,
-          loading: false,
-          message: intl.formatMessage({ id: "message.added" }),
-          severity: "success",
-        };
+        enqueueSnackbar(intl.formatMessage({ id: "message.added" }));
       }
     } else if (result.arguments.torrentDuplicate) {
-      messageConfig = {
-        open: true,
-        loading: false,
-        message: intl.formatMessage({ id: "message.duplicate" }),
-        severity: "warning",
-      };
+      enqueueSnackbar(intl.formatMessage({ id: "message.duplicate" }), {
+        variant: "warning",
+      });
     } else {
-      messageConfig = {
-        open: true,
-        loading: false,
-        message:
-          intl.formatMessage({ id: "message.failedAdd" }) +
+      enqueueSnackbar(
+        intl.formatMessage({ id: "message.failedAdd" }) +
           intl.formatMessage({ id: "message.unknownError" }),
-        severity: "error",
-      };
+        {
+          variant: "error",
+        }
+      );
     }
-
-    messageConfig && dispatch(setMessageBar(messageConfig));
   };
 
   const handleAdd = (data: IFormInput) => {
-    dispatch(
-      setMessageBar({
-        open: true,
-        loading: true,
-        message: intl.formatMessage({ id: "message.adding" }),
-        severity: "info",
-      })
-    );
+    enqueueSnackbar(intl.formatMessage({ id: "message.adding" }), {
+      variant: "info",
+    });
     api
       .addTorrent(
         data.torrentUrl,
@@ -131,14 +113,9 @@ const AddTorrentDialog = () => {
         handleAddResult(result.data as IAddResult, data.advancedMode)
       )
       .catch(() => {
-        dispatch(
-          setMessageBar({
-            open: true,
-            loading: false,
-            message: intl.formatMessage({ id: "message.unknownError" }),
-            severity: "error",
-          })
-        );
+        enqueueSnackbar(intl.formatMessage({ id: "message.unknownError" }), {
+          variant: "error",
+        });
       });
   };
 

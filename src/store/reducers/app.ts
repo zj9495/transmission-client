@@ -3,7 +3,6 @@ import produce from "immer";
 import { IAppState } from "src/types";
 import {
   TOGGLE_ADD_TORRENT_DIALOG,
-  SET_MESSAGE_BAR,
   SHOW_TORRENT_DOWNLOAD_OPTIONS,
   CLOSE_TORRENT_DOWNLOAD_OPTIONS,
   TOGGLE_REMOVE_TORRENTS_DIALOG,
@@ -21,13 +20,6 @@ export interface Action {
 
 export const initialAppState: IAppState = {
   open: false,
-  messageConfig: {
-    key: 0,
-    open: false,
-    loading: false,
-    message: "",
-    severity: "info",
-  },
   torrentDownloadOptions: {
     id: null,
     freeDiskSpace: 0,
@@ -52,9 +44,6 @@ export default (state = initialAppState, action: Action) =>
     switch (action.type) {
       case TOGGLE_ADD_TORRENT_DIALOG:
         draft.open = action.payload;
-        break;
-      case SET_MESSAGE_BAR:
-        draft.messageConfig = action.payload;
         break;
       case SHOW_TORRENT_DOWNLOAD_OPTIONS:
         draft.torrentDownloadOptions.id = action.payload.id;

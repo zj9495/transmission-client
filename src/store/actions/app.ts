@@ -5,7 +5,6 @@ import { cloneDeep } from "lodash";
 
 import {
   TOGGLE_ADD_TORRENT_DIALOG,
-  SET_MESSAGE_BAR,
   SHOW_TORRENT_DOWNLOAD_OPTIONS,
   CLOSE_TORRENT_DOWNLOAD_OPTIONS,
   TOGGLE_REMOVE_TORRENTS_DIALOG,
@@ -15,7 +14,7 @@ import {
   SHOW_TORRENT_DETAIL,
   HIDE_TORRENT_DETAIL,
 } from "src/store/constants";
-import { IMessageConfig, IState } from "src/types";
+import { IState } from "src/types";
 import {
   getTorrent,
   removeTorrents,
@@ -40,20 +39,6 @@ export const toggleAddTorrentDialog = (open?: boolean) => (
   dispatch({
     type: TOGGLE_ADD_TORRENT_DIALOG,
     payload: open,
-  });
-};
-
-export const setMessageBar = (payload: IMessageConfig) => (
-  dispatch: ThunkDispatch<{}, {}, AnyAction>,
-  getState: () => IState
-) => {
-  const key = (getState().app.messageConfig.key || 0) + 1;
-  dispatch({
-    type: SET_MESSAGE_BAR,
-    payload: {
-      ...payload,
-      key,
-    },
   });
 };
 
