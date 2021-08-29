@@ -1,0 +1,2 @@
+export const SET_TORRENTS = "SET_TORRENTS";
+export const SET_SELECTED_IDS = "SET_SELECTED_IDS";

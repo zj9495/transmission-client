@@ -13,17 +13,12 @@ import {
   Switch,
   Typography,
 } from "@material-ui/core";
+import { useSnackbar } from "notistack";
 
-import {
-  getRemoveTorrentsDialogOpen,
-  getSelectedTorrents,
-  getSelectedIds,
-} from "src/store/selector";
-import {
-  toggleRemoveTorrentsDialog,
-  setMessageBar,
-} from "src/store/actions/app";
-import { setSelectedIds } from "src/store/actions/rpc";
+import { getSelectedTorrents, getSelectedIds } from "src/store/selector/list";
+import { getRemoveTorrentsDialogOpen } from "src/store/selector/app";
+import { toggleRemoveTorrentsDialog } from "src/store/actions/app";
+import { setSelectedIds } from "src/store/actions/list";
 import { removeTorrents } from "src/api";
 
 interface IFormInput {
@@ -38,6 +33,7 @@ type TResult = {
 const AddTorrentDialog = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const open = useSelector(getRemoveTorrentsDialogOpen);
   const selectIds = useSelector(getSelectedIds);
   const selectedTorrents = useSelector(getSelectedTorrents);
@@ -50,41 +46,27 @@ const AddTorrentDialog = () => {
   const handleResult = (result: TResult) => {
     const isSuccess = result.result === "success";
 
-    dispatch(
-      setMessageBar({
-        open: true,
-        loading: false,
-        message: isSuccess
-          ? intl.formatMessage({ id: "message.removed" })
-          : result.result,
-        severity: isSuccess ? "success" : "error",
-      })
+    enqueueSnackbar(
+      isSuccess ? intl.formatMessage({ id: "message.removed" }) : result.result,
+      {
+        variant: isSuccess ? "success" : "error",
+      }
     );
   };
 
   const handleRemove = (data: IFormInput) => {
-    dispatch(
-      setMessageBar({
-        open: true,
-        loading: true,
-        message: intl.formatMessage({ id: "message.removing" }),
-        severity: "info",
-      })
-    );
+    enqueueSnackbar(intl.formatMessage({ id: "message.removing" }), {
+      variant: "info",
+    });
     removeTorrents(selectIds, data.deleteLocalData)
       .then((result) => {
         handleResult(result.data as TResult);
         dispatch(setSelectedIds([]));
       })
       .catch(() => {
-        dispatch(
-          setMessageBar({
-            open: true,
-            loading: false,
-            message: intl.formatMessage({ id: "message.unknownError" }),
-            severity: "error",
-          })
-        );
+        enqueueSnackbar(intl.formatMessage({ id: "message.unknownError" }), {
+          variant: "error",
+        });
       });
   };
 

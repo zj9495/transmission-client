@@ -4,30 +4,58 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import rpcReducer from "./reducers/rpc";
+import addReducer from "./reducers/add";
 import appReducer from "./reducers/app";
+import detailReducer from "./reducers/detail";
+import listReducer from "./reducers/list";
+import menuReducer from "./reducers/menu";
+import sessionReducer from "./reducers/session";
 
 const rootPersistConfig = {
   key: "root",
   storage,
-  blacklist: ["rpc", "app"],
+  blacklist: ["session", "detail"],
 };
 
-const rpcPersistConfig = {
-  key: "rpc",
+const addPersistConfig = {
+  key: "session",
   storage,
-  blacklist: ["session", "connected"],
 };
 
 const appPersistConfig = {
   key: "app",
   storage,
-  blacklist: ["detail"],
+};
+
+const detailPersistConfig = {
+  key: "detail",
+  storage,
+  blacklist: ["open"],
+};
+
+const listPersistConfig = {
+  key: "list",
+  storage,
+};
+
+const menuPersistConfig = {
+  key: "menu",
+  storage,
+};
+
+const sessionPersistConfig = {
+  key: "session",
+  storage,
+  blacklist: ["session", "connected"],
 };
 
 const rootReducer = combineReducers({
-  rpc: persistReducer(rpcPersistConfig, rpcReducer),
+  add: persistReducer(addPersistConfig, addReducer),
   app: persistReducer(appPersistConfig, appReducer),
+  detail: persistReducer(detailPersistConfig, detailReducer),
+  list: persistReducer(listPersistConfig, listReducer),
+  menu: persistReducer(menuPersistConfig, menuReducer),
+  session: persistReducer(sessionPersistConfig, sessionReducer),
 });
 
 export const reducer = persistReducer(rootPersistConfig, rootReducer);

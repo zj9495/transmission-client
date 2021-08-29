@@ -2,17 +2,10 @@ import produce from "immer";
 
 import { IAppState } from "src/types";
 import {
-  TOGGLE_ADD_TORRENT_DIALOG,
-  SET_MESSAGE_BAR,
-  SHOW_TORRENT_DOWNLOAD_OPTIONS,
-  CLOSE_TORRENT_DOWNLOAD_OPTIONS,
+  SET_LOCALE,
+  CHANGE_THEME,
   TOGGLE_REMOVE_TORRENTS_DIALOG,
-  SET_DOWNLOAD_SELECTED_FILES,
-  SET_DOWNLOAD_FILES,
-  SET_FREE_DISK_SPACE,
-  SHOW_TORRENT_DETAIL,
-  HIDE_TORRENT_DETAIL,
-} from "../constants";
+} from "src/store/constants/app";
 
 export interface Action {
   type: string;
@@ -20,75 +13,25 @@ export interface Action {
 }
 
 export const initialAppState: IAppState = {
-  open: false,
-  messageConfig: {
-    key: 0,
-    open: false,
-    loading: false,
-    message: "",
-    severity: "info",
-  },
-  torrentDownloadOptions: {
-    id: null,
-    freeDiskSpace: 0,
-    open: false,
-    info: null,
-    files: [],
-    selectedFilesIds: [],
-    selectedFiles: [],
-  },
   removeTorrents: {
     open: false,
   },
-  detail: {
-    open: false,
-    id: null,
-  },
+  locale: "",
+  theme: "auto",
 };
 
 export default (state = initialAppState, action: Action) =>
   // eslint-disable-next-line consistent-return
   produce(state, (draft) => {
     switch (action.type) {
-      case TOGGLE_ADD_TORRENT_DIALOG:
-        draft.open = action.payload;
+      case SET_LOCALE:
+        draft.locale = action.payload;
         break;
-      case SET_MESSAGE_BAR:
-        draft.messageConfig = action.payload;
-        break;
-      case SHOW_TORRENT_DOWNLOAD_OPTIONS:
-        draft.torrentDownloadOptions.id = action.payload.id;
-        draft.torrentDownloadOptions.info = action.payload.info;
-        draft.torrentDownloadOptions.open = true;
-        draft.torrentDownloadOptions.files = action.payload.files;
-        break;
-      case CLOSE_TORRENT_DOWNLOAD_OPTIONS:
-        draft.torrentDownloadOptions.id = null;
-        draft.torrentDownloadOptions.info = null;
-        draft.torrentDownloadOptions.open = false;
-        draft.torrentDownloadOptions.files = [];
-        break;
-      case SET_DOWNLOAD_SELECTED_FILES:
-        draft.torrentDownloadOptions.selectedFilesIds =
-          action.payload.selectedFilesIds;
-        draft.torrentDownloadOptions.selectedFiles =
-          action.payload.selectedFiles;
-        break;
-      case SET_DOWNLOAD_FILES:
-        draft.torrentDownloadOptions.files = action.payload;
-        break;
-      case SET_FREE_DISK_SPACE:
-        draft.torrentDownloadOptions.freeDiskSpace = action.payload;
+      case CHANGE_THEME:
+        draft.theme = action.payload;
         break;
       case TOGGLE_REMOVE_TORRENTS_DIALOG:
         draft.removeTorrents.open = action.payload;
-        break;
-      case SHOW_TORRENT_DETAIL:
-        draft.detail.open = true;
-        draft.detail.id = action.payload.id;
-        break;
-      case HIDE_TORRENT_DETAIL:
-        draft.detail.open = false;
         break;
       default:
         return state;

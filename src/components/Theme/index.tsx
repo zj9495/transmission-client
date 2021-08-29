@@ -5,7 +5,7 @@ import { enUS, zhCN, Localization } from "@material-ui/core/locale";
 import { blue } from "@material-ui/core/colors";
 
 import { Theme as ITheme } from "src/types";
-import { getLocale, getTheme } from "src/store/selector";
+import { getLocale, getTheme } from "src/store/selector/app";
 
 interface Props {
   children?: JSX.Element;

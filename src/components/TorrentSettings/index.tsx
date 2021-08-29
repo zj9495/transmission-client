@@ -10,6 +10,7 @@ import {
   InputAdornment,
   Checkbox,
   Button,
+  Box,
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 
@@ -60,30 +61,16 @@ const TorrentSettings = ({ id }: Props) => {
     setTorrentSettings(id as TorrentId, params)
       .then((res) => {
         if (res.data.result === "success") {
-          enqueueSnackbar("Success", {
-            variant: "success",
-            anchorOrigin: {
-              vertical: "top",
-              horizontal: "left",
-            },
-          });
+          enqueueSnackbar("Success");
         } else {
           enqueueSnackbar(res.data.result, {
             variant: "error",
-            anchorOrigin: {
-              vertical: "top",
-              horizontal: "left",
-            },
           });
         }
       })
       .catch(() => {
         enqueueSnackbar(<FormattedMessage id="message.unknownError" />, {
           variant: "error",
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "left",
-          },
         });
       })
       .finally(() => {
@@ -234,20 +221,22 @@ const TorrentSettings = ({ id }: Props) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button
-            type="submit"
-            color="primary"
-            disabled={loading}
-            startIcon={<SaveIcon />}
-          >
-            <FormattedMessage
-              id={
-                loading
-                  ? "dialog.systemConfig.saving"
-                  : "dialog.public.buttonSave"
-              }
-            />
-          </Button>
+          <Box display="flex" justifyContent="flex-end">
+            <Button
+              type="submit"
+              color="primary"
+              disabled={loading}
+              startIcon={<SaveIcon />}
+            >
+              <FormattedMessage
+                id={
+                  loading
+                    ? "dialog.systemConfig.saving"
+                    : "dialog.public.buttonSave"
+                }
+              />
+            </Button>
+          </Box>
         </Grid>
       </Grid>
     </form>

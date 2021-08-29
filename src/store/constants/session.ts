@@ -1,0 +1,3 @@
+export const SET_SESSION_ID = "SET_SESSION_ID";
+export const SET_SESSION = "SET_SESSION";
+export const SET_SESSION_STATS = "SET_SESSION_STATS";

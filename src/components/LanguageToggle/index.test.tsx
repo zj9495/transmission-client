@@ -8,7 +8,7 @@ import LanguageToggle from "./index";
 describe("test LanguageToggle", () => {
   it("should update language from store", () => {
     const state = {
-      rpc: {
+      app: {
         locale: "en",
       },
     };
@@ -22,7 +22,7 @@ describe("test LanguageToggle", () => {
       "English"
     );
 
-    state.rpc.locale = "zh-CN";
+    state.app.locale = "zh-CN";
     rerender(
       <Providers state={state}>
         <LanguageToggle />
@@ -36,7 +36,7 @@ describe("test LanguageToggle", () => {
 
   it("should update language from Menu", () => {
     const state = {
-      rpc: {
+      app: {
         locale: "en",
       },
     };

@@ -14,8 +14,8 @@ import { FormattedMessage } from "react-intl";
 
 import { useTorrent } from "src/hooks/swr";
 
-import { getTorrentDetailOpen, getDetailId } from "src/store/selector";
-import { hideTorrentDetail } from "src/store/actions/app";
+import { getTorrentDetailOpen, getDetailId } from "src/store/selector/detail";
+import { hideTorrentDetail } from "src/store/actions/detail";
 import { FilesTable } from "src/components/TorrentFilesTable";
 import TorrentSettings from "src/components/TorrentSettings";
 import { TFile } from "src/types";

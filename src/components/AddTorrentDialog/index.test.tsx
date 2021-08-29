@@ -11,8 +11,8 @@ jest.mock("src/api/request");
 describe("test AddTorrentDialog", () => {
   it("render AddTorrentDialog", () => {
     const state = {
-      app: { open: true },
-      rpc: {
+      add: { open: true },
+      session: {
         session: {
           downloadDir: "",
         },
@@ -31,7 +31,7 @@ describe("test AddTorrentDialog", () => {
     expect(screen.queryAllByTestId("add-torrent-dialog").length).toBe(1);
     expect(downloadDirInput.value).toBe("");
 
-    state.rpc.session.downloadDir = "MOCK_DIR";
+    state.session.session.downloadDir = "MOCK_DIR";
     rerender(
       <Providers state={state}>
         <AddTorrentDialog />
@@ -43,8 +43,8 @@ describe("test AddTorrentDialog", () => {
 
   it("should not render dialog if open is false", () => {
     const state = {
-      app: { open: false },
-      rpc: {
+      add: { open: false },
+      session: {
         session: {
           downloadDir: "",
         },
@@ -58,7 +58,7 @@ describe("test AddTorrentDialog", () => {
 
     expect(screen.queryAllByTestId("add-torrent-dialog").length).toBe(0);
 
-    state.app.open = true;
+    state.add.open = true;
     rerender(
       <Providers state={state}>
         <AddTorrentDialog />
@@ -70,8 +70,8 @@ describe("test AddTorrentDialog", () => {
 
   it("should update download dir when downloadDir state change", () => {
     const state = {
-      app: { open: true },
-      rpc: {
+      add: { open: true },
+      session: {
         session: {
           downloadDir: "",
         },
@@ -88,7 +88,7 @@ describe("test AddTorrentDialog", () => {
 
     expect(downloadDirInput.value).toBe("");
 
-    state.rpc.session.downloadDir = "MOCK_DIR";
+    state.session.session.downloadDir = "MOCK_DIR";
 
     rerender(
       <Providers state={state}>
@@ -101,8 +101,8 @@ describe("test AddTorrentDialog", () => {
 
   it("auto start should be disabled in advanced mode", () => {
     const state = {
-      app: { open: true },
-      rpc: {
+      add: { open: true },
+      session: {
         session: {
           downloadDir: "",
         },
@@ -127,8 +127,8 @@ describe("test AddTorrentDialog", () => {
 
   it("auto start should be enabled by default in basic mode", () => {
     const state = {
-      app: { open: true },
-      rpc: {
+      add: { open: true },
+      session: {
         session: {
           downloadDir: "",
         },
@@ -152,10 +152,10 @@ describe("test AddTorrentDialog", () => {
 
   it("test auto start in basic mode", async () => {
     const state = {
-      app: {
+      add: {
         open: true,
       },
-      rpc: {
+      session: {
         session: {
           downloadDir: "/download/compelete",
         },
@@ -184,10 +184,10 @@ describe("test AddTorrentDialog", () => {
 
   it("test disable auto start in basic mode", async () => {
     const state = {
-      app: {
+      add: {
         open: true,
       },
-      rpc: {
+      session: {
         session: {
           downloadDir: "/download/compelete",
         },
@@ -217,10 +217,10 @@ describe("test AddTorrentDialog", () => {
 
   it("test auto start in advanced mode", async () => {
     const state = {
-      app: {
+      add: {
         open: true,
       },
-      rpc: {
+      session: {
         session: {
           downloadDir: "/download/compelete",
         },

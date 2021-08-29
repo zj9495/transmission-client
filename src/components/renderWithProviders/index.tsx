@@ -3,11 +3,12 @@ import { render } from "@testing-library/react";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import { SnackbarProvider } from "notistack";
 
 import { cloneDeep, merge } from "lodash";
 
-import Intl from "src/containers/Intl";
-import Theme from "src/containers/Theme";
+import Intl from "src/components/Intl";
+import Theme from "src/components/Theme";
 import { reducer } from "src/store";
 import initialState from "src/store/initialState";
 
@@ -19,7 +20,7 @@ interface IProvidersProps {
 }
 
 const defaultMockState = {
-  rpc: {
+  app: {
     locale: "en",
   },
 };
@@ -42,7 +43,9 @@ export default function renderWithProviders(
     <Provider store={store}>
       <Intl>
         <Theme>
-          <div id={id}>{children}</div>
+          <SnackbarProvider variant="success">
+            <div id={id}>{children}</div>
+          </SnackbarProvider>
         </Theme>
       </Intl>
     </Provider>
@@ -57,7 +60,9 @@ export function Providers(props: IProvidersProps) {
     <Provider store={store}>
       <Intl>
         <Theme>
-          <div id={id}>{children}</div>
+          <SnackbarProvider variant="success">
+            <div id={id}>{children}</div>
+          </SnackbarProvider>
         </Theme>
       </Intl>
     </Provider>

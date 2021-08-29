@@ -20,7 +20,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useDispatch } from "react-redux";
 import { useIntl } from "react-intl";
 
-import { toggleMenuOpen } from "src/store/actions/rpc";
+import { toggleMenuOpen } from "src/store/actions/menu";
 import { GITHUB_REPO } from "src/constants";
 import ThemeToggle from "src/components/ThemeToggle";
 import LanguageToggle from "src/components/LanguageToggle";

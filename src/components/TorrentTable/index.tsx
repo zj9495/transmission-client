@@ -14,9 +14,10 @@ import { find } from "lodash";
 
 import { useParams } from "react-router-dom";
 
-import { getTorrents, getSelectedIds, getLocale } from "src/store/selector";
-import { setSelectedIds } from "src/store/actions/rpc";
-import { showTorrentDetail } from "src/store/actions/app";
+import { getLocale } from "src/store/selector/app";
+import { getTorrents, getSelectedIds } from "src/store/selector/list";
+import { setSelectedIds } from "src/store/actions/list";
+import { showTorrentDetail } from "src/store/actions/detail";
 import {
   formatSize,
   formatSpeed,

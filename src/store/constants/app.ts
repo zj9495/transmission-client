@@ -1,0 +1,4 @@
+export const SET_LOCALE = "SET_LOCALE";
+export const CHANGE_THEME = "CHANGE_THEME";
+// Remove Torrents
+export const TOGGLE_REMOVE_TORRENTS_DIALOG = "TOGGLE_REMOVE_TORRENTS_DIALOG";

@@ -10,11 +10,9 @@ import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
 import StorageIcon from "@material-ui/icons/Storage";
 import { FormattedMessage } from "react-intl";
 
-import {
-  toggleAddTorrentDialog,
-  toggleRemoveTorrentsDialog,
-} from "src/store/actions/app";
-import { getSelectedIds } from "src/store/selector";
+import { toggleAddTorrentDialog } from "src/store/actions/add";
+import { toggleRemoveTorrentsDialog } from "src/store/actions/app";
+import { getSelectedIds } from "src/store/selector/list";
 
 import {
   startTorrents,
