@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
+import { Helmet } from "react-helmet";
 
 import { Tooltip, Typography, Fade, Box, Hidden } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
@@ -81,6 +82,11 @@ const AppStatusBar = () => {
 
   return (
     <div className={classes.root}>
+      <Helmet>
+        <title>
+          ↓ {downloadSpeed} ↑ {uploadSpeed} - Transmission Client
+        </title>
+      </Helmet>
       <i
         className={clsx(classes.status, {
           [classes.connected]: connected,
