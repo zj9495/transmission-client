@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useForm } from "react-hook-form";
+import { v4 as uuid } from "uuid";
+
 import {
   Button,
   TextField,
@@ -48,7 +50,7 @@ const AUTO_START = true;
 const AddTorrentDialog = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const open = useSelector(getAddTorrentDialogOpen);
   const downloadDirFromStore = useSelector(getDownloadDirSelector);
@@ -68,7 +70,7 @@ const AddTorrentDialog = () => {
     dispatch(toggleAddTorrentDialog(false));
   };
 
-  const handleAddResult = (result: IAddResult, advancedMode: boolean) => {
+  const handleAddResult = (result: IAddResult, formData: IFormInput) => {
     if (result.result !== "success") {
       enqueueSnackbar(
         intl.formatMessage({ id: "message.failedAdd" }) + result.result,
@@ -77,7 +79,7 @@ const AddTorrentDialog = () => {
         }
       );
     } else if (result.arguments.torrentAdded) {
-      if (advancedMode) {
+      if (formData.advancedMode) {
         dispatch(showTorrentDownloadOptions(result.arguments.torrentAdded.id));
       } else {
         enqueueSnackbar(intl.formatMessage({ id: "message.added" }));
@@ -98,8 +100,10 @@ const AddTorrentDialog = () => {
   };
 
   const handleAdd = (data: IFormInput) => {
+    const snackbarKey = uuid();
     enqueueSnackbar(intl.formatMessage({ id: "message.adding" }), {
       variant: "info",
+      key: snackbarKey,
     });
     api
       .addTorrent(
@@ -107,13 +111,14 @@ const AddTorrentDialog = () => {
         data.downloadDir,
         data.advancedMode || !data.autoStart
       )
-      .then((result) =>
-        handleAddResult(result.data as IAddResult, data.advancedMode)
-      )
+      .then((result) => handleAddResult(result.data as IAddResult, data))
       .catch(() => {
         enqueueSnackbar(intl.formatMessage({ id: "message.unknownError" }), {
           variant: "error",
         });
+      })
+      .finally(() => {
+        closeSnackbar(snackbarKey);
       });
   };
 
