@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useForm } from "react-hook-form";
+import { v4 as uuid } from "uuid";
+
 import {
   Button,
   Dialog,
@@ -33,7 +35,7 @@ type TResult = {
 const AddTorrentDialog = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const open = useSelector(getRemoveTorrentsDialogOpen);
   const selectIds = useSelector(getSelectedIds);
   const selectedTorrents = useSelector(getSelectedTorrents);
@@ -55,8 +57,10 @@ const AddTorrentDialog = () => {
   };
 
   const handleRemove = (data: IFormInput) => {
+    const snackbarKey = uuid();
     enqueueSnackbar(intl.formatMessage({ id: "message.removing" }), {
       variant: "info",
+      key: snackbarKey,
     });
     removeTorrents(selectIds, data.deleteLocalData)
       .then((result) => {
@@ -67,6 +71,9 @@ const AddTorrentDialog = () => {
         enqueueSnackbar(intl.formatMessage({ id: "message.unknownError" }), {
           variant: "error",
         });
+      })
+      .finally(() => {
+        closeSnackbar(snackbarKey);
       });
   };
 
