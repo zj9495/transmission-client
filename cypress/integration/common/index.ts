@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { DOWNLOAD_DIR, TEST_TORRENT } from "../../fixtures/constants"
+import { DOWNLOAD_DIR, TEST_TORRENT } from "../../fixtures/constants";
 
 export const addTestTorrent = (autoStart = true) => {
   cy.getByTestId("add-btn").click();
@@ -20,23 +20,28 @@ export const addTestTorrent = (autoStart = true) => {
 };
 
 export const removeTestTorrent = () => {
-  cy.contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('input[type=checkbox]').check()
-  cy.getByTestId('delete-btn').click()
-  cy.get('[data-testid=delete-local-data] [type=checkbox]').check()
-  cy.contains('OK').click()
-  cy.contains(TEST_TORRENT.NAME).should('not.exist')
+  cy.contains(TEST_TORRENT.NAME)
+    .closest(".MuiDataGrid-row")
+    .find("input[type=checkbox]")
+    .check();
+  cy.getByTestId("delete-btn").click();
+  cy.get("[data-testid=delete-local-data] [type=checkbox]").check();
+  cy.contains("OK").click();
+  cy.contains(TEST_TORRENT.NAME).should("not.exist");
 };
 
 export const showAllColumns = () => {
-  cy.contains("Columns").click()
-  cy.contains("Show all").click()
-  cy.contains("Columns").click()
-}
+  cy.contains("Columns").click();
+  cy.contains("Show all").click();
+  cy.contains("Columns").click();
+};
 
 export const getUrl = () => {
-  const { env } = Cypress
+  const { env } = Cypress;
   // result example: protocol://user:password@host:port/path
-  return `${env('protocol')}://${env('user')}:${env('password')}@${env('host')}:${env('port')}${env('path')}`
-}
+  return `${env("protocol")}://${env("user")}:${env("password")}@${env(
+    "host"
+  )}:${env("port")}${env("path")}`;
+};
 
-export const TEST_URL = getUrl()
+export const TEST_URL = getUrl();
