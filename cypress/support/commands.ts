@@ -23,19 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-Cypress.Commands.add('verifyConnected', () => {
-  cy.contains('Transmission Client')
-  cy.getByTestId("connected-icon")
-})
+Cypress.Commands.add("verifyConnected", () => {
+  cy.contains("Transmission Client");
+  cy.getByTestId("connected-icon");
+});
 
-Cypress.Commands.add('getByTestId', (selector, ...args) => cy.get(`[data-testid=${selector}]`, ...args))
+Cypress.Commands.add("getByTestId", (selector, ...args) =>
+  cy.get(`[data-testid=${selector}]`, ...args)
+);
 
-Cypress.Commands.add('visitWithoutLocalStorage', (url, options) => cy.visit(url, {
-  onBeforeLoad: (window) => {
-    window.localStorage.clear()
-  },
-  ...options
-}))
+Cypress.Commands.add("visitWithoutLocalStorage", (url, options) =>
+  cy.visit(url, {
+    onBeforeLoad: (window) => {
+      window.localStorage.clear();
+    },
+    ...options,
+  })
+);
 
 // eslint-disable-next-line cypress/no-unnecessary-waiting
-Cypress.Commands.add('waitForWritteState', () => cy.wait(300))
+Cypress.Commands.add("waitForWritteState", () => cy.wait(300));
