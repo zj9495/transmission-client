@@ -10,21 +10,24 @@
 
 # Introduction
 
-A Web Client for [Transmission](https://github.com/transmission/transmission), build with Material-UI and Typescript.
+🚧 A modern web client for [Transmission](https://github.com/transmission/transmission), built with React， Material-UI and Typescript.
 
 # Features
 
 - [x] Moden UI
-- [ ] Mobile friendly UI
+- [X] Mobile friendly UI
 - [x] Dark mode
 - [x] Multi-language support.
 - [x] Start, stop, upload, delete and recheck torrents
 - [x] Select files to download
 - [x] Choose files priority
-- [ ] View details about connected peers
-- [ ] Full information about each torrent
-- [ ] Per torrent options
+- [X] View details about connected peers
+- [X] Full information about each torrent
+- [X] Per torrent options
 - [ ] PT site classification
+
+# Install
+TODO
 
 # Demo
 
