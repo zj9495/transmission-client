@@ -26,7 +26,7 @@
 - [X] Per torrent options
 - [ ] PT site classification
 
-# Install
+# Installation
 TODO
 
 # Demo
@@ -35,6 +35,9 @@ Demo Url: http://transmission.zj9495.com:9091
 
 - Username: `zj9495`
 - Password: `zj9495`
+
+![image.png](https://i.loli.net/2021/09/26/BldmDNsQfTXkw8c.png)
+![image.png](https://i.loli.net/2021/09/26/GQ9VnehvDCtO2mX.png)
 
 # License
 
