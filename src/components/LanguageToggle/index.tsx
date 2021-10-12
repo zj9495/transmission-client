@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Tooltip, Button, Menu, MenuItem } from "@material-ui/core";
+import { Tooltip, Button, Menu, MenuItem, TextField } from "@material-ui/core";
 import LanguageIcon from "@material-ui/icons/Translate";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 
 import { LANGUAGES } from "src/constants";
 import { setLocale } from "src/store/actions/app";
@@ -45,53 +45,30 @@ export default function LanguageToggle() {
   };
 
   return (
-    <>
-      <Tooltip
-        title={intl.formatMessage({ id: "changeLanguage" })}
-        enterDelay={300}
-      >
-        <Button
-          id="switch-language"
-          data-testid="switch-language"
-          color="inherit"
-          onClick={handleLanguageIconClick}
-          data-ga-event-category="header"
-          data-ga-event-action="language"
+    <TextField
+      value={locale}
+      select
+      fullWidth
+      size="small"
+      name="language"
+      variant="outlined"
+      label={<FormattedMessage id="changeLanguage" />}
+    >
+      {LANGUAGES.map((language) => (
+        <MenuItem
+          id={`lang-item-${language.code}`}
+          data-no-link="true"
+          key={language.code}
+          value={language.code}
+          selected={locale === language.code}
+          onClick={() => {
+            handleLanguageMenuItemClick(language.code);
+          }}
+          lang={language.code}
         >
-          <LanguageIcon />
-          <span
-            id="selected-language"
-            data-testid="selected-language"
-            className={classes.language}
-          >
-            {LANGUAGES.find((language) => language.code === locale)?.text}
-          </span>
-          <ExpandMoreIcon fontSize="small" />
-        </Button>
-      </Tooltip>
-      <Menu
-        id="language-menu"
-        data-testid="language-menu"
-        anchorEl={languageMenu}
-        open={Boolean(languageMenu)}
-        onClose={handleLanguageMenuClose}
-      >
-        {LANGUAGES.map((language) => (
-          <MenuItem
-            id={`lang-item-${language.code}`}
-            data-no-link="true"
-            key={language.code}
-            value={language.code}
-            selected={locale === language.code}
-            onClick={() => {
-              handleLanguageMenuItemClick(language.code);
-            }}
-            lang={language.code}
-          >
-            {language.text}
-          </MenuItem>
-        ))}
-      </Menu>
-    </>
+          {language.text}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 }

@@ -4,14 +4,16 @@ import type {
   TorrentSettings,
   OriginTorrentSettings,
   QueueType,
+  SessionFormData,
 } from "src/types";
+import { objectToKebabCase } from "src/utils/object";
 import request from "./request";
 
 export const getSession = () =>
   request({
     method: "post",
     data: { method: "session-get", arguments: {}, tag: "" },
-  });
+  }).then((res) => res.data.arguments);
 
 export const getSessionStats = () =>
   request({
@@ -250,7 +252,7 @@ export const renameTorrent = ({
     },
   });
 
-export const getFreeSpace = ({ path }: { path: string }) =>
+export const getFreeSpace = (path: string) =>
   request({
     method: "post",
     data: {
@@ -304,6 +306,38 @@ export const moveQueue = (type: QueueType, ids: number[]) =>
       method: `queue-move-${type}`,
       arguments: {},
       ids,
+      tag: "",
+    },
+  });
+
+export const setSession = (data: Partial<SessionFormData>) => {
+  const _data = objectToKebabCase(data, ["seedRatioLimit", "seedRatioLimited"]);
+  return request({
+    method: "post",
+    data: {
+      method: "session-set",
+      arguments: _data,
+      tag: "",
+    },
+  });
+};
+
+export const testPort = () =>
+  request({
+    method: "post",
+    data: {
+      method: "port-test",
+      arguments: {},
+      tag: "",
+    },
+  });
+
+export const updateBlocklist = () =>
+  request({
+    method: "post",
+    data: {
+      method: "blocklist-update",
+      arguments: {},
       tag: "",
     },
   });

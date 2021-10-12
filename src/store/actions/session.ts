@@ -12,7 +12,7 @@ export const getSessionAction = () => (
     getSession().then((res) => {
       dispatch({
         type: SET_SESSION,
-        payload: res.data.arguments,
+        payload: res,
       });
     });
   return setSession().catch(() => {

@@ -57,7 +57,7 @@ export const setFreeDiskSpace = (path: string) => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   if (path) {
-    getFreeSpace({ path }).then((res) => {
+    getFreeSpace(path).then((res) => {
       dispatch({
         type: SET_FREE_DISK_SPACE,
         payload: res.data.arguments["size-bytes"],

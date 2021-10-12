@@ -106,6 +106,40 @@ export interface ISession {
   version: string;
   rpcVersion: number;
   downloadDir: string;
+  renamePartialFiles: boolean;
+  startAddedTorrents: boolean;
+  incompleteDirEnabled: boolean;
+  incompleteDir: string;
+  cacheSizeMb: number;
+  scriptTorrentDoneEnabled: boolean;
+  scriptTorrentDoneFilename: string;
+  configDir: string;
+  downloadQueueEnabled: boolean;
+  downloadQueueSize: number;
+  seedQueueEnabled: boolean;
+  seedQueueSize: number;
+  peerPortRandomOnStart: boolean;
+  peerPort: number;
+  blocklistEnabled: boolean;
+  blocklistUrl: string;
+  encryption: string;
+  portForwardingEnabled: boolean;
+  lpdEnabled: boolean;
+  utpEnabled: boolean;
+  dhtEnabled: boolean;
+  pexEnabled: boolean;
+  speedLimitDownEnabled: boolean;
+  speedLimitDown: number;
+  speedLimitUpEnabled: boolean;
+  speedLimitUp: number;
+  peerLimitGlobal: number;
+  peerLimitPerTorrent: number;
+  seedRatioLimited: boolean;
+  seedRatioLimit: number;
+  idleSeedingLimitEnabled: boolean;
+  idleSeedingLimit: number;
+  queueStalledEnabled: boolean;
+  queueStalledMinutes: number;
 }
 
 export interface IStats {
@@ -287,3 +321,42 @@ export interface IParamTypes {
 }
 
 export type QueueType = "top" | "up" | "down" | "bottom";
+
+export type SessionFormData = Pick<
+  ISession,
+  | "renamePartialFiles"
+  | "startAddedTorrents"
+  | "downloadDir"
+  | "incompleteDirEnabled"
+  | "incompleteDir"
+  | "cacheSizeMb"
+  | "scriptTorrentDoneEnabled"
+  | "scriptTorrentDoneFilename"
+  | "configDir"
+  | "downloadQueueEnabled"
+  | "downloadQueueSize"
+  | "seedQueueEnabled"
+  | "seedQueueSize"
+  | "peerPortRandomOnStart"
+  | "peerPort"
+  | "blocklistEnabled"
+  | "blocklistUrl"
+  | "encryption"
+  | "portForwardingEnabled"
+  | "lpdEnabled"
+  | "utpEnabled"
+  | "dhtEnabled"
+  | "pexEnabled"
+  | "speedLimitDownEnabled"
+  | "speedLimitDown"
+  | "speedLimitUpEnabled"
+  | "speedLimitUp"
+  | "peerLimitGlobal"
+  | "peerLimitPerTorrent"
+  | "seedRatioLimited"
+  | "seedRatioLimit"
+  | "idleSeedingLimitEnabled"
+  | "idleSeedingLimit"
+  | "queueStalledEnabled"
+  | "queueStalledMinutes"
+>;
