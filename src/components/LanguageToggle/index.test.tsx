@@ -17,10 +17,7 @@ describe("test LanguageToggle", () => {
         <LanguageToggle />
       </Providers>
     );
-
-    expect(screen.queryByTestId("selected-language")?.textContent).toBe(
-      "English"
-    );
+    screen.getByLabelText("English");
 
     state.app.locale = "zh-CN";
     rerender(
@@ -29,9 +26,7 @@ describe("test LanguageToggle", () => {
       </Providers>
     );
 
-    expect(screen.queryByTestId("selected-language")?.textContent).toBe(
-      "中文 - 简体"
-    );
+    screen.getByLabelText("中文 - 简体");
   });
 
   it("should update language from Menu", () => {
@@ -40,26 +35,27 @@ describe("test LanguageToggle", () => {
         locale: "en",
       },
     };
-    render(
+    const { container } = render(
       <Providers state={state}>
         <LanguageToggle />
       </Providers>
     );
 
-    expect(screen.queryByTestId("selected-language")?.textContent).toBe(
-      "English"
-    );
+    const languageSelectTextField = container.querySelector(
+      "#select-language"
+    ) as HTMLDivElement;
+
+    screen.getByLabelText("English");
     expect(screen.queryByTestId("language-menu")).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("English"));
-    expect(screen.queryByTestId("language-menu")).toBeInTheDocument();
+    fireEvent.mouseDown(languageSelectTextField);
+    expect(screen.getByTestId("language-menu")).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("中文 - 简体"));
     waitFor(() => {
-      expect(screen.queryByTestId("language-menu")).not.toBeInTheDocument();
+      expect(screen.getByTestId("language-menu")).not.toBeInTheDocument();
     });
-    expect(screen.queryByTestId("selected-language")?.textContent).toBe(
-      "中文 - 简体"
-    );
+
+    screen.getByLabelText("中文 - 简体");
   });
 });

@@ -10,7 +10,6 @@ import {
   Switch,
   MenuItem,
   FormControlLabel,
-  Button,
 } from "@material-ui/core";
 
 import TextFieldWithSwitch from "src/components/TextFieldWithSwitch";
@@ -18,7 +17,7 @@ import BlocklistField from "src/components/Settings/BlocklistField";
 import PortField from "src/components/Settings/PortField";
 
 const Network = () => {
-  const { register, control, errors } = useFormContext();
+  const { control, errors } = useFormContext();
 
   return (
     <Grid container spacing={3}>
