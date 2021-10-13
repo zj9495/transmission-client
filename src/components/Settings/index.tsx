@@ -186,6 +186,7 @@ const Settings = (props: Props) => {
       aria-describedby="alert-dialog-description"
       maxWidth="md"
       fullWidth
+      scroll="paper"
     >
       <DialogTitle id="alert-dialog-title">
         <FormattedMessage id="toolbar.systemConfig" />
@@ -236,22 +237,23 @@ const Settings = (props: Props) => {
               </TabPanel>
               <TabPanel value="altSpeed">{/* <Alternative /> */}</TabPanel>
             </TabContext>
-            <DialogActions>
-              <Button color="primary" onClick={onClose}>
-                <FormattedMessage id="dialog.public.buttonCancel" />
-              </Button>
-              <Button
-                type="submit"
-                autoFocus
-                color="primary"
-                startIcon={<SaveIcon />}
-              >
-                <FormattedMessage id="dialog.public.buttonOk" />
-              </Button>
-            </DialogActions>
           </form>
         </FormProvider>
       </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={onClose}>
+          <FormattedMessage id="dialog.public.buttonCancel" />
+        </Button>
+        <Button
+          type="submit"
+          autoFocus
+          color="primary"
+          startIcon={<SaveIcon />}
+          onClick={methods.handleSubmit(onSubmit)}
+        >
+          <FormattedMessage id="dialog.public.buttonOk" />
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };
