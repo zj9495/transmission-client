@@ -389,6 +389,7 @@
   "public.textJsonFileParsingFailed": "JSON文件解析失败！",
   "message.adding": "正在添加中...",
   "message.removing": "正在删除中...",
+  "message.saved": "保存成功!",
   "message.added": "添加种子成功！",
   "message.removed": "删除种子成功！",
   "message.duplicate": "种子已存在！",

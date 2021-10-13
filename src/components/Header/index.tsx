@@ -23,7 +23,7 @@ import { useIntl } from "react-intl";
 import { toggleMenuOpen } from "src/store/actions/menu";
 import { GITHUB_REPO } from "src/constants";
 import ThemeToggle from "src/components/ThemeToggle";
-import LanguageToggle from "src/components/LanguageToggle";
+import SettingsButton from "src/components/SettingsButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -133,8 +133,8 @@ export default function SearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <LanguageToggle />
           <ThemeToggle />
+          <SettingsButton />
           <Hidden xsDown>
             <Tooltip title="Github" enterDelay={300}>
               <IconButton

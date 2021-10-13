@@ -94,6 +94,7 @@ module.exports = {
         'react-hooks/exhaustive-deps': OFF,
         'react/jsx-props-no-spreading': OFF,
         'react-hooks/rules-of-hooks': OFF,
+        'react/destructuring-assignment': OFF,
 
         'func-names': OFF,
         'lines-between-class-members': OFF,

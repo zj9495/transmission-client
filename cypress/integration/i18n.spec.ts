@@ -7,14 +7,13 @@ context("i18n", () => {
   describe("test switch language", () => {
     before(() => {
       cy.visit(TEST_URL);
+      cy.getByTestId("settings-button").click();
     });
     LANGUAGES.forEach((language) => {
       it(`switch to ${language.code} (${language.text})`, () => {
-        cy.get("#switch-language").click();
-        cy.get('#language-menu li[role="menuitem"]')
-          .contains(language.text)
-          .click();
-        cy.get("#selected-language").contains(language.text);
+        cy.get("#select-language").click();
+        cy.getByTestId("language-menu").contains(language.text).click();
+        cy.get("#select-language").contains(language.text);
         cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
           language.strings["torrent.fields.name"]
         );
@@ -31,8 +30,9 @@ context("i18n", () => {
         const url = `${TEST_URL}?locale=${locale}`;
         it(`should use ${language.code} (${language.text}) for http://ip:port/transmission/web?locale=${locale}`, () => {
           cy.visitWithoutLocalStorage(url);
+          cy.getByTestId("settings-button").click();
 
-          cy.get("#selected-language").contains(language.text);
+          cy.get("#select-language").contains(language.text);
           cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
             language.strings["torrent.fields.name"]
           );
@@ -60,7 +60,9 @@ context("i18n", () => {
               });
             },
           });
-          cy.get("#selected-language").contains(language.text);
+          cy.getByTestId("settings-button").click();
+
+          cy.get("#select-language").contains(language.text);
           cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
             language.strings["torrent.fields.name"]
           );
