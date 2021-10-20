@@ -62,7 +62,7 @@ module.exports = {
         ],
 
         'unicorn/filename-case': [
-            ERROR,
+            OFF,
             {
                 cases: {
                     // 中划线

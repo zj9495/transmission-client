@@ -2,15 +2,22 @@
 
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 
-import { TextField, Grid, FormControlLabel, Switch } from "@material-ui/core";
+import {
+  TextField,
+  Grid,
+  FormControlLabel,
+  Switch,
+  InputAdornment,
+} from "@material-ui/core";
 
 import TextFieldWithSwitch from "src/components/TextFieldWithSwitch";
 import FreeSpace from "src/components/FreeSpace";
 import LanguageToggle from "src/components/LanguageToggle";
 
 const Base = () => {
+  const intl = useIntl();
   const { register, control, errors, watch } = useFormContext();
 
   const watchDownloadDir = watch("downloadDir");
@@ -88,8 +95,9 @@ const Base = () => {
           size="small"
           label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
           fullWidth
+          required
           inputRef={register({
-            required: "please input download dir",
+            required: intl.formatMessage({ id: "message.validation.required" }),
           })}
           onBlur={handleDownloadDirBlur}
           helperText={
@@ -113,13 +121,27 @@ const Base = () => {
           inputProps={{
             "data-testid": "cache-size-Mb",
           }}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">MB</InputAdornment>,
+          }}
           error={!!errors.cacheSizeMb}
           name="cacheSizeMb"
           variant="outlined"
           size="small"
           label={<FormattedMessage id="dialog.systemConfig.cacheSizeMb" />}
           fullWidth
-          inputRef={register}
+          required
+          inputRef={register({
+            valueAsNumber: true,
+            required: intl.formatMessage({ id: "message.validation.required" }),
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          })}
           helperText={errors.cacheSizeMb?.message || ""}
         />
       </Grid>
@@ -128,6 +150,9 @@ const Base = () => {
           textFieldName="scriptTorrentDoneFilename"
           switchName="scriptTorrentDoneEnabled"
           labelId="dialog.systemConfig.scriptTorrentDoneEnabled"
+          TextFieldProps={{
+            multiline: true,
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6}>

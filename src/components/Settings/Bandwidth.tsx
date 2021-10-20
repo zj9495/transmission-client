@@ -2,13 +2,14 @@
 
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import { TextField, Grid, InputAdornment } from "@material-ui/core";
 
 import TextFieldWithSwitch from "src/components/TextFieldWithSwitch";
 
 const Bandwidth = () => {
+  const intl = useIntl();
   const { register, errors } = useFormContext();
 
   return (
@@ -22,6 +23,16 @@ const Bandwidth = () => {
             InputProps: {
               endAdornment: (
                 <InputAdornment position="end">KB/s</InputAdornment>
+              ),
+            },
+          }}
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
               ),
             },
           }}
@@ -39,6 +50,16 @@ const Bandwidth = () => {
               ),
             },
           }}
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -48,9 +69,20 @@ const Bandwidth = () => {
           name="peerLimitGlobal"
           variant="outlined"
           size="small"
+          required
           label={<FormattedMessage id="dialog.systemConfig.peerLimitGlobal" />}
           fullWidth
-          inputRef={register}
+          inputRef={register({
+            valueAsNumber: true,
+            required: intl.formatMessage({ id: "message.validation.required" }),
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          })}
           helperText={errors.peerLimitGlobal?.message || ""}
         />
       </Grid>
@@ -61,11 +93,22 @@ const Bandwidth = () => {
           name="peerLimitPerTorrent"
           variant="outlined"
           size="small"
+          required
           label={
             <FormattedMessage id="dialog.systemConfig.peerLimitPerTorrent" />
           }
           fullWidth
-          inputRef={register}
+          inputRef={register({
+            valueAsNumber: true,
+            required: intl.formatMessage({ id: "message.validation.required" }),
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          })}
           helperText={errors.peerLimitPerTorrent?.message || ""}
         />
       </Grid>
@@ -74,6 +117,16 @@ const Bandwidth = () => {
           textFieldName="seedRatioLimit"
           switchName="seedRatioLimited"
           labelId="dialog.systemConfig.seedRatioLimited"
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -90,6 +143,16 @@ const Bandwidth = () => {
               ),
             },
           }}
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          }}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -103,6 +166,16 @@ const Bandwidth = () => {
                 <InputAdornment position="end">
                   <FormattedMessage id="dialog.systemConfig.minutes" />
                 </InputAdornment>
+              ),
+            },
+          }}
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
               ),
             },
           }}

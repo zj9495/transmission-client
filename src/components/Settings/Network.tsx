@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import {
   TextField,
@@ -17,7 +17,8 @@ import BlocklistField from "src/components/Settings/BlocklistField";
 import PortField from "src/components/Settings/PortField";
 
 const Network = () => {
-  const { control, errors } = useFormContext();
+  const intl = useIntl();
+  const { control, errors, register } = useFormContext();
 
   return (
     <Grid container spacing={3}>
@@ -26,6 +27,16 @@ const Network = () => {
           textFieldName="downloadQueueSize"
           switchName="downloadQueueEnabled"
           labelId="dialog.systemConfig.downloadQueueEnabled"
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          }}
         />
       </Grid>
 
@@ -35,6 +46,16 @@ const Network = () => {
           switchName="seedQueueEnabled"
           labelId="dialog.systemConfig.seedQueueEnabled"
           TextFieldProps={{ type: "number" }}
+          registerOptions={{
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: intl.formatMessage(
+                { id: "message.validation.min" },
+                { num: "0" }
+              ),
+            },
+          }}
         />
       </Grid>
 
@@ -62,6 +83,11 @@ const Network = () => {
               fullWidth
               onChange={(e) => onChange(e.target.value)}
               helperText={errors.encryption?.message || ""}
+              inputRef={register({
+                required: intl.formatMessage({
+                  id: "message.validation.required",
+                }),
+              })}
             >
               <MenuItem value="required">
                 <FormattedMessage id="dialog.systemConfig.encryptionType.required" />

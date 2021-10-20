@@ -12,6 +12,7 @@ const BlocklistField = () => {
   const { watch } = useFormContext();
   const blocklistEnabled: boolean = watch("blocklistEnabled");
   const blocklistUrl: string = watch("blocklistUrl");
+  const blocklistSize: number = watch("blocklistSize");
 
   const handleUpdate = async () => {
     await setSession({ blocklistUrl });
@@ -43,6 +44,12 @@ const BlocklistField = () => {
             </Button>
           ),
         },
+        helperText: (
+          <FormattedMessage
+            id="dialog.systemConfig.blocklistSize"
+            values={{ num: blocklistSize }}
+          />
+        ),
       }}
     />
   );

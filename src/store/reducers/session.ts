@@ -39,6 +39,7 @@ export const initialSessionState: SessionState = {
     peerPort: 0,
     blocklistEnabled: false,
     blocklistUrl: "",
+    blocklistSize: 0,
     encryption: "",
     portForwardingEnabled: false,
     lpdEnabled: false,
