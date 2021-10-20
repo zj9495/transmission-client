@@ -122,6 +122,7 @@ export interface ISession {
   peerPort: number;
   blocklistEnabled: boolean;
   blocklistUrl: string;
+  blocklistSize: number;
   encryption: string;
   portForwardingEnabled: boolean;
   lpdEnabled: boolean;
@@ -359,4 +360,5 @@ export type SessionFormData = Pick<
   | "idleSeedingLimit"
   | "queueStalledEnabled"
   | "queueStalledMinutes"
+  | "blocklistSize"
 >;

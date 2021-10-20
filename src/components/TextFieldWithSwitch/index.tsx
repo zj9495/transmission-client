@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { FormattedMessage } from "react-intl";
+import type { RegisterOptions } from "react-hook-form";
+import { useIntl, FormattedMessage } from "react-intl";
 
 import { TextField, InputAdornment, Switch } from "@material-ui/core";
 import type { SwitchProps, TextFieldProps } from "@material-ui/core";
@@ -12,13 +13,25 @@ type Props = {
   readonlyOn?: "checked" | "unChecked";
   TextFieldProps?: Partial<TextFieldProps>;
   SwitchProps?: Partial<SwitchProps>;
+  registerOptions?: RegisterOptions;
 };
 
 const TextFieldWithSwitch = (props: Props) => {
-  const { textFieldName, switchName, labelId, readonlyOn = "checked" } = props;
+  const intl = useIntl();
+  const {
+    textFieldName,
+    switchName,
+    labelId,
+    readonlyOn = "unChecked",
+    registerOptions,
+  } = props;
   const { register, control, errors, watch } = useFormContext();
 
   const checked = watch(switchName);
+  const message = intl.formatMessage({ id: "message.validation.required" });
+
+  const shouldRequired = readonlyOn === "unChecked" ? checked : !checked;
+  const inputRequired = shouldRequired ? message : false;
 
   return (
     <TextField
@@ -28,13 +41,17 @@ const TextFieldWithSwitch = (props: Props) => {
       fullWidth
       size="small"
       variant="outlined"
-      inputRef={register}
+      inputRef={register({
+        required: inputRequired,
+        ...registerOptions,
+      })}
+      required={Boolean(inputRequired)}
       {...props.TextFieldProps}
       helperText={
         errors[textFieldName]?.message || props.TextFieldProps?.helperText
       }
       InputProps={{
-        readOnly: readonlyOn === "checked" ? !checked : checked,
+        readOnly: readonlyOn === "unChecked" ? !checked : checked,
         startAdornment: (
           <InputAdornment position="start">
             <Controller

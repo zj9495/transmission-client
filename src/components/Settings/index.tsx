@@ -18,7 +18,7 @@ import { useTheme } from "@material-ui/core/styles";
 import SaveIcon from "@material-ui/icons/Save";
 
 import { useSnackbar } from "notistack";
-import { pick, cloneDeep } from "lodash";
+import { pick } from "lodash";
 
 import { getSessionSelector } from "src/store/selector/session";
 import { getSessionAction } from "src/store/actions/session";
@@ -57,44 +57,6 @@ export const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-type numberSessionField =
-  | "cacheSizeMb"
-  | "downloadQueueSize"
-  | "seedQueueSize"
-  | "peerPort"
-  | "speedLimitDown"
-  | "speedLimitUp"
-  | "peerLimitGlobal"
-  | "peerLimitPerTorrent"
-  | "seedRatioLimit"
-  | "idleSeedingLimit"
-  | "queueStalledMinutes";
-
-const formatFormData = (formData: SessionFormData) => {
-  const result = cloneDeep(formData);
-  const numberFields: numberSessionField[] = [
-    "cacheSizeMb",
-    "downloadQueueSize",
-    "seedQueueSize",
-    "peerPort",
-    "speedLimitDown",
-    "speedLimitUp",
-    "peerLimitGlobal",
-    "peerLimitPerTorrent",
-    "seedRatioLimit",
-    "idleSeedingLimit",
-    "queueStalledMinutes",
-  ];
-
-  numberFields.forEach((field) => {
-    if (result[field] !== undefined) {
-      result[field] = Number(formData[field]);
-    }
-  });
-
-  return result;
-};
-
 const Settings = (props: Props) => {
   const dispatch = useDispatch();
   const intl = useIntl();
@@ -126,6 +88,7 @@ const Settings = (props: Props) => {
         "peerPort",
         "blocklistEnabled",
         "blocklistUrl",
+        "blocklistSize",
         "encryption",
         "portForwardingEnabled",
         "lpdEnabled",
@@ -161,7 +124,7 @@ const Settings = (props: Props) => {
   };
 
   const onSubmit = (formData: SessionFormData) => {
-    setSession(formatFormData(formData)).then((res) => {
+    setSession(formData).then((res) => {
       const { result } = res.data;
       const isSuccess = result === "success";
 
