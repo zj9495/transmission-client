@@ -161,7 +161,7 @@
   "dialog.systemConfig.weekday.5": "Sexta",
   "dialog.systemConfig.weekday.6": "Sábado",
   "dialog.systemConfig.blocklistEnabled": "Usar lista de bloqueio",
-  "dialog.systemConfig.blocklistSize": "Blocklist has {num} rules.",
+  "dialog.systemConfig.blocklistSize": "A lista de bloqueio tem {num} regra(s).",
   "dialog.systemConfig.seedRatioLimited": "Taxa máxima de Seeds:",
   "dialog.systemConfig.queueStalledEnabled": "Considerar os Torrents inativos como parados:",
   "dialog.systemConfig.idleSeedingLimitEnabled": "O semeamento dos Torrents parará se ficam inativos por:",
