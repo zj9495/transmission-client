@@ -11,8 +11,8 @@ import {
   Checkbox,
   Button,
   Box,
-} from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
+} from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 
 import SeedModeCheckbox from "src/components/SeedModeCheckbox";
 import { useTorrentSettings } from "src/hooks/swr";

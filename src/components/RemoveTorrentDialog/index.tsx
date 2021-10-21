@@ -14,7 +14,7 @@ import {
   FormControlLabel,
   Switch,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useSnackbar } from "notistack";
 
 import { getSelectedTorrents, getSelectedIds } from "src/store/selector/list";

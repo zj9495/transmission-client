@@ -20,7 +20,7 @@ context("test columns", () => {
           COLUMNS.ALL.forEach((name) => {
             const SMAILL_WIDTH = "100px";
             const BIG_WIDTH = "500px";
-            cy.get(`[data-field=${name}] .MuiDataGrid-colCellTitle`)
+            cy.get(`[data-field=${name}] .MuiDataGrid-columnHeaderTitle`)
               .click()
               .then(($field) => {
                 // get the column title currently width
@@ -45,7 +45,7 @@ context("test columns", () => {
 
                 cy.log(`language: ${language.code}, fieldName: ${name}`);
                 // column title width should not be changed
-                cy.get(`[data-field=${name}] .MuiDataGrid-colCellTitle`)
+                cy.get(`[data-field=${name}] .MuiDataGrid-columnHeaderTitle`)
                   .invoke("width")
                   .should("eq", oldWidth);
 

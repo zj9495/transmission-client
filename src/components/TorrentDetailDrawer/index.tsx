@@ -6,9 +6,9 @@ import {
   Tab,
   Box,
   Drawer,
-} from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import { Skeleton } from "@mui/lab";
+import { makeStyles, createStyles } from "@mui/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage } from "react-intl";
 

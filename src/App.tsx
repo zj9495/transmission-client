@@ -5,8 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useMediaQuery, useTheme } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { useMediaQuery, useTheme, CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import { SnackbarProvider } from "notistack";
 import { PersistGate } from "redux-persist/integration/react";

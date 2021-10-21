@@ -14,10 +14,10 @@ context("i18n", () => {
         cy.get("#select-language").click();
         cy.getByTestId("language-menu").contains(language.text).click();
         cy.get("#select-language").contains(language.text);
-        cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
+        cy.get("#torrent-table .MuiDataGrid-columnHeaderTitle").contains(
           language.strings["torrent.fields.name"]
         );
-        cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
+        cy.get("#torrent-table .MuiDataGrid-columnHeaderTitle").contains(
           language.strings["torrent.fields.totalSize"]
         );
       });
@@ -33,10 +33,10 @@ context("i18n", () => {
           cy.getByTestId("settings-button").click();
 
           cy.get("#select-language").contains(language.text);
-          cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
+          cy.get("#torrent-table .MuiDataGrid-columnHeaderTitle").contains(
             language.strings["torrent.fields.name"]
           );
-          cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
+          cy.get("#torrent-table .MuiDataGrid-columnHeaderTitle").contains(
             language.strings["torrent.fields.totalSize"]
           );
         });
@@ -63,10 +63,10 @@ context("i18n", () => {
           cy.getByTestId("settings-button").click();
 
           cy.get("#select-language").contains(language.text);
-          cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
+          cy.get("#torrent-table .MuiDataGrid-columnHeaderTitle").contains(
             language.strings["torrent.fields.name"]
           );
-          cy.get("#torrent-table .MuiDataGrid-colCellTitle").contains(
+          cy.get("#torrent-table .MuiDataGrid-columnHeaderTitle").contains(
             language.strings["torrent.fields.totalSize"]
           );
         });

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
-import { enUS, zhCN, Localization } from "@material-ui/core/locale";
-import { blue } from "@material-ui/core/colors";
+import { enUS, zhCN, Localization } from "@mui/material/locale";
+import { blue } from "@mui/material/colors";
 
 import { Theme as ITheme } from "src/types";
 import { getLocale, getTheme } from "src/store/selector/app";
@@ -52,13 +52,13 @@ const Theme = (props: Props) => {
   }, []);
   const { children } = props;
   const messages = getMessages(locale);
-  const theme = createMuiTheme(
+  const theme = createTheme(
     {
       typography: {
         fontSize: 12,
       },
       palette: {
-        type: themeType,
+        mode: themeType,
         primary: {
           main: themeType === "light" ? blue[700] : blue[200],
           contrastText: "#fff",

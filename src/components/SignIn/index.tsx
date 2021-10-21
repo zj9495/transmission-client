@@ -14,9 +14,11 @@ import {
   MenuItem,
   Select,
   FormControl,
-} from "@material-ui/core";
-import { LockOutlined as LockOutlinedIcon } from "@material-ui/icons";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import type { SelectChangeEvent } from "@mui/material/Select";
+import type { Theme } from "@mui/material";
+import { LockOutlined as LockOutlinedIcon } from "@mui/icons-material";
+import { createStyles, makeStyles } from "@mui/styles";
 import { useIntl } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -34,7 +36,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       backgroundImage: "url(https://source.unsplash.com/random)",
       backgroundRepeat: "no-repeat",
       backgroundColor:
-        theme.palette.type === "dark"
+        theme.palette.mode === "dark"
           ? theme.palette.grey[900]
           : theme.palette.grey[50],
       backgroundSize: "cover",
@@ -81,8 +83,8 @@ export default function SignIn() {
   const locale = useSelector(getLocale);
   const classes = useStyles();
   const intl = useIntl();
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    dispatch(setLocale(event.target.value as string));
+  const handleChange = (event: SelectChangeEvent) => {
+    dispatch(setLocale(event.target.value));
   };
 
   return (

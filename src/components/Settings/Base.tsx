@@ -10,7 +10,7 @@ import {
   FormControlLabel,
   Switch,
   InputAdornment,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import TextFieldWithSwitch from "src/components/TextFieldWithSwitch";
 import FreeSpace from "src/components/FreeSpace";

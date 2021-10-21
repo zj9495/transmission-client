@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem, TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
 import { FormattedMessage } from "react-intl";

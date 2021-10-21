@@ -11,11 +11,11 @@ import {
   Button,
   Tab,
   useMediaQuery,
-} from "@material-ui/core";
-import { TabList } from "@material-ui/lab";
-import TabContext, { useTabContext } from "@material-ui/lab/TabContext";
-import { useTheme } from "@material-ui/core/styles";
-import SaveIcon from "@material-ui/icons/Save";
+  useTheme,
+} from "@mui/material";
+import { TabList } from "@mui/lab";
+import TabContext, { useTabContext } from "@mui/lab/TabContext";
+import SaveIcon from "@mui/icons-material/Save";
 
 import { useSnackbar } from "notistack";
 import { pick } from "lodash";
@@ -116,10 +116,7 @@ const Settings = (props: Props) => {
 
   const [selectedTab, setSelectedTab] = useState<SelectedTab>("base");
 
-  const handleChange = (
-    event: React.ChangeEvent<Record<string, unknown>>,
-    newValue: SelectedTab
-  ) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: SelectedTab) => {
     setSelectedTab(newValue);
   };
 

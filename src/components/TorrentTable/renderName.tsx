@@ -1,6 +1,6 @@
 import * as React from "react";
-import { GridCellParams } from "@material-ui/x-grid";
-import { Link, Tooltip } from "@material-ui/core";
+import { GridCellParams } from "@mui/x-data-grid-pro";
+import { Link, Tooltip } from "@mui/material";
 
 import { TorrentId } from "src/types";
 

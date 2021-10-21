@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { useIntl } from "react-intl";
 
-import { Tooltip, IconButton } from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { Tooltip, IconButton } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import Settings from "../Settings";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, CheckboxProps } from "@material-ui/core";
+import { Checkbox, CheckboxProps } from "@mui/material";
 
 import { SEED_MODE, getNextValue } from "./constants";
 

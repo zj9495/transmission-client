@@ -10,7 +10,7 @@ import {
   Switch,
   MenuItem,
   FormControlLabel,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import TextFieldWithSwitch from "src/components/TextFieldWithSwitch";
 import BlocklistField from "src/components/Settings/BlocklistField";

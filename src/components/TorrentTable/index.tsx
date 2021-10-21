@@ -2,14 +2,15 @@ import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  XGrid,
+  DataGridPro,
   GridColDef,
   GridColTypeDef,
   GridCellParams,
   GridToolbar,
-} from "@material-ui/x-grid";
-import type { GridSelectionModelChangeParams } from "@material-ui/x-grid";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+} from "@mui/x-data-grid-pro";
+import type { GridSelectionModel } from "@mui/x-data-grid-pro";
+import { makeStyles, createStyles } from "@mui/styles";
+import type { Theme } from "@mui/material";
 import { find } from "lodash";
 
 import { useParams } from "react-router-dom";
@@ -113,7 +114,7 @@ const TorrentTable: React.FC = () => {
       {
         field: "leftUntilDone",
         headerName: intl.formatMessage({ id: "torrent.fields.remainingTime" }),
-        valueFormatter: ({ value, row }) =>
+        valueGetter: ({ value, row }) =>
           value && row.rateDownload
             ? formatLeftTime(Number(value) / Number(row.rateDownload))
             : " ",
@@ -257,8 +258,8 @@ const TorrentTable: React.FC = () => {
     };
   }, [tableRef, rows]);
 
-  const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
-    dispatch(setSelectedIds(params.selectionModel as number[]));
+  const handleSelectionChange = (model: GridSelectionModel) => {
+    dispatch(setSelectedIds(model as number[]));
   };
 
   const handleClose = () => {
@@ -270,7 +271,7 @@ const TorrentTable: React.FC = () => {
 
   return (
     <div id="torrent-table" style={{ height: tableHeight, width: "100%" }}>
-      <XGrid
+      <DataGridPro
         ref={tableRef}
         className={classes.table}
         density="compact"

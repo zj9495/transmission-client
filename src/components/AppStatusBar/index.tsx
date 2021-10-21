@@ -4,17 +4,18 @@ import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 
-import { Tooltip, Typography, Fade, Box, Hidden } from "@material-ui/core";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Tooltip, Typography, Fade, Box, Hidden } from "@mui/material";
+import type { Theme } from "@mui/material";
+import { makeStyles, createStyles } from "@mui/styles";
 import {
   getStatsSelector,
   getSessionSelector,
   getConnectedSelector,
 } from "src/store/selector/session";
 import { formatSpeed, formatSize } from "src/utils/formatter";
-import UploadIcon from "@material-ui/icons/Publish";
-import DownloadIcon from "@material-ui/icons/GetApp";
-import StorageIcon from "@material-ui/icons/Storage";
+import UploadIcon from "@mui/icons-material/Publish";
+import DownloadIcon from "@mui/icons-material/GetApp";
+import StorageIcon from "@mui/icons-material/Storage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

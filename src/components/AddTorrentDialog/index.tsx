@@ -14,7 +14,7 @@ import {
   FormControlLabel,
   Switch,
   Box,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useSnackbar } from "notistack";
 
 import { getAddTorrentDialogOpen } from "src/store/selector/add";

@@ -1,4 +1,4 @@
-import { LicenseInfo } from "@material-ui/x-grid";
+import { LicenseInfo } from "@mui/x-data-grid-pro";
 
 import appStart from "./appStart";
 
@@ -25,7 +25,7 @@ describe("test appStart", () => {
     setupLicenseSpy.mockRestore();
   });
 
-  test("should correct setup @material-ui/x-grid license key", () => {
+  test("should correct setup @mui/x-data-grid-pro license key", () => {
     const setLicenseKeySpy = jest.spyOn(LicenseInfo, "setLicenseKey");
 
     appStart.setupLicense();

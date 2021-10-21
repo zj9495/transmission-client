@@ -1,9 +1,9 @@
 import React from "react";
-import { Tooltip, IconButton } from "@material-ui/core";
+import { Tooltip, IconButton } from "@mui/material";
 import { useIntl } from "react-intl";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
-import BrightnessAutoIcon from "@material-ui/icons/BrightnessAuto";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import BrightnessAutoIcon from "@mui/icons-material/BrightnessAuto";
 import { useDispatch, useSelector } from "react-redux";
 
 import { toggleTheme } from "src/store/actions/app";

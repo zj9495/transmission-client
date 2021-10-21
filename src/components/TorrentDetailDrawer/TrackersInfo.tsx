@@ -1,7 +1,8 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Grid, Typography } from "@mui/material";
+import type { Theme } from "@mui/material";
+import { Skeleton } from "@mui/lab";
+import { makeStyles, createStyles } from "@mui/styles";
 import { FormattedMessage } from "react-intl";
 
 import { TrackerStats } from "src/types";

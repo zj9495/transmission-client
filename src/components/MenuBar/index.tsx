@@ -2,22 +2,18 @@ import React from "react";
 import clsx from "clsx";
 import { useDebounce } from "react-use";
 
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  useTheme,
-} from "@material-ui/core/styles";
-import { Drawer, List, useMediaQuery } from "@material-ui/core";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import AllInboxIcon from "@material-ui/icons/AllInbox";
-import PauseCircleOutlineIcon from "@material-ui/icons/PauseCircleOutline";
-import SwapVertOutlinedIcon from "@material-ui/icons/SwapVertOutlined";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
-// import WarningIcon from "@material-ui/icons/Warning";
-import FindInPageIcon from "@material-ui/icons/FindInPage";
+import { createStyles, makeStyles } from "@mui/styles";
+import type { Theme } from "@mui/material";
+import { Drawer, List, useMediaQuery, useTheme } from "@mui/material";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import AllInboxIcon from "@mui/icons-material/AllInbox";
+import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
+import SwapVertOutlinedIcon from "@mui/icons-material/SwapVertOutlined";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
+// import WarningIcon from "@mui/icons-material/Warning";
+import FindInPageIcon from "@mui/icons-material/FindInPage";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";

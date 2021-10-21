@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { LicenseInfo } from "@material-ui/x-grid";
+import { LicenseInfo } from "@mui/x-data-grid-pro";
 
 import store from "src/store";
 import { setLocale } from "src/store/actions/app";

@@ -13,8 +13,8 @@ import {
   Switch,
   FormControlLabel,
   useMediaQuery,
-} from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+  useTheme,
+} from "@mui/material";
 
 import { getTorrentDownloadOptions } from "src/store/selector/add";
 import {
