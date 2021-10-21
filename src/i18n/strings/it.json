@@ -161,7 +161,7 @@
   "dialog.systemConfig.weekday.5": "Venerdì",
   "dialog.systemConfig.weekday.6": "Sabato",
   "dialog.systemConfig.blocklistEnabled": "Usa lista di blocco",
-  "dialog.systemConfig.blocklistSize": "Blocklist has {num} rules.",
+  "dialog.systemConfig.blocklistSize": "La lista di blocco ha {num} regole.",
   "dialog.systemConfig.seedRatioLimited": "Rapporto di condivisione predefinito per i torrent:",
   "dialog.systemConfig.queueStalledEnabled": "Considera in stallo i torrent senza attività da:",
   "dialog.systemConfig.idleSeedingLimitEnabled": "Ferma seeding per i torrent senza attività da:",
