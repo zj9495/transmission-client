@@ -161,7 +161,7 @@
   "dialog.systemConfig.weekday.5": "Péntek",
   "dialog.systemConfig.weekday.6": "Szombat",
   "dialog.systemConfig.blocklistEnabled": "Feketelista használata",
-  "dialog.systemConfig.blocklistSize": "Blocklist has {num} rules.",
+  "dialog.systemConfig.blocklistSize": "A feketelista {num} szabályt tartalmaz.",
   "dialog.systemConfig.seedRatioLimited": "Seed a következő arány eléréséig:",
   "dialog.systemConfig.queueStalledEnabled": "Inaktív torrentek leállítása:",
   "dialog.systemConfig.idleSeedingLimitEnabled": "Inaktív torrentek leállítása ennyi tétlenség után:",
