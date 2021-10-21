@@ -161,7 +161,7 @@
   "dialog.systemConfig.weekday.5": "Пятница",
   "dialog.systemConfig.weekday.6": "Суббота",
   "dialog.systemConfig.blocklistEnabled": "Использовать черный список",
-  "dialog.systemConfig.blocklistSize": "Blocklist has {num} rules.",
+  "dialog.systemConfig.blocklistSize": "Черный список содержит {num} правил.",
   "dialog.systemConfig.seedRatioLimited": "Раздача будет остановлена на рейтинге:",
   "dialog.systemConfig.queueStalledEnabled": "Считать активные торрренты зависшими, если нет активности:",
   "dialog.systemConfig.idleSeedingLimitEnabled": "Раздача будет остановлена если нет активности:",
