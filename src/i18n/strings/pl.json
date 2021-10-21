@@ -161,7 +161,7 @@
   "dialog.systemConfig.weekday.5": "Piątek",
   "dialog.systemConfig.weekday.6": "Sobota",
   "dialog.systemConfig.blocklistEnabled": "Używaj blocklist'y (czarna lista z adresami IP organizacji antypirackich)",
-  "dialog.systemConfig.blocklistSize": "Blocklist has {num} rules.",
+  "dialog.systemConfig.blocklistSize": "Na czarnej liście jest {num} reguł",
   "dialog.systemConfig.seedRatioLimited": "Domyślne proporcje dla torrentów:",
   "dialog.systemConfig.queueStalledEnabled": "Bezczynne torrenty będą blokowane po czasie:",
   "dialog.systemConfig.idleSeedingLimitEnabled": "Wysyłanie pobranych torrentów zostanie zatrzymane, jeżeli nikt nie będzie ich pobierał przez:",
