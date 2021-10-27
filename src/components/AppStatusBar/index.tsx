@@ -128,7 +128,7 @@ const AppStatusBar = () => {
               <span data-testid="free-space">{freeSpace}</span>
             </span>
           </Tooltip>
-          <Hidden xsDown>
+          <Hidden smDown>
             <span className={classes.split}>|</span>
             <span>
               Transmission <FormattedMessage id="statusbar.version" />

@@ -159,7 +159,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
       overflowX: "hidden",
       width: closedDrawerWidth,
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down("sm")]: {
         width: 0,
       },
     },
@@ -182,7 +182,7 @@ export default function MenuBar() {
   const torrents = useSelector(getTorrents);
   const [mouseOver, setMouseOver] = React.useState(false);
   const [debouncedMouseOver, setDebouncedMouseOver] = React.useState(false);
-  const isMoblie = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMoblie = useMediaQuery(theme.breakpoints.down("sm"));
 
   const menuTemporaryOpen = mouseOver && debouncedMouseOver;
   const open = menuTemporaryOpen || menuOpen;
