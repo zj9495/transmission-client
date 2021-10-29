@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      zIndex: 1201,
+      zIndex: 1199,
       backgroundColor:
         theme.palette.mode === "dark" ? "transparent" : undefined,
     },
