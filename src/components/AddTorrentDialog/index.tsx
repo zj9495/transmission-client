@@ -14,7 +14,7 @@ import {
   FormControlLabel,
   Switch,
   Box,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useSnackbar } from "notistack";
 
 import { getAddTorrentDialogOpen } from "src/store/selector/add";
@@ -147,6 +147,7 @@ const AddTorrentDialog = () => {
             inputProps={{
               "data-testid": "download-dir",
             }}
+            variant="standard"
             error={!!errors.downloadDir}
             name="downloadDir"
             label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
@@ -160,6 +161,7 @@ const AddTorrentDialog = () => {
             inputProps={{
               "data-testid": "torrent-link",
             }}
+            variant="standard"
             autoFocus
             error={!!errors.torrentUrl}
             name="torrentUrl"

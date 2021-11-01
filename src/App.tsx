@@ -5,8 +5,13 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useMediaQuery, useTheme } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import {
+  useMediaQuery,
+  useTheme,
+  CssBaseline,
+  StyledEngineProvider,
+} from "@mui/material";
+
 import { Provider } from "react-redux";
 import { SnackbarProvider } from "notistack";
 import { PersistGate } from "redux-persist/integration/react";
@@ -25,25 +30,27 @@ appStart.start();
 
 const App = (): JSX.Element => {
   const theme = useTheme();
-  const isMoblie = useMediaQuery(theme.breakpoints.down("xs"));
+  const isMoblie = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Intl>
-          <Theme>
-            <SnackbarProvider dense={isMoblie} variant="success">
-              <Router>
-                <CssBaseline />
-                <Header />
-                <Switch>
-                  <Route path={APP_ROUTES.signIn} component={SignIn} />
-                  <Route path={APP_ROUTES.list} component={List} />
-                  <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
-                </Switch>
-              </Router>
-            </SnackbarProvider>
-          </Theme>
-        </Intl>
+        <StyledEngineProvider injectFirst>
+          <Intl>
+            <Theme>
+              <SnackbarProvider dense={isMoblie} variant="success">
+                <Router>
+                  <CssBaseline />
+                  <Header />
+                  <Switch>
+                    <Route path={APP_ROUTES.signIn} component={SignIn} />
+                    <Route path={APP_ROUTES.list} component={List} />
+                    <Redirect from={APP_ROUTES.base} to={APP_ROUTES.allList} />
+                  </Switch>
+                </Router>
+              </SnackbarProvider>
+            </Theme>
+          </Intl>
+        </StyledEngineProvider>
       </PersistGate>
     </Provider>
   );

@@ -17,17 +17,18 @@ describe("renders MenuItem", () => {
     const { container, getByText, rerender } = render(
       <MenuItem {...mockProps} />
     );
+
     expect(
       container.querySelector(".MuiListItemText-root > span")?.textContent
     ).toBe(mockProps.text);
     expect(
       container.querySelector(".MuiListItemIcon-root .MuiBadge-root")
         ?.textContent
-    ).toBe(`${mockProps.icon}0`);
+    ).toBe(mockProps.icon);
     expect(
       container.querySelector(".MuiListItemIcon-root .MuiBadge-badge")
         ?.textContent
-    ).toBe("0");
+    ).toBe("");
     expect(
       container.querySelector(
         ".MuiListItemSecondaryAction-root .MuiBadge-badge"
@@ -38,6 +39,8 @@ describe("renders MenuItem", () => {
     fireEvent.click(getByText(mockProps.text));
     expect(mockProps.onClick.mock.calls.length).toBe(1);
 
+    // FIX: Badge render a empty string instead of "0"
+    rerender(<MenuItem {...mockProps} menuOpen={false} />);
     rerender(<MenuItem {...mockProps} menuOpen={false} />);
 
     expect(

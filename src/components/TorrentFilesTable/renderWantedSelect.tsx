@@ -1,6 +1,6 @@
 import React from "react";
-import { Select, SelectProps, MenuItem } from "@material-ui/core";
-import { GridCellParams } from "@material-ui/x-grid";
+import { Select, SelectProps, MenuItem } from "@mui/material";
+import { GridCellParams } from "@mui/x-data-grid-pro";
 import { FormattedMessage } from "react-intl";
 
 type Props = {

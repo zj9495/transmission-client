@@ -1,22 +1,23 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-import { Menu, MenuItem, Divider } from "@material-ui/core";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Menu, MenuItem, Divider } from "@mui/material";
+import type { Theme } from "@mui/material";
+import { makeStyles, createStyles } from "@mui/styles";
 
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PauseIcon from "@material-ui/icons/Pause";
-import DeleteIcon from "@material-ui/icons/Delete";
-import StorageIcon from "@material-ui/icons/Storage";
-import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-import FolderOpenOutlinedIcon from "@material-ui/icons/FolderOpenOutlined";
-import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
-import VerticalAlignTopOutlinedIcon from "@material-ui/icons/VerticalAlignTopOutlined";
-import ArrowUpwardOutlinedIcon from "@material-ui/icons/ArrowUpwardOutlined";
-import ArrowDownwardOutlinedIcon from "@material-ui/icons/ArrowDownwardOutlined";
-import VerticalAlignBottomOutlinedIcon from "@material-ui/icons/VerticalAlignBottomOutlined";
-import LinkOutlinedIcon from "@material-ui/icons/LinkOutlined";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import DeleteIcon from "@mui/icons-material/Delete";
+import StorageIcon from "@mui/icons-material/Storage";
+import SettingsInputAntennaIcon from "@mui/icons-material/SettingsInputAntenna";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
+import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
+import VerticalAlignTopOutlinedIcon from "@mui/icons-material/VerticalAlignTopOutlined";
+import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
+import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined";
+import VerticalAlignBottomOutlinedIcon from "@mui/icons-material/VerticalAlignBottomOutlined";
+import LinkOutlinedIcon from "@mui/icons-material/LinkOutlined";
 
 import type { TorrentId, ITorrent, QueueType } from "src/types";
 import { STATUS_TYPES } from "src/constants";

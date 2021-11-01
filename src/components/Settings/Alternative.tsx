@@ -12,7 +12,7 @@ import {
   Switch,
   FormGroup,
   Checkbox,
-} from "@material-ui/core";
+} from "@mui/material";
 
 const Alternative = () => {
   const { register, control, errors } = useFormContext();

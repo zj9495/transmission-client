@@ -2,11 +2,12 @@ import React from "react";
 import { useIntl } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  XGrid,
+  DataGridPro,
   GridColDef,
   GridColTypeDef,
-  GridSelectionModelChangeParams,
-} from "@material-ui/x-grid";
+  GridSelectionModel,
+} from "@mui/x-data-grid-pro";
+import type { SelectChangeEvent } from "@mui/material";
 
 import { getTorrentDownloadOptions } from "src/store/selector/add";
 import {
@@ -27,12 +28,12 @@ const useSize: GridColTypeDef = {
 };
 
 export type FileWantedChangeParams = {
-  rowIndex: number;
+  id: number;
   value: boolean;
 };
 
 export type FilePriorityChangeParams = {
-  rowIndex: number;
+  id: number;
   value: 1 | 0 | -1;
 };
 
@@ -42,7 +43,7 @@ export type FilesTableProps = {
   onFileWantedChange?: (params: FileWantedChangeParams) => void;
   onFilePriorityChange?: (params: FilePriorityChangeParams) => void;
   selectedFilesIds?: number[];
-  onSelectionModelChange?: (params: GridSelectionModelChangeParams) => void;
+  onSelectionModelChange?: (params: GridSelectionModel) => void;
 };
 
 export const FilesTable = (props: FilesTableProps) => {
@@ -98,15 +99,10 @@ export const FilesTable = (props: FilesTableProps) => {
         width: 110,
         valueFormatter: ({ value }) => (value ? "Yes" : "No"),
         renderCell: (cellProps) => {
-          const onChange = (
-            event: React.ChangeEvent<{
-              name?: string | undefined;
-              value: unknown;
-            }>
-          ) => {
+          const onChange = (event: SelectChangeEvent<unknown>) => {
             const value = Boolean(event.target.value);
-            const rowIndex = cellProps.rowIndex as number;
-            onFileWantedChange && onFileWantedChange({ rowIndex, value });
+            const id = cellProps.id as number;
+            onFileWantedChange && onFileWantedChange({ id, value });
           };
           return renderWantedSelect({
             ...cellProps,
@@ -123,15 +119,10 @@ export const FilesTable = (props: FilesTableProps) => {
         type: "number",
         width: 120,
         renderCell: (cellProps) => {
-          const onChange = (
-            event: React.ChangeEvent<{
-              name?: string | undefined;
-              value: unknown;
-            }>
-          ) => {
+          const onChange = (event: SelectChangeEvent<unknown>) => {
             const value = event.target.value as 1 | 0 | -1;
-            const rowIndex = cellProps.rowIndex as number;
-            onFilePriorityChange && onFilePriorityChange({ rowIndex, value });
+            const id = cellProps.id as number;
+            onFilePriorityChange && onFilePriorityChange({ id, value });
           };
           return renderPrioritySelect({
             ...cellProps,
@@ -145,7 +136,7 @@ export const FilesTable = (props: FilesTableProps) => {
 
   return (
     <div data-testid="files-table" style={{ height: "400px" }}>
-      <XGrid
+      <DataGridPro
         density="compact"
         rows={files}
         columns={columns}
@@ -163,8 +154,8 @@ const TorrentFilesTable = () => {
   const { files } = useSelector(getTorrentDownloadOptions);
   const { selectedFilesIds } = useSelector(getTorrentDownloadOptions);
 
-  const handleSelectionChange = (params: GridSelectionModelChangeParams) => {
-    dispatch(setDownloadSelectedFiles(params.selectionModel));
+  const handleSelectionChange = (model: GridSelectionModel) => {
+    dispatch(setDownloadSelectedFiles(model));
   };
 
   const handleFileWantedChange = (params: FileWantedChangeParams) => {

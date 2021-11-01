@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { XGrid, GridColDef, GridColTypeDef } from "@material-ui/x-grid";
+import { DataGridPro, GridColDef, GridColTypeDef } from "@mui/x-data-grid-pro";
 
 import { formatSpeed } from "src/utils/formatter";
 import renderProgress from "src/components/TorrentTable/renderProgress";
@@ -77,7 +77,7 @@ const UserTable = (props: ServerTableProps) => {
 
   return (
     <div data-testid="files-table" style={{ height: "400px" }}>
-      <XGrid
+      <DataGridPro
         getRowId={(row) => row.address}
         density="compact"
         rows={rows}

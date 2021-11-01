@@ -1,14 +1,15 @@
 import React from "react";
 
-// import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+// import { makeStyles, createStyles } from "@mui/styles";
+// import type { Theme } from "@mui/material";
 import {
   ListItem,
   ListItemIcon,
   ListItemText,
   ListItemSecondaryAction,
   Badge,
-} from "@material-ui/core";
-import { ListItemProps } from "@material-ui/core/ListItem";
+} from "@mui/material";
+import { ListItemProps } from "@mui/material/ListItem";
 import { omit } from "lodash";
 
 // const useStyles = makeStyles((theme: Theme) =>

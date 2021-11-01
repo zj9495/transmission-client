@@ -13,8 +13,8 @@ import {
   Switch,
   FormControlLabel,
   useMediaQuery,
-} from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+  useTheme,
+} from "@mui/material";
 
 import { getTorrentDownloadOptions } from "src/store/selector/add";
 import {
@@ -91,6 +91,7 @@ const TorrentDownloadOptionsDialog = () => {
             inputProps={{
               "data-testid": "download-dir",
             }}
+            variant="standard"
             error={!!errors.downloadDir}
             name="downloadDir"
             label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
@@ -107,6 +108,7 @@ const TorrentDownloadOptionsDialog = () => {
             inputProps={{
               "data-testid": "torrent-name",
             }}
+            variant="standard"
             error={!!errors.name}
             name="name"
             label={<FormattedMessage id="torrent.fields.name" />}

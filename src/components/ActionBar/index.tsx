@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Box, IconButton, Tooltip } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PauseIcon from "@material-ui/icons/Pause";
-import SettingsInputAntennaIcon from "@material-ui/icons/SettingsInputAntenna";
-import StorageIcon from "@material-ui/icons/Storage";
+import { Box, IconButton, Tooltip } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import SettingsInputAntennaIcon from "@mui/icons-material/SettingsInputAntenna";
+import StorageIcon from "@mui/icons-material/Storage";
 import { FormattedMessage } from "react-intl";
 
 import { toggleAddTorrentDialog } from "src/store/actions/add";

@@ -16,14 +16,15 @@ import {
   LinearProgress,
   Divider,
   Box,
-} from "@material-ui/core";
-import { LinearProgressProps } from "@material-ui/core/LinearProgress";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import InboxIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
+} from "@mui/material";
+import { LinearProgressProps } from "@mui/material/LinearProgress";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import InboxIcon from "@mui/icons-material/Inbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@mui/styles";
+import type { Theme } from "@mui/material";
 
 import {
   getSizeBytesSelector,
@@ -62,13 +63,13 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down("sm")]: {
         marginLeft: 0,
       },
     },
     menuOpen: {
       marginLeft: 240,
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down("sm")]: {
         marginLeft: 0,
       },
     },

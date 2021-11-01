@@ -3,8 +3,8 @@ import { useFormContext, Controller } from "react-hook-form";
 import type { RegisterOptions } from "react-hook-form";
 import { useIntl, FormattedMessage } from "react-intl";
 
-import { TextField, InputAdornment, Switch } from "@material-ui/core";
-import type { SwitchProps, TextFieldProps } from "@material-ui/core";
+import { TextField, InputAdornment, Switch } from "@mui/material";
+import type { SwitchProps, TextFieldProps } from "@mui/material";
 
 type Props = {
   textFieldName: string;

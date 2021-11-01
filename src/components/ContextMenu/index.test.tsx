@@ -46,14 +46,16 @@ describe("test ContextMenu", () => {
         <ContextMenu {...defaultProps} open={false} />
       </Providers>
     );
-    expect(getByTestId("context-menu").style.visibility).toBe("hidden");
+    expect(getByTestId("context-menu-transition").style.visibility).toBe(
+      "hidden"
+    );
 
     rerender(
       <Providers>
         <ContextMenu {...defaultProps} open />
       </Providers>
     );
-    expect(getByTestId("context-menu").style.visibility).toBe("");
+    expect(getByTestId("context-menu-transition").style.visibility).toBe("");
   });
 
   it("test position", () => {

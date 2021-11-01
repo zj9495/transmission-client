@@ -7,16 +7,12 @@ import {
   Tooltip,
   IconButton,
   Hidden,
-} from "@material-ui/core";
-import {
-  createStyles,
-  fade,
-  Theme,
-  makeStyles,
-} from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import MenuIcon from "@material-ui/icons/Menu";
+} from "@mui/material";
+import { alpha, Theme } from "@mui/material/styles";
+import { createStyles, makeStyles } from "@mui/styles";
+import SearchIcon from "@mui/icons-material/Search";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch } from "react-redux";
 import { useIntl } from "react-intl";
 
@@ -31,9 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      zIndex: 1201,
+      zIndex: 1199,
       backgroundColor:
-        theme.palette.type === "dark" ? "transparent" : undefined,
+        theme.palette.mode === "dark" ? "transparent" : undefined,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -55,9 +51,9 @@ const useStyles = makeStyles((theme: Theme) =>
     search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
       },
       marginLeft: 0,
       marginRight: theme.spacing(1),
@@ -82,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("sm")]: {

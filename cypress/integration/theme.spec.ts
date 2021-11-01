@@ -60,7 +60,7 @@ context("theme", () => {
       .should("be.exist");
     cy.get("body")
       .invoke("css", "background-color")
-      .should("eq", "rgb(48, 48, 48)");
+      .should("eq", "rgb(18, 18, 18)");
 
     cy.clearLocalStorage();
     cy.visit(TEST_URL, {
@@ -78,6 +78,6 @@ context("theme", () => {
       .should("be.exist");
     cy.get("body")
       .invoke("css", "background-color")
-      .should("eq", "rgb(250, 250, 250)");
+      .should("eq", "rgb(255, 255, 255)");
   });
 });
