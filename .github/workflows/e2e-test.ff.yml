@@ -50,6 +50,7 @@ jobs:
           browser: firefox
           start: npm start
           wait-on: "http://localhost:8888"
+          wait-on-timeout: 120
           record: true
           parallel: true
         env:
