@@ -67,8 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TorrentTable: React.FC = () => {
-  const tableRef = React.useRef<HTMLDivElement>(null);
-
+  const [page, setPage] = React.useState(0);
   const [contextMenuProps, setContextMenuProps] = React.useState<
     Omit<ContextMenuProps, "onClose">
   >({
@@ -220,6 +219,11 @@ const TorrentTable: React.FC = () => {
     window.innerHeight,
   ]);
 
+  React.useEffect(() => {
+    // switch to first page after torrent list status has changed
+    setPage(0);
+  }, [torrentStatus]);
+
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
     const clickedTorrentId = Number(
@@ -250,7 +254,6 @@ const TorrentTable: React.FC = () => {
   return (
     <div id="torrent-table" style={{ height: tableHeight, width: "100%" }}>
       <DataGridPro
-        ref={tableRef}
         className={classes.table}
         density="compact"
         components={{
@@ -265,7 +268,8 @@ const TorrentTable: React.FC = () => {
         columns={columns}
         selectionModel={selectedIds}
         pagination
-        pageSize={20}
+        page={page}
+        onPageChange={(newPage) => setPage(newPage)}
         rowsPerPageOptions={[10, 20, 50, 100, 200, 5000, 10000]}
         checkboxSelection
         disableSelectionOnClick
