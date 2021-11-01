@@ -147,6 +147,7 @@ const AddTorrentDialog = () => {
             inputProps={{
               "data-testid": "download-dir",
             }}
+            variant="standard"
             error={!!errors.downloadDir}
             name="downloadDir"
             label={<FormattedMessage id="dialog.torrentAdd.downloadDir" />}
@@ -160,6 +161,7 @@ const AddTorrentDialog = () => {
             inputProps={{
               "data-testid": "torrent-link",
             }}
+            variant="standard"
             autoFocus
             error={!!errors.torrentUrl}
             name="torrentUrl"
