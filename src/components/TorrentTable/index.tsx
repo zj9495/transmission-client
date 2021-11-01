@@ -220,43 +220,21 @@ const TorrentTable: React.FC = () => {
     window.innerHeight,
   ]);
 
-  React.useEffect(() => {
-    const handleRightClick = (event: MouseEvent): any => {
-      let target = event.target as HTMLElement;
-      while (target) {
-        if (target.classList?.contains("MuiDataGrid-row")) {
-          break;
-        }
-        target = target.parentNode as HTMLElement;
-      }
-      if (!target) {
-        return;
-      }
-
-      event.preventDefault();
-
-      const clickedTorrentId = Number(target.dataset.id);
-      setContextMenuProps({
+  const handleContextMenu = (event: React.MouseEvent) => {
+    event.preventDefault();
+    const clickedTorrentId = Number(
+      event.currentTarget.getAttribute("data-id")
+    );
+    setContextMenuProps({
+      id: clickedTorrentId,
+      open: true,
+      x: event.clientX - 2,
+      y: event.clientY - 4,
+      torrent: find<ITorrent>(torrents[torrentStatus], {
         id: clickedTorrentId,
-        open: true,
-        x: event.clientX - 2,
-        y: event.clientY - 4,
-        torrent: find<ITorrent>(torrents[torrentStatus], {
-          id: clickedTorrentId,
-        }) as ITorrent,
-      });
-    };
-
-    if (tableRef.current) {
-      tableRef.current.addEventListener("contextmenu", handleRightClick);
-    }
-
-    return () => {
-      if (tableRef.current) {
-        tableRef.current.removeEventListener("contextmenu", handleRightClick);
-      }
-    };
-  }, [tableRef, rows]);
+      }) as ITorrent,
+    });
+  };
 
   const handleSelectionChange = (model: GridSelectionModel) => {
     dispatch(setSelectedIds(model as number[]));
@@ -277,6 +255,11 @@ const TorrentTable: React.FC = () => {
         density="compact"
         components={{
           Toolbar: GridToolbar,
+        }}
+        componentsProps={{
+          row: {
+            onContextMenu: handleContextMenu,
+          },
         }}
         rows={rows}
         columns={columns}

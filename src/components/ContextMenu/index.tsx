@@ -138,6 +138,14 @@ const ContextMenu = ({
         // @ts-ignore
         "data-testid": "context-menu-transition",
       }}
+      componentsProps={{
+        root: {
+          onContextMenu: (e) => {
+            e.preventDefault();
+            onClose();
+          },
+        },
+      }}
     >
       <MenuItem
         data-testid="context-menu-start"
