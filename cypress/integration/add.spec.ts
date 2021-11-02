@@ -156,4 +156,27 @@ context("app", () => {
     // should remove the test torrent before exit
     removeTestTorrent();
   });
+
+  it("test set defualt download dir", () => {
+    const downloadDir = "/downloads/complete/defualt";
+    cy.getByTestId("add-btn").click();
+    cy.contains("Add Torrent");
+    cy.getByTestId("download-dir").clear();
+    cy.getByTestId("download-dir").type(downloadDir);
+    cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
+    cy.getByTestId("set-download-dir").check();
+    cy.getByTestId("advanced-mode").uncheck();
+    cy.getByTestId("auto-start").uncheck();
+    cy.contains("OK").click();
+    cy.contains("Adding...");
+    cy.contains("Successfully added!");
+
+    cy.getByTestId("add-btn").click();
+    cy.contains("Add Torrent");
+    cy.getByTestId("download-dir").should("have.value", downloadDir);
+    cy.contains("Cancel").click();
+
+    // should remove the test torrent before exit
+    removeTestTorrent();
+  });
 });
