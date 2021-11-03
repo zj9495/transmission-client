@@ -23,11 +23,13 @@ import {
   toggleAddTorrentDialog,
   showTorrentDownloadOptions,
 } from "src/store/actions/add";
+import { getSessionAction } from "src/store/actions/session";
 
 import * as api from "src/api";
 
 interface IFormInput {
   downloadDir: string;
+  setDownloadDir: boolean;
   torrentUrl: string;
   advancedMode: boolean;
   autoStart: boolean;
@@ -45,6 +47,7 @@ interface IAddResult {
 }
 
 const DEFAULT_ADVANCED_MODE = true;
+const SET_DOWNLOAD_DIR = true;
 const AUTO_START = true;
 
 const AddTorrentDialog = () => {
@@ -128,12 +131,22 @@ const AddTorrentDialog = () => {
       downloadDir: data.downloadDir.trim(),
       torrentUrl: data.torrentUrl.trim(),
     });
+    if (data.setDownloadDir) {
+      api
+        .setSession({
+          downloadDir: data.downloadDir,
+        })
+        .finally(() => {
+          dispatch(getSessionAction());
+        });
+    }
     handleClose();
   };
 
   return (
     <Dialog
       open={open}
+      fullWidth
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       data-testid="add-torrent-dialog"
@@ -147,6 +160,7 @@ const AddTorrentDialog = () => {
             inputProps={{
               "data-testid": "download-dir",
             }}
+            InputLabelProps={{ shrink: true }}
             variant="standard"
             error={!!errors.downloadDir}
             name="downloadDir"
@@ -157,6 +171,27 @@ const AddTorrentDialog = () => {
             })}
             helperText={errors.downloadDir?.message || ""}
           />
+          <Box>
+            <FormControlLabel
+              label={
+                <FormattedMessage id="dialog.torrentAdd.setDefaultDownloadDir" />
+              }
+              control={
+                <Switch
+                  inputProps={{
+                    // waiting for https://github.com/microsoft/TypeScript/issues/28960
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    "data-testid": "set-download-dir",
+                  }}
+                  defaultChecked={SET_DOWNLOAD_DIR}
+                  color="primary"
+                  name="setDownloadDir"
+                  inputRef={register}
+                />
+              }
+            />
+          </Box>
           <TextField
             inputProps={{
               "data-testid": "torrent-link",

@@ -90,6 +90,7 @@ const Torrents: React.FC = () => {
   useEffect(() => {
     dispatch(getSessionAction());
     setInterval(() => {
+      dispatch(getSessionAction());
       dispatch(getTorrentsAction());
       dispatch(getSessionStatsAction());
     }, REFRESH_INTERVAL);
