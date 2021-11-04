@@ -27,6 +27,8 @@ import { getSessionAction } from "src/store/actions/session";
 
 import * as api from "src/api";
 
+import SnackbarMessage from "src/components/SnackbarMessage";
+
 interface IFormInput {
   downloadDir: string;
   setDownloadDir: boolean;
@@ -76,7 +78,10 @@ const AddTorrentDialog = () => {
   const handleAddResult = (result: IAddResult, formData: IFormInput) => {
     if (result.result !== "success") {
       enqueueSnackbar(
-        intl.formatMessage({ id: "message.failedAdd" }) + result.result,
+        <SnackbarMessage
+          title={intl.formatMessage({ id: "message.failedAdd" })}
+          message={result.result}
+        />,
         {
           variant: "error",
         }
@@ -85,16 +90,29 @@ const AddTorrentDialog = () => {
       if (formData.advancedMode) {
         dispatch(showTorrentDownloadOptions(result.arguments.torrentAdded.id));
       } else {
-        enqueueSnackbar(intl.formatMessage({ id: "message.added" }));
+        enqueueSnackbar(
+          <SnackbarMessage
+            title={intl.formatMessage({ id: "message.added" })}
+            message={result.arguments.torrentAdded.name}
+          />
+        );
       }
     } else if (result.arguments.torrentDuplicate) {
-      enqueueSnackbar(intl.formatMessage({ id: "message.duplicate" }), {
-        variant: "warning",
-      });
+      enqueueSnackbar(
+        <SnackbarMessage
+          title={intl.formatMessage({ id: "message.duplicate" })}
+          message={result.arguments.torrentDuplicate.name}
+        />,
+        {
+          variant: "warning",
+        }
+      );
     } else {
       enqueueSnackbar(
-        intl.formatMessage({ id: "message.failedAdd" }) +
-          intl.formatMessage({ id: "message.unknownError" }),
+        <SnackbarMessage
+          title={intl.formatMessage({ id: "message.failedAdd" })}
+          message={intl.formatMessage({ id: "message.unknownError" })}
+        />,
         {
           variant: "error",
         }

@@ -12,7 +12,8 @@ context("app", () => {
   it("remove torrent", () => {
     addTestTorrent();
 
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("input[type=checkbox]")
       .check();
@@ -22,13 +23,16 @@ context("app", () => {
     cy.contains("OK").click();
     cy.contains("Removing...");
     cy.contains("Successfully removed!");
-    cy.contains(TEST_TORRENT.NAME).should("not.exist");
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
+      .should("not.exist");
   });
 
   it("should clear the selection after by multiple delete", () => {
     addTestTorrent();
 
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("input[type=checkbox]")
       .check();
