@@ -12,7 +12,8 @@ context("test torrent list", () => {
   it("should format ratio if ratio < 0", () => {
     addTestTorrent(false);
 
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=uploadRatio]")
       .contains("0");

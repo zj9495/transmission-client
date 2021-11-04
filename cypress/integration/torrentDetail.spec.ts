@@ -23,7 +23,7 @@ context("test torrent detail", () => {
   });
 
   it("should show torrent detail when click torrent name", () => {
-    cy.contains(TEST_TORRENT.NAME).click();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).click();
     cy.getByTestId("torrent-detail-title").contains(TEST_TORRENT.NAME);
     cy.contains("Base");
     cy.contains("Trackers");
@@ -33,7 +33,7 @@ context("test torrent detail", () => {
   });
 
   it("should show Base as the default tab", () => {
-    cy.contains(TEST_TORRENT.NAME).click();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).click();
     cy.getByTestId("torrent-detail-tabs")
       .find(".Mui-selected")
       .contains("Base");
@@ -46,7 +46,7 @@ context("test torrent detail", () => {
       .find(".MuiBackdrop-root")
       .click({ force: true });
 
-    cy.contains(TEST_TORRENT.NAME).click();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).click();
     // should show Base as the default tab
     cy.getByTestId("torrent-detail-tabs")
       .find(".Mui-selected")
@@ -64,7 +64,7 @@ context("test torrent detail", () => {
       { fixture: "torrent/detail.json" }
     ).as("getDetail");
 
-    cy.contains(TEST_TORRENT.NAME).click();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).click();
     cy.getByTestId("torrent-detail-tabs")
       .find(".Mui-selected")
       .contains("Base");
@@ -132,7 +132,7 @@ context("test torrent detail", () => {
       { fixture: "torrent/detail.json" }
     ).as("getDetail");
 
-    cy.contains(TEST_TORRENT.NAME).click();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).click();
     cy.contains("Trackers").click();
 
     cy.getByTestId("torrent-tracker-announce").contains("Announce");

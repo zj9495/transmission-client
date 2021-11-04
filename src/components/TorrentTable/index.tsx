@@ -252,7 +252,11 @@ const TorrentTable: React.FC = () => {
   };
 
   return (
-    <div id="torrent-table" style={{ height: tableHeight, width: "100%" }}>
+    <div
+      id="torrent-table"
+      data-testid="torrent-table"
+      style={{ height: tableHeight, width: "100%" }}
+    >
       <DataGridPro
         className={classes.table}
         density="compact"

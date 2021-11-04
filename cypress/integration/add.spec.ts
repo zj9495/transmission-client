@@ -21,8 +21,9 @@ context("app", () => {
     cy.contains("OK").click();
     cy.contains("Adding...");
     cy.contains("Successfully added!");
-    cy.contains(TEST_TORRENT.NAME);
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Downloading");
@@ -40,11 +41,12 @@ context("app", () => {
     cy.get("[data-testid=advanced-mode]").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
-    cy.contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.contains("Paused");
-    // cy.contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    // cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
     cy.contains("OK").click();
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Downloading");
@@ -62,11 +64,13 @@ context("app", () => {
     cy.get("[data-testid=advanced-mode]").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
-    cy.contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.contains("Cancel").click();
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(3000);
-    cy.contains(TEST_TORRENT.NAME).should("not.exist");
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
+      .should("not.exist");
   });
 
   it("test auto start - basic mode", () => {
@@ -80,8 +84,9 @@ context("app", () => {
     cy.contains("OK").click();
     cy.contains("Adding...");
     cy.contains("Successfully added!");
-    cy.contains(TEST_TORRENT.NAME);
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Downloading");
@@ -101,8 +106,9 @@ context("app", () => {
     cy.contains("OK").click();
     cy.contains("Adding...");
     cy.contains("Successfully added!");
-    cy.contains(TEST_TORRENT.NAME);
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Paused");
@@ -120,12 +126,13 @@ context("app", () => {
     cy.get("[data-testid=advanced-mode]").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
-    cy.contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.contains("Paused");
-    // cy.contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    // cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
     cy.get("[data-testid=auto-start]").check({ force: true });
     cy.contains("OK").click();
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Downloading");
@@ -143,12 +150,13 @@ context("app", () => {
     cy.get("[data-testid=advanced-mode]").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
-    cy.contains(TEST_TORRENT.NAME);
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.contains("Paused");
-    // cy.contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
+    // cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
     cy.get("[data-testid=auto-start]").uncheck({ force: true });
     cy.contains("OK").click();
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Paused");

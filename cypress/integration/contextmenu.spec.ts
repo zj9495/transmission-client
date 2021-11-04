@@ -17,7 +17,7 @@ context("test context menu", () => {
   it("should display contextmenu when right click torrent", () => {
     cy.contains("Start the checked torrents").should("be.hidden");
 
-    cy.contains(TEST_TORRENT.NAME).rightclick();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).rightclick();
     cy.contains("Start the checked torrents").should("not.be.hidden");
 
     // should close contextmenu when click other place
@@ -28,15 +28,16 @@ context("test context menu", () => {
   });
 
   it("test disable menu item", () => {
-    cy.contains(TEST_TORRENT.NAME).rightclick();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).rightclick();
     cy.contains("Start the checked torrents").click();
 
     // start & recheck should be disable when torrent is downloading
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Downloading");
-    cy.contains(TEST_TORRENT.NAME).rightclick();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).rightclick();
     cy.getByTestId("context-menu-start").should(
       "have.css",
       "pointer-events",
@@ -49,15 +50,16 @@ context("test context menu", () => {
     );
 
     // pause torrent
-    // cy.contains(TEST_TORRENT.NAME).rightclick()
+    // cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).rightclick()
     cy.contains("Pause the checked torrents").click();
 
     // pause & more peers should be disable when torrent is downloading
-    cy.contains(TEST_TORRENT.NAME)
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
       .find("[data-field=status]")
       .contains("Paused");
-    cy.contains(TEST_TORRENT.NAME).rightclick();
+    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).rightclick();
     cy.getByTestId("context-menu-pause").should(
       "have.css",
       "pointer-events",
