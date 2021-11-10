@@ -83,11 +83,7 @@ const Network = () => {
               fullWidth
               onChange={(e) => onChange(e.target.value)}
               helperText={errors.encryption?.message || ""}
-              inputRef={register({
-                required: intl.formatMessage({
-                  id: "message.validation.required",
-                }),
-              })}
+              inputRef={register}
             >
               <MenuItem value="required">
                 <FormattedMessage id="dialog.systemConfig.encryptionType.required" />
