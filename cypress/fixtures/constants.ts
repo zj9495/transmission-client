@@ -6,6 +6,12 @@ export const TEST_TORRENT = {
   NAME:
     "Daft Punk - TRON Legacy - The Complete Edition (2020) Mp3 320kbps [PMEDIA]",
 };
+export const TEST_TORRENT_2 = {
+  URL:
+    "https://pt.hdupt.com/download.php?id=15264&passkey=b4ab64d2f26b9134e00899443f2dd209",
+  NAME: "Eminem-Revival-2017-NOiR",
+};
+
 export const COLUMNS = {
   DISPLAY: [
     "name",

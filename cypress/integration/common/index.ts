@@ -19,18 +19,16 @@ export const addTestTorrent = (autoStart = true) => {
   cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
 };
 
-export const removeTestTorrent = () => {
+export const removeTestTorrent = (name = TEST_TORRENT.NAME) => {
   cy.getByTestId("torrent-table")
-    .contains(TEST_TORRENT.NAME)
+    .contains(name)
     .closest(".MuiDataGrid-row")
     .find("input[type=checkbox]")
     .check();
   cy.getByTestId("delete-btn").click();
   cy.get("[data-testid=delete-local-data] [type=checkbox]").check();
   cy.contains("OK").click();
-  cy.getByTestId("torrent-table")
-    .contains(TEST_TORRENT.NAME)
-    .should("not.exist");
+  cy.getByTestId("torrent-table").contains(name).should("not.exist");
 };
 
 export const showAllColumns = () => {

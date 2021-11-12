@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { removeTestTorrent, TEST_URL } from "./common";
-import { TEST_TORRENT } from "../fixtures/constants";
+import { TEST_TORRENT, TEST_TORRENT_2 } from "../fixtures/constants";
 
 const DOWNLOAD_DIR = "/downloads/complete";
 
@@ -17,7 +17,7 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").uncheck();
+    cy.getByTestId("advanced-mode").uncheck();
     cy.contains("OK").click();
     cy.contains("Adding...");
     cy.contains("Successfully added!");
@@ -38,7 +38,7 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").check();
+    cy.getByTestId("advanced-mode").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
     cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
@@ -61,7 +61,7 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").check();
+    cy.getByTestId("advanced-mode").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
     cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
@@ -79,12 +79,11 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").uncheck();
-    cy.get("[data-testid=auto-start]").check();
+    cy.getByTestId("advanced-mode").uncheck();
+    cy.getByTestId("auto-start").check();
     cy.contains("OK").click();
     cy.contains("Adding...");
     cy.contains("Successfully added!");
-    cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.getByTestId("torrent-table")
       .contains(TEST_TORRENT.NAME)
       .closest(".MuiDataGrid-row")
@@ -101,8 +100,8 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").uncheck();
-    cy.get("[data-testid=auto-start]").uncheck();
+    cy.getByTestId("advanced-mode").uncheck();
+    cy.getByTestId("auto-start").uncheck();
     cy.contains("OK").click();
     cy.contains("Adding...");
     cy.contains("Successfully added!");
@@ -123,13 +122,13 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").check();
+    cy.getByTestId("advanced-mode").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
     cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.contains("Paused");
     // cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
-    cy.get("[data-testid=auto-start]").check({ force: true });
+    cy.getByTestId("auto-start").check({ force: true });
     cy.contains("OK").click();
     cy.getByTestId("torrent-table")
       .contains(TEST_TORRENT.NAME)
@@ -147,13 +146,13 @@ context("app", () => {
     cy.getByTestId("download-dir").clear();
     cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
     cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
-    cy.get("[data-testid=advanced-mode]").check();
+    cy.getByTestId("advanced-mode").check();
     cy.contains("Next").click();
     cy.contains("Adding...");
     cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME);
     cy.contains("Paused");
     // cy.getByTestId("torrent-table").contains(TEST_TORRENT.NAME).closest('.MuiDataGrid-row').find('[data-field=status]').contains('Paused')
-    cy.get("[data-testid=auto-start]").uncheck({ force: true });
+    cy.getByTestId("auto-start").uncheck({ force: true });
     cy.contains("OK").click();
     cy.getByTestId("torrent-table")
       .contains(TEST_TORRENT.NAME)
@@ -186,5 +185,45 @@ context("app", () => {
 
     // should remove the test torrent before exit
     removeTestTorrent();
+  });
+
+  it("test add multiple torrents - basic mode", () => {
+    cy.getByTestId("add-btn").click();
+    cy.contains("Add Torrent");
+    cy.getByTestId("download-dir").clear();
+    cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
+
+    cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
+    cy.getByTestId("torrent-link").type("{enter}");
+    cy.getByTestId("torrent-link").type(TEST_TORRENT_2.URL);
+
+    cy.getByTestId("advanced-mode").should("be.disabled");
+    cy.getByTestId("advanced-mode").should("not.be.checked");
+
+    cy.contains("OK").click();
+    cy.getByTestId("torrent-table")
+      .contains(TEST_TORRENT.NAME)
+      .closest(".MuiDataGrid-row")
+      .find("[data-field=status]")
+      .contains("Downloading");
+
+    // should remove the test torrent before exit
+    removeTestTorrent(TEST_TORRENT.NAME);
+    removeTestTorrent(TEST_TORRENT_2.NAME);
+  });
+
+  it("test add multiple torrents - advanced mode", () => {
+    cy.getByTestId("add-btn").click();
+    cy.contains("Add Torrent");
+    cy.getByTestId("download-dir").clear();
+    cy.getByTestId("download-dir").type(DOWNLOAD_DIR);
+
+    cy.getByTestId("torrent-link").type(TEST_TORRENT.URL);
+    cy.getByTestId("torrent-link").type("{enter}");
+    cy.getByTestId("torrent-link").type(TEST_TORRENT_2.URL);
+
+    // advanced mode -  should be unavailable for now
+    cy.getByTestId("advanced-mode").should("be.disabled");
+    cy.getByTestId("advanced-mode").should("not.be.checked");
   });
 });

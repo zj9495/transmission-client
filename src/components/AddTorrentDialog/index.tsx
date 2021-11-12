@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { v4 as uuid } from "uuid";
 
 import {
@@ -16,6 +16,7 @@ import {
   Box,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { uniq } from "lodash";
 
 import { getAddTorrentDialogOpen } from "src/store/selector/add";
 import { getDownloadDirSelector } from "src/store/selector/session";
@@ -52,6 +53,14 @@ const DEFAULT_ADVANCED_MODE = true;
 const SET_DOWNLOAD_DIR = true;
 const AUTO_START = true;
 
+const getUrls = (url: string) =>
+  uniq(
+    url
+      .trim()
+      .split("\n")
+      .filter((url) => url)
+  );
+
 const AddTorrentDialog = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
@@ -59,8 +68,28 @@ const AddTorrentDialog = () => {
 
   const open = useSelector(getAddTorrentDialogOpen);
   const downloadDirFromStore = useSelector(getDownloadDirSelector);
-  const { register, watch, handleSubmit, reset, errors } = useForm();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    reset,
+    errors,
+    setValue,
+    control,
+  } = useForm();
   const isAdvancedMode = watch("advancedMode", DEFAULT_ADVANCED_MODE);
+  const torrentUrl = watch("torrentUrl");
+
+  const disableAdvancedMode = React.useMemo(() => {
+    const urls = getUrls(torrentUrl || "");
+    return urls.length > 1;
+  }, [torrentUrl]);
+
+  React.useEffect(() => {
+    if (disableAdvancedMode) {
+      setValue("advancedMode", false);
+    }
+  }, [disableAdvancedMode]);
 
   React.useEffect(() => {
     reset({
@@ -143,12 +172,18 @@ const AddTorrentDialog = () => {
       });
   };
 
-  const onSubmit = (data: IFormInput) => {
-    handleAdd({
-      ...data,
-      downloadDir: data.downloadDir.trim(),
-      torrentUrl: data.torrentUrl.trim(),
+  const addTorrents = (urls: string[], data: IFormInput) => {
+    urls.forEach((url) => {
+      handleAdd({
+        ...data,
+        torrentUrl: url,
+      });
     });
+  };
+
+  const onSubmit = (data: IFormInput) => {
+    const urls = getUrls(data.torrentUrl);
+    addTorrents(urls, data);
     if (data.setDownloadDir) {
       api
         .setSession({
@@ -220,30 +255,41 @@ const AddTorrentDialog = () => {
             name="torrentUrl"
             label={<FormattedMessage id="dialog.torrentAdd.torrentUrl" />}
             multiline
-            rows={4}
+            rows={8}
             fullWidth
             inputRef={register({
               required: "please input torrent link",
             })}
-            helperText={errors.torrentUrl?.message || ""}
+            helperText={
+              errors.torrentUrl?.message ||
+              intl.formatMessage({ id: "dialog.torrentAdd.tipTorrentUrl" })
+            }
           />
           <Box>
-            <FormControlLabel
-              label="Advaced mode"
-              control={
-                <Switch
-                  inputProps={{
-                    // waiting for https://github.com/microsoft/TypeScript/issues/28960
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
-                    "data-testid": "advanced-mode",
-                  }}
-                  defaultChecked={DEFAULT_ADVANCED_MODE}
-                  color="primary"
-                  name="advancedMode"
-                  inputRef={register}
+            <Controller
+              name="advancedMode"
+              control={control}
+              render={({ value, onChange }) => (
+                <FormControlLabel
+                  label="Advaced mode"
+                  disabled={disableAdvancedMode}
+                  control={
+                    <Switch
+                      inputProps={{
+                        // waiting for https://github.com/microsoft/TypeScript/issues/28960
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
+                        "data-testid": "advanced-mode",
+                      }}
+                      checked={Boolean(value)}
+                      defaultChecked={DEFAULT_ADVANCED_MODE}
+                      color="primary"
+                      name="advancedMode"
+                      onChange={(e) => onChange(e.target.checked)}
+                    />
+                  }
                 />
-              }
+              )}
             />
           </Box>
           <Box>
