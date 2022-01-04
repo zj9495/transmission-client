@@ -61,6 +61,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:report": "yarn build --stats && npx webpack-bundle-analyzer ./build/bundle-stats.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx src",
