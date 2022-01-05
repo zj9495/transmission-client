@@ -12,86 +12,111 @@ export const LANGUAGES = [
   {
     code: "en",
     text: "English",
-    strings: require("src/i18n/strings/en.json"),
+    strings: () => import("src/i18n/strings/en.json"),
   },
   {
     code: "zh-CN",
     text: "中文 - 简体",
-    strings: require("src/i18n/strings/zh-Hans.json"),
+    strings: () =>
+      import(
+        /* webpackChunkName: "zh-Hans.json" */ "src/i18n/strings/zh-Hans.json"
+      ),
   },
   {
     code: "zh-TW",
     text: "中文 - 繁体",
-    strings: require("src/i18n/strings/zh-Hant.json"),
+    strings: () =>
+      import(
+        /* webpackChunkName: "zh-Hant.json" */ "src/i18n/strings/zh-Hant.json"
+      ),
   },
   {
     code: "de",
     text: "Deutsch",
-    strings: require("src/i18n/strings/de.json"),
+    strings: () =>
+      import(/* webpackChunkName: "de.json" */ "src/i18n/strings/de.json"),
   },
   {
     code: "es",
     text: "Español",
-    strings: require("src/i18n/strings/es.json"),
+    strings: () =>
+      import(/* webpackChunkName: "es.json" */ "src/i18n/strings/es.json"),
   },
   {
     code: "fr",
     text: "Français",
-    strings: require("src/i18n/strings/fr.json"),
+    strings: () =>
+      import(/* webpackChunkName: "fr.json" */ "src/i18n/strings/fr.json"),
   },
   {
     code: "hu",
     text: "Magyar",
-    strings: require("src/i18n/strings/hu.json"),
+    strings: () =>
+      import(/* webpackChunkName: "hu.json" */ "src/i18n/strings/hu.json"),
   },
   {
     code: "it",
     text: "Italiano",
-    strings: require("src/i18n/strings/it.json"),
+    strings: () =>
+      import(/* webpackChunkName: "it.json" */ "src/i18n/strings/it.json"),
   },
   {
     code: "ko",
     text: "Korean",
-    strings: require("src/i18n/strings/ko.json"),
+    strings: () =>
+      import(/* webpackChunkName: "ko.json" */ "src/i18n/strings/ko.json"),
   },
   {
     code: "nl",
     text: "Nederlands",
-    strings: require("src/i18n/strings/nl.json"),
+    strings: () =>
+      import(/* webpackChunkName: "nl.json" */ "src/i18n/strings/nl.json"),
   },
   {
     code: "pl",
     text: "Polska - Polski",
-    strings: require("src/i18n/strings/pl.json"),
+    strings: () =>
+      import(/* webpackChunkName: "pl.json" */ "src/i18n/strings/pl.json"),
   },
   {
     code: "pt-BR",
     text: "Português - Brasil",
-    strings: require("src/i18n/strings/pt_BR.json"),
+    strings: () =>
+      import(
+        /* webpackChunkName: "pt_BR.json" */ "src/i18n/strings/pt_BR.json"
+      ),
   },
   {
     code: "pt-PT",
     text: "Português - Portugal",
-    strings: require("src/i18n/strings/pt.json"),
+    strings: () =>
+      import(/* webpackChunkName: "pt.json" */ "src/i18n/strings/pt.json"),
   },
   {
     code: "ro",
     text: "Romanian",
-    strings: require("src/i18n/strings/ro.json"),
+    strings: () =>
+      import(/* webpackChunkName: "ro.json" */ "src/i18n/strings/ro.json"),
   },
   {
     code: "ru",
     text: "Русский",
-    strings: require("src/i18n/strings/ru.json"),
+    strings: () =>
+      import(/* webpackChunkName: "ru.json" */ "src/i18n/strings/ru.json"),
   },
   {
     code: "uk",
     text: "українська мова",
-    strings: require("src/i18n/strings/uk.json"),
+    strings: () =>
+      import(/* webpackChunkName: "uk.json" */ "src/i18n/strings/uk.json"),
   },
 ];
 
-export const DEFAULT_LANGUAGE = LANGUAGES[0];
+export const DEFAULT_LANGUAGE = {
+  code: "en",
+  text: "English",
+  strings: require("src/i18n/strings/en.json"),
+};
 
 export const GITHUB_REPO = "https://github.com/zj9495/transmission-client";
 
