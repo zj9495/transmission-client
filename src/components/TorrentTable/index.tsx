@@ -211,7 +211,7 @@ const TorrentTable: React.FC = () => {
         ...useTime,
       },
     ],
-    [locale]
+    [locale, intl]
   );
 
   const rows = torrents[torrentStatus];
