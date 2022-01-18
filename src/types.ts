@@ -75,6 +75,7 @@ export interface ITorrent {
   errorString: string;
   hashString: string;
   magnetLink: string;
+  color: "primary" | "info" | "warning" | "error";
 }
 
 export interface ITorrents {
@@ -207,6 +208,7 @@ export type Torrent = {
   activityDate: number;
   dateCreated: number;
   comment: string;
+  errorString: string;
   trackerStats: TrackerStats;
   peers: {
     address: string;

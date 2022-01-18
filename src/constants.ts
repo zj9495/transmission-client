@@ -142,3 +142,10 @@ export const PRIORITY_LOW = -1;
 export const INVALID_STATUS = -1;
 
 export const REFRESH_INTERVAL = 5000;
+
+export const TORRENT_ERROR = {
+  None: 0,
+  TrackerWarning: 1,
+  TrackerError: 2,
+  LocalError: 3,
+};

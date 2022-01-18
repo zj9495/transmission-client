@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { STATUS_TYPES } from "src/constants";
+import { STATUS_TYPES, TORRENT_ERROR } from "src/constants";
 import { ITorrent, ITorrents } from "src/types";
 
 import { getTorrents } from "src/api";
@@ -11,7 +11,35 @@ export const getTorrentsAction = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) =>
   getTorrents().then((res) => {
-    const torrents: ITorrent[] = res.data.arguments.torrents || [];
+    const torrents: ITorrent[] = (res.data.arguments.torrents || []).map(
+      (torrent: ITorrent) => {
+        const { error, status } = torrent;
+        let color: ITorrent["color"];
+        if (error) {
+          color = error === TORRENT_ERROR.TrackerWarning ? "warning" : "error";
+        } else {
+          switch (status) {
+            case STATUS_TYPES.download:
+            case STATUS_TYPES.paused:
+              color = "primary";
+              break;
+            case STATUS_TYPES.checkwait:
+            case STATUS_TYPES.check:
+            case STATUS_TYPES.downloadwait:
+            case STATUS_TYPES.seedwait:
+              color = "info";
+              break;
+            case STATUS_TYPES.seed:
+              color = "primary";
+              break;
+            default:
+              color = "info";
+          }
+        }
+        torrent.color = color;
+        return torrent;
+      }
+    );
     const payload: ITorrents = {
       all: torrents,
       downloading: torrents.filter(
