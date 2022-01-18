@@ -2,6 +2,9 @@ import * as React from "react";
 import { GridCellParams } from "@mui/x-data-grid-pro";
 import { makeStyles, createStyles } from "@mui/styles";
 import type { Theme } from "@mui/material";
+import clsx from "clsx";
+
+import { ITorrent } from "src/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,17 +26,26 @@ const useStyles = makeStyles((theme: Theme) =>
     bar: {
       height: "100%",
       backgroundColor: "#088208a3",
+
+      "&.error": {
+        backgroundColor: theme.palette.error.main,
+      },
+
+      "&.warning": {
+        backgroundColor: theme.palette.warning.main,
+      },
     },
   })
 );
 
 interface ProgressBarProps {
   value: number;
+  color: ITorrent["color"];
 }
 
 // eslint-disable-next-line react/display-name
 const ProgressBar = React.memo((props: ProgressBarProps) => {
-  const { value } = props;
+  const { value, color } = props;
   const valueInPercent = value * 100;
   const classes = useStyles();
 
@@ -42,11 +54,14 @@ const ProgressBar = React.memo((props: ProgressBarProps) => {
       <div
         className={classes.value}
       >{`${valueInPercent.toLocaleString()} %`}</div>
-      <div className={classes.bar} style={{ maxWidth: `${valueInPercent}%` }} />
+      <div
+        className={clsx([classes.bar, color])}
+        style={{ maxWidth: `${valueInPercent}%` }}
+      />
     </div>
   );
 });
 
 export default function renderProgress(params: GridCellParams) {
-  return <ProgressBar value={Number(params.value)!} />;
+  return <ProgressBar value={Number(params.value)!} color={params.row.color} />;
 }

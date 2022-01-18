@@ -34,16 +34,19 @@ const BasicInfo = (props: BasicInfoProp) => {
       children: [
         {
           key: "addedDate",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.addedDate" />,
           value: torrent && formatUnixTimeStamp(torrent.addedDate),
         },
         {
           key: "downloadDir",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.downloadDir" />,
           value: torrent?.downloadDir,
         },
         {
           key: "labels",
+          color: "text",
           title: <FormattedMessage id="torrents.properties.tags" />,
           value: torrent?.labels.join(",") || "无",
         },
@@ -57,16 +60,19 @@ const BasicInfo = (props: BasicInfoProp) => {
       children: [
         {
           key: "doneDate",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.doneDate" />,
           value: torrent && formatUnixTimeStamp(torrent.doneDate),
         },
         {
           key: "percentDone",
+          color: "text",
           title: <FormattedMessage id="torrents.details.general.downloaded" />,
           value: `${(torrent?.percentDone || 0) * 100}%`,
         },
         {
           key: "leecherCount",
+          color: "text",
           title: <FormattedMessage id="torrents.details.peers" />,
           value: (
             <FormattedMessage
@@ -80,6 +86,7 @@ const BasicInfo = (props: BasicInfoProp) => {
         },
         {
           key: "seederCount",
+          color: "text",
           title: <FormattedMessage id="torrents.details.general.seeds" />,
           value: (
             <FormattedMessage
@@ -93,6 +100,7 @@ const BasicInfo = (props: BasicInfoProp) => {
         },
         {
           key: "activityDate",
+          color: "text",
           title: <FormattedMessage id="torrents.details.general.date.active" />,
           value: torrent && formatUnixTimeStamp(torrent.activityDate),
         },
@@ -104,21 +112,25 @@ const BasicInfo = (props: BasicInfoProp) => {
       children: [
         {
           key: "dateCreated",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.dateCreated" />,
           value: torrent && formatUnixTimeStamp(torrent.dateCreated),
         },
         {
           key: "hashString",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.hashString" />,
           value: torrent?.hashString,
         },
         {
           key: "totalSize",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.totalSize" />,
           value: torrent && formatSize(torrent.totalSize),
         },
         {
           key: "type",
+          color: "text",
           title: <FormattedMessage id="torrents.details.general.type" />,
           value: torrent?.isPrivate ? (
             <FormattedMessage id="torrents.details.general.type.private" />
@@ -128,12 +140,22 @@ const BasicInfo = (props: BasicInfoProp) => {
         },
         {
           key: "comment",
+          color: "text",
           title: <FormattedMessage id="torrent.attribute.label.comment" />,
           value: torrent?.comment,
         },
       ],
     },
   ];
+
+  if (torrent?.errorString) {
+    info[0].children.push({
+      key: "errorString",
+      color: "error.main",
+      title: <FormattedMessage id="torrent.attribute.label.errorString" />,
+      value: torrent?.errorString,
+    });
+  }
   return (
     <div data-testid="base-info-container">
       {info.map((group) => (
@@ -145,6 +167,7 @@ const BasicInfo = (props: BasicInfoProp) => {
             <Grid
               container
               key={item.key}
+              sx={{ color: item.color }}
               data-testid={`torrent-detail-${item.key}`}
             >
               <Grid item xs={3}>

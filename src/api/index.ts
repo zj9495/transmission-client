@@ -181,6 +181,7 @@ export const getTorrent = (id: number): Promise<Torrent> =>
           "trackerStats",
           "peers",
           "comment",
+          "errorString",
           "downloadLimit",
           "downloadLimited",
           "peer-limit",

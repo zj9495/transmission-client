@@ -9,6 +9,7 @@ export const torrent: ITorrent = {
   downloadedEver: 1373681346,
   error: 0,
   errorString: "",
+  color: "primary",
   hashString: "bc6bd7320e2917d50826dd46c2177b8af5f91a0e",
   id: 1,
   labels: [],
