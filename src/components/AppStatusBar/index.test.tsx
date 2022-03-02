@@ -1,6 +1,7 @@
 import React from "react";
 import { screen } from "@testing-library/react";
 import mediaQuery from "css-mediaquery";
+import { DataGridPro } from "@mui/x-data-grid-pro";
 
 import renderWithProviders from "src/components/renderWithProviders";
 
@@ -36,7 +37,14 @@ describe("test AppStatusBar", () => {
         },
       },
     };
-    renderWithProviders(<AppStatusBar />, state);
+    renderWithProviders(
+      <DataGridPro
+        columns={[]}
+        rows={[]}
+        components={{ Footer: AppStatusBar }}
+      />,
+      state
+    );
     expect(screen.getByTestId("download-speed").textContent).toBe("100kB/s");
     expect(screen.getByTestId("seed-speed").textContent).toBe("200kB/s");
     expect(screen.getByTestId("free-space").textContent).toBe("500GB");

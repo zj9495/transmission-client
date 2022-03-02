@@ -115,7 +115,7 @@ const Torrents: React.FC = () => {
           [classes.menuOpen]: menuOpen,
         })}
       >
-        <ActionBar />
+        {/* <ActionBar /> */}
         <AddTorrentDialog />
         <TorrentDownloadOptionsDialog />
         <RemoveTorrentDialog />
@@ -143,7 +143,7 @@ const Torrents: React.FC = () => {
             );
           })}
         </List> */}
-        <AppStatusBar />
+        {/* <AppStatusBar /> */}
       </Box>
     </div>
   );

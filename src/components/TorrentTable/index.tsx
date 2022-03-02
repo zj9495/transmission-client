@@ -6,10 +6,10 @@ import {
   GridColDef,
   GridColTypeDef,
   GridCellParams,
-  GridToolbar,
 } from "@mui/x-data-grid-pro";
 import type { GridSelectionModel } from "@mui/x-data-grid-pro";
 import { makeStyles, createStyles } from "@mui/styles";
+import { useMediaQuery, useTheme } from "@mui/material";
 import type { Theme } from "@mui/material";
 import { find } from "lodash";
 
@@ -27,6 +27,8 @@ import {
 } from "src/utils/formatter";
 import { IParamTypes, ITorrent, TorrentId } from "src/types";
 import ContextMenu, { ContextMenuProps } from "src/components/ContextMenu";
+import AppStatusBar from "src/components/AppStatusBar";
+import ActionBar from "src/components/ActionBar";
 import renderName from "./renderName";
 import renderProgress from "./renderProgress";
 import { COLUMNS_WIDTH } from "./constants";
@@ -214,8 +216,28 @@ const TorrentTable: React.FC = () => {
     [locale, intl]
   );
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const toolbarLocaleText = React.useMemo(
+    () =>
+      isMobile
+        ? {
+            toolbarColumns: "",
+            toolbarFilters: "",
+            toolbarDensity: "",
+            toolbarExport: "",
+          }
+        : {
+            toolbarColumns: "Columns",
+            toolbarFilters: "Filters",
+            toolbarDensity: "Density",
+            toolbarExport: "Export",
+          },
+    [isMobile]
+  );
+
   const rows = torrents[torrentStatus];
-  const tableHeight = React.useMemo(() => window.innerHeight - 117, [
+  const tableHeight = React.useMemo(() => window.innerHeight - 48, [
     window.innerHeight,
   ]);
 
@@ -261,7 +283,8 @@ const TorrentTable: React.FC = () => {
         className={classes.table}
         density="compact"
         components={{
-          Toolbar: GridToolbar,
+          Toolbar: ActionBar,
+          Footer: AppStatusBar,
         }}
         componentsProps={{
           row: {
@@ -278,6 +301,7 @@ const TorrentTable: React.FC = () => {
         checkboxSelection
         disableSelectionOnClick
         onSelectionModelChange={handleSelectionChange}
+        localeText={toolbarLocaleText}
       />
       <ContextMenu {...contextMenuProps} onClose={handleClose} />
     </div>
