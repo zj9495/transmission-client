@@ -112,7 +112,7 @@ context("test torrent detail", () => {
     );
 
     cy.getByTestId("torrent-detail-totalSize").contains("Total size");
-    cy.getByTestId("torrent-detail-totalSize").contains("257.75MB");
+    cy.getByTestId("torrent-detail-totalSize").contains("245.81MB");
 
     cy.getByTestId("torrent-detail-type").contains("Type");
     cy.getByTestId("torrent-detail-type").contains("Private");
