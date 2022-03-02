@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { Helmet } from "react-helmet";
 
 import { Tooltip, Typography, Fade, Box, Hidden } from "@mui/material";
+import { GridFooter } from "@mui/x-data-grid-pro";
 import type { Theme } from "@mui/material";
 import { makeStyles, createStyles } from "@mui/styles";
 import {
@@ -23,6 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center",
       lineHeight: "1.5rem",
+      position: "relative",
+      overflow: "hidden",
     },
     iconContainer: {
       display: "flex",
@@ -68,6 +71,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     hide: {
       display: "none",
+    },
+    pagination: {
+      position: "absolute",
+      right: 0,
     },
   })
 );
@@ -141,6 +148,7 @@ const AppStatusBar = () => {
           </Hidden>
         </Box>
       </Fade>
+      <GridFooter className={classes.pagination} />
     </div>
   );
 };
