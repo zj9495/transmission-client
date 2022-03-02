@@ -74,14 +74,13 @@ test("formatSize", () => {
     session: {
       session: {
         units: {
-          sizeBytes: 1000,
           sizeUnits: ["kB", "MB", "GB", "TB"],
         },
       },
     },
   });
 
-  expect(formatSize(1000)).toBe("1kB");
+  expect(formatSize(1024)).toBe("1kB");
 });
 
 test("formatSize format zero", () => {
@@ -89,7 +88,6 @@ test("formatSize format zero", () => {
     session: {
       session: {
         units: {
-          sizeBytes: 1000,
           sizeUnits: ["kB", "MB", "GB", "TB"],
         },
       },
@@ -105,14 +103,13 @@ test("formatSpeed", () => {
     session: {
       session: {
         units: {
-          speedBytes: 1000,
           speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
         },
       },
     },
   });
 
-  expect(formatSpeed(1000)).toBe("1kB/s");
+  expect(formatSpeed(1024)).toBe("1kB/s");
 });
 
 test("formatSpeed format zero", () => {
@@ -120,7 +117,6 @@ test("formatSpeed format zero", () => {
     session: {
       session: {
         units: {
-          speedBytes: 1000,
           speedUnits: ["kB/s", "MB/s", "GB/s", "TB/s"],
         },
       },

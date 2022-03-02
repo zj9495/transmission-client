@@ -27,11 +27,11 @@ describe("test AppStatusBar", () => {
       session: {
         locale: "en-US",
         stats: {
-          downloadSpeed: 100000,
-          uploadSpeed: 200000,
+          downloadSpeed: 102400,
+          uploadSpeed: 204800,
         },
         session: {
-          downloadDirFreeSpace: 500000000000,
+          downloadDirFreeSpace: 536870912000,
           version: "MOCK_VERSION",
           rpcVersion: 10,
         },

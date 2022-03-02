@@ -23,20 +23,20 @@ export const formatBytes = (
 
 export const formatSize = (number: number, allowZero = false): string => {
   const session = getSessionSelector(store.getState());
-  const { sizeBytes, sizeUnits } = session.units;
+  const { sizeUnits } = session.units;
   if (!allowZero && !number) {
     return " ";
   }
-  return formatBytes(number, sizeBytes, sizeUnits);
+  return formatBytes(number, 1024, sizeUnits);
 };
 
 export const formatSpeed = (number: number, allowZero = false): string => {
   const session = getSessionSelector(store.getState());
-  const { speedBytes, speedUnits } = session.units;
+  const { speedUnits } = session.units;
   if (!allowZero && !number) {
     return " ";
   }
-  return formatBytes(number, speedBytes, speedUnits);
+  return formatBytes(number, 1024, speedUnits);
 };
 
 export const formatUnixTimeStamp = (timeStamp: number): string => {
