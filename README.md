@@ -10,7 +10,7 @@
 
 # Introduction
 
-🚧 A modern web client for [Transmission](https://github.com/transmission/transmission), built with React， Material-UI and Typescript.
+🚧 A modern web client for [Transmission](https://github.com/transmission/transmission), built with React, Material-UI and Typescript.
 
 # Features
 
