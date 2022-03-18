@@ -58,6 +58,9 @@ const useStyles = makeStyles(() =>
     title: {
       wordBreak: "break-all",
     },
+    content: {
+      minHeight: "500px",
+    },
   })
 );
 
@@ -116,7 +119,7 @@ const TorrentDetailDrawer = () => {
         {isLoading ? <Skeleton /> : torrent?.name}
       </DialogTitle>
 
-      <DialogContent>
+      <DialogContent className={classes.content}>
         <Tabs
           value={currentTab}
           indicatorColor="primary"
