@@ -21,7 +21,7 @@ export const useTorrent = (
 
   return {
     torrent: data,
-    isLoading: !error && !data,
+    isLoading: error || !data,
     isError: error,
   };
 };
