@@ -70,9 +70,13 @@ const NameLink = React.memo((props: NameLinkProps) => {
     () => (
       <>
         <span>{name}</span>
-        <br />
-        <br />
-        {errorString && <span>{errorString}</span>}
+        {errorString && (
+          <>
+            <br />
+            <br />
+            <span>{errorString}</span>
+          </>
+        )}
       </>
     ),
     [name, errorString]
