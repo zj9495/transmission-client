@@ -81,23 +81,25 @@ const TorrentDetailDrawer = () => {
   React.useEffect(() => {
     if (open) {
       setCurrentTab(0);
-
-      let result: TFile[] = [];
-      if (torrent) {
-        result = (torrent?.files || []).map((item, index) => ({
-          ...item,
-          ...torrent?.fileStats[index],
-          id: index,
-          percentDone: item.bytesCompleted / item.length,
-          fileFormat: item.name.slice(
-            item.name.lastIndexOf(".") + 1,
-            item.name.length
-          ),
-        }));
-      }
-      setFiles(result);
     }
   }, [open]);
+
+  React.useEffect(() => {
+    let result: TFile[] = [];
+    if (torrent) {
+      result = (torrent?.files || []).map((item, index) => ({
+        ...item,
+        ...torrent?.fileStats[index],
+        id: index,
+        percentDone: item.bytesCompleted / item.length,
+        fileFormat: item.name.slice(
+          item.name.lastIndexOf(".") + 1,
+          item.name.length
+        ),
+      }));
+    }
+    setFiles(result);
+  }, [torrent]);
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
