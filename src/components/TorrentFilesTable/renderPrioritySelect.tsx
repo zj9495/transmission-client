@@ -12,7 +12,7 @@ const renderPrioritySelect = (props: GridCellParams & Props) => (
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
-    defaultValue={props.value}
+    value={props.value}
     {...props.selectProps}
   >
     <MenuItem value={1}>

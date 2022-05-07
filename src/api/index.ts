@@ -223,11 +223,18 @@ export const setTorrent = ({
       arguments: {
         ids: id,
         location,
-        "files-wanted": filesWanted,
-        "files-unwanted": filesUnwanted,
-        "priority-high": priorityHigh,
-        "priority-normal": priorityNormal,
-        "priority-low": priorityLow,
+        "files-wanted":
+          filesWanted && filesWanted.length > 0 ? filesWanted : undefined,
+        "files-unwanted":
+          filesUnwanted && filesUnwanted.length > 0 ? filesUnwanted : undefined,
+        "priority-high":
+          priorityHigh && priorityHigh.length > 0 ? priorityHigh : undefined,
+        "priority-normal":
+          priorityNormal && priorityNormal.length > 0
+            ? priorityNormal
+            : undefined,
+        "priority-low":
+          priorityLow && priorityLow.length > 0 ? priorityLow : undefined,
       },
     },
   });

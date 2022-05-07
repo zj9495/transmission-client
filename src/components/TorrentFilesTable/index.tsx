@@ -1,13 +1,23 @@
 import React from "react";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import { useSelector, useDispatch } from "react-redux";
 import {
   DataGridPro,
   GridColDef,
   GridColTypeDef,
   GridSelectionModel,
+  useGridApiContext,
+  useGridSelector,
+  selectedGridRowsSelector,
 } from "@mui/x-data-grid-pro";
+import { Button, Menu, MenuItem } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material";
+import {
+  bindTrigger,
+  bindMenu,
+  usePopupState,
+} from "material-ui-popup-state/hooks";
+import FlagIcon from "@mui/icons-material/Flag";
 
 import { getTorrentDownloadOptions } from "src/store/selector/add";
 import {
@@ -30,12 +40,12 @@ const useSize: GridColTypeDef = {
 export type FileWantedChangeParams = {
   id: number;
   value: boolean;
-};
+}[];
 
 export type FilePriorityChangeParams = {
   id: number;
   value: 1 | 0 | -1;
-};
+}[];
 
 export type FilesTableProps = {
   files: TFile[];
@@ -44,6 +54,76 @@ export type FilesTableProps = {
   onFilePriorityChange?: (params: FilePriorityChangeParams) => void;
   selectedFilesIds?: number[];
   onSelectionModelChange?: (params: GridSelectionModel) => void;
+};
+
+type ToolbarProps = Required<
+  Pick<FilesTableProps, "onFileWantedChange" | "onFilePriorityChange">
+>;
+
+const Toolbar = (props: ToolbarProps) => {
+  const { onFileWantedChange, onFilePriorityChange } = props;
+  const apiRef = useGridApiContext();
+  const selectedRows = useGridSelector(apiRef, selectedGridRowsSelector);
+  // eslint-disable-next-line unicorn/prefer-spread
+  const selectedRowIds = Array.from(selectedRows.keys());
+  const wantedPopupState = usePopupState({
+    variant: "popover",
+    popupId: "files-wanted",
+  });
+  const priorityPopupState = usePopupState({
+    variant: "popover",
+    popupId: "files-priority",
+  });
+  const handleWantedChange = (wanted: boolean) => {
+    //
+    const parmas = selectedRowIds.map((id) => ({
+      id: Number(id),
+      value: wanted,
+    }));
+    onFileWantedChange(parmas);
+    wantedPopupState.close();
+  };
+  const handlePriorityChange = (priority: 1 | 0 | -1) => {
+    //
+    const parmas = selectedRowIds.map((id) => ({
+      id: Number(id),
+      value: priority,
+    }));
+    onFilePriorityChange(parmas);
+    priorityPopupState.close();
+  };
+  return (
+    <div>
+      <Button {...bindTrigger(wantedPopupState)}>
+        <FormattedMessage id="torrent.attribute.filesFields.wanted" />
+      </Button>
+      <Menu {...bindMenu(wantedPopupState)}>
+        <MenuItem onClick={() => handleWantedChange(false)}>
+          <FormattedMessage id="torrent.attribute.status.false" />
+        </MenuItem>
+        <MenuItem onClick={() => handleWantedChange(true)}>
+          <FormattedMessage id="torrent.attribute.status.true" />
+        </MenuItem>
+      </Menu>
+      <Button {...bindTrigger(priorityPopupState)}>
+        <FormattedMessage id="torrent.attribute.filesFields.priority" />
+      </Button>
+      <Menu {...bindMenu(priorityPopupState)}>
+        <MenuItem onClick={() => handlePriorityChange(1)}>
+          <FlagIcon color="secondary" />
+          <FormattedMessage id="torrent.attribute.priority.high" />
+        </MenuItem>
+        <MenuItem onClick={() => handlePriorityChange(0)}>
+          <FlagIcon color="primary" />
+          <FormattedMessage id="torrent.attribute.priority.normal" />
+        </MenuItem>
+        <MenuItem onClick={() => handlePriorityChange(-1)}>
+          <FlagIcon color="action" />
+          <FormattedMessage id="torrent.attribute.priority.low" />
+        </MenuItem>
+      </Menu>
+    </div>
+  );
 };
 
 export const FilesTable = (props: FilesTableProps) => {
@@ -102,11 +182,11 @@ export const FilesTable = (props: FilesTableProps) => {
           const onChange = (event: SelectChangeEvent<unknown>) => {
             const value = Boolean(event.target.value);
             const id = cellProps.id as number;
-            onFileWantedChange && onFileWantedChange({ id, value });
+            onFileWantedChange && onFileWantedChange([{ id, value }]);
           };
           return renderWantedSelect({
             ...cellProps,
-            selectProps: { onChange, disabled: simple },
+            selectProps: { onChange },
           });
         },
         hide: !simple,
@@ -122,11 +202,11 @@ export const FilesTable = (props: FilesTableProps) => {
           const onChange = (event: SelectChangeEvent<unknown>) => {
             const value = event.target.value as 1 | 0 | -1;
             const id = cellProps.id as number;
-            onFilePriorityChange && onFilePriorityChange({ id, value });
+            onFilePriorityChange && onFilePriorityChange([{ id, value }]);
           };
           return renderPrioritySelect({
             ...cellProps,
-            selectProps: { onChange, disabled: simple },
+            selectProps: { onChange },
           });
         },
       },
@@ -140,6 +220,15 @@ export const FilesTable = (props: FilesTableProps) => {
         density="compact"
         rows={files}
         columns={columns}
+        components={{
+          Toolbar: simple ? Toolbar : undefined,
+        }}
+        componentsProps={{
+          toolbar: {
+            onFileWantedChange,
+            onFilePriorityChange,
+          },
+        }}
         checkboxSelection
         disableSelectionOnClick
         selectionModel={selectedFilesIds}
