@@ -17,8 +17,13 @@ import { useTorrent } from "src/hooks/swr";
 import { getTorrentDetailOpen, getDetailId } from "src/store/selector/detail";
 import { hideTorrentDetail } from "src/store/actions/detail";
 import { FilesTable } from "src/components/TorrentFilesTable";
+import type {
+  FileWantedChangeParams,
+  FilePriorityChangeParams,
+} from "src/components/TorrentFilesTable";
 import TorrentSettings from "src/components/TorrentSettings";
 import { TFile } from "src/types";
+import { setTorrent } from "src/api";
 
 import BaseInfo from "./BaseInfo";
 import TrackersInfo from "./TrackersInfo";
@@ -58,6 +63,9 @@ const useStyles = makeStyles(() =>
     title: {
       wordBreak: "break-all",
     },
+    content: {
+      minHeight: "500px",
+    },
   })
 );
 
@@ -66,31 +74,30 @@ const TorrentDetailDrawer = () => {
   const open = useSelector(getTorrentDetailOpen);
   const id = useSelector(getDetailId);
   const [currentTab, setCurrentTab] = useState(0);
+  const [files, setFiles] = useState<TFile[]>([]);
   const { torrent, isLoading } = useTorrent(id);
   const classes = useStyles();
 
   React.useEffect(() => {
     if (open) {
       setCurrentTab(0);
+
+      let result: TFile[] = [];
+      if (torrent) {
+        result = (torrent?.files || []).map((item, index) => ({
+          ...item,
+          ...torrent?.fileStats[index],
+          id: index,
+          percentDone: item.bytesCompleted / item.length,
+          fileFormat: item.name.slice(
+            item.name.lastIndexOf(".") + 1,
+            item.name.length
+          ),
+        }));
+      }
+      setFiles(result);
     }
   }, [open]);
-
-  const files = React.useMemo(() => {
-    let result: TFile[] = [];
-    if (torrent) {
-      result = (torrent?.files || []).map((item, index) => ({
-        ...item,
-        ...torrent?.fileStats[index],
-        id: index,
-        percentDone: item.bytesCompleted / item.length,
-        fileFormat: item.name.slice(
-          item.name.lastIndexOf(".") + 1,
-          item.name.length
-        ),
-      }));
-    }
-    return result;
-  }, [torrent]);
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -98,6 +105,62 @@ const TorrentDetailDrawer = () => {
   };
   const handleClose = () => {
     dispatch(hideTorrentDetail());
+  };
+
+  const handleFileWantedChange = (params: FileWantedChangeParams) => {
+    setFiles((oldFiles) => {
+      const newFiles = oldFiles.map((file) => {
+        const param = params.find((item) => item.id === file.id);
+        return {
+          ...file,
+          wanted: param ? param.value : file.wanted,
+        };
+      });
+      return newFiles;
+    });
+
+    const filesWanted = params
+      .filter((file) => file.value)
+      .map((file) => file.id);
+    const filesUnwanted = params
+      .filter((file) => !file.value)
+      .map((file) => file.id);
+
+    setTorrent({
+      id: id as number,
+      filesWanted,
+      filesUnwanted,
+    });
+  };
+
+  const handleFilePriorityChange = (params: FilePriorityChangeParams) => {
+    setFiles((oldFiles) => {
+      const newFiles = oldFiles.map((file) => {
+        const param = params.find((item) => item.id === file.id);
+        return {
+          ...file,
+          priority: param ? param.value : file.priority,
+        };
+      });
+      return newFiles;
+    });
+
+    const priorityLow = params
+      .filter((file) => file.value === -1)
+      .map((file) => file.id);
+    const priorityNormal = params
+      .filter((file) => file.value === 0)
+      .map((file) => file.id);
+    const priorityHigh = params
+      .filter((file) => file.value === 1)
+      .map((file) => file.id);
+
+    setTorrent({
+      id: id as number,
+      priorityLow,
+      priorityNormal,
+      priorityHigh,
+    });
   };
   return (
     <Drawer
@@ -116,7 +179,7 @@ const TorrentDetailDrawer = () => {
         {isLoading ? <Skeleton /> : torrent?.name}
       </DialogTitle>
 
-      <DialogContent>
+      <DialogContent className={classes.content}>
         <Tabs
           value={currentTab}
           indicatorColor="primary"
@@ -156,7 +219,12 @@ const TorrentDetailDrawer = () => {
           />
         </TabPanel>
         <TabPanel value={currentTab} index={2}>
-          <FilesTable files={files} simple />
+          <FilesTable
+            files={files}
+            simple
+            onFileWantedChange={handleFileWantedChange}
+            onFilePriorityChange={handleFilePriorityChange}
+          />
         </TabPanel>
         <TabPanel value={currentTab} index={3}>
           <PeersTable rows={torrent?.peers || []} />

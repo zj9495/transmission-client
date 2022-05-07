@@ -11,7 +11,7 @@ const renderWantedSelect = (props: GridCellParams & Props) => (
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
-    defaultValue={Number(props.value)}
+    value={Number(props.value)}
     {...props.selectProps}
     style={{ width: "120px" }}
   >

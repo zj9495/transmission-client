@@ -111,20 +111,18 @@ export const closeTorrentDownloadOptionsDialog = (
 type filesWantedChangeParams = {
   value: boolean;
   id: number;
-};
+}[];
 
-export const setDownloadFilesWanted = ({
-  value,
-  id,
-}: filesWantedChangeParams) => (
+export const setDownloadFilesWanted = (params: filesWantedChangeParams) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
   getState: () => IState
 ) => {
   const files = cloneDeep(getTorrentDownloadOptions(getState()).files);
 
   files.forEach((file) => {
-    if (file.id === id) {
-      file.wanted = value;
+    const param = params.find((item) => item.id === file.id);
+    if (param) {
+      file.wanted = param.value;
     }
   });
 
@@ -137,20 +135,19 @@ export const setDownloadFilesWanted = ({
 type filesPriorityChangeParams = {
   value: 1 | 0 | -1;
   id: number;
-};
+}[];
 
-export const setDownloadFilesPriority = ({
-  value,
-  id,
-}: filesPriorityChangeParams) => (
+export const setDownloadFilesPriority = (params: filesPriorityChangeParams) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
   getState: () => IState
 ) => {
   const files = cloneDeep(getTorrentDownloadOptions(getState()).files);
 
   files.forEach((file) => {
-    if (file.id === id) {
-      file.priority = value;
+    const param = params.find((item) => item.id === file.id);
+
+    if (param) {
+      file.priority = param.value;
     }
   });
 
