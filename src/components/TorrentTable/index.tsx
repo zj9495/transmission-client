@@ -137,11 +137,19 @@ const TorrentTable: React.FC = () => {
         field: "seederCount",
         headerName: intl.formatMessage({ id: "torrent.fields.seederCount" }),
         width: COLUMNS_WIDTH[locale].seederCount,
+        renderCell: (params) =>
+          `${params.row.trackerStats[0]?.seederCount || 0} (${
+            params.value || 0
+          })`,
       },
       {
         field: "leecherCount",
         headerName: intl.formatMessage({ id: "torrent.fields.leecherCount" }),
         width: COLUMNS_WIDTH[locale].leecherCount,
+        renderCell: (params) =>
+          `${params.row.trackerStats[0]?.leecherCount || 0} (${
+            params.value || 0
+          })`,
       },
       {
         field: "rateDownload",

@@ -79,7 +79,7 @@ const BasicInfo = (props: BasicInfoProp) => {
               id="torrents.details.general.connected"
               values={{
                 connected: torrent?.peersGettingFromUs,
-                total: torrent?.leecherCount,
+                total: torrent?.trackerStats[0]?.leecherCount || 0,
               }}
             />
           ),
@@ -93,7 +93,7 @@ const BasicInfo = (props: BasicInfoProp) => {
               id="torrents.details.general.connected"
               values={{
                 connected: torrent?.peersSendingToUs,
-                total: torrent?.seederCount,
+                total: torrent?.trackerStats[0]?.seederCount || 0,
               }}
             />
           ),
