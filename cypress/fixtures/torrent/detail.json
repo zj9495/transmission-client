@@ -157,7 +157,7 @@
         "id": 51,
         "isPrivate": true,
         "labels": [],
-        "leecherCount": 5,
+        "leecherCount": 0,
         "magnetLink": "magnet:?xt=urn:btih:d3d0774b8d3d1389a956899250de94d5f11b29be&dn=Beethoven%20-%20Piano%20Trio%20in%20C%20minor,%20Triple%20Concerto%20%5BOborin,%20Oistrakh,%20Knushevitskiy%5D%20%282011%29%20%5BFLAC%5D&tr=http%3A%2F%2Fwww.hdarea.co%2Fannounce.php%3Fpasskey%3Dddeb644cd5dac0c3c3b00152e415fdf8",
         "metadataPercentComplete": 1,
         "name": "Beethoven - Piano Trio in C minor, Triple Concerto [Oborin, Oistrakh, Knushevitskiy] (2011) [FLAC]",
@@ -190,7 +190,7 @@
         "seedIdleMode": 0,
         "seedRatioLimit": 2,
         "seedRatioMode": 0,
-        "seederCount": 4,
+        "seederCount": 0,
         "status": 4,
         "totalSize": 257751467,
         "trackerStats": [
@@ -214,12 +214,12 @@
             "lastScrapeSucceeded": true,
             "lastScrapeTime": 1627629701,
             "lastScrapeTimedOut": false,
-            "leecherCount": 1,
+            "leecherCount": 5,
             "nextAnnounceTime": 1627633296,
             "nextScrapeTime": 1627631510,
             "scrape": "http://www.hdarea.co/scrape.php?passkey=ddeb644cd5dac0c3c3b00152e415fdf8",
             "scrapeState": 1,
-            "seederCount": 2,
+            "seederCount": 4,
             "tier": 0
           }
         ],
