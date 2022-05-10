@@ -150,10 +150,10 @@ context("test torrent detail", () => {
     cy.getByTestId("torrent-tracker-downloadCount").contains("35");
 
     cy.getByTestId("torrent-tracker-leecherCount").contains("Leecher count");
-    cy.getByTestId("torrent-tracker-leecherCount").contains("1");
+    cy.getByTestId("torrent-tracker-leecherCount").contains("5");
 
     cy.getByTestId("torrent-tracker-seederCount").contains("Seeder count");
-    cy.getByTestId("torrent-tracker-seederCount").contains("2");
+    cy.getByTestId("torrent-tracker-seederCount").contains("4");
 
     cy.getByTestId("torrent-tracker-lastAnnounceSucceeded").contains(
       "Succeeded"
