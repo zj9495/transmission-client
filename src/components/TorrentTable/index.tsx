@@ -139,7 +139,7 @@ const TorrentTable: React.FC = () => {
         width: COLUMNS_WIDTH[locale].seederCount,
         renderCell: (params) =>
           `${params.row.trackerStats[0]?.seederCount || 0} (${
-            params.value || 0
+            params.row.peersSendingToUs || 0
           })`,
       },
       {
@@ -148,7 +148,7 @@ const TorrentTable: React.FC = () => {
         width: COLUMNS_WIDTH[locale].leecherCount,
         renderCell: (params) =>
           `${params.row.trackerStats[0]?.leecherCount || 0} (${
-            params.value || 0
+            params.row.peersGettingFromUs || 0
           })`,
       },
       {
