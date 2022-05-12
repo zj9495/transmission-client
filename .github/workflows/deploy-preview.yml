@@ -2,6 +2,10 @@ name: Deploy preview environment
 on:
   release:
     types: [prereleased]
+    
+env:
+  TZ: Asia/Shanghai
+
 jobs:
   build-and-deploy:
     name: Deploy

@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - v*
+    
+env:
+  TZ: Asia/Shanghai
 
 jobs:
   tagged-release:
