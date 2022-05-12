@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    
+env:
+  TZ: Asia/Shanghai
 
 jobs:
   pre-release:

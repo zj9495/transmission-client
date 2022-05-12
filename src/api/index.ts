@@ -24,6 +24,9 @@ export const getSessionStats = () =>
 export const getTorrents = () =>
   request({
     method: "post",
+    headers: {
+      "x-request-method": "get-torrent-list",
+    },
     data: {
       method: "torrent-get",
       arguments: {

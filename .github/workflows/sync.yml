@@ -3,6 +3,9 @@ name: Sync To Gitee
 on:
   push:
     branches: [master]
+    
+env:
+  TZ: Asia/Shanghai
 
 jobs:
   sync:
