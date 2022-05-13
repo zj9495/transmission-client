@@ -139,13 +139,6 @@ export const FilesTable = (props: FilesTableProps) => {
   const columns: GridColDef[] = React.useMemo<GridColDef[]>(
     () => [
       {
-        field: "name",
-        headerName: intl.formatMessage({
-          id: "torrent.attribute.filesFields.name",
-        }),
-        flex: 1,
-      },
-      {
         field: "length",
         headerName: intl.formatMessage({
           id: "torrent.attribute.filesFields.length",
@@ -213,6 +206,16 @@ export const FilesTable = (props: FilesTableProps) => {
     ],
     [intl]
   );
+  const groupingColDef = React.useMemo<GridColDef>(
+    () => ({
+      field: "name",
+      headerName: intl.formatMessage({
+        id: "torrent.attribute.filesFields.name",
+      }),
+      flex: 1,
+    }),
+    [intl]
+  );
 
   return (
     <div data-testid="files-table" style={{ height: "400px" }}>
@@ -229,6 +232,9 @@ export const FilesTable = (props: FilesTableProps) => {
             onFilePriorityChange,
           },
         }}
+        treeData
+        groupingColDef={groupingColDef}
+        getTreeDataPath={(row) => row.name.split("/")}
         checkboxSelection
         disableSelectionOnClick
         selectionModel={selectedFilesIds}
