@@ -36,7 +36,7 @@ context("app", () => {
       .closest(".MuiDataGrid-row")
       .find("input[type=checkbox]")
       .check();
-    cy.get(".MuiDataGrid-columnsContainer input[type=checkbox]").should(
+    cy.get(".MuiDataGrid-columnHeader input[type=checkbox]").should(
       "be.checked"
     );
 
@@ -46,7 +46,7 @@ context("app", () => {
     cy.contains("OK").click();
     cy.contains("Successfully removed!");
 
-    cy.get(".MuiDataGrid-columnsContainer input[type=checkbox]").should(
+    cy.get(".MuiDataGrid-columnHeader input[type=checkbox]").should(
       "not.checked"
     );
     cy.getByTestId("delete-btn").should("be.disabled");
