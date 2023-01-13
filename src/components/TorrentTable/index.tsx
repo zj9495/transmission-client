@@ -69,7 +69,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TorrentTable: React.FC = () => {
-  const [page, setPage] = React.useState(0);
   const [contextMenuProps, setContextMenuProps] = React.useState<
     Omit<ContextMenuProps, "onClose">
   >({
@@ -249,11 +248,6 @@ const TorrentTable: React.FC = () => {
     window.innerHeight,
   ]);
 
-  React.useEffect(() => {
-    // switch to first page after torrent list status has changed
-    setPage(0);
-  }, [torrentStatus]);
-
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
     const clickedTorrentId = Number(
@@ -302,9 +296,6 @@ const TorrentTable: React.FC = () => {
         rows={rows}
         columns={columns}
         selectionModel={selectedIds}
-        pagination
-        page={page}
-        onPageChange={(newPage) => setPage(newPage)}
         rowsPerPageOptions={[10, 20, 50, 100, 200, 5000, 10000]}
         checkboxSelection
         disableSelectionOnClick
