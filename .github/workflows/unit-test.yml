@@ -15,7 +15,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -30,18 +30,12 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: install
+        run: yarn
       - name: Lint
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: lint
+        run: yarn lint
         env:
           CI: true
       - name: Test
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: test
+        run: yarn test
         env:
           CI: true

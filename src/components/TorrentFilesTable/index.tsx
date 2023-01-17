@@ -139,13 +139,6 @@ export const FilesTable = (props: FilesTableProps) => {
   const columns: GridColDef[] = React.useMemo<GridColDef[]>(
     () => [
       {
-        field: "name",
-        headerName: intl.formatMessage({
-          id: "torrent.attribute.filesFields.name",
-        }),
-        flex: 1,
-      },
-      {
         field: "length",
         headerName: intl.formatMessage({
           id: "torrent.attribute.filesFields.length",
@@ -159,7 +152,8 @@ export const FilesTable = (props: FilesTableProps) => {
         }),
         type: "number",
         width: 120,
-        renderCell: renderProgress,
+        renderCell: (cellProps) =>
+          cellProps.value === undefined ? null : renderProgress(cellProps),
         hide: !simple,
       },
       {
@@ -177,8 +171,12 @@ export const FilesTable = (props: FilesTableProps) => {
         }),
         type: "number",
         width: 110,
-        valueFormatter: ({ value }) => (value ? "Yes" : "No"),
+        valueFormatter: ({ value }) =>
+          value === undefined ? null : (value ? "Yes" : "No"),
         renderCell: (cellProps) => {
+          if (cellProps.value === undefined) {
+            return null;
+          }
           const onChange = (event: SelectChangeEvent<unknown>) => {
             const value = Boolean(event.target.value);
             const id = cellProps.id as number;
@@ -199,6 +197,9 @@ export const FilesTable = (props: FilesTableProps) => {
         type: "number",
         width: 120,
         renderCell: (cellProps) => {
+          if (cellProps.value === undefined) {
+            return null;
+          }
           const onChange = (event: SelectChangeEvent<unknown>) => {
             const value = event.target.value as 1 | 0 | -1;
             const id = cellProps.id as number;
@@ -213,12 +214,31 @@ export const FilesTable = (props: FilesTableProps) => {
     ],
     [intl]
   );
+  const groupingColDef = React.useMemo<GridColDef>(
+    () => ({
+      field: "name",
+      headerName: intl.formatMessage({
+        id: "torrent.attribute.filesFields.name",
+      }),
+      flex: 1,
+    }),
+    [intl]
+  );
+
+  const rows = React.useMemo(
+    () =>
+      files.map((file) => ({
+        ...file,
+        path: file.name.split("/"),
+      })),
+    [files]
+  );
 
   return (
     <div data-testid="files-table" style={{ height: "400px" }}>
       <DataGridPro
         density="compact"
-        rows={files}
+        rows={rows}
         columns={columns}
         components={{
           Toolbar: simple ? Toolbar : undefined,
@@ -229,6 +249,9 @@ export const FilesTable = (props: FilesTableProps) => {
             onFilePriorityChange,
           },
         }}
+        treeData
+        groupingColDef={groupingColDef}
+        getTreeDataPath={(row) => row.path}
         checkboxSelection
         disableSelectionOnClick
         selectionModel={selectedFilesIds}

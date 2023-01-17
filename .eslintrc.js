@@ -51,7 +51,7 @@ module.exports = {
         'eslint-comments/disable-enable-pair': [ERROR, { allowWholeFile: true }],
 
         'import/extensions': [
-            ERROR,
+            OFF,
             'ignorePackages',
             {
                 ts: 'never',
