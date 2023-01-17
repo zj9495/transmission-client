@@ -7,6 +7,7 @@ on:
     
 env:
   TZ: Asia/Shanghai
+  REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
 
 jobs:
   tagged-release:
@@ -33,11 +34,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-        env:
-          REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
       - run: yarn install
       - run: yarn build
-      
+
       - name: Zip
         run: cd build && zip -r ../build.zip * && tar -zcvf ../build.tar.gz *
 
