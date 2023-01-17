@@ -29,16 +29,15 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Install
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: install
       - name: Build
-        uses: CultureHQ/actions-yarn@master
+        uses: actions/setup-node@v3
         with:
-          args: build
+          node-version: 16
         env:
           REACT_APP_MUIX_LICENSE_KEY: ${{ secrets.REACT_APP_MUIX_LICENSE_KEY }}
+      - run: yarn install
+      - run: yarn build
+      
       - name: Zip
         run: cd build && zip -r ../build.zip * && tar -zcvf ../build.tar.gz *
 
