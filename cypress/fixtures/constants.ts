@@ -1,14 +1,11 @@
 /* eslint-disable global-require */
 export const DOWNLOAD_DIR = "/downloads/complete";
 export const TEST_TORRENT = {
-  URL:
-    "https://pt.hdupt.com/download.php?id=30675&passkey=b4ab64d2f26b9134e00899443f2dd209",
-  NAME:
-    "Daft Punk - TRON Legacy - The Complete Edition (2020) Mp3 320kbps [PMEDIA]",
+  URL: "https://pt.hdupt.com/download.php?id=30675&passkey=b4ab64d2f26b9134e00899443f2dd209",
+  NAME: "Daft Punk - TRON Legacy - The Complete Edition (2020) Mp3 320kbps [PMEDIA]",
 };
 export const TEST_TORRENT_2 = {
-  URL:
-    "https://pt.hdupt.com/download.php?id=15264&passkey=b4ab64d2f26b9134e00899443f2dd209",
+  URL: "https://pt.hdupt.com/download.php?id=15264&passkey=b4ab64d2f26b9134e00899443f2dd209",
   NAME: "Eminem-Revival-2017-NOiR",
 };
 
@@ -31,7 +28,7 @@ export const COLUMNS = {
     "completeSize",
     "uploadedEver",
     "queuePosition",
-    "trackers",
+    "trackerNames",
     "activityDate",
     "labels",
     "doneDate",
