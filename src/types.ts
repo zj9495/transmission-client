@@ -65,7 +65,8 @@ export interface ITorrent {
   completeSize: number;
   addedDate: number;
   trackers: [];
-  trackerStats: [];
+  trackerStats: TrackerStats;
+  trackerNames?: string[];
   downloadDir: string;
   labels: string[];
   doneDate: number;

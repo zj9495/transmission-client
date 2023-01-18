@@ -73,8 +73,7 @@ context("test torrent list", () => {
           ["completeSize", " "],
           ["uploadedEver", "82.31GB"],
           ["queuePosition", "79"],
-          // todo: 显示正确的 tracker 服务器
-          // ["trackers", " "],
+          ["trackerNames", "hdhome.org"],
           ["activityDate", "2022-05-11 10:59:13"],
           ["labels", ""],
           ["doneDate", " "],
@@ -97,8 +96,7 @@ context("test torrent list", () => {
           ["completeSize", " "],
           ["uploadedEver", "38.61GB"],
           ["queuePosition", "141"],
-          // todo: 显示正确的 tracker 服务器
-          // ["trackers", " "],
+          ["trackerNames", "hdhome.org"],
           ["activityDate", "2022-05-11 10:59:14"],
           ["labels", ""],
           ["doneDate", "2022-05-08 13:04:59"],
@@ -121,8 +119,7 @@ context("test torrent list", () => {
           ["completeSize", " "],
           ["uploadedEver", "9.98MB"],
           ["queuePosition", "143"],
-          // todo: 显示正确的 tracker 服务器
-          // ["trackers", " "],
+          ["trackerNames", ""],
           ["activityDate", "2022-05-11 10:59:14"],
           ["labels", ""],
           ["doneDate", " "],

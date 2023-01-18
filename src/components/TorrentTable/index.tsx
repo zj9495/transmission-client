@@ -194,9 +194,10 @@ const TorrentTable: React.FC = () => {
         width: COLUMNS_WIDTH[locale].queuePosition,
       },
       {
-        field: "trackers",
+        field: "trackerNames",
         hide: true,
         headerName: intl.formatMessage({ id: "torrent.fields.trackers" }),
+        valueFormatter: ({ value }) => value.join(","),
         width: COLUMNS_WIDTH[locale].trackers,
       },
       {
@@ -244,9 +245,10 @@ const TorrentTable: React.FC = () => {
   );
 
   const rows = torrents[torrentStatus];
-  const tableHeight = React.useMemo(() => window.innerHeight - 48, [
-    window.innerHeight,
-  ]);
+  const tableHeight = React.useMemo(
+    () => window.innerHeight - 48,
+    [window.innerHeight]
+  );
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
