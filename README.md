@@ -31,7 +31,7 @@ TODO
 
 # Demo
 
-Demo Url: http://transmission.zj9495.com:9091
+Demo Url: http://transmission.zj9495.cn:9091
 
 - Username: `zj9495`
 - Password: `zj9495`
