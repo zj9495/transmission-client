@@ -285,6 +285,11 @@ const TorrentTable: React.FC = () => {
     >
       <DataGridPro
         className={classes.table}
+        initialState={{
+          sorting: {
+            sortModel: [{ field: "addedDate", sort: "desc" }],
+          },
+        }}
         density="compact"
         components={{
           Toolbar: ActionBar,
